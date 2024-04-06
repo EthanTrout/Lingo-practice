@@ -77,6 +77,7 @@ console.log(gameController.userAnswer);
 function submitAnswer(){
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
+        displayAnswer()
         verifyAnswer()
     }
     else{
@@ -88,6 +89,10 @@ function verifyAnswer(){
     if(gameController.userAnswer === gameController.lingoWord ){
         win();
         
+    }
+    else if(gameController.roundCounter === 6){
+        loose()
+
     }
     else if(gameController.userAnswer != gameController.lingoWord){
         for(x =0; x<gameController.userAnswer.length;x++){
@@ -101,35 +106,77 @@ function verifyAnswer(){
                 }
             }
         }
+        
+        document.getElementById("user-answer").value =""
+        gameController.roundCounter++;
     }
+    
 
 
 
 }
 
 function win(){
+    // Set all tiles green//
+    gameController.roundCounter =1;
     console.log("win")
 }
 
 function loose(){
+    // Set all tiles red //
+    gameController.roundCounter =1;
     console.log("loose")
 }
 
+function displayAnswer(){
+    if(gameController.roundCounter ===1){
+        for(x =0; x<gameController.round1Tiles.length;x++){
+            gameController.round1Tiles[x].innerText = gameController.userAnswer[x];
+        }
+    }
+    else if(gameController.roundCounter ===2){
+        for(x =0; x<gameController.round2Tiles.length;x++){
+            gameController.round2Tiles[x].innerText = gameController.userAnswer[x];
+        }
+    }
+    else if(gameController.roundCounter ===3){
+        for(x =0; x<gameController.round3Tiles.length;x++){
+            gameController.round3Tiles[x].innerText = gameController.userAnswer[x];
+        }
+    }
+    else if(gameController.roundCounter ===4){
+        for(x =0; x<gameController.round4Tiles.length;x++){
+            gameController.round4Tiles[x].innerText = gameController.userAnswer[x];
+        }
+    }
+    else if(gameController.roundCounter ===5){
+        for(x =0; x<gameController.round5Tiles.length;x++){
+            gameController.round5Tiles[x].innerText = gameController.userAnswer[x];
+        }
+    }
+
+    
+    
+}
+
 function setTileGreen (index){
-if(gameController.roundCounter =1){
+if(gameController.roundCounter ===1){
     gameController.round1Tiles[index].style.backgroundColor = "green";
 }
-else if (gameController.roundCounter =2){
+else if (gameController.roundCounter ===2){
     gameController.round2Tiles[index].style.backgroundColor = "green";
 }
-else if (gameController.roundCounter =3){
+else if (gameController.roundCounter ===3){
     gameController.round3Tiles[index].style.backgroundColor = "green";
 }
-else if (gameController.roundCounter =4){
+else if (gameController.roundCounter ===4){
     gameController.round4Tiles[index].style.backgroundColor = "green";
 }
-else if (gameController.roundCounter =5){
+else if (gameController.roundCounter ===5){
     gameController.round5Tiles[index].style.backgroundColor = "green";
+}
+else{
+    console.log("no green")
 }
 
 
@@ -138,20 +185,23 @@ else if (gameController.roundCounter =5){
 
 
 function setTileOrange(index){
-    if(gameController.roundCounter =1 && gameController.round1Tiles[index].style.backgroundColor != "green"){
+    if(gameController.roundCounter ===1 && gameController.round1Tiles[index].style.backgroundColor != "green"){
         gameController.round1Tiles[index].style.backgroundColor = "orange";
     }
-    else if(gameController.roundCounter =2 && gameController.round2Tiles[index].style.backgroundColor != "green"){
+    else if(gameController.roundCounter ===2 && gameController.round2Tiles[index].style.backgroundColor != "green"){
         gameController.round2Tiles[index].style.backgroundColor = "orange";
     }
-    else if(gameController.roundCounter =3 && gameController.round3Tiles[index].style.backgroundColor != "green"){
+    else if(gameController.roundCounter ===3 && gameController.round3Tiles[index].style.backgroundColor != "green"){
         gameController.round3Tiles[index].style.backgroundColor = "orange";
     }
-    else if(gameController.roundCounter =4 && gameController.round4Tiles[index].style.backgroundColor != "green"){
+    else if(gameController.roundCounter ===4 && gameController.round4Tiles[index].style.backgroundColor != "green"){
         gameController.round4Tiles[index].style.backgroundColor = "orange";
     }
-    else if(gameController.roundCounter =5 && gameController.round5Tiles[index].style.backgroundColor != "green"){
+    else if(gameController.roundCounter ===5 && gameController.round5Tiles[index].style.backgroundColor != "green"){
         gameController.round5Tiles[index].style.backgroundColor = "orange";
+    }
+    else{
+        console.log("no orange")
     }
 }
 
