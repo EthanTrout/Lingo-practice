@@ -13,7 +13,7 @@
 ```javascript 
 console.log(gameController.round3List)
 ```
-![](/assets/testing-images/Screenshot%202024-04-06%20174017.png)
+![Result](/assets/testing-images/Screenshot%202024-04-06%20174017.png)
 
 
 ## submitAnswer onlick function 
@@ -21,3 +21,39 @@ console.log(gameController.round3List)
 ### the submitAnswer function will
 - add the value of user input to the game controller obj 
 - call the verifyAnswer function
+
+#### manual testing the game obj is updated
+
+```javascript
+function submitAnswer(){
+    if(gameController.gameTimer != 0){
+        gameController.userAnswer = document.getElementById("user-answer").value;
+        console.log(gameController.userAnswer)
+    }
+}
+```
+![Result](/assets/testing-images/verifyAnswerTest1.png)
+
+## VerifyAnswer function
+
+### the verifyAnswer function will
+- check if the answer and the lingo word are the same and show the player has won 
+- check if the word entered is a real word in the dictonary. if not display a fail 
+- check if the each letter in the answer is in the correct place of the lingo word 
+- check if the letter is in the lingo word 
+- call setGreenTile if letter is correct and in correct place 
+- call setOrangeTile if letter is in the lingo word 
+
+## setGreenTile function
+
+### the setGreenTile function will
+- check to see which round is curently being played 
+- update tile to green if correct placement and letter on the correct round tiles
+
+## setOrangeTile function
+
+### the setOrangeTile function will 
+- check to see which round is currently being played 
+- check to see if tile is already green
+- update tile to orange if the letter is correct but in the wrong place the correct round tiles
+
