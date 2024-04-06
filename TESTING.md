@@ -58,6 +58,7 @@ function submitAnswer(){
 ### the setGreenTile function will
 - check to see which round is curently being played 
 - update tile to green if correct placement and letter on the correct round tiles
+- update tile below to contain the letters that were placed correctly
 
 ## setOrangeTile function
 

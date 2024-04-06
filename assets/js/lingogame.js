@@ -162,15 +162,23 @@ function displayAnswer(){
 function setTileGreen (index){
 if(gameController.roundCounter ===1){
     gameController.round1Tiles[index].style.backgroundColor = "green";
+    gameController.round2Tiles[index].innerText = gameController.userAnswer[index];
+    
 }
 else if (gameController.roundCounter ===2){
     gameController.round2Tiles[index].style.backgroundColor = "green";
+    gameController.round3Tiles[index].innerText = gameController.userAnswer[index];
+    
 }
 else if (gameController.roundCounter ===3){
     gameController.round3Tiles[index].style.backgroundColor = "green";
+    gameController.round4Tiles[index].innerText = gameController.userAnswer[index];
+    
 }
 else if (gameController.roundCounter ===4){
     gameController.round4Tiles[index].style.backgroundColor = "green";
+    gameController.round5Tiles[index].innerText = gameController.userAnswer[index];
+    
 }
 else if (gameController.roundCounter ===5){
     gameController.round5Tiles[index].style.backgroundColor = "green";
