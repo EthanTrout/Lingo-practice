@@ -110,7 +110,7 @@ function submitAnswer(){
         verifyAnswer()
     }
     else{
-        // End game, show score, set all tiles to red //
+        // End game, show score, set all tiles to red. //
     }
 }
 
