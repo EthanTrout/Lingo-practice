@@ -74,6 +74,27 @@ const gameController ={
 
 };
 
+// taken from WordsApi documentation //
+async function getNewWord(){
+    const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=4&partOfSpeech=verb';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '44fbfbc299msh07c047d4921cbfap162ff8jsnd35ae1cbf043',
+            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+        }
+    };
+    
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        lingoWord = result.word
+    } catch (error) {
+        console.error(error);
+    }
+}
+getNewWord();
+
 
 function submitAnswer(){
     if(gameController.gameTimer != 0){
