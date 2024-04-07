@@ -61,7 +61,7 @@
 
 const gameController ={
     gameTimer:10,
-    lingoWord: "beet",
+    lingoWord: "",
     roundCounter:0,
     roundTiles:[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")],
     // round1Tiles: document.querySelectorAll(".round-1"),
@@ -88,12 +88,19 @@ async function getNewWord(){
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        lingoWord = result.word
+        gameController.lingoWord = result.word
     } catch (error) {
         console.error(error);
     }
 }
-getNewWord();
+
+async function GenerateLingo(){
+    await getNewWord()
+    var roundIndex = gameController.roundCounter;
+    gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
+    console.log(gameController.lingoWord)
+
+}
 
 
 function submitAnswer(){
@@ -130,6 +137,7 @@ function verifyAnswer(){
         }
         
         document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
         gameController.roundCounter++;
     }
     
@@ -251,4 +259,6 @@ function setTileOrange(index){
         
 //     }
 // }
+
+window.onload = GenerateLingo;
 
