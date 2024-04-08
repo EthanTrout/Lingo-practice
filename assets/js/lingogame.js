@@ -70,7 +70,9 @@ const gameController ={
     // round4Tiles: document.querySelectorAll(".round-4"),
     // round5Tiles: document.querySelectorAll(".round-5"),
     userAnswer: document.getElementById("user-answer").value,
-    correctLetters:[]
+    correctLetters:[],
+    playerMoney:0,
+    moneyIncrement:200
 
 };
 
@@ -110,7 +112,7 @@ function submitAnswer(){
         verifyAnswer()
     }
     else{
-        // End game, show score, set all tiles to red. //
+        // End game, show score, set all tiles to red //
     }
 }
 
@@ -135,7 +137,7 @@ function verifyAnswer(){
                 }
             }
         }
-        
+        console.log("function end")
         document.getElementById("user-answer").value =""
         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
         gameController.roundCounter++;
@@ -148,7 +150,11 @@ function verifyAnswer(){
 
 function win(){
     // Set all tiles green//
-    gameController.roundCounter =0;
+    for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
+        gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor ="green";
+    }
+    gameController.playerMoney += gameController.moneyIncrement;
+    setTimeout(resetDisplay,2000)
     console.log("win")
 }
 
@@ -187,11 +193,24 @@ function loose(){
 // }
 function displayAnswer(){
     var roundIndex =gameController.roundCounter;
-    console.log(gameController.roundTiles[roundIndex])
     for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
         gameController.roundTiles[roundIndex][x].innerText = gameController.userAnswer[x];
     }
     
+}
+
+function resetDisplay(){
+    gameController.roundCounter =0;
+    var roundIndex =gameController.roundCounter;
+    for(x=0; x<gameController.roundTiles.length;x++){
+        for(y =0; y<gameController.roundTiles[x].length;y++){
+            gameController.roundTiles[x][y].innerText = ".";
+            gameController.roundTiles[x][y].style.backgroundColor ="white"
+        }
+    }
+    GenerateLingo();
+    
+
 }
 
 function setTileGreen (index){
