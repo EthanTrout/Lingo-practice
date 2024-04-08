@@ -118,11 +118,11 @@ function submitAnswer(){
 
 function verifyAnswer(){
     if(gameController.userAnswer === gameController.lingoWord ){
-        win();
+        endGame("green");
         
     }
-    else if(gameController.roundCounter === 5){
-        loose()
+    else if(gameController.roundCounter === 4){
+        endGame("red")
 
     }
     else if(gameController.userAnswer != gameController.lingoWord){
@@ -148,21 +148,19 @@ function verifyAnswer(){
 
 }
 
-function win(){
+function endGame(color){
     // Set all tiles green//
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
-        gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor ="green";
+        gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
     }
-    gameController.playerMoney += gameController.moneyIncrement;
+    if(color === "green"){
+        gameController.playerMoney += gameController.moneyIncrement;
+    }
     setTimeout(resetDisplay,2000)
-    console.log("win")
+    
 }
 
-function loose(){
-    // Set all tiles red //
-    gameController.roundCounter =0;
-    console.log("loose")
-}
+
 
 // function displayAnswer(){
 //     if(gameController.roundCounter ===1){
