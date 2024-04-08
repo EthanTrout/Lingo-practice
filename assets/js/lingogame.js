@@ -99,8 +99,9 @@ async function getNewWord(){
 async function GenerateLingo(){
     await getNewWord()
     var roundIndex = gameController.roundCounter;
-    gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
+    document.getElementById("user-answer").value =""
     console.log(gameController.lingoWord)
+    gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
 
 }
 
@@ -159,6 +160,7 @@ function endGame(color){
     if(color === "green"){
         gameController.playerMoney += gameController.moneyIncrement;
     }
+    
     setTimeout(resetDisplay,2000)
     
 }
@@ -202,6 +204,7 @@ function displayAnswer(){
 
 function resetDisplay(){
     gameController.roundCounter =0;
+    console.log(gameController.playerMoney)
     var roundIndex =gameController.roundCounter;
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
@@ -210,6 +213,7 @@ function resetDisplay(){
         }
     }
     GenerateLingo();
+    
     
 
 }
