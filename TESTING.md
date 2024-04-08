@@ -344,3 +344,24 @@ This has created a new issue that the code will only work if the letter is after
 - ![New Error](/assets/testing-images/setTileOrangeNewError.png)
 
 
+This is easily fixed by turning all the tiles green before checking if the tiles need to be made orange
+
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
+                    setTileOrange(z);
+                }
+            }
+
+        }
+}
+```

@@ -131,12 +131,15 @@ function verifyAnswer(){
             if(letter === gameController.lingoWord[x]){
                 setTileGreen(x);
             }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
             for(y=0; y<gameController.lingoWord.length;y++){
                 if(letter === gameController.lingoWord[y]){
                     if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
-                    setTileOrange(x);
+                    setTileOrange(z);
                 }
             }
+
         }
         document.getElementById("user-answer").value =""
         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
