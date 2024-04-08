@@ -121,7 +121,7 @@ function verifyAnswer(){
         endGame("green");
         
     }
-    else if(gameController.roundCounter === 4){
+    else if(gameController.roundCounter === 4 ){
         endGame("red")
 
     }
@@ -133,11 +133,11 @@ function verifyAnswer(){
             }
             for(y=0; y<gameController.lingoWord.length;y++){
                 if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
                     setTileOrange(x);
                 }
             }
         }
-        console.log("function end")
         document.getElementById("user-answer").value =""
         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
         gameController.roundCounter++;
@@ -219,6 +219,7 @@ function setTileGreen (index){
     }
 }
 
+
 // function setTileGreen (index){
 // if(gameController.roundCounter ===0){
 //     gameController.round1Tiles[index].style.backgroundColor = "green";
@@ -249,12 +250,17 @@ function setTileGreen (index){
 
 // }
 
-function setTileOrange(index){
+function setTileOrange(index,letter){
     var roundIndex = gameController.roundCounter;
     if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"){
-        gameController.roundTiles[roundIndex][index].style.backgroundColor ="orange"
+        gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange"
     }
+    
+    
+    
 }
+
+
 
 // function setTileOrange(index){
 //     if(gameController.roundCounter ===0 && gameController.round1Tiles[index].style.backgroundColor != "green"){

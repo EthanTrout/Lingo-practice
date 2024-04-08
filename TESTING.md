@@ -278,8 +278,69 @@ function setTileOrange(index){
         gameController.roundTiles[roundIndex][index].style.backgroundColor ="orange"
     }
 }
+
+```
+#### bugs with setTile Orange 
+
+- set tile orange doesnt currently only tests for if the current tile is not green. 
+- the function is not testing for if the letter is already green in another tile and the letter isnt repeated and therefore the letter does not need to be set to orange.
+
+- word: Step
+    - ![Examples](/assets/testing-images/setTileOrangeTest1.png)
+
+- word: Dart
+    - ![Examples](/assets/testing-images/setTileOrangeTest2.png)
+
+
+#### Previous code in VerifyAnswer function
+
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    setTileOrange(x);
+                }
+            }
+        }
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
 ```
 
+#### Fix 
 
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
+                    setTileOrange(x);
+                }
+            }
+        }
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+``` 
+The for loop checks to see if the letter is found elsewhere in the lingoWord. the index for this is Y
+Because the lingoWord and the tiles will always be the same length we can use the index of the found lingoWord letter to also check to see if that letter has already been found and set green.
+
+- ![Fix](/assets/testing-images/setTileOrangeFix.png)
+
+This has created a new issue that the code will only work if the letter is after the orange one:
+
+- ![New Error](/assets/testing-images/setTileOrangeNewError.png)
 
 
