@@ -97,7 +97,7 @@ async function getNewWord(){
     }
 }
 
- async function checkWord(word){
+ async function checkWord(word,cb){
     const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
     const options = {
         method: 'GET',
@@ -106,19 +106,23 @@ async function getNewWord(){
             'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
         }
     };
-    
+    console.log(word)
     try {
         const response = await fetch(url, options);
-        if(response.status === 404){
-            return false;
+        
+        if(response.ok){
+            cb(true)
         }
-        else if(response.ok){
-            return true;
+        else if(response.status === 404){
+            cb(false)
         }
         
+        
+        
     } catch (error) {
+        console.log("error")
         console.error(error)
-        return false;
+        
     }
     
  }
@@ -138,24 +142,24 @@ async function GenerateLingo(){
 function submitAnswer(){
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
-        displayAnswer()
-        verifyAnswer()
+        displayAnswer();
+        checkWord(gameController.userAnswer,verifyAnswer);
     }
     else{
         // End game, show score, set all tiles to red //
     }
 }
 
-function verifyAnswer(){
+function verifyAnswer(isWord){
+    console.log(isWord)
     if(gameController.userAnswer === gameController.lingoWord ){
         endGame("green");
-        
     }
-    else if(gameController.roundCounter === 4 || checkWord(gameController.userAnswer)){
+    else if(gameController.roundCounter === 4 || !isWord){
         endGame("red")
 
     }
-    else if(gameController.userAnswer != gameController.lingoWord){
+    else if(gameController.userAnswer != gameController.lingoWord && isWord){
         for(x =0; x<gameController.userAnswer.length;x++){
             var letter = gameController.userAnswer[x]
             if(letter === gameController.lingoWord[x]){
