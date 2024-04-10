@@ -73,6 +73,7 @@ const gameController ={
     correctLetters:[],
     playerMoney:0,
     moneyIncrement:200
+    
 
 };
 
@@ -92,9 +93,37 @@ async function getNewWord(){
         const result = await response.json();
         gameController.lingoWord = result.word
     } catch (error) {
-        console.error(error);
+        console.error(error)
     }
 }
+
+ async function checkWord(word){
+    const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '44fbfbc299msh07c047d4921cbfap162ff8jsnd35ae1cbf043',
+            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+        }
+    };
+    
+    try {
+        const response = await fetch(url, options);
+        if(response.status === 404){
+            return false;
+        }
+        else if(response.ok){
+            return true;
+        }
+        
+    } catch (error) {
+        console.error(error)
+        return false;
+    }
+    
+ }
+
+
 
 async function GenerateLingo(){
     await getNewWord()
@@ -122,7 +151,7 @@ function verifyAnswer(){
         endGame("green");
         
     }
-    else if(gameController.roundCounter === 4 ){
+    else if(gameController.roundCounter === 4 || checkWord(gameController.userAnswer)){
         endGame("red")
 
     }
