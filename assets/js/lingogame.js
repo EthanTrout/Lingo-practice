@@ -78,8 +78,8 @@ const gameController ={
 };
 
 // taken from WordsApi documentation //
-async function getNewWord(){
-    const url = 'https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=4&partOfSpeech=verb';
+async function getNewWord(wordLength){
+    const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=${wordLength}&partOfSpeech=verb`;
     const options = {
         method: 'GET',
         headers: {
@@ -97,6 +97,7 @@ async function getNewWord(){
     }
 }
 
+// Checks to see if the word is a real word
  async function checkWord(word,cb){
     const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
     const options = {
@@ -128,9 +129,9 @@ async function getNewWord(){
  }
 
 
-
-async function GenerateLingo(){
-    await getNewWord()
+// Starts a new round 
+async function GenerateLingo(wordLength){
+    await getNewWord(wordLength)
     var roundIndex = gameController.roundCounter;
     document.getElementById("user-answer").value =""
     console.log(gameController.lingoWord)
@@ -138,7 +139,7 @@ async function GenerateLingo(){
     
 }
 
-
+// Onlcick verify button
 function submitAnswer(){
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
@@ -148,6 +149,13 @@ function submitAnswer(){
     
 }
 
+// Onclick 4 letter Lingo
+function fourLetterLingo(){
+    GenerateLingo(4)
+}
+
+
+// Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
 function verifyAnswer(isWord){
     console.log(isWord)
     if(gameController.userAnswer === gameController.lingoWord ){
@@ -185,7 +193,7 @@ function verifyAnswer(isWord){
 }
 
 function endGame(color){
-    // Set all tiles green//
+    // Set all tiles to correct color//
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
     }
@@ -226,6 +234,8 @@ function endGame(color){
 //         }
 //     }
 // }
+
+// Sets user input onto tiles
 function displayAnswer(){
     var roundIndex =gameController.roundCounter;
     for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
@@ -234,6 +244,7 @@ function displayAnswer(){
     
 }
 
+// clears all tiles 
 function resetDisplay(){
     gameController.roundCounter =0;
     console.log(gameController.playerMoney)
@@ -249,7 +260,7 @@ function resetDisplay(){
     
 
 }
-
+// sets tile passed to green
 function setTileGreen (index){
     var roundIndex = gameController.roundCounter;
     gameController.roundTiles[roundIndex][index].style.backgroundColor ="green";
@@ -289,6 +300,7 @@ function setTileGreen (index){
 
 // }
 
+// sets tile passed to orange
 function setTileOrange(index,letter){
     var roundIndex = gameController.roundCounter;
     if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"){
@@ -322,5 +334,5 @@ function setTileOrange(index,letter){
 //     }
 // }
 
-window.onload = GenerateLingo;
+
 
