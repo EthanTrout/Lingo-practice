@@ -531,3 +531,11 @@ async function checkWord(word,cb){
 ```
 ## Conclusion
 The Basic functionality for the Lingo Game is in place. Next will be giving the player options on word length. round length. implementing scoring and eventually a leaderboard.
+
+# User Game options 
+
+## fiveLetterLingo function
+
+## fiverLetterLingo function will:
+- generate five boxes for each round
+- generate a five letter lingo
