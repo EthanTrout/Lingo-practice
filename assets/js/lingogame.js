@@ -72,13 +72,15 @@ const gameController ={
     userAnswer: document.getElementById("user-answer").value,
     correctLetters:[],
     playerMoney:0,
-    moneyIncrement:200
+    moneyIncrement:200,
+    wordLength:4
     
 
 };
 
 // taken from WordsApi documentation //
-async function getNewWord(wordLength){
+async function getNewWord(){
+    var wordLength =gameController.wordLength;
     const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${wordLength}&lettersMax=${wordLength}&partOfSpeech=verb`;
     const options = {
         method: 'GET',
@@ -151,7 +153,8 @@ function submitAnswer(){
 
 // Onclick 4 letter Lingo
 function fourLetterLingo(){
-    GenerateLingo(4)
+    gameController.wordLength=4
+    GenerateLingo()
 }
 function fiveLetterLingo(){
     var rounds = document.querySelectorAll(".round")
@@ -163,7 +166,8 @@ function fiveLetterLingo(){
         console.log(clone)
         rounds[x].appendChild(clone)
     }
-    GenerateLingo(5)
+    gameController.wordLength =5
+    GenerateLingo()
 }
 
 
