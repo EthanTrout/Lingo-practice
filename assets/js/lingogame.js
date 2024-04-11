@@ -135,7 +135,7 @@ async function GenerateLingo(){
     document.getElementById("user-answer").value =""
     console.log(gameController.lingoWord)
     gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
-
+    
 }
 
 
@@ -145,9 +145,7 @@ function submitAnswer(){
         displayAnswer();
         checkWord(gameController.userAnswer,verifyAnswer);
     }
-    else{
-        // End game, show score, set all tiles to red //
-    }
+    
 }
 
 function verifyAnswer(isWord){
@@ -167,6 +165,7 @@ function verifyAnswer(isWord){
             }
         }
         for(z =0; z<gameController.userAnswer.length;z++){
+            var letter = gameController.userAnswer[z]
             for(y=0; y<gameController.lingoWord.length;y++){
                 if(letter === gameController.lingoWord[y]){
                     if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")

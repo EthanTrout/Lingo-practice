@@ -1,4 +1,14 @@
-# Testing
+# Basic Funcationality for a 4 letter Lingo Game
+## Requirements:
+- The game displays 4 letter boxes for each guess. the player gets 5 guesses
+- The game displays the first letter of the Answer in the boxes(tiles)
+- the Player can guess the the word 
+- the correct letter in the correct place displays green
+- the correct letter in the incorrect place displays orange
+- after 5 guesses the player fails 
+- if the guess is not a real word the Player fails
+- if guessed correctly a new game starts 
+
 
 ## gameController obj
 
@@ -241,7 +251,7 @@ function setTileGreen (index){
 }
 ```
 
-### setTileOrange 
+## setTileOrange 
 the same changes to setTileGreen were done to setTileOrange
 
 #### Previous code
@@ -365,3 +375,159 @@ else if(gameController.userAnswer != gameController.lingoWord){
         }
 }
 ```
+
+## endGame()
+### this function will:
+- take one argument color 
+- if red then the player has failed 
+- if green then the player has won
+- if green icrement money
+- call resetDisplay
+
+## resetDisplay
+### this function will:
+- set round to 0
+- set all tiles to "."
+- set all tiles to white
+- call GenerateLingo
+
+## getNewWord
+
+### this function will:
+- call words API and get a 4 letter word 
+- set lingoWord to found word 
+- display errors if server cannot be reached 
+
+## GenerateLingo 
+
+### this function will:
+- call getNewWord function 
+- set rounds to 1 
+- set first letter of tiles to new lingo first letter 
+
+## Testing EndGame, resetDisplay, getNewWord,GenerateLingo
+
+### Test 1 
+#### EndGame is called when player runs out of rounds or guesses correctly
+1. the display should be set to green when getting the correct answer
+2. the display should be set to red when running out of guesses
+3. the display should be reset to the beginning 
+4. the next guess should start on round 0
+5. A new word i generated each reset
+
+#### Results
+##### 1  word:gown     Guess:Correct
+- ![Set To green](/assets/testing-images/correctAnswerTest.png)
+
+##### 2 word:stem     Guess:Incorrect
+-![Set To Red](/assets/testing-images/incorrectAnswerTest.png)
+
+##### 3 word:gown     Guess:Correct
+- ![Reset](/assets/testing-images/correctAnswerTestReset.png)
+##### 3 word:stem     Guess:Incorrect
+- ![Reset](/assets/testing-images/incorrectAnswerTestReset.png)
+
+##### 4  word:gown     Guess:Correct
+- ![Round](/assets/testing-images/correctAnswerTestRound.png)
+
+##### 4  word:stem     Guess:Incorrect
+- ![Round](/assets/testing-images/incorrectAnswerTestRound.png)
+
+##### 5 It can be seen from the previous screenshots that a new word is generated evertime 
+
+## checkWord
+
+### The final functunality for the simple game:
+- Check If the word is a real word if not then end the game
+
+### This function will:
+- call the WordsAPI with the userAnswer 
+- if a entry is returned then Continue to verifyAnswer
+- if no entry is returned then end the game
+
+I had alot of trouble with this Function and tried many different options to get it work. I rewatched CodeInstitutes Working with External resourses sections and realised that using VerifyAnswer as call back function inside of checkWord was the best way to get this working.
+
+i previously tried to use the GetWord inside of my verifyAnswer as a condition. but as it returns a promise and the API takes time to generate this never worked. Instead Now. When Submiting the userAnswer it will call checkWord which will call VerifyAnswer with true or false.
+
+#### changes to submitAnswer
+```javascript
+function submitAnswer(){
+    if(gameController.gameTimer != 0){
+        gameController.userAnswer = document.getElementById("user-answer").value;
+        displayAnswer();
+        checkWord(gameController.userAnswer,verifyAnswer);
+    }
+    
+}
+```
+
+#### CheckWord
+```javascript 
+async function checkWord(word,cb){
+    const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '44fbfbc299msh07c047d4921cbfap162ff8jsnd35ae1cbf043',
+            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+        }
+    };
+    console.log(word)
+    try {
+        const response = await fetch(url, options);
+        
+        if(response.ok){
+            cb(true)
+        }
+        else if(response.status === 404){
+            cb(false)
+        }
+        
+        
+        
+    } catch (error) {
+        console.log("error")
+        console.error(error)
+        
+    }
+    
+ }
+ ```
+
+ #### changes to VerifyAnswer
+ ```javascript
+ function verifyAnswer(isWord){
+    console.log(isWord)
+    if(gameController.userAnswer === gameController.lingoWord ){
+        endGame("green");
+    }
+    else if(gameController.roundCounter === 4 || !isWord){
+        endGame("red")
+
+    }
+    else if(gameController.userAnswer != gameController.lingoWord && isWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
+            var letter = gameController.userAnswer[z]
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
+                    setTileOrange(z);
+                }
+            }
+
+        }
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+
+}
+```
+## Conclusion
+The Basic functionality for the Lingo Game is in place. Next will be giving the player options on word length. round length. implementing scoring and eventually a leaderboard.
