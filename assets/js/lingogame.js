@@ -73,7 +73,9 @@ const gameController ={
     correctLetters:[],
     playerMoney:0,
     moneyIncrement:200,
-    wordLength:4
+    wordLength:4,
+    gameRounds:4,
+    currentRound:0
     
 
 };
@@ -151,25 +153,9 @@ function submitAnswer(){
     
 }
 
-// Onclick 4 letter Lingo
-function fourLetterLingo(){
-    gameController.wordLength=4
-    GenerateLingo()
-}
-function fiveLetterLingo(){
-    var rounds = document.querySelectorAll(".round")
-    for(x=0;x<rounds.length;x++){
-        console.log(rounds[x])
-        var li =rounds[x].firstElementChild
-        console.log(li)
-        var clone = li.cloneNode(true)
-        console.log(clone)
-        rounds[x].appendChild(clone)
-    }
-    gameController.wordLength =5
-    GenerateLingo()
-}
-function startGame(wordLength,roundsLength){
+// Onclick Start Game. create all tiles and initalise GameController variables
+
+function startGame(wordLength,roundsLength,gameRounds){
     divEl = document.getElementById("game-area")
     for(x=1;x<roundsLength+1;x++){
         var startHtml = `<ul class ="round">`
@@ -184,13 +170,56 @@ function startGame(wordLength,roundsLength){
     userInput.innerHTML =`<input id="user-answer" type="text">
     <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
     divEl.appendChild(userInput)
-    document.getElementById("game-menu").style.display ="none"
+    document.getElementById("game-menu").style.visibility ="hidden"
     gameController.roundTiles =[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")]
     gameController.userAnswer= document.getElementById("user-answer").value
+    gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
     GenerateLingo()
 }
 
+// Onclick Extra options
+
+function options(wordLength){
+    var gameMenu =document.getElementById("game-menu")
+    gameMenu.innerHTML = `<h1>Guesses</h1>
+    <div>
+        <label for="g-five">5</label>
+        <input type="radio" name="guesses" id="g-five" value="5">
+        <label for="g-six">6</label>
+        <input type="radio" name="guesses" id="g-six" value="6">
+        <label for="g-seven">7</label>
+        <input type="radio" name="guesses" id="g-seven" value="7">
+    </div>
+    <br>
+    <h1>Total rounds</h1>
+    <div>
+        <label for="r-five">5</label>
+        <input type="radio" name="rounds" id="r-five" value="5">
+        <label for="r-six">6</label>
+        <input type="radio" name="rounds" id="r-six" value="6">
+        <label for="r-seven">7</label>
+        <input type="radio" name="rounds" id="r-seven" value="7">
+        <label for="r-eight">8</label>
+        <input type="radio" name="rounds" id="r-eight" value="8">
+        <label for="r-nine">9</label>
+        <input type="radio" name="rounds" id="r-nine" value="9">
+        <label for="r-ten">10</label>
+        <input type="radio" name="rounds" id="r-ten" value="10">
+    </div>
+    <button id="confirm">Confirm</button>
+    `
+    document.getElementById("confirm").addEventListener("click",addButton)
+
+    function addButton(){
+        var button = document.createElement("div")
+        var rounds = document.querySelector('input[name = rounds]:checked').value
+        var guesses = document.querySelector('input[name = guesses]:checked').value
+        button.innerHTML =`<button id="play" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
+        gameMenu.appendChild(button)
+    }
+
+}
 
 // Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
 function verifyAnswer(isWord){
@@ -231,15 +260,37 @@ function verifyAnswer(isWord){
 
 function endGame(color){
     // Set all tiles to correct color//
+    gameController.currentRound++;
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
     }
     if(color === "green"){
         gameController.playerMoney += gameController.moneyIncrement;
+        console.log(gameController.playerMoney)
+    }
+    if(gameController.currentRound === gameController.gameRounds){
+        finishGame()
+    }
+    else{
+        setTimeout(resetDisplay,2000)
     }
     
-    setTimeout(resetDisplay,2000)
-    
+}
+function finishGame(){
+    document.getElementById("game-area").innerHTML =`
+    <h1> Game Over</h1>
+    <p>You got £${gameController.playerMoney}
+    <button onclick="returnToMenu()">Return to menu</button>`
+}
+
+function returnToMenu(){
+    document.getElementById("game-area").innerHTML =""
+    document.getElementById("game-menu").innerHTML =`
+    <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
+    <button id="5-letter" onclick="options(5)">5 Letter Lingo</button>
+    <button id="challenge" onclick="options(9)">Challenge Words</button>
+    <button id="play" onclick="startGame()">Play Lingo</button>`
+    document.getElementById("game-menu").style.visibility ="visible"
 }
 
 
@@ -284,7 +335,6 @@ function displayAnswer(){
 // clears all tiles 
 function resetDisplay(){
     gameController.roundCounter =0;
-    console.log(gameController.playerMoney)
     var roundIndex =gameController.roundCounter;
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){

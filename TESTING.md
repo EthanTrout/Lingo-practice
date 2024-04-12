@@ -536,14 +536,14 @@ The Basic functionality for the Lingo Game is in place. Next will be giving the 
 
 ## fiveLetterLingo function
 
-## fiverLetterLingo function will:
+### fiverLetterLingo function will:
 - generate five boxes for each round
 - generate a five letter lingo
 
-### The button adds an extra tile for each round sucessfully 
+#### The button adds an extra tile for each round sucessfully 
 ![Results](/assets/testing-images/fiveLetterLingoTest.png)
 
-### The issue when testing found is that the displayAnswer and verifyAnswer dont contain the new LI element 
+#### The issue when testing found is that the displayAnswer and verifyAnswer dont contain the new LI element 
 ![Results](/assets/testing-images/fiveLetterLingoEroor.png)
 
 This is because the roundTiles is initialised before the button is clicked 
@@ -551,9 +551,9 @@ This is because the roundTiles is initialised before the button is clicked
 #### Fix 
 To fix this the rounds will have to be initalised after the player selects the game option. 
 
-## Code change 
+### Code change 
 
-### fiveLetterLingo will change to StartGame.
+#### fiveLetterLingo will change to StartGame.
 - this will take two parameters. Word length and roundLength
 - this will create a set of tiles for any of the parameters given 
 
@@ -610,3 +610,111 @@ gameController.roundTiles =[document.querySelectorAll(".round-1"),document.query
 ```javascript
 document.getElementById("game-menu").style.display ="none"
 ```
+
+### Final testing of startGame
+![result](/assets/testing-images/startGameFinished.png)
+
+## FinishGame functionality 
+### The game needs to 
+- Allow players to select how many guesses they can have 
+- Allow players to select how many games to have 
+- end the game and display total correct 
+- send players back to start menu 
+
+### second menu for more options 
+- Once the player has selected the gamemode they want to play they can then select how many guesses and rounds to complete 
+- this functionality is mainly for the practice lingos and not the main game which these values will be set
+
+changing the onclick for the practice 4 letters, 5 letters and challenge questions will allow them to change these options 
+
+```html 
+<div id="game-menu">
+            <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
+            <button id="5-letter" onclick="options(5)">5 Letter Lingo</button>
+            <button id="challenge" onclick="options(9)">Challenge Words</button>
+            <button id="play" onclick="startGame()">Play Lingo</button>
+        </div>
+```
+### Rough JS for options menu 
+i am aware that i can make this less complicated and will return to it once everything is completed.
+``` javascript
+function options(wordLength){
+    var gameMenu =document.getElementById("game-menu")
+    gameMenu.innerHTML = `<h1>Guesses</h1>
+    <div>
+        <label for="g-five">5</label>
+        <input type="radio" name="guesses" id="g-five" value="5">
+        <label for="g-six">6</label>
+        <input type="radio" name="guesses" id="g-six" value="6">
+        <label for="g-seven">7</label>
+        <input type="radio" name="guesses" id="g-seven" value="7">
+    </div>
+    <br>
+    <h1>Total rounds</h1>
+    <div>
+        <label for="r-five">5</label>
+        <input type="radio" name="rounds" id="r-five" value="5">
+        <label for="r-six">6</label>
+        <input type="radio" name="rounds" id="r-six" value="6">
+        <label for="r-seven">7</label>
+        <input type="radio" name="rounds" id="r-seven" value="7">
+        <label for="r-eight">8</label>
+        <input type="radio" name="rounds" id="r-eight" value="8">
+        <label for="r-nine">9</label>
+        <input type="radio" name="rounds" id="r-nine" value="9">
+        <label for="r-ten">10</label>
+        <input type="radio" name="rounds" id="r-ten" value="10">
+    </div>
+    <button id="confirm">Confirm</button>
+    `
+    document.getElementById("confirm").addEventListener("click",addButton)
+
+    function addButton(){
+        var button = document.createElement("div")
+        var rounds = document.querySelector('input[name = rounds]:checked').value
+        var guesses = document.querySelector('input[name = guesses]:checked').value
+        button.innerHTML =`<button id="play" onclick="startGame(${wordLength},${guesses})">Play Lingo</button>`
+        gameMenu.appendChild(button)
+    }
+
+}
+```
+
+### Implementing Game Rounds
+
+- Adding varible to startGame 
+```javascript
+function startGame(wordLength,roundsLength,gameRounds)
+```
+- updating variable in gameController from startGame
+```javascript
+gameController.gameRounds = gameRounds
+```
+
+- updating endGame to have condition 
+```javascript
+function endGame(color){
+    gameController.currentRound++;
+    // Set all tiles to correct color//
+    for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
+        gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
+    }
+    if(color === "green"){
+        gameController.playerMoney += gameController.moneyIncrement;
+    }
+    if(gameController.currentRound === gameController.gameRounds){
+        // Display End 
+    }
+    else{
+        setTimeout(resetDisplay,2000)
+    }
+    
+}
+```
+
+### finishGame function 
+#### finishGame function will: 
+- display a score 
+- allow user to get back to menu
+- in future add options to add score to leaderboard 
+
