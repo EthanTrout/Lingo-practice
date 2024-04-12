@@ -169,6 +169,18 @@ function fiveLetterLingo(){
     gameController.wordLength =5
     GenerateLingo()
 }
+function startGame(wordLength,roundsLength){
+    for(x=1;x<roundsLength+1;x++){
+        var startHtml = `<ul class ="round">`
+        for(y=0;y<wordLength;y++){
+            startHtml += `<li class="round-${x}".</li>`
+        }
+        var endHtml = `</ul>`
+        var html= startHtml+endHtml;
+        console.log(html,x)
+
+    }
+}
 
 
 // Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 

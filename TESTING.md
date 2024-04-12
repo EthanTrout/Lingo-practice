@@ -539,3 +539,38 @@ The Basic functionality for the Lingo Game is in place. Next will be giving the 
 ## fiverLetterLingo function will:
 - generate five boxes for each round
 - generate a five letter lingo
+
+### The button adds an extra tile for each round sucessfully 
+![Results](/assets/testing-images/fiveLetterLingoTest.png)
+
+### The issue when testing found is that the displayAnswer and verifyAnswer dont contain the new LI element 
+![Results](/assets/testing-images/fiveLetterLingoEroor.png)
+
+This is because the roundTiles is initialised before the button is clicked 
+
+#### Fix 
+To fix this the rounds will have to be initalised after the player selects the game option. 
+
+## Code change 
+
+### fiveLetterLingo will change to StartGame.
+- this will take two parameters. Word length and roundLength
+- this will create a set of tiles for any of the parameters given 
+
+```javascript 
+function startGame(wordLength,roundsLength){
+    for(x=1;x<roundsLength+1;x++){
+        var startHtml = `<ul class ="round">`
+        for(y=0;y<wordLength;y++){
+            startHtml += `<li class="round-${x}".</li>`
+        }
+        var endHtml = `</ul>`
+        var html= startHtml+endHtml;
+        console.log(html,x)
+
+    }
+}
+```
+![results when called](/assets/testing-images/startGameTest.png)
+
+- this works but will not need to be pushed to the correct div element on the DOM
