@@ -63,13 +63,13 @@ const gameController ={
     gameTimer:10,
     lingoWord: "",
     roundCounter:0,
-    roundTiles:[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")],
+    roundTiles:[],
     // round1Tiles: document.querySelectorAll(".round-1"),
     // round2Tiles: document.querySelectorAll(".round-2"),
     // round3Tiles: document.querySelectorAll(".round-3"),
     // round4Tiles: document.querySelectorAll(".round-4"),
     // round5Tiles: document.querySelectorAll(".round-5"),
-    userAnswer: document.getElementById("user-answer").value,
+    userAnswer:"",
     correctLetters:[],
     playerMoney:0,
     moneyIncrement:200,
@@ -170,6 +170,7 @@ function fiveLetterLingo(){
     GenerateLingo()
 }
 function startGame(wordLength,roundsLength){
+    divEl = document.getElementById("game-area")
     for(x=1;x<roundsLength+1;x++){
         var startHtml = `<ul class ="round">`
         for(y=0;y<wordLength;y++){
@@ -177,9 +178,17 @@ function startGame(wordLength,roundsLength){
         }
         var endHtml = `</ul>`
         var html= startHtml+endHtml;
-        console.log(html,x)
-
+        divEl.innerHTML += html
     }
+    var userInput =document.createElement("div")
+    userInput.innerHTML =`<input id="user-answer" type="text">
+    <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
+    divEl.appendChild(userInput)
+    document.getElementById("game-menu").style.display ="none"
+    gameController.roundTiles =[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")]
+    gameController.userAnswer= document.getElementById("user-answer").value
+    gameController.wordLength = wordLength
+    GenerateLingo()
 }
 
 

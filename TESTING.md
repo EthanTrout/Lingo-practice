@@ -574,3 +574,39 @@ function startGame(wordLength,roundsLength){
 ![results when called](/assets/testing-images/startGameTest.png)
 
 - this works but will not need to be pushed to the correct div element on the DOM
+
+#### fix
+```javascript 
+function startGame(wordLength,roundsLength){
+    divEl = document.getElementById("game-area")
+    for(x=1;x<roundsLength+1;x++){
+        var startHtml = `<ul class ="round">`
+        for(y=0;y<wordLength;y++){
+            startHtml += `<li class="round-${x}".</li>`
+        }
+        var endHtml = `</ul>`
+        var html= startHtml+endHtml;
+        divEl.innerHTML += html
+    }
+    var userInput =document.createElement("div")
+    userInput.innerHTML =`<input id="user-answer" type="text">
+    <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
+    divEl.appendChild(userInput)
+}
+```
+
+- This works and will now need to remove the buttons aswell as initalise GameController and generateLingo
+
+##### Initalising Gamecontroller and generateLingo
+```javascript
+gameController.roundTiles =[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")]
+    gameController.userAnswer= document.getElementById("user-answer").value
+    gameController.wordLength = wordLength
+    GenerateLingo()
+```
+
+##### Removing Buttons
+
+```javascript
+document.getElementById("game-menu").style.display ="none"
+```

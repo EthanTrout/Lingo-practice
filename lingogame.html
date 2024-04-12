@@ -9,52 +9,15 @@
 </head>
 <body>
     <section>
-        <div class="game-area">
-            <ul class="round">
-                <li class="round-1">.</li>
-                <li class="round-1">.</li>
-                <li class="round-1">.</li>
-                <li class="round-1">.</li>
-            </ul>
-
-            <ul class="round">
-                <li class="round-2">.</li>
-                <li class="round-2">.</li>
-                <li class="round-2">.</li>
-                <li class="round-2">.</li>
-            </ul>
-
-            <ul class="round">
-                <li class="round-3">.</li>
-                <li class="round-3">.</li>
-                <li class="round-3">.</li>
-                <li class="round-3">.</li>
-            </ul>
-
-            <ul class="round">
-                <li class="round-4">.</li>
-                <li class="round-4">.</li>
-                <li class="round-4">.</li>
-                <li class="round-4">.</li>
-            </ul>
-
-            <ul class="round">
-                <li class="round-5">.</li>
-                <li class="round-5">.</li>
-                <li class="round-5">.</li>
-                <li class="round-5">.</li>
-            </ul>
-
-            <input id="user-answer" type="text">
-            <button id="submit-answer" onclick="submitAnswer()">Verify</button>
+        <div id="game-area">
         </div>
     </section>
     <section>
-        <div class="game-menu">
-            <button id="4-letter" onclick="fourLetterLingo()">4 Letter Lingo</button>
-            <button id="5-letter" onclick="fiveLetterLingo()">5 Letter Lingo</button>
-            <button id="challenge">Challenge Words</button>
-            <button id="play">Play Lingo</button>
+        <div id="game-menu">
+            <button id="4-letter" onclick="startGame(4,5)">4 Letter Lingo</button>
+            <button id="5-letter" onclick="startGame(5,5)">5 Letter Lingo</button>
+            <button id="challenge" onclick="startGame(9,5)">Challenge Words</button>
+            <button id="play" onclick="startGame()">Play Lingo</button>
         </div>
     </section>
 </section>
