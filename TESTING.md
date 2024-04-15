@@ -604,7 +604,17 @@ gameController.roundTiles =[document.querySelectorAll(".round-1"),document.query
     gameController.wordLength = wordLength
     GenerateLingo()
 ```
+###### Error with initalising roundTiles array
+the roundTiles is currently only finding tiles up to the class of round-5, i need to make this array search for all rounds given from the guesses variable
 
+###### fix
+```javascript
+for(x=1;x<roundsLength+1;x++){
+        var tileObj =document.querySelectorAll(`.round-${x}`)
+        gameController.roundTiles.push(tileObj)
+    }
+```
+adding them in a loop should make sure all of the Objects are there 
 ##### Removing Buttons
 
 ```javascript
@@ -717,4 +727,51 @@ function endGame(color){
 - display a score 
 - allow user to get back to menu
 - in future add options to add score to leaderboard 
+
+# Challenge word functionality 
+## A challenge round will 
+- find a 9 or 10 letter word that also has a clue 
+- a timer will start and the letters will be added to the long word tiles
+- the more letters added the less money will be won 
+
+### 9 letter and 10 letter dictonary 
+i could use the WordsAPI to populate these words as is , however this would make it very difficult to create a clue as the words API has definitions but that wouldnt be as fun as generating clues.
+
+#### Solution 
+i can use ChatGPT to create JSON object with A 9 or 10 letter word with a clue to the word. 
+
+#### Limitations 
+Using this method i will have a limited amount of challenge questions in the library compared to the words api. However this library could be added to if the reoccuring userbase continued. 
+
+equally in the future if the website had a large daily userbase a chatGPT API could be called on each word to generate the clue. i will not be doing this currently as token costs for ChatGPT API are out of my budget.
+
+##### ChatGPT prompts 
+
+![ChatGPT Prompt](/assets/testing-images/chatGptPrompt1.png)
+![ChatGPT Second Prompt](/assets/testing-images/chatGptPrompt2.png)
+
+From testing chatGPT can only generate 28 at a time.
+
+#### nineLetterWords and tenLetterWords
+- i have got these objects ceated by ChatGPT to test A generateChallenge function. 
+- I have realised that Some words are not 9 letters or 9 letters and so need to fix these issues in the future.
+
+### ChallengeQuestion onlick function
+#### a challengeQuestion function will:
+- create only one question textbox.
+- display a clue
+- display a timer
+- set gamerounds to 1
+- initalise gameController objects.
+- hide menu screen
+- call GenerateChallengeQuestion function
+
+### GenerateChallengeQuestion onlick function
+#### a GenerateChallengeQuestion function will:
+- start timer function
+- determine if challenge is 9 or 10 letters 
+- call correct object to get Lingo
+- display lingo first letter
+- display lingo clue 
+
 

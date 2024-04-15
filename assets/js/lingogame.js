@@ -58,10 +58,197 @@
 
 
 // window.onload =GenerateLingo
+const nineLetterWords=[
+    {"word": "abandoned", "clue": "Where lost socks go"},
+    {"word": "blackjack", "clue": "21's favorite card game"},
+    {"word": "honeymoon", "clue": "The adventure after 'I do'"},
+    {"word": "laborious", "clue": "As hard as finding Waldo in a candy store"},
+    {"word": "mysterious", "clue": "The secret life of socks"},
+    {"word": "adventure", "clue": "The quest for excitement"},
+    {"word": "boulevard", "clue": "Where streets become grand"},
+    {"word": "courageous", "clue": "What lions and heroes have in common"},
+    {"word": "delicious", "clue": "The sound of a meal worth savoring"},
+    {"word": "enchanted", "clue": "Where fairy tales come true"},
+    {"word": "flourish", "clue": "How gardens and talents thrive"},
+    {"word": "gleefully", "clue": "The way laughter fills a room"},
+    {"word": "harmonize", "clue": "When voices blend in perfect pitch"},
+    {"word": "innocence", "clue": "The quality lost but never forgotten"},
+    {"word": "jubilance", "clue": "The joy of celebration"},
+    {"word": "kindheart", "clue": "The place where compassion resides"},
+    {"word": "labyrinth", "clue": "A maze of twists and turns"},
+    {"word": "mystique", "clue": "The allure of the unknown"},
+    {"word": "nourished", "clue": "What good food does for the soul"},
+    {"word": "opulence", "clue": "The luxury of abundance"},
+    {"word": "paradise", "clue": "Heaven on Earth"},
+    {"word": "quicksand", "clue": "The earth's sneaky trap"},
+    {"word": "radiantly", "clue": "Shining like the sun"},
+    {"word": "settlings", "clue": "Where disputes find resolution"},
+    {"word": "tranquili", "clue": "The calm within the storm"},
+    {"word": "uplifting", "clue": "What a good song or story does to the spirit"},
+    {"word": "victorious", "clue": "The feeling of triumph"},
+    {"word": "whimsical", "clue": "The magic of imagination"},
+    {"word": "beachside", "clue": "Where sand meets surf"},
+    {"word": "carousel", "clue": "A spinning symphony of childhood joy"},
+    {"word": "dazzling", "clue": "Like fireworks on a starry night"},
+    {"word": "euphorial", "clue": "On cloud nine"},
+    {"word": "fireworks", "clue": "Sky's celebration"},
+    {"word": "gigabytes", "clue": "Bytes on steroids"},
+    {"word": "happiness", "clue": "The ultimate pursuit"},
+    {"word": "imagining", "clue": "The playground of the mind"},
+    {"word": "jellybean", "clue": "Sweet and colorful"},
+    {"word": "kaleidoscope", "clue": "A visual wonder"},
+    {"word": "laughting", "clue": "The sound of joy"},
+    {"word": "magnified", "clue": "Brought into focus"},
+    {"word": "nostalgia", "clue": "Fond memories of the past"},
+    {"word": "optimistic", "clue": "Seeing the glass as half full"},
+    {"word": "pizzazzed", "clue": "Adding spice to life"},
+    {"word": "quicksand", "clue": "Mercury on the move"},
+    {"word": "rainstorm", "clue": "Nature's shower of blessings"},
+    {"word": "sunrising", "clue": "A new dawn"},
+    {"word": "treasured", "clue": "Priceless possessions"},
+    {"word": "uniformed", "clue": "Dressed to impress"},
+    {"word": "vivacious", "clue": "Full of life and energy"},
+    {"word": "wanderers", "clue": "Roaming spirits"},
+    {"word": "xylophone", "clue": "Musical rainbow"},
+    {"word": "yesterday", "clue": "The day before tomorrow"},
+    {"word": "zestiest", "clue": "Adding a punch to life"},
+    {"word": "dreamland", "clue": "Where dreams come true"},
+    {"word": "festerers", "clue": "The festivity's hosts"},
+    {"word": "adorkable", "clue": "Endearingly nerdy"},
+    {"word": "bubblegum", "clue": "Fun to chew, fun to blow"},
+    {"word": "cosmology", "clue": "The study of the universe"},
+    {"word": "dazzlers", "clue": "Sparkling stars"},
+    {"word": "enchanted", "clue": "Where magic resides"},
+    {"word": "fabulist", "clue": "The teller of tall tales"},
+    {"word": "giggliest", "clue": "Overflowing with giggles"},
+    {"word": "huggable", "clue": "Just asking for a squeeze"},
+    {"word": "inspiring", "clue": "Stirring the soul"},
+    {"word": "jubilant", "clue": "Exuberantly joyful"},
+    {"word": "kittycat", "clue": "Furry friend with whiskers"},
+    {"word": "lovelight", "clue": "Radiant affection"},
+    {"word": "merrymark", "clue": "The mark of happiness"},
+    {"word": "noodleful", "clue": "Brimming with noodles"},
+    {"word": "optimists", "clue": "Seeing the bright side"},
+    {"word": "peanutbop", "clue": "Tiny dance with big flavor"},
+    {"word": "quirkiness", "clue": "Irresistibly odd"},
+    {"word": "rainstorm", "clue": "Color explosion after rain"},
+    {"word": "sillyguts", "clue": "Laughing nonsensically"},
+    {"word": "troubleso", "clue": "The origin of mischief"},
+    {"word": "unifluff", "clue": "Soft as clouds"},
+    {"word": "vitalists", "clue": "The keepers of vitality"},
+    {"word": "wonderful", "clue": "Full of wonder"},
+    {"word": "xylobop", "clue": "Drumming with xylophone sounds"},
+    {"word": "yogamates", "clue": "Comrades in yoga"},
+    {"word": "zealotry", "clue": "Extreme enthusiasm"},
+    {"word": "zippering", "clue": "Closing with style"},
+    {"word": "dreamiest", "clue": "Lost in reverie"}
+]
+
+const tenLetterWords = [
+    {"word": "technology", "clue": "The magic of the future"},
+    {"word": "electronics", "clue": "The heart of gadgets"},
+    {"word": "harmonious", "clue": "Musical symphony of life"},
+    {"word": "celebrated", "clue": "Famous and adored"},
+    {"word": "efficiency", "clue": "Getting more done in less time"},
+    {"word": "informants", "clue": "Gatherers of secrets"},
+    {"word": "revelation", "clue": "Shocking plot twist"},
+    {"word": "accomplish", "clue": "Achievement unlocked"},
+    {"word": "experience", "clue": "Life's grand adventure"},
+    {"word": "eavesdrops", "clue": "Secret listeners"},
+    {"word": "extroverts", "clue": "Life of the party"},
+    {"word": "nightmares", "clue": "Sleep's spooky visitors"},
+    {"word": "advocators", "clue": "Champions of change"},
+    {"word": "consultancy", "clue": "Expert advice"},
+    {"word": "consummate", "clue": "Perfectly executed"},
+    {"word": "storyboard", "clue": "Visual storytelling"},
+    {"word": "flickering", "clue": "Intermittent light"},
+    {"word": "conclusion", "clue": "Final resolution"},
+    {"word": "exteriors", "clue": "Outer appearances"},
+    {"word": "instrument", "clue": "Tool of creation"},
+    {"word": "journeying", "clue": "Adventure seeker"},
+    {"word": "originating", "clue": "Starting point"},
+    {"word": "persistent", "clue": "Never giving up"},
+    {"word": "revelation", "clue": "Game-changing discovery"},
+    {"word": "simplified", "clue": "Made easy to understand"},
+    {"word": "underrated", "clue": "Underappreciated"},
+    {"word": "comfortable", "clue": "Cozy and relaxed"},
+    {"word": "interaction", "clue": "Social exchange"},
+    {"word": "mainstream", "clue": "Popular and widespread"},
+    {"word": "opportunity", "clue": "Door to success"},
+    {"word": "photograph", "clue": "Captured moment"},
+    {"word": "subscribed", "clue": "Agreed to receive"},
+    {"word": "tremendous", "clue": "Enormous in scale"},
+    {"word": "accelerator", "clue": "Speed booster"},
+    {"word": "catastrophe", "clue": "Disastrous event"},
+    {"word": "intervention", "clue": "Stepping in to help"},
+    {"word": "magnificent", "clue": "Grand and splendid"},
+    {"word": "observation", "clue": "Keen scrutiny"},
+    {"word": "practitioner", "clue": "Skilled professional"},
+    {"word": "superficial", "clue": "Surface level"},
+    {"word": "transmitted", "clue": "Sent across"},
+    {"word": "autonomous", "clue": "Independent and self-governing"},
+    {"word": "controlling", "clue": "Taking charge"},
+    {"word": "invitation", "clue": "Welcome request"},
+    {"word": "masterpiece", "clue": "Work of genius"},
+    {"word": "watermelon", "clue": "Summer's juicy delight"},
+    {"word": "lighthouse", "clue": "Beacon of hope in the dark"},
+    {"word": "butterball", "clue": "Soft and creamy delight"},
+    {"word": "basketball", "clue": "Bouncing fun on the court"},
+    {"word": "innovation", "clue": "Thinking outside the box"},
+    {"word": "holography", "clue": "3D magic in the air"},
+    {"word": "jellybeans", "clue": "Colorful candy surprise"},
+    {"word": "quicksands", "clue": "Sink or swim adventure"},
+    {"word": "vocabulary", "clue": "Words to impress"},
+    {"word": "wonderland", "clue": "Fantasy realm of dreams"},
+    {"word": "creativity", "clue": "Imagination's playground"},
+    {"word": "effervesce", "clue": "Fizzing with excitement"},
+    {"word": "flattering", "clue": "Complimenting appearance"},
+    {"word": "juxtaposed", "clue": "Oddly paired"},
+    {"word": "marshmallow", "clue": "Soft and fluffy treat"},
+    {"word": "nightmares", "clue": "Sleep's spooky visitors"},
+    {"word": "overwhelms", "clue": "Feeling flooded with emotion"},
+    {"word": "persuading", "clue": "Convincing with words"},
+    {"word": "queenliest", "clue": "Most regal"},
+    {"word": "rhapsodize", "clue": "Exuberant expression"},
+    {"word": "strawberry", "clue": "Nature's sweetest berry"},
+    {"word": "tantalized", "clue": "Teasingly tempting"},
+    {"word": "university", "clue": "Learning hub of life"},
+    {"word": "volleyball", "clue": "Beach or court sport"},
+    {"word": "whirlwind", "clue": "Blowing through life"},
+    {"word": "xylophones", "clue": "Musical rainbow"},
+    {"word": "zestfulness", "clue": "Lively and spirited"},
+    {"word": "butterfish", "clue": "Delicate ocean dweller"},
+    {"word": "candyfloss", "clue": "Sweet cloud on a stick"},
+    {"word": "dreamscape", "clue": "Where dreams roam free"},
+    {"word": "enchanted", "clue": "Where magic abounds"},
+    {"word": "frenchness", "clue": "French-like quality"},
+    {"word": "gigglesome", "clue": "Full of joyful laughter"},
+    {"word": "heartbeats", "clue": "Romantic rhythms"},
+    {"word": "jackhammer", "clue": "Construction's symphony"},
+    {"word": "keyboardin", "clue": "Typing adventure"},
+    {"word": "locomotive", "clue": "Steam-powered journey"},
+    {"word": "moonstruck", "clue": "Charmed by the moon"},
+    {"word": "noodlehead", "clue": "Silly thinker"},
+    {"word": "optimistic", "clue": "Always seeing the bright side"},
+    {"word": "paradiddle", "clue": "Drumming rhythm"},
+    {"word": "persuading", "clue": "Convincing with words"},
+    {"word": "rainbowish", "clue": "Somewhat colorful"},
+    {"word": "schoolroom", "clue": "Learning space"},
+    {"word": "thumbprint", "clue": "Unique mark of identity"},
+    {"word": "unplugging", "clue": "Digital detox"},
+    {"word": "vitalizing", "clue": "Reviving energy"},
+    {"word": "wonderland", "clue": "Fantasy realm of dreams"},
+    {"word": "xylitolize", "clue": "Sweeten naturally"},
+    {"word": "yearbooked", "clue": "Memorable memories"},
+    {"word": "zookeeper", "clue": "Guardian of the wild"},
+    {"word": "zombifying", "clue": "Turning into a zombie"},
+    {"word": "whistlebug", "clue": "Nature's melodious friend"}
+]
 
 const gameController ={
-    gameTimer:10,
+    gameTimer:28,
     lingoWord: "",
+    challengeClue:"",
     roundCounter:0,
     roundTiles:[],
     // round1Tiles: document.querySelectorAll(".round-1"),
@@ -143,6 +330,51 @@ async function GenerateLingo(wordLength){
     
 }
 
+function GenerateChallengeWord(challengeLength){
+    timer()
+    if(challengeLength === 9){
+        var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
+        gameController.lingoWord = nineLetterWords[randomIndex].word
+        document.getElementById("clue").innerText = nineLetterWords[randomIndex].clue
+        gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
+        console.log(gameController.lingoWord)
+    }
+    else if (challengeLength === 10){
+        var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
+        gameController.lingoWord = tenLetterWords[randomIndex].word
+        document.getElementById("clue").innerText = nineLetterWords[randomIndex].clue
+        gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
+        console.log(gameController.lingoWord)
+    }
+    else{
+        console.log("Challenge length not identified")
+    }
+     
+}
+// Timer function
+function timer(){
+    var sec = gameController.gameTimer;
+    var interval =0;
+    var givenIndexOrder = [2,6,7,8,1,3,4,5]
+    var timer = setInterval(function(){
+        document.getElementById('timerDisplay').innerHTML='00:'+sec;
+        if(interval % 4 == 0){
+            var randomIndex = givenIndexOrder.pop()
+            randomLetter = gameController.lingoWord[randomIndex]
+            if(gameController.roundTiles[0][randomIndex].innerText === ""){
+                gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
+            }
+        }
+        sec--;
+        interval++;
+        if (sec < 0) {
+            gameController.gameTimer =0;
+            endGame("red")
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
 // Onlcick verify button
 function submitAnswer(){
     if(gameController.gameTimer != 0){
@@ -171,11 +403,44 @@ function startGame(wordLength,roundsLength,gameRounds){
     <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
     divEl.appendChild(userInput)
     document.getElementById("game-menu").style.visibility ="hidden"
-    gameController.roundTiles =[document.querySelectorAll(".round-1"),document.querySelectorAll(".round-2"),document.querySelectorAll(".round-3"),document.querySelectorAll(".round-4"),document.querySelectorAll(".round-5")]
+    for(x=1;x<roundsLength+1;x++){
+        var tileObj =document.querySelectorAll(`.round-${x}`)
+        gameController.roundTiles.push(tileObj)
+    }
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
     GenerateLingo()
+}
+
+
+
+// Onclick Challenge round 
+function challengeQuestion(challengeLength){
+    divEl = document.getElementById("game-area")
+    startHtml = `<p id="clue"></p>
+    <ul class="round>`
+    for(x=0;x<challengeLength+1;x++){
+        startHtml += `<li class="round-1".</li>`
+    }
+    var endHtml = `</ul>`
+    var html= startHtml+endHtml;
+    divEl.innerHTML += html
+    var userInput =document.createElement("div")
+    userInput.innerHTML =`<input id="user-answer" type="text">
+    <button id="submit-answer" onclick="submitAnswer()">Verify</button>
+    <div id="safeTimer">
+    <h2>Timer</h2>
+    <p id="timerDisplay">00:28</p>
+    </div>`
+    divEl.appendChild(userInput)
+    document.getElementById("game-menu").style.visibility ="hidden"
+    gameController.roundTiles =[document.querySelectorAll(".round-1")]
+    gameController.userAnswer= document.getElementById("user-answer").value
+    gameController.gameRounds = 1
+    gameController.wordLength = challengeLength
+    GenerateChallengeWord(challengeLength)
+
 }
 
 // Onclick Extra options
@@ -268,7 +533,7 @@ function endGame(color){
         gameController.playerMoney += gameController.moneyIncrement;
         console.log(gameController.playerMoney)
     }
-    if(gameController.currentRound === gameController.gameRounds){
+    if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
         finishGame()
     }
     else{
@@ -288,7 +553,7 @@ function returnToMenu(){
     document.getElementById("game-menu").innerHTML =`
     <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
     <button id="5-letter" onclick="options(5)">5 Letter Lingo</button>
-    <button id="challenge" onclick="options(9)">Challenge Words</button>
+    <button id="challenge" onclick="challengeQuestion(9)">Challenge Words</button>
     <button id="play" onclick="startGame()">Play Lingo</button>`
     document.getElementById("game-menu").style.visibility ="visible"
 }
