@@ -262,7 +262,9 @@ const gameController ={
     moneyIncrement:200,
     wordLength:4,
     gameRounds:4,
-    currentRound:0
+    currentRound:0,
+    correctAnswersTally:0,
+    isPracticeGame:false
     
 
 };
@@ -321,8 +323,8 @@ async function getNewWord(){
 
 
 // Starts a new round 
-async function GenerateLingo(wordLength){
-    await getNewWord(wordLength)
+async function GenerateLingo(){
+    await getNewWord()
     var roundIndex = gameController.roundCounter;
     document.getElementById("user-answer").value =""
     console.log(gameController.lingoWord)
@@ -407,6 +409,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
     divEl.appendChild(userInput)
     document.getElementById("game-menu").style.visibility ="hidden"
+    gameController.roundTiles =[]
     for(x=1;x<roundsLength+1;x++){
         var tileObj =document.querySelectorAll(`.round-${x}`)
         gameController.roundTiles.push(tileObj)
@@ -415,7 +418,8 @@ function startGame(wordLength,roundsLength,gameRounds){
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
     gameController.gameTimer =32
-    GenerateLingo()
+    gameController.correctAnswersTally =0
+    GenerateLingo(wordLength)
 }
 
 
@@ -449,9 +453,13 @@ function challengeQuestion(challengeLength){
 
 }
 
+// Onclick Play Lingo
+
+
 // Onclick Extra options for practice questions
 
 function options(){
+    gameController.isPracticeGame =true;
     var gameMenu =document.getElementById("game-menu")
     gameMenu.innerHTML = `<h1>Word Length</h1>
     <div>
@@ -550,7 +558,7 @@ function endGame(color){
     }
     if(color === "green"){
         gameController.playerMoney += gameController.moneyIncrement;
-        console.log(gameController.playerMoney)
+        gameController.correctAnswersTally++;
     }
     if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
         finishGame()
@@ -561,19 +569,26 @@ function endGame(color){
     
 }
 function finishGame(){
-    document.getElementById("game-area").innerHTML =`
+    if(gameController.isPracticeGame){
+        document.getElementById("game-area").innerHTML =`
+    <h1> Game Over</h1>
+    <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
+    <button onclick="returnToMenu()">Return to menu</button>`
+    }else{
+        document.getElementById("game-area").innerHTML =`
     <h1> Game Over</h1>
     <p>You got £${gameController.playerMoney}
     <button onclick="returnToMenu()">Return to menu</button>`
+    }
+    
 }
 
 function returnToMenu(){
     document.getElementById("game-area").innerHTML =""
     document.getElementById("game-menu").innerHTML =`
-    <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
-    <button id="5-letter" onclick="options(5)">5 Letter Lingo</button>
-    <button id="challenge" onclick="challengeQuestion(9)">Challenge Words</button>
-    <button id="play" onclick="startGame()">Play Lingo</button>`
+    <button id="play" onclick="startGame()">Play Lingo</button>
+    <button id="practice" onclick="options()">Practice</button>
+    <button>Leaderboard</button>`
     document.getElementById("game-menu").style.visibility ="visible"
 }
 
