@@ -34,6 +34,9 @@ section{
       cursor: pointer;
       margin-bottom: 2em;
 }
+#game-menu .btn-red{
+    background-image: linear-gradient(144deg,#F19C3D, #bfed35 50%,#D8601F)
+}
 #game-menu  button:active,
     button:hover {
       outline: 0;
@@ -45,6 +48,7 @@ section{
         min-width: 196px;
       }
     }
+
 
 
 #game-menu button:first-of-type{

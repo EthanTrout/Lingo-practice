@@ -373,7 +373,7 @@ function timer(){
             endGame("green")
             clearInterval(timer);
         }
-        if (sec < 0 || gameController.userAnswer !="") {
+        else if (sec <= 0 ) {
             gameController.gameTimer =0;
             endGame("red")
             clearInterval(timer);
@@ -417,7 +417,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
-    gameController.gameTimer =32
+    gameController.gameTimer =28
     gameController.correctAnswersTally =0
     GenerateLingo(wordLength)
 }
@@ -448,7 +448,7 @@ function challengeQuestion(challengeLength){
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = 1
     gameController.wordLength = challengeLength
-    gameController.gameTimer =32
+    gameController.gameTimer =28
     GenerateChallengeWord(challengeLength)
 
 }
@@ -499,6 +499,8 @@ function options(){
         <input type="radio" name="rounds" id="r-ten" value="10">
     </div>
     <button id="confirm">Confirm</button>
+    <button id="challenge"class="btn-red" onclick="challengeQuestion(9)">Play Challenge Words</button>
+    <button onclick="returnToMenu()">Return to menu</button>
     `
     document.getElementById("confirm").addEventListener("click",addButton)
 
@@ -519,7 +521,7 @@ function verifyAnswer(isWord){
     if(gameController.userAnswer === gameController.lingoWord ){
         endGame("green");
     }
-    else if(gameController.roundCounter === 4 || !isWord){
+    else if(gameController.roundCounter === gameController.roundCounter || !isWord){
         endGame("red")
 
     }
