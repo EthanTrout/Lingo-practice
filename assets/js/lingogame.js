@@ -244,7 +244,31 @@ const tenLetterWords = [
     {"word": "zombifying", "clue": "Turning into a zombie"},
     {"word": "whistlebug", "clue": "Nature's melodious friend"}
 ]
-
+document.addEventListener("DOMContentLoaded",()=>{
+    const gameController ={
+        gameTimer:28,
+        lingoWord: "",
+        challengeClue:"",
+        roundCounter:0,
+        roundTiles:[],
+        // round1Tiles: document.querySelectorAll(".round-1"),
+        // round2Tiles: document.querySelectorAll(".round-2"),
+        // round3Tiles: document.querySelectorAll(".round-3"),
+        // round4Tiles: document.querySelectorAll(".round-4"),
+        // round5Tiles: document.querySelectorAll(".round-5"),
+        userAnswer:"",
+        correctLetters:[],
+        playerMoney:0,
+        moneyIncrement:200,
+        wordLength:4,
+        gameRounds:4,
+        currentRound:0,
+        correctAnswersTally:0,
+        isPracticeGame:false
+        
+    
+    };
+})
 const gameController ={
     gameTimer:28,
     lingoWord: "",
@@ -470,7 +494,7 @@ function options(){
         <label for="w-six">6</label>
         <input type="radio" name="wordLength" id="w-six" value="6">
         <label for="w-seven">7</label>
-        <input type="radio" name="wordLength-seven" value="7">
+        <input type="radio" name="wordLength"id="w-seven" value="7">
     </div>
 
     <h1>How many guesses?</h1>
@@ -500,7 +524,6 @@ function options(){
     </div>
     <button id="confirm">Confirm</button>
     <button id="challenge"class="btn-red" onclick="challengeQuestion(9)">Play Challenge Words</button>
-    <button onclick="returnToMenu()">Return to menu</button>
     `
     document.getElementById("confirm").addEventListener("click",addButton)
 
@@ -521,7 +544,7 @@ function verifyAnswer(isWord){
     if(gameController.userAnswer === gameController.lingoWord ){
         endGame("green");
     }
-    else if(gameController.roundCounter === gameController.roundCounter || !isWord){
+    else if(gameController.roundCounter === gameController.roundTiles.length -1 || !isWord){
         endGame("red")
 
     }
@@ -636,7 +659,6 @@ function displayAnswer(){
 // clears all tiles 
 function resetDisplay(){
     gameController.roundCounter =0;
-    var roundIndex =gameController.roundCounter;
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
