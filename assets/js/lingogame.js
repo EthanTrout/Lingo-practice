@@ -367,7 +367,11 @@ function timer(){
         }
         sec--;
         interval++;
-        if (sec < 0) {
+        if(sec>0 && gameController.userAnswer === gameController.lingoWord){
+            endGame("green")
+            clearInterval(timer);
+        }
+        if (sec < 0 || gameController.userAnswer !="") {
             gameController.gameTimer =0;
             endGame("red")
             clearInterval(timer);
@@ -410,6 +414,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
+    gameController.gameTimer =32
     GenerateLingo()
 }
 
@@ -439,6 +444,7 @@ function challengeQuestion(challengeLength){
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = 1
     gameController.wordLength = challengeLength
+    gameController.gameTimer =32
     GenerateChallengeWord(challengeLength)
 
 }
