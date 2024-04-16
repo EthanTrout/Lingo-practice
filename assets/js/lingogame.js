@@ -449,24 +449,36 @@ function challengeQuestion(challengeLength){
 
 }
 
-// Onclick Extra options
+// Onclick Extra options for practice questions
 
-function options(wordLength){
+function options(){
     var gameMenu =document.getElementById("game-menu")
-    gameMenu.innerHTML = `<h1>Guesses</h1>
+    gameMenu.innerHTML = `<h1>Word Length</h1>
     <div>
+        <label for="w-four">4</label>
+        <input type="radio" name="wordLength" id="w-four" value="4" checked>
+        <label for="w-five">5</label>
+        <input type="radio" name="wordLength" id="w-five" value="5">
+        <label for="w-six">6</label>
+        <input type="radio" name="wordLength" id="w-six" value="6">
+        <label for="w-seven">7</label>
+        <input type="radio" name="wordLength-seven" value="7">
+    </div>
+
+    <h1>How many guesses?</h1>
+    <div>
+    <label for="g-four">4</label>
+        <input type="radio" name="guesses" id="g-four" value="4" >
         <label for="g-five">5</label>
-        <input type="radio" name="guesses" id="g-five" value="5">
+        <input type="radio" name="guesses" id="g-five" value="5" checked>
         <label for="g-six">6</label>
         <input type="radio" name="guesses" id="g-six" value="6">
-        <label for="g-seven">7</label>
-        <input type="radio" name="guesses" id="g-seven" value="7">
     </div>
     <br>
-    <h1>Total rounds</h1>
+    <h1>How many total words?</h1>
     <div>
         <label for="r-five">5</label>
-        <input type="radio" name="rounds" id="r-five" value="5">
+        <input type="radio" name="rounds" id="r-five" value="5"checked>
         <label for="r-six">6</label>
         <input type="radio" name="rounds" id="r-six" value="6">
         <label for="r-seven">7</label>
@@ -486,6 +498,7 @@ function options(wordLength){
         var button = document.createElement("div")
         var rounds = document.querySelector('input[name = rounds]:checked').value
         var guesses = document.querySelector('input[name = guesses]:checked').value
+        var wordLength = document.querySelector('input[name = wordLength]:checked').value
         button.innerHTML =`<button id="play" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
         gameMenu.appendChild(button)
     }
