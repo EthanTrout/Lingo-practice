@@ -396,7 +396,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     for(x=1;x<roundsLength+1;x++){
         var startHtml = `<ul class ="round">`
         for(y=0;y<wordLength;y++){
-            startHtml += `<li class="round-${x}".</li>`
+            startHtml += `<li class="round-${x}">.</li>`
         }
         var endHtml = `</ul>`
         var html= startHtml+endHtml;
@@ -610,7 +610,7 @@ function resetDisplay(){
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
-            gameController.roundTiles[x][y].style.backgroundColor ="white"
+            gameController.roundTiles[x][y].style.backgroundColor ="#00225B"
         }
     }
     GenerateLingo();
