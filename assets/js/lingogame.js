@@ -244,31 +244,31 @@ const tenLetterWords = [
     {"word": "zombifying", "clue": "Turning into a zombie"},
     {"word": "whistlebug", "clue": "Nature's melodious friend"}
 ]
-document.addEventListener("DOMContentLoaded",()=>{
-    const gameController ={
-        gameTimer:28,
-        lingoWord: "",
-        challengeClue:"",
-        roundCounter:0,
-        roundTiles:[],
-        // round1Tiles: document.querySelectorAll(".round-1"),
-        // round2Tiles: document.querySelectorAll(".round-2"),
-        // round3Tiles: document.querySelectorAll(".round-3"),
-        // round4Tiles: document.querySelectorAll(".round-4"),
-        // round5Tiles: document.querySelectorAll(".round-5"),
-        userAnswer:"",
-        correctLetters:[],
-        playerMoney:0,
-        moneyIncrement:200,
-        wordLength:4,
-        gameRounds:4,
-        currentRound:0,
-        correctAnswersTally:0,
-        isPracticeGame:false
+// document.addEventListener("DOMContentLoaded",()=>{
+//     const gameController ={
+//         gameTimer:28,
+//         lingoWord: "",
+//         challengeClue:"",
+//         roundCounter:0,
+//         roundTiles:[],
+//         // round1Tiles: document.querySelectorAll(".round-1"),
+//         // round2Tiles: document.querySelectorAll(".round-2"),
+//         // round3Tiles: document.querySelectorAll(".round-3"),
+//         // round4Tiles: document.querySelectorAll(".round-4"),
+//         // round5Tiles: document.querySelectorAll(".round-5"),
+//         userAnswer:"",
+//         correctLetters:[],
+//         playerMoney:0,
+//         moneyIncrement:200,
+//         wordLength:4,
+//         gameRounds:4,
+//         currentRound:0,
+//         correctAnswersTally:0,
+//         isPracticeGame:false
         
     
-    };
-})
+//     };
+// })
 const gameController ={
     gameTimer:28,
     lingoWord: "",
@@ -288,7 +288,9 @@ const gameController ={
     gameRounds:4,
     currentRound:0,
     correctAnswersTally:0,
-    isPracticeGame:false
+    isPracticeGame:false,
+    isChallengeWord:false,
+    LingoRoundStage:0
     
 
 };
@@ -357,7 +359,10 @@ async function GenerateLingo(){
 }
 
 function GenerateChallengeWord(challengeLength){
-    timer()
+    var sec = 28;
+    gameController.isChallengeWord =true;
+    gameController.correctAnswersTally =0;
+    gameController.currentRound=0;
     if(challengeLength === 9){
         var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
         gameController.lingoWord = nineLetterWords[randomIndex].word
@@ -375,33 +380,70 @@ function GenerateChallengeWord(challengeLength){
     else{
         console.log("Challenge length not identified")
     }
+    timer(sec)
      
 }
+
+
+//  Revised Timer function 
+
+
+// function challenegWordCheck() {
+//     const myInterval = setInterval(myTimer, 1000);
+//     function myTimer(){
+//         document.getElementById('timerDisplay').innerHTML='00:'+gameController.gameTimer;
+//         var interval =0;
+//         var givenIndexOrder = [2,6,7,8,1,3,4,5]
+//         if(interval % 4 == 0){
+//             var randomIndex = givenIndexOrder.pop()
+//             randomLetter = gameController.lingoWord[randomIndex]
+//             if(gameController.roundTiles[0][randomIndex].innerText === ""){
+//                 gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
+//             }
+//         }
+//         gameController.gameTimer--;
+//         interval++;
+//         if(gameController.gameTimer>0 && gameController.userAnswer === gameController.lingoWord){
+//             endGame("green")
+//             clearInterval(myInterval)
+//         }
+//         else if (gameController.gameTimer <= 0 ) {
+//             endGame("red")
+//             clearInterval(myInterval)
+//         }
+//     }
+// }
+
+// function myStopFunction() {
+//   clearInterval(myInterval);
+// }
 // Timer function
-function timer(){
-    var sec = gameController.gameTimer;
+function timer(sec){
+    
     var interval =0;
     var givenIndexOrder = [2,6,7,8,1,3,4,5]
     var timer = setInterval(function(){
-        document.getElementById('timerDisplay').innerHTML='00:'+sec;
-        if(interval % 4 == 0){
-            var randomIndex = givenIndexOrder.pop()
-            randomLetter = gameController.lingoWord[randomIndex]
-            if(gameController.roundTiles[0][randomIndex].innerText === ""){
+        if(document.getElementById('timerDisplay')){
+            document.getElementById('timerDisplay').innerHTML='00:'+sec;
+            if(interval % 4 == 0){
+                var randomIndex = givenIndexOrder.pop()
+                randomLetter = gameController.lingoWord[randomIndex]
                 gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
             }
-        }
-        sec--;
-        interval++;
-        if(sec>0 && gameController.userAnswer === gameController.lingoWord){
-            endGame("green")
-            clearInterval(timer);
-        }
-        else if (sec <= 0 ) {
-            gameController.gameTimer =0;
-            endGame("red")
-            clearInterval(timer);
-        }
+            sec--;
+            interval++;
+            if(sec>0 && gameController.userAnswer === gameController.lingoWord){
+                endGame("green")
+                clearInterval(timer);
+            }
+            else if (sec <= 0 ) {
+                endGame("red")
+                clearInterval(timer);
+            }
+            else if(gameController.isChallengeWord === false){
+                clearInterval(timer);
+            }
+        }else{clearInterval(timer)}
     }, 1000);
 }
 
@@ -446,7 +488,10 @@ function startGame(wordLength,roundsLength,gameRounds){
     GenerateLingo(wordLength)
 }
 
-
+// Onclick Play Lingo
+function playLingo(){
+    startGame(4,5,4)
+}
 
 // Onclick Challenge round 
 function challengeQuestion(challengeLength){
@@ -594,17 +639,47 @@ function endGame(color){
     
 }
 function finishGame(){
+    divEl = document.getElementById("game-area")
     if(gameController.isPracticeGame){
         document.getElementById("game-area").innerHTML =`
     <h1> Game Over</h1>
     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
     <button onclick="returnToMenu()">Return to menu</button>`
-    }else{
-        document.getElementById("game-area").innerHTML =`
-    <h1> Game Over</h1>
-    <p>You got £${gameController.playerMoney}
-    <button onclick="returnToMenu()">Return to menu</button>`
+    }else if(!gameController.isPracticeGame){
+        gameController.LingoRoundStage++
+        if(gameController.LingoRoundStage===1){
+            divEl.innerHTML =""
+            challengeQuestion(9)
+        }
+        else if(gameController.LingoRoundStage===2){
+            divEl.innerHTML =""
+            gameController.isChallengeWord =false;
+            startGame(5,5,4)
+        }
+        else if(gameController.LingoRoundStage===3){
+            divEl.innerHTML =""
+            challengeQuestion(9)
+        }
+        else if(gameController.LingoRoundStage===4){
+            divEl.innerHTML =""
+            gameController.isChallengeWord =false;
+            startGame(4,5,2)
+        }
+        else if(gameController.LingoRoundStage===5){
+            divEl.innerHTML =""
+            gameController.isChallengeWord =false;
+            startGame(5,5,2)
+        }
+        else if(gameController.LingoRoundStage ===6){
+            divEl.innerHTML =`<h1> Game Over</h1>
+            <p>You got ${gameController.playerMoney}
+            <button onclick="returnToMenu()">Return to menu</button>`
+        }
+
     }
+        
+    
+    
     
 }
 
