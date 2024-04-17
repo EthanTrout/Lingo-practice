@@ -363,6 +363,7 @@ function GenerateChallengeWord(challengeLength){
     gameController.isChallengeWord =true;
     gameController.correctAnswersTally =0;
     gameController.currentRound=0;
+    gameController.roundCounter =0;
     if(challengeLength === 9){
         var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
         gameController.lingoWord = nineLetterWords[randomIndex].word
@@ -449,6 +450,7 @@ function timer(sec){
 
 // Onlcick verify button
 function submitAnswer(){
+    console.log(gameController)
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
         displayAnswer();
@@ -483,6 +485,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
+    gameController.currentRound=0;
     gameController.gameTimer =28
     gameController.correctAnswersTally =0
     GenerateLingo(wordLength)
@@ -622,6 +625,7 @@ function verifyAnswer(isWord){
 
 function endGame(color){
     // Set all tiles to correct color//
+    console.log(gameController.currentGame)
     gameController.currentRound++;
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
