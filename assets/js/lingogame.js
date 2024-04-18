@@ -634,34 +634,35 @@ function options(){
 
 function verifyAnswer(isWord){
     console.log(isWord)
+    // Object to store Lingo word letters and indexs
     lingoLettersAndIndex ={};
+    // creates key and value as indexs and letters
     for(z=0;z<gameController.lingoWord.length;z++){
         lingoLettersAndIndex[z] = gameController.lingoWord[z]
     }
-    console.log(lingoLettersAndIndex)
-    if(gameController.userAnswer === gameController.lingoWord ){
-        endGame("green");
+    if(gameController.userAnswer === gameController.lingoWord && isWord ){
+        endGame("green"); // ends game if answer is correct and is a word
     }
-    else if(gameController.roundCounter === gameController.roundTiles.length -1 ){
-        endGame("red")
+    else if(gameController.roundCounter === gameController.roundTiles.length -1 || !isWord ){
+        endGame("red") // ends the game if all guesses have been used or word entered is not a word 
 
     }
     else if(gameController.userAnswer != gameController.lingoWord){
         
-        for(x =0; x<gameController.userAnswer.length;x++){
+        for(x =0; x<gameController.userAnswer.length;x++){          // loops to get each letter of user answer 
             var letter = gameController.userAnswer[x]
-            if(letter === gameController.lingoWord[x]){
-                delete lingoLettersAndIndex[x]
-                setTileGreen(x)
+            if(letter === gameController.lingoWord[x]){             // if the letter is the same as the lingo word letter
+                delete lingoLettersAndIndex[x]                          // removes it from the object
+                setTileGreen(x)  
             }
         }
-        for(z =0; z<gameController.userAnswer.length;z++){
+        for(z =0; z<gameController.userAnswer.length;z++){                  // loops to get each letter of user answer
             var letter = gameController.userAnswer[z]
-             if(Object.values(lingoLettersAndIndex).includes(letter)){
-                for( var prop in lingoLettersAndIndex ) {
+             if(Object.values(lingoLettersAndIndex).includes(letter)){          // if the letter is still in object
+                for( var prop in lingoLettersAndIndex ) {                       // finds the values key
                     if( lingoLettersAndIndex.hasOwnProperty( prop ) ) {
                          if( lingoLettersAndIndex[ prop ] === letter ){
-                            delete lingoLettersAndIndex[prop]
+                            delete lingoLettersAndIndex[prop]               // removes that specific letter from the index
                             setTileOrange(z)
                             break;
                          }
@@ -673,6 +674,7 @@ function verifyAnswer(isWord){
         }
         
         document.getElementById("user-answer").value =""
+        document.getElementById("user-answer").focus();
         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
         gameController.roundCounter++;
     }
@@ -684,7 +686,6 @@ function verifyAnswer(isWord){
 
 function endGame(color){
     // Set all tiles to correct color//
-    console.log(gameController.currentGame)
     gameController.currentRound++;
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
@@ -812,7 +813,7 @@ function resetDisplay(){
 function setTileGreen (index){
     var roundIndex = gameController.roundCounter;
     gameController.roundTiles[roundIndex][index].style.backgroundColor ="green";
-    if(roundIndex != 4){
+    if(roundIndex != gameController.lingoWord.length){
         gameController.roundTiles[roundIndex+1][index].innerText = gameController.userAnswer[index];
     }
 }
