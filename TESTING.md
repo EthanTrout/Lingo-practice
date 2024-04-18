@@ -383,36 +383,105 @@ else if(gameController.userAnswer != gameController.lingoWord){
 - ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
 
 #### Fix
-- we can fix this by creating a set that stores when a letter is being made orange 
-- we use a set as we want only unique values 
+- I need to find a way to store the letter and its index if it is being turned green or orange 
 
-##### Code
+##### Sudo Code
+Object{W:0 O:1 R:2 D:3}
+
+loop user-answer letters
+if letter index = key and letter = key
+remove key and value 
+set tile green
+
+loop user-answer letters
+if letter is in Object 
+find object key 
+remove key and value 
+set tile orange
+
+- i created the object with indexs 
+
 ```javascript
-function setTileOrange(index) {
-    var roundIndex = gameController.roundCounter;
-    var letter = gameController.userAnswer[index];
-    var letterFound = false; // Flag to check if the letter is already matched
-    if (gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green") {
-        // Check if the letter has already been matched
-        if (!gameController.orangeLetters.has(letter)) {
-            for (var y = 0; y < gameController.lingoWord.length; y++) {
-                if (letter === gameController.lingoWord[y]) {
-                    // If the letter is found in the lingo word, mark it orange
-                    gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
-                }
+lingoLettersAndIndex ={};
+    for(z=0;z<gameController.lingoWord.length;z++){
+        lingoLettersAndIndex[z] = gameController.lingoWord[z]
+    }
+```
+
+- i didnt need to search the obj for Green letters as they needed to have the same index so i stuck with the previous loop
+
+```javascript
+for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                delete lingoLettersAndIndex[x]
+                setTileGreen(x)
             }
-            // Add the letter to the set to indicate it has been marked orange
-            gameController.orangeLetters.add(letter);
+        }
+```
+- the orange tile was harder as i neede to check if it was contained in the object with
+
+```javascript
+Object.values(lingoLettersAndIndex).includes(letter)
+```
+
+- i searched online for how to find a key from its value in an object and found this on stack overflow
+[stackoverflow][https://stackoverflow.com/questions/9907419/how-to-get-a-key-in-a-javascript-object-by-its-value]
+
+```javascript
+Object.prototype.getKeyByValue = function( value ) {
+    for( var prop in this ) {
+        if( this.hasOwnProperty( prop ) ) {
+             if( this[ prop ] === value )
+                 return prop;
         }
     }
 }
+
+var test = {
+   key1: 42,
+   key2: 'foo'
+};
+
+test.getKeyByValue( 42 );  // returns 'key1'
 ```
 
-- We reset the set evertime a new Answer is submitted
+using this i could complete the function 
 
-##### Example
-- ![Fix](/assets/testing-images/setTileOrangeErrorMultipleLettersFix.png.png)
+##### Refactored code
+```javascript
+else if(gameController.userAnswer != gameController.lingoWord){
+        
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                delete lingoLettersAndIndex[x]
+                setTileGreen(x)
+            }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
+            var letter = gameController.userAnswer[z]
+             if(Object.values(lingoLettersAndIndex).includes(letter)){
+                for( var prop in lingoLettersAndIndex ) {
+                    if( lingoLettersAndIndex.hasOwnProperty( prop ) ) {
+                         if( lingoLettersAndIndex[ prop ] === letter ){
+                            delete lingoLettersAndIndex[prop]
+                            setTileOrange(z)
+                            break;
+                         }
+                    }
+                }        
+                
+             }
 
+        }
+        
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+    
+```
 ## endGame()
 ### this function will:
 - take one argument color 
