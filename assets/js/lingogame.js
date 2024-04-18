@@ -290,7 +290,9 @@ const gameController ={
     correctAnswersTally:0,
     isPracticeGame:false,
     isChallengeWord:false,
-    LingoRoundStage:0
+    LingoRoundStage:0,
+    orangeLetters: new Set()
+    
     
 
 };
@@ -589,6 +591,7 @@ function options(){
 // Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
 function verifyAnswer(isWord){
     console.log(isWord)
+    gameController.orangeLetters.clear();
     if(gameController.userAnswer === gameController.lingoWord ){
         endGame("green");
     }
@@ -789,15 +792,35 @@ function setTileGreen (index){
 
 // }
 
+
 // sets tile passed to orange
-function setTileOrange(index,letter){
+// function setTileOrange(index,letter){
+//     var roundIndex = gameController.roundCounter;
+//     if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"){
+
+//         gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange"
+//     }
+    
+    
+    
+// }
+function setTileOrange(index) {
     var roundIndex = gameController.roundCounter;
-    if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"){
-        gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange"
+    var letter = gameController.userAnswer[index];
+    var letterFound = false; // Flag to check if the letter is already matched
+    if (gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green") {
+        // Check if the letter has already been matched
+        if (!gameController.orangeLetters.has(letter)) {
+            for (var y = 0; y < gameController.lingoWord.length; y++) {
+                if (letter === gameController.lingoWord[y]) {
+                    // If the letter is found in the lingo word, mark it orange
+                    gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
+                }
+            }
+            // Add the letter to the set to indicate it has been marked orange
+            gameController.orangeLetters.add(letter);
+        }
     }
-    
-    
-    
 }
 
 

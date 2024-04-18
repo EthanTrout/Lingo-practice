@@ -375,6 +375,43 @@ else if(gameController.userAnswer != gameController.lingoWord){
         }
 }
 ```
+#### More bugs with set tileOrange
+- set tile orange will still trigger if the user enters two letters and one should be orange. it makes both orange
+
+##### Examples
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters.png.png)
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
+
+#### Fix
+- we can fix this by creating a set that stores when a letter is being made orange 
+- we use a set as we want only unique values 
+
+##### Code
+```javascript
+function setTileOrange(index) {
+    var roundIndex = gameController.roundCounter;
+    var letter = gameController.userAnswer[index];
+    var letterFound = false; // Flag to check if the letter is already matched
+    if (gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green") {
+        // Check if the letter has already been matched
+        if (!gameController.orangeLetters.has(letter)) {
+            for (var y = 0; y < gameController.lingoWord.length; y++) {
+                if (letter === gameController.lingoWord[y]) {
+                    // If the letter is found in the lingo word, mark it orange
+                    gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
+                }
+            }
+            // Add the letter to the set to indicate it has been marked orange
+            gameController.orangeLetters.add(letter);
+        }
+    }
+}
+```
+
+- We reset the set evertime a new Answer is submitted
+
+##### Example
+- ![Fix](/assets/testing-images/setTileOrangeErrorMultipleLettersFix.png.png)
 
 ## endGame()
 ### this function will:
