@@ -354,9 +354,11 @@ async function getNewWord(){
 // Starts a new round 
 async function GenerateLingo(){
     await getNewWord()
+    gameController.roundCounter =0;
     var roundIndex = gameController.roundCounter;
     document.getElementById("user-answer").value =""
     console.log(gameController.lingoWord)
+    resetDisplay()
     gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
     
 }
@@ -698,7 +700,7 @@ function endGame(color){
         finishGame()
     }
     else{
-        setTimeout(resetDisplay,2000)
+        GenerateLingo();
     }
     
 }
@@ -750,7 +752,7 @@ function finishGame(){
 function returnToMenu(){
     document.getElementById("game-area").innerHTML =""
     document.getElementById("game-menu").innerHTML =`
-    <button id="play" onclick="startGame()">Play Lingo</button>
+    <button id="play" onclick="playLingo()">Play Lingo</button>
     <button id="practice" onclick="options()">Practice</button>
     <button>Leaderboard</button>`
     document.getElementById("game-menu").style.visibility ="visible"
@@ -797,14 +799,13 @@ function displayAnswer(){
 
 // clears all tiles 
 function resetDisplay(){
-    gameController.roundCounter =0;
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
             gameController.roundTiles[x][y].style.backgroundColor ="#00225B"
         }
     }
-    GenerateLingo();
+    
     
     
 
