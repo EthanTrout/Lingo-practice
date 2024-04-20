@@ -717,10 +717,7 @@ function endGame(color){
     else{
         displayLingo()
         setTimeout(GenerateLingo,3000)
-        setTimeout(()=>{
-            document.getElementById("toggle-user-input").style.display="block"
-            document.getElementById("reveal-lingo").remove()
-        },3000)
+        
     }
     
 }
@@ -823,6 +820,7 @@ function displayLingo(){
             gameController.roundTiles[roundIndex+1][x].innerText = gameController.lingoWord[x];
             gameController.roundTiles[roundIndex+1][x].style.backgroundColor ="green"
         }
+        document.getElementById("toggle-user-input").style.display="none"
     }
     else{
         var ulElement =document.createElement("ul")
@@ -843,6 +841,13 @@ function displayLingo(){
 
 // clears all tiles 
 function resetDisplay(){
+    if(document.getElementById("toggle-user-input").style.display==="none"){
+        document.getElementById("toggle-user-input").style.display="block";
+        if(document.getElementById("reveal-lingo")){
+            document.getElementById("reveal-lingo").remove();
+        }
+    }
+    document.getElementById("user-answer").focus();
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
