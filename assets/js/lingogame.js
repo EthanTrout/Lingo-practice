@@ -458,7 +458,7 @@ function submitAnswer(){
     console.log(gameController)
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
-        displayAnswer();
+        displayAnswer(gameController.userAnswer);
         checkWord(gameController.userAnswer,verifyAnswer);
     }
     
@@ -478,6 +478,7 @@ function startGame(wordLength,roundsLength,gameRounds){
         divEl.innerHTML += html
     }
     var userInput =document.createElement("div")
+    userInput.setAttribute("id","toggle-user-input");
     userInput.innerHTML =`<input id="user-answer" type="text">
     <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
     divEl.appendChild(userInput)
@@ -487,9 +488,18 @@ function startGame(wordLength,roundsLength,gameRounds){
         var tileObj =document.querySelectorAll(`.round-${x}`)
         gameController.roundTiles.push(tileObj)
     }
+    enterKeySubmit();
+    gameController.userAnswer= document.getElementById("user-answer").value
+    gameController.gameRounds = gameRounds
+    gameController.wordLength = wordLength
+    gameController.currentRound=0;
+    gameController.gameTimer =28
+    gameController.correctAnswersTally =0
+    GenerateLingo(wordLength)
+}
+function enterKeySubmit(){
     var userTextBox = document.getElementById("user-answer")
     var userSubmitBtn = document.getElementById("submit-answer")
-    gameController.userAnswer= userTextBox.value
     userTextBox.addEventListener("keyup",e =>{
         e.preventDefault();
         if(e.key === "Enter"){
@@ -497,13 +507,6 @@ function startGame(wordLength,roundsLength,gameRounds){
             userSubmitBtn.click()
         }
     })
-    
-    gameController.gameRounds = gameRounds
-    gameController.wordLength = wordLength
-    gameController.currentRound=0;
-    gameController.gameTimer =28
-    gameController.correctAnswersTally =0
-    GenerateLingo(wordLength)
 }
 
 // Onclick Play Lingo
@@ -523,6 +526,7 @@ function challengeQuestion(challengeLength){
     var html= startHtml+endHtml;
     divEl.innerHTML += html
     var userInput =document.createElement("div")
+    userInput.setAttribute("id","toggle-user-input");
     userInput.innerHTML =`<input id="user-answer" type="text">
     <button id="submit-answer" onclick="submitAnswer()">Verify</button>
     <div id="safeTimer">
@@ -530,6 +534,7 @@ function challengeQuestion(challengeLength){
     <p id="timerDisplay">00:28</p>
     </div>`
     divEl.appendChild(userInput)
+    enterKeySubmit();
     document.getElementById("game-menu").style.visibility ="hidden"
     gameController.roundTiles =[document.querySelectorAll(".round-1")]
     gameController.userAnswer= document.getElementById("user-answer").value
@@ -710,7 +715,12 @@ function endGame(color){
         finishGame()
     }
     else{
-        GenerateLingo();
+        displayLingo()
+        setTimeout(GenerateLingo,3000)
+        setTimeout(()=>{
+            document.getElementById("toggle-user-input").style.display="block"
+            document.getElementById("reveal-lingo").remove()
+        },3000)
     }
     
 }
@@ -799,10 +809,34 @@ function returnToMenu(){
 // }
 
 // Sets user input onto tiles
-function displayAnswer(){
+function displayAnswer(answer){
     var roundIndex =gameController.roundCounter;
     for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
-        gameController.roundTiles[roundIndex][x].innerText = gameController.userAnswer[x];
+        gameController.roundTiles[roundIndex][x].innerText = answer[x];
+    }
+    
+}
+function displayLingo(){
+    var roundIndex =gameController.roundCounter;
+    if(roundIndex < gameController.roundTiles.length -1){
+        for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
+            gameController.roundTiles[roundIndex+1][x].innerText = gameController.lingoWord[x];
+            gameController.roundTiles[roundIndex+1][x].style.backgroundColor ="green"
+        }
+    }
+    else{
+        var ulElement =document.createElement("ul")
+        ulElement.setAttribute("id","reveal-lingo")
+        var startHtml ="";
+        for(x=0;x<gameController.lingoWord.length;x++){
+            var liElement = document.createElement("li");
+            liElement.innerText = `${gameController.lingoWord[x]}`
+            liElement.style.backgroundColor = "green"
+            ulElement.append(liElement);
+            
+        }
+        document.getElementById("game-area").appendChild(ulElement)
+        document.getElementById("toggle-user-input").style.display="none"
     }
     
 }
