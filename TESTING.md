@@ -881,3 +881,13 @@ From testing chatGPT can only generate 28 at a time.
 - display lingo clue 
 
 
+## Conclusion 
+I have most of the functionality of the Challenege words in place and the basic functionality of a Lingo Game 
+
+# Quality of life touches 
+## Things to make the User experince better 
+
+- Clicking enter will submit the answer X
+- if the answer is incorrect. display what the answer is before moving onto the next round. 
+- if the answer is correct. display that the answer is correct.
+- display money earned in main lingo game 

@@ -487,7 +487,17 @@ function startGame(wordLength,roundsLength,gameRounds){
         var tileObj =document.querySelectorAll(`.round-${x}`)
         gameController.roundTiles.push(tileObj)
     }
-    gameController.userAnswer= document.getElementById("user-answer").value
+    var userTextBox = document.getElementById("user-answer")
+    var userSubmitBtn = document.getElementById("submit-answer")
+    gameController.userAnswer= userTextBox.value
+    userTextBox.addEventListener("keyup",e =>{
+        e.preventDefault();
+        if(e.key === "Enter"){
+            console.log("enter key clicked")
+            userSubmitBtn.click()
+        }
+    })
+    
     gameController.gameRounds = gameRounds
     gameController.wordLength = wordLength
     gameController.currentRound=0;
