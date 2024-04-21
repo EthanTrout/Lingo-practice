@@ -713,7 +713,8 @@ function endGame(color){
         gameController.correctAnswersTally++;
     }
     if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
-        finishGame()
+        displayLingo()
+        setTimeout(finishGame,3000)
     }
     else{
         displayLingo()
@@ -729,6 +730,7 @@ function finishGame(){
     <h1> Game Over</h1>
     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
     <button onclick="returnToMenu()">Return to menu</button>`
+    document.getElementById("control-area").innerHTML=""
     }else if(!gameController.isPracticeGame){
         gameController.LingoRoundStage++
         if(gameController.LingoRoundStage===1){
@@ -755,6 +757,7 @@ function finishGame(){
             startGame(5,5,2)
         }
         else if(gameController.LingoRoundStage ===6){
+            document.getElementById("control-area").innerHTML=""
             divEl.innerHTML =`<h1> Game Over</h1>
             <p>You got ${gameController.playerMoney}
             <button onclick="returnToMenu()">Return to menu</button>`
@@ -843,12 +846,14 @@ function displayLingo(){
 // clears all tiles 
 function resetDisplay(){
     if(document.getElementById("toggle-user-input").style.display==="none"){
-        document.getElementById("toggle-user-input").style.display="block";
+        document.getElementById("toggle-user-input").style.display="flex";
         if(document.getElementById("reveal-lingo")){
             document.getElementById("reveal-lingo").remove();
         }
     }
     document.getElementById("user-answer").focus();
+    document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
+    document.getElementById("player-money").innerText = `£${gameController.playerMoney}`
     for(x=0; x<gameController.roundTiles.length;x++){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
