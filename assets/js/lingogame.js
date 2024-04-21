@@ -439,10 +439,12 @@ function timer(sec){
             sec--;
             interval++;
             if(sec>0 && gameController.userAnswer === gameController.lingoWord){
+                document.getElementById("control-area").innerHTML=""
                 endGame("green")
                 clearInterval(timer);
             }
             else if (sec <= 0 ) {
+                document.getElementById("control-area").innerHTML=""
                 endGame("red")
                 clearInterval(timer);
             }
@@ -480,12 +482,9 @@ function startGame(wordLength,roundsLength,gameRounds){
         var html= startHtml+endHtml;
         divEl.innerHTML += html
     }
-    var userInput =document.createElement("div")
-    userInput.setAttribute("id","toggle-user-input");
-    userInput.innerHTML =`<div id="money-increment" class="column">£0</div>
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
     <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    <div id="player-money" class="column">£0</div>`
-    document.getElementById("control-area").appendChild(userInput)
+    <div id="player-money" class="column">£0</div></div>`
     document.getElementById("game-menu").style.visibility ="hidden"
     gameController.roundTiles =[]
     for(x=1;x<roundsLength+1;x++){
@@ -520,6 +519,7 @@ function playLingo(){
 
 // Onclick Challenge round 
 function challengeQuestion(challengeLength){
+    resetDisplay()
     divEl = document.getElementById("game-area")
     startHtml = `<p id="clue"></p>
     <ul class="round>`
@@ -529,17 +529,15 @@ function challengeQuestion(challengeLength){
     var endHtml = `</ul>`
     var html= startHtml+endHtml;
     divEl.innerHTML += html
-    var userInput =document.createElement("div")
-    userInput.setAttribute("id","toggle-user-input");
-    userInput.innerHTML =`<input id="user-answer" type="text">
-    <button id="submit-answer" onclick="submitAnswer()">Verify</button>
+    var timer =document.createElement("div")
+    timer.innerHTML =`
     <div id="safeTimer">
     <h2>Timer</h2>
     <p id="timerDisplay">00:28</p>
     </div>`
-    divEl.appendChild(userInput)
-    enterKeySubmit();
+    divEl.appendChild(timer)
     document.getElementById("game-menu").style.visibility ="hidden"
+    enterKeySubmit();
     gameController.roundTiles =[document.querySelectorAll(".round-1")]
     gameController.userAnswer= document.getElementById("user-answer").value
     gameController.gameRounds = 1
@@ -742,24 +740,29 @@ function finishGame(){
         gameController.LingoRoundStage++
         if(gameController.LingoRoundStage===1){
             divEl.innerHTML =""
+            gameController.moneyIncrement=500;
             challengeQuestion(9)
         }
         else if(gameController.LingoRoundStage===2){
             divEl.innerHTML =""
+            gameController.moneyIncrement=300;
             gameController.isChallengeWord =false;
             startGame(5,5,4)
         }
         else if(gameController.LingoRoundStage===3){
             divEl.innerHTML =""
+            gameController.moneyIncrement=500;
             challengeQuestion(9)
         }
         else if(gameController.LingoRoundStage===4){
             divEl.innerHTML =""
+            gameController.moneyIncrement=200;
             gameController.isChallengeWord =false;
             startGame(4,5,2)
         }
         else if(gameController.LingoRoundStage===5){
             divEl.innerHTML =""
+            gameController.moneyIncrement=300;
             gameController.isChallengeWord =false;
             startGame(5,5,2)
         }
