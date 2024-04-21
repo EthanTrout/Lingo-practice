@@ -458,10 +458,11 @@ function submitAnswer(){
     console.log(gameController)
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
-        displayAnswer(gameController.userAnswer);
         setTimeout(()=>{
             checkWord(gameController.userAnswer,verifyAnswer);
         },gameController.wordLength * gameController.letterDisplayDelay)
+        displayAnswer(gameController.userAnswer);
+       
     }
     
 }
@@ -785,6 +786,9 @@ function returnToMenu(){
     document.getElementById("game-menu").style.visibility ="visible"
 }
 
+function displayLetter(letter,index){
+    gameController.roundTiles[gameController.roundCounter][index].innerText = letter;
+}
 
 
 // function displayAnswer(){
@@ -838,7 +842,7 @@ function displayLingo(color){
         }
         document.getElementById("toggle-user-input").style.display="none"
     }
-    else if(roundIndex > gameController.roundTiles.length -1&&color ==="red"){
+    else if(roundIndex >= gameController.roundTiles.length -1&&color ==="red"){
         var ulElement =document.createElement("ul")
         ulElement.setAttribute("id","reveal-lingo")
         var startHtml ="";
