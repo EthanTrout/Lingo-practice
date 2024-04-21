@@ -443,7 +443,7 @@ function timer(sec){
                 endGame("green")
                 clearInterval(timer);
             }
-            else if (sec <= 0 ) {
+            else if (sec = 0 ) {
                 document.getElementById("control-area").innerHTML=""
                 endGame("red")
                 clearInterval(timer);
@@ -519,7 +519,6 @@ function playLingo(){
 
 // Onclick Challenge round 
 function challengeQuestion(challengeLength){
-    resetDisplay()
     divEl = document.getElementById("game-area")
     startHtml = `<p id="clue"></p>
     <ul class="round>`
@@ -528,7 +527,7 @@ function challengeQuestion(challengeLength){
     }
     var endHtml = `</ul>`
     var html= startHtml+endHtml;
-    divEl.innerHTML += html
+    divEl.innerHTML = html
     var timer =document.createElement("div")
     timer.innerHTML =`
     <div id="safeTimer">
@@ -536,6 +535,9 @@ function challengeQuestion(challengeLength){
     <p id="timerDisplay">00:28</p>
     </div>`
     divEl.appendChild(timer)
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
+    <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="player-money" class="column">£0</div></div>`
     document.getElementById("game-menu").style.visibility ="hidden"
     enterKeySubmit();
     gameController.roundTiles =[document.querySelectorAll(".round-1")]
@@ -543,6 +545,7 @@ function challengeQuestion(challengeLength){
     gameController.gameRounds = 1
     gameController.wordLength = challengeLength
     gameController.gameTimer =28
+    resetDisplay()
     GenerateChallengeWord(challengeLength)
 
 }
@@ -874,6 +877,7 @@ function resetDisplay(){
         }
     }
     document.getElementById("user-answer").focus();
+    document.getElementById("user-answer").value =""
     document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
     document.getElementById("player-money").innerText = `£${gameController.playerMoney}`
     for(x=0; x<gameController.roundTiles.length;x++){
