@@ -291,8 +291,8 @@ const gameController ={
     isPracticeGame:false,
     isChallengeWord:false,
     LingoRoundStage:0,
-    orangeLetters: new Set(),
-    matchedIndices: new Set(),
+    letterDisplayDelay:300,
+    gameRoundDisplayDelay:3000
     
     
 
@@ -461,7 +461,7 @@ function submitAnswer(){
         displayAnswer(gameController.userAnswer);
         setTimeout(()=>{
             checkWord(gameController.userAnswer,verifyAnswer);
-        },gameController.wordLength * 400)
+        },gameController.wordLength * gameController.letterDisplayDelay)
     }
     
 }
@@ -716,11 +716,11 @@ function endGame(color){
     }
     if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
         displayLingo()
-        setTimeout(finishGame,3000)
+        setTimeout(finishGame,gameController.gameRoundDisplayDelay)
     }
     else{
         displayLingo()
-        setTimeout(GenerateLingo,3000)
+        setTimeout(GenerateLingo,gameController.gameRoundDisplayDelay)
         
     }
     
@@ -823,7 +823,7 @@ function displayAnswer(answer){
 function delayLoop(x){
     setTimeout(()=>{
         gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
-    },x*400)
+    },x*gameController.letterDisplayDelay)
 }
 function displayLingo(){
     var roundIndex =gameController.roundCounter;
