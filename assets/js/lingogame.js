@@ -479,9 +479,10 @@ function startGame(wordLength,roundsLength,gameRounds){
     }
     var userInput =document.createElement("div")
     userInput.setAttribute("id","toggle-user-input");
-    userInput.innerHTML =`<input id="user-answer" type="text">
-    <button id="submit-answer" onclick="submitAnswer()">Verify</button>`
-    divEl.appendChild(userInput)
+    userInput.innerHTML =`<div id="money-increment" class="column">£0</div>
+    <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="player-money" class="column">£0</div>`
+    document.getElementById("control-area").appendChild(userInput)
     document.getElementById("game-menu").style.visibility ="hidden"
     gameController.roundTiles =[]
     for(x=1;x<roundsLength+1;x++){
