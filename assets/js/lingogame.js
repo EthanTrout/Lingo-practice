@@ -709,17 +709,21 @@ function endGame(color){
     gameController.currentRound++;
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
+        if(color ==="green"){
+            gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__animated")
+            gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__headShake")
+        }
     }
     if(color === "green"){
         gameController.playerMoney += gameController.moneyIncrement;
         gameController.correctAnswersTally++;
     }
     if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
-        displayLingo()
+        displayLingo(color)
         setTimeout(finishGame,gameController.gameRoundDisplayDelay)
     }
     else{
-        displayLingo()
+        displayLingo(color)
         setTimeout(GenerateLingo,gameController.gameRoundDisplayDelay)
         
     }
@@ -825,16 +829,16 @@ function delayLoop(x){
         gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
     },x*gameController.letterDisplayDelay)
 }
-function displayLingo(){
+function displayLingo(color){
     var roundIndex =gameController.roundCounter;
-    if(roundIndex < gameController.roundTiles.length -1){
+    if(roundIndex < gameController.roundTiles.length -1 &&color ==="red"){
         for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
             gameController.roundTiles[roundIndex+1][x].innerText = gameController.lingoWord[x];
             gameController.roundTiles[roundIndex+1][x].style.backgroundColor ="green"
         }
         document.getElementById("toggle-user-input").style.display="none"
     }
-    else{
+    else if(roundIndex > gameController.roundTiles.length -1&&color ==="red"){
         var ulElement =document.createElement("ul")
         ulElement.setAttribute("id","reveal-lingo")
         var startHtml ="";
@@ -846,6 +850,9 @@ function displayLingo(){
             
         }
         document.getElementById("game-area").appendChild(ulElement)
+        document.getElementById("toggle-user-input").style.display="none"
+    }
+    else{
         document.getElementById("toggle-user-input").style.display="none"
     }
     
