@@ -459,7 +459,9 @@ function submitAnswer(){
     if(gameController.gameTimer != 0){
         gameController.userAnswer = document.getElementById("user-answer").value;
         displayAnswer(gameController.userAnswer);
-        checkWord(gameController.userAnswer,verifyAnswer);
+        setTimeout(()=>{
+            checkWord(gameController.userAnswer,verifyAnswer);
+        },gameController.wordLength * 400)
     }
     
 }
@@ -812,10 +814,16 @@ function returnToMenu(){
 // Sets user input onto tiles
 function displayAnswer(answer){
     var roundIndex =gameController.roundCounter;
-    for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
-        gameController.roundTiles[roundIndex][x].innerText = answer[x];
-    }
-    
+        for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
+            delayLoop(x)
+        }
+        
+        
+}
+function delayLoop(x){
+    setTimeout(()=>{
+        gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
+    },x*400)
 }
 function displayLingo(){
     var roundIndex =gameController.roundCounter;
