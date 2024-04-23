@@ -425,32 +425,31 @@ function GenerateChallengeWord(challengeLength){
 // }
 // Timer function
 function timer(sec){
-    
+    console.log(sec)
     var interval =0;
     var givenIndexOrder = [2,6,7,8,1,3,4,5]
     var timer = setInterval(function(){
         if(document.getElementById('timerDisplay')){
             document.getElementById('timerDisplay').innerHTML='00:'+sec;
-            if(interval % 4 == 0){
+            console.log(sec)
+            if (sec === 1 ) {
+                endGame("red")
+                clearInterval(timer);
+            }
+            else if(sec>0 && gameController.userAnswer === gameController.lingoWord){
+                endGame("green")
+                clearInterval(timer);
+            }
+            else if(gameController.isChallengeWord === false){
+                clearInterval(timer);
+            }
+            else if(interval % 4 == 0){
                 var randomIndex = givenIndexOrder.pop()
                 randomLetter = gameController.lingoWord[randomIndex]
                 gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
             }
             sec--;
             interval++;
-            if(sec>0 && gameController.userAnswer === gameController.lingoWord){
-                document.getElementById("control-area").innerHTML=""
-                endGame("green")
-                clearInterval(timer);
-            }
-            else if (sec = 0 ) {
-                document.getElementById("control-area").innerHTML=""
-                endGame("red")
-                clearInterval(timer);
-            }
-            else if(gameController.isChallengeWord === false){
-                clearInterval(timer);
-            }
         }else{clearInterval(timer)}
     }, 1000);
 }
