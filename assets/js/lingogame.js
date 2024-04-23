@@ -481,9 +481,11 @@ function startGame(wordLength,roundsLength,gameRounds){
         var html= startHtml+endHtml;
         divEl.innerHTML += html
     }
-    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
-    <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    <div id="player-money" class="column">£0</div></div>`
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
+    <div id="money-increment" class="column">£0</div>
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="player-money" class="column">£0</div>
+    </div>`
     document.getElementById("game-menu").style.visibility ="hidden"
     gameController.roundTiles =[]
     for(x=1;x<roundsLength+1;x++){
