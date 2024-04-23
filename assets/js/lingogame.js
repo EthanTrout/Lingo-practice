@@ -467,12 +467,14 @@ function timer(sec){
 //     }
     
 // }
+
+// Regular expressions learn about here and implemented into code https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/
 function submitAnswer(){
     console.log(gameController)
     let lettersOnlyRegex = /^[a-zA-Z]+$/;
 
     if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
-        gameController.userAnswer = document.getElementById("user-answer").value;
+        gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
         console.log(gameController.userAnswer)
         setTimeout(()=>{
             checkWord(gameController.userAnswer,verifyAnswer);
