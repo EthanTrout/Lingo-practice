@@ -455,15 +455,35 @@ function timer(sec){
 }
 
 // Onlcick verify button
+// function submitAnswer(){
+//     console.log(gameController)
+//     if(gameController.gameTimer != 0){
+//         gameController.userAnswer = document.getElementById("user-answer").value;
+//         setTimeout(()=>{
+//             checkWord(gameController.userAnswer,verifyAnswer);
+//         },gameController.wordLength * gameController.letterDisplayDelay)
+//         displayAnswer(gameController.userAnswer);
+       
+//     }
+    
+// }
 function submitAnswer(){
     console.log(gameController)
-    if(gameController.gameTimer != 0){
+    let lettersOnlyRegex = /^[a-zA-Z]+$/;
+
+    if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
         gameController.userAnswer = document.getElementById("user-answer").value;
+        console.log(gameController.userAnswer)
         setTimeout(()=>{
             checkWord(gameController.userAnswer,verifyAnswer);
         },gameController.wordLength * gameController.letterDisplayDelay)
         displayAnswer(gameController.userAnswer);
        
+    }
+    else{
+        document.getElementById("user-answer").value=""
+        alert("There are only letters allowed in answers")
+        
     }
     
 }
