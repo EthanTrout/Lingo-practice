@@ -92,3 +92,9 @@ section{
 #user-input{
     background-color: #00225B;
 }
+
+/* Hidden elements */
+
+#leader-board{
+    display: none;
+}

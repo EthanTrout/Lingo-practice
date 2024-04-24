@@ -760,7 +760,9 @@ function finishGame(){
         document.getElementById("game-area").innerHTML =`
     <h1> Game Over</h1>
     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
-    <button onclick="returnToMenu()">Return to menu</button>`
+    <button onclick="returnToMenu()">Return to menu</button>
+    <input id="user-name" type="text">
+    <button onclick="saveScoreToLeaderBoard()">Save Score</button>`
     document.getElementById("control-area").innerHTML=""
     }else if(!gameController.isPracticeGame){
         gameController.LingoRoundStage++
@@ -796,7 +798,9 @@ function finishGame(){
             document.getElementById("control-area").innerHTML=""
             divEl.innerHTML =`<h1> Game Over</h1>
             <p>You got ${gameController.playerMoney}
-            <button onclick="returnToMenu()">Return to menu</button>`
+            <button onclick="returnToMenu()">Return to menu</button>
+            <input id="user-name" type="text">
+            <button onclick="saveScoreToLeaderBoard()">Save Score</button>`
         }
 
     }
@@ -804,6 +808,31 @@ function finishGame(){
     
     
     
+}
+
+function saveScoreToLeaderBoard(){
+    var lingoHighScores = JSON.parse(localStorage.getItem("lingoHighScores") || "[]");
+
+    var lingoScore ={
+        name:document.getElementById("user-name").value,
+        score:gameController.playerMoney}
+    lingoHighScores.push(lingoScore)
+    lingoHighScores.sort((a,b)=> b.score - a.score)
+    lingoHighScores.splice(5)
+    localStorage.setItem("lingoHighScores",JSON.stringify(lingoHighScores))
+}
+function displayLeaderBoard(){
+    document.getElementById("game-menu").style.display ="none"
+    document.getElementById("leader-board").style.display ="block"
+    var highScoresUl = document.getElementById("high-scores")
+    var highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || [])
+    highScoresUl.innerHTML=highScoresObj.map(score=>{
+        return `<li class="leader-board-score">${score.name}-${score.score}</li>`
+    }).join("");
+}
+function hideLeaderBoard(){
+    document.getElementById("leader-board").style.display ="none"
+    document.getElementById("game-menu").style.display="block"
 }
 
 function returnToMenu(){
@@ -913,8 +942,6 @@ function resetDisplay(){
             }
         }
     }
-    
-    
     
 
 }
