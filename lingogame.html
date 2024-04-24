@@ -13,7 +13,8 @@
 </head>
 <body>
     <section>
-        <div id="game-area">
+        <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+            <div id="game-area"></div>
         </div>
     </section>
     <div id="control-area"></div>
@@ -28,6 +29,7 @@
 
         </div>
         <div id="options">
+            <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
             <h1>Word Length</h1>
     <div>
         <label for="w-four">4</label>
@@ -68,7 +70,7 @@
     <button id="confirm">Confirm</button>
     <button id="challenge"class="btn-red" onclick="challengeQuestion(9)">Play Challenge Words</button>
         </div>
-        
+
     </section>
     <section>
         <div id="leader-board">

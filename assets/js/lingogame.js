@@ -493,8 +493,13 @@ function submitAnswer(){
 // Onclick Start Game. create all tiles and initalise GameController variables
 
 function startGame(wordLength,roundsLength,gameRounds){
+    document.getElementById("game-area").style.display="block"
+    document.getElementById("back-button").style.display ="block"
+    document.getElementById("control-area").style.display ="block"
     document.getElementById("options").style.display ="none"
+    document.getElementById("game-menu").style.display ="none"
     divEl = document.getElementById("game-area")
+    divEl.innerHTML="";
     for(x=1;x<roundsLength+1;x++){
         var startHtml = `<ul class ="round">`
         for(y=0;y<wordLength;y++){
@@ -509,7 +514,7 @@ function startGame(wordLength,roundsLength,gameRounds){
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
     <div id="player-money" class="column">£0</div>
     </div>`
-    document.getElementById("game-menu").style.visibility ="hidden"
+    
     gameController.roundTiles =[]
     for(x=1;x<roundsLength+1;x++){
         var tileObj =document.querySelectorAll(`.round-${x}`)
@@ -800,7 +805,12 @@ function hideLeaderBoard(){
 }
 
 function returnToMenu(){
+    gameController.playerMoney =0;
+    gameController.correctAnswersTally =0;
     document.getElementById("game-area").style.display="none"
+    document.getElementById("options").style.display="none"
+    document.getElementById("control-area").style.display="none"
+    document.getElementById("back-button").style.display ="none"
     document.getElementById("game-menu").style.display ="block"
 }
 

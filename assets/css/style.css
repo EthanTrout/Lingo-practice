@@ -95,6 +95,6 @@ section{
 
 /* Hidden elements */
 
-#leader-board,#options{
+#leader-board,#options,#back-button{
     display: none;
 }
