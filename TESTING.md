@@ -888,6 +888,6 @@ I have most of the functionality of the Challenege words in place and the basic 
 ## Things to make the User experince better 
 
 - Clicking enter will submit the answer X
-- if the answer is incorrect. display what the answer is before moving onto the next round. 
-- if the answer is correct. display that the answer is correct.
-- display money earned in main lingo game 
+- if the answer is incorrect. display what the answer is before moving onto the next round. X
+- if the answer is correct. display that the answer is correct. X 
+- display money earned in main lingo game X

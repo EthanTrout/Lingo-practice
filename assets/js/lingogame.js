@@ -907,6 +907,10 @@ function resetDisplay(){
         for(y =0; y<gameController.roundTiles[x].length;y++){
             gameController.roundTiles[x][y].innerText = ".";
             gameController.roundTiles[x][y].style.backgroundColor ="#00225B"
+            if(gameController.roundTiles[x][y].classList.contains("animate__animated") && gameController.roundTiles[x][y].classList.contains("animate__headShake")){
+                gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__animated")
+                gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__headShake")
+            }
         }
     }
     
