@@ -493,6 +493,7 @@ function submitAnswer(){
 // Onclick Start Game. create all tiles and initalise GameController variables
 
 function startGame(wordLength,roundsLength,gameRounds){
+    document.getElementById("options").style.display ="none"
     divEl = document.getElementById("game-area")
     for(x=1;x<roundsLength+1;x++){
         var startHtml = `<ul class ="round">`
@@ -799,12 +800,8 @@ function hideLeaderBoard(){
 }
 
 function returnToMenu(){
-    document.getElementById("game-area").innerHTML =""
-    document.getElementById("game-menu").innerHTML =`
-    <button id="play" onclick="playLingo()">Play Lingo</button>
-    <button id="practice" onclick="options()">Practice</button>
-    <button>Leaderboard</button>`
-    document.getElementById("game-menu").style.visibility ="visible"
+    document.getElementById("game-area").style.display="none"
+    document.getElementById("game-menu").style.display ="block"
 }
 
 function displayLetter(letter,index){
