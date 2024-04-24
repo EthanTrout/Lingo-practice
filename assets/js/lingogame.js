@@ -588,19 +588,20 @@ function options(){
     // hides game menu and shows options 
     document.getElementById("game-menu").style.display="none"
     document.getElementById("options").style.display ="block"
-
     gameController.isPracticeGame =true;
     document.getElementById("confirm").addEventListener("click",addButton)
-
-    function addButton(){
-        var button = document.createElement("div")
-        var rounds = document.querySelector('input[name = rounds]:checked').value
-        var guesses = document.querySelector('input[name = guesses]:checked').value
-        var wordLength = document.querySelector('input[name = wordLength]:checked').value
-        button.innerHTML =`<button id="play" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
-        document.getElementById("options").appendChild(button)
+    if(document.getElementById("playWithOptions")){
+        document.getElementById("playWithOptions").remove()
     }
 
+}
+// Find better way to do this V
+function addButton(){
+    var button = document.getElementById("play-button")
+    var rounds = document.querySelector('input[name = rounds]:checked').value
+    var guesses = document.querySelector('input[name = guesses]:checked').value
+    var wordLength = document.querySelector('input[name = wordLength]:checked').value
+    button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
 }
 
 // Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
