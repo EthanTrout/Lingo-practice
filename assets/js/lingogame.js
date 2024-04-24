@@ -579,48 +579,11 @@ function challengeQuestion(challengeLength){
 // Onclick Extra options for practice questions
 
 function options(){
-    gameController.isPracticeGame =true;
-    var gameMenu =document.getElementById("game-menu")
-    gameMenu.innerHTML = `<h1>Word Length</h1>
-    <div>
-        <label for="w-four">4</label>
-        <input type="radio" name="wordLength" id="w-four" value="4" checked>
-        <label for="w-five">5</label>
-        <input type="radio" name="wordLength" id="w-five" value="5">
-        <label for="w-six">6</label>
-        <input type="radio" name="wordLength" id="w-six" value="6">
-        <label for="w-seven">7</label>
-        <input type="radio" name="wordLength"id="w-seven" value="7">
-    </div>
+    // hides game menu and shows options 
+    document.getElementById("game-menu").style.display="none"
+    document.getElementById("options").style.display ="block"
 
-    <h1>How many guesses?</h1>
-    <div>
-    <label for="g-four">4</label>
-        <input type="radio" name="guesses" id="g-four" value="4" >
-        <label for="g-five">5</label>
-        <input type="radio" name="guesses" id="g-five" value="5" checked>
-        <label for="g-six">6</label>
-        <input type="radio" name="guesses" id="g-six" value="6">
-    </div>
-    <br>
-    <h1>How many total words?</h1>
-    <div>
-        <label for="r-five">5</label>
-        <input type="radio" name="rounds" id="r-five" value="5"checked>
-        <label for="r-six">6</label>
-        <input type="radio" name="rounds" id="r-six" value="6">
-        <label for="r-seven">7</label>
-        <input type="radio" name="rounds" id="r-seven" value="7">
-        <label for="r-eight">8</label>
-        <input type="radio" name="rounds" id="r-eight" value="8">
-        <label for="r-nine">9</label>
-        <input type="radio" name="rounds" id="r-nine" value="9">
-        <label for="r-ten">10</label>
-        <input type="radio" name="rounds" id="r-ten" value="10">
-    </div>
-    <button id="confirm">Confirm</button>
-    <button id="challenge"class="btn-red" onclick="challengeQuestion(9)">Play Challenge Words</button>
-    `
+    gameController.isPracticeGame =true;
     document.getElementById("confirm").addEventListener("click",addButton)
 
     function addButton(){
@@ -629,7 +592,7 @@ function options(){
         var guesses = document.querySelector('input[name = guesses]:checked').value
         var wordLength = document.querySelector('input[name = wordLength]:checked').value
         button.innerHTML =`<button id="play" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
-        gameMenu.appendChild(button)
+        document.getElementById("options").appendChild(button)
     }
 
 }
