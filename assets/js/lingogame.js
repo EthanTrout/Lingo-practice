@@ -727,7 +727,9 @@ function endGame(color){
 function finishGame(){
     divEl = document.getElementById("game-area")
     if(gameController.isPracticeGame){
-        document.getElementById("game-area").innerHTML =`
+        document.getElementById("game-over").style.display="block"
+        document.getElementById("game-area").style.display="none"
+        document.getElementById("game-over").innerHTML =`
     <h1> Game Over</h1>
     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
     <button onclick="returnToMenu()">Return to menu</button>
@@ -765,7 +767,9 @@ function finishGame(){
             startGame(5,5,2)
         }
         else if(gameController.LingoRoundStage ===6){
-            document.getElementById("control-area").innerHTML=""
+            document.getElementById("game-over").style.display="block"
+            document.getElementById("game-area").style.display="none"
+            document.getElementById("game-over").innerHTML=""
             divEl.innerHTML =`<h1> Game Over</h1>
             <p>You got ${gameController.playerMoney}
             <button onclick="returnToMenu()">Return to menu</button>
@@ -790,6 +794,7 @@ function saveScoreToLeaderBoard(){
     lingoHighScores.sort((a,b)=> b.score - a.score)
     lingoHighScores.splice(5)
     localStorage.setItem("lingoHighScores",JSON.stringify(lingoHighScores))
+    returnToMenu()
 }
 function displayLeaderBoard(){
     document.getElementById("game-menu").style.display ="none"
@@ -809,6 +814,7 @@ function returnToMenu(){
     gameController.playerMoney =0;
     gameController.correctAnswersTally =0;
     document.getElementById("game-area").style.display="none"
+    document.getElementById("game-over").style.display="none"
     document.getElementById("options").style.display="none"
     document.getElementById("control-area").style.display="none"
     document.getElementById("back-button").style.display ="none"
