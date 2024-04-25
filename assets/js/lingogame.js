@@ -290,13 +290,18 @@ const gameController ={
     correctAnswersTally:0,
     isPracticeGame:false,
     isChallengeWord:false,
-    LingoRoundStage:0,
+    isInfinte:false,
+    isFinal:false,
+    LingoRoundStage:6,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
     
 
 };
+
+let remainingTime; // Assuming 30 seconds remaining
+let pauseTimer;
 
 // taken from WordsApi documentation //
 async function getNewWord(){
@@ -543,7 +548,7 @@ function enterKeySubmit(){
 
 // Onclick Play Lingo
 function playLingo(){
-    startGame(4,5,4)
+    startGame(4,5,1)
 }
 
 // Onclick Challenge round 
@@ -700,8 +705,16 @@ function verifyAnswer(isWord){
 }
 
 function endGame(color){
-    // Set all tiles to correct color//
     gameController.currentRound++;
+    if(gameController.isInfinte && color ==="green"){
+        gameController.isInfinte= false;
+    }
+    if(gameController.isInfinte){
+        gameController.gameRounds = gameController.currentRound +1;
+    }
+    // Set all tiles to correct color//
+    
+    
     for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
         gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
         if(color ==="green"){
@@ -713,7 +726,9 @@ function endGame(color){
         gameController.playerMoney += gameController.moneyIncrement;
         gameController.correctAnswersTally++;
     }
-    if(gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0){
+    if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
+        if(gameController.isFinal){pauseTimer()}
+        console.log(gameController.isFinal)
         displayLingo(color)
         setTimeout(finishGame,gameController.gameRoundDisplayDelay)
     }
@@ -766,7 +781,32 @@ function finishGame(){
             gameController.isChallengeWord =false;
             startGame(5,5,2)
         }
-        else if(gameController.LingoRoundStage ===6){
+        else if(gameController.LingoRoundStage===6){
+            divEl.innerHTML =""
+            gameController.moneyIncrement=500;
+            challengeQuestion(9)
+        }
+        else if(gameController.LingoRoundStage===7){
+            divEl.innerHTML =""
+            gameController.moneyIncrement= 0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            gameController.isFinal =true;
+            startGame(4,5,1)
+            pauseTimer = startTimer(90, timerCallback);
+            
+        }
+        else if(gameController.LingoRoundStage===8 && gameController.timeLeft!=0){
+            divEl.innerHTML =""
+            gameController.moneyIncrement= 0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            startGame(5,5,1)
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            
+            
+        }
+        else if(gameController.LingoRoundStage ===9){
             document.getElementById("game-over").style.display="block"
             document.getElementById("game-area").style.display="none"
             document.getElementById("game-over").innerHTML=""
@@ -776,13 +816,41 @@ function finishGame(){
             <input id="user-name" type="text">
             <button onclick="saveScoreToLeaderBoard()">Save Score</button>`
         }
-
-    }
         
-    
+    }
     
     
 }
+
+function startTimer(duration, callback, remainingTime = duration) {
+    let timeLeft = remainingTime; // Use remaining time if provided, otherwise use the initial duration
+    let timerInterval;
+
+    // Start the timer
+    timerInterval = setInterval(() => {
+        // Decrease time left
+        timeLeft--;
+
+        // Call the callback function with timeLeft
+        callback(timeLeft);
+
+        // Check if timeLeft is zero, and if so, stop the timer
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000); // Run every 1000ms (1 second)
+
+    // Return a function to pause the timer
+    return function pauseTimer() {
+        clearInterval(timerInterval);
+    };
+}
+
+function timerCallback(timeLeft) {
+    remainingTime = timeLeft; // Update remaining time
+    console.log(`Time left: ${timeLeft} seconds`);
+}
+
 
 function saveScoreToLeaderBoard(){
     var lingoHighScores = JSON.parse(localStorage.getItem("lingoHighScores") || "[]");
