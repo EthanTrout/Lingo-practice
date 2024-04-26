@@ -747,12 +747,12 @@ function finishGame(){
         document.getElementById("game-over").innerHTML =`
     <h1> Game Over</h1>
     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
-    <button onclick="returnToMenu()">Return to menu</button>
-    <input id="user-name" type="text">
-    <button onclick="saveScoreToLeaderBoard()">Save Score</button>`
+    <button onclick="returnToMenu()">Return to menu</button>`
     document.getElementById("control-area").innerHTML=""
     }else if(!gameController.isPracticeGame){
-        gameController.LingoRoundStage++
+        if(!gameController.isInfinte){
+            gameController.LingoRoundStage++
+        }
         if(gameController.LingoRoundStage===1){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
@@ -810,7 +810,7 @@ function finishGame(){
             document.getElementById("game-over").style.display="block"
             document.getElementById("game-area").style.display="none"
             document.getElementById("game-over").innerHTML=""
-            divEl.innerHTML =`<h1> Game Over</h1>
+            document.getElementById("game-over").innerHTML =`<h1> Game Over</h1>
             <p>You got ${gameController.playerMoney}
             <button onclick="returnToMenu()">Return to menu</button>
             <input id="user-name" type="text">
@@ -849,6 +849,11 @@ function startTimer(duration, callback, remainingTime = duration) {
 function timerCallback(timeLeft) {
     remainingTime = timeLeft; // Update remaining time
     console.log(`Time left: ${timeLeft} seconds`);
+    if(remainingTime <=0){
+        gameController.isInfinte =false;
+        endGame("red")
+        pauseTimer()
+    }
 }
 
 
@@ -881,6 +886,8 @@ function hideLeaderBoard(){
 function returnToMenu(){
     gameController.playerMoney =0;
     gameController.correctAnswersTally =0;
+    gameController.LingoRoundStage=0;
+    gameController.currentRound=0;
     document.getElementById("game-area").style.display="none"
     document.getElementById("game-over").style.display="none"
     document.getElementById("options").style.display="none"
