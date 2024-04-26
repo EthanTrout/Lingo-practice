@@ -557,7 +557,7 @@ async function GenerateLingo(){
 }
 
 function GenerateChallengeWord(challengeLength){
-    givenIndexOrder = [2,6,7,8,1,3,4,5]
+    givenIndexOrder = [2,6,3,8,1,7,4,5]
     var clue=document.getElementById("clue")
     gameController.timerDisplay.style.display="block";
     if(challengeLength === 9){
@@ -565,6 +565,7 @@ function GenerateChallengeWord(challengeLength){
         gameController.lingoWord = nineLetterWords[randomIndex].word
         clue.innerText = nineLetterWords[randomIndex].clue
         gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
+        gameController.roundTiles[0][0].style.backgroundColor="green";
         console.log(gameController.lingoWord)
         pauseTimer =startTimer(32,challengeTimerCallBack)
     }
@@ -573,6 +574,7 @@ function GenerateChallengeWord(challengeLength){
         gameController.lingoWord = tenLetterWords[randomIndex].word
         clue.innerText = tenLetterWords[randomIndex].clue
         gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
+        gameController.roundTiles[0][0].style.backgroundColor="green";
         console.log(gameController.lingoWord)
         givenIndexOrder.push(9)
         pauseTimer =startTimer(36,challengeTimerCallBack)
@@ -600,6 +602,7 @@ function challengeTimerCallBack(timeLeft){
         var randomIndex = givenIndexOrder.pop()
         randomLetter = gameController.lingoWord[randomIndex]
         gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
+        gameController.roundTiles[0][randomIndex].style.backgroundColor ="green"
     }
     
 }
@@ -987,6 +990,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===2){
             divEl.innerHTML =""
+            gameController.timerDisplay.style.display="none"
             gameController.moneyIncrement=300;
             gameController.isChallengeWord =false;
             startGame(5,5,4)
@@ -999,6 +1003,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===4){
             divEl.innerHTML =""
+            gameController.timerDisplay.style.display="none"
             gameController.moneyIncrement=200;
             gameController.isChallengeWord =false;
             startGame(4,5,2)
