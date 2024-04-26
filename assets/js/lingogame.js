@@ -292,9 +292,11 @@ const gameController ={
     isChallengeWord:false,
     isInfinte:false,
     isFinal:false,
+    isChoiceMade:false,
     LingoRoundStage:6,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
+    
     
     
 
@@ -609,6 +611,17 @@ function addButton(){
     button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
 }
 
+// Onclick Final choices
+
+function finalSixLetterChoice(){
+    gameController.LingoRoundStage =9; // one less because finish game adds 1
+    finishGame()
+}
+function finalSevenLetterChoice(){
+    gameController.LingoRoundStage =10; // one less because finish game adds 1
+    finishGame()
+}
+
 // Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
 // function verifyAnswer(isWord){
 //     console.log(isWord)
@@ -750,6 +763,7 @@ function finishGame(){
     <button onclick="returnToMenu()">Return to menu</button>`
     document.getElementById("control-area").innerHTML=""
     }else if(!gameController.isPracticeGame){
+        // If the Lingo game is infinte it is in the final and should be looped till timer ends.
         if(!gameController.isInfinte){
             gameController.LingoRoundStage++
         }
@@ -806,7 +820,35 @@ function finishGame(){
             
             
         }
-        else if(gameController.LingoRoundStage ===9){
+        else if(gameController.LingoRoundStage===9 && gameController.timeLeft!=0){
+            document.getElementById("game-area").style.display="none"
+            document.getElementById("control-area").style.display="none"
+            document.getElementById("final").style.display="block"
+            
+        }
+        else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
+            document.getElementById("final").style.display="none"
+            divEl.innerHTML =""
+            gameController.moneyIncrement= 0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            startGame(6,5,1)
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            gameController.isChoiceMade =true;
+            
+        }
+        else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
+            document.getElementById("final").style.display="none"
+            divEl.innerHTML =""
+            gameController.moneyIncrement= 0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            startGame(7,5,1)
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            gameController.isChoiceMade =true;
+            
+        }
+        else{
             document.getElementById("game-over").style.display="block"
             document.getElementById("game-area").style.display="none"
             document.getElementById("game-over").innerHTML=""
@@ -888,6 +930,8 @@ function returnToMenu(){
     gameController.correctAnswersTally =0;
     gameController.LingoRoundStage=0;
     gameController.currentRound=0;
+    gameController.isChoiceMade=false;
+    gameController.isFinal=false;
     document.getElementById("game-area").style.display="none"
     document.getElementById("game-over").style.display="none"
     document.getElementById("options").style.display="none"
