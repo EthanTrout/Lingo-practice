@@ -294,7 +294,7 @@ const gameController ={
     isInfinte:false,
     isFinal:false,
     isChoiceMade:false,
-    LingoRoundStage:6,
+    LingoRoundStage:0,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -305,6 +305,8 @@ const gameController ={
 
 let remainingTime; // Assuming 30 seconds remaining
 let pauseTimer;
+let letterDisplayInterval=4;
+let givenIndexOrder = [2,6,7,8,1,3,4,5]
 
 // taken from WordsApi documentation //
 async function getNewWord(){
@@ -373,10 +375,6 @@ async function GenerateLingo(){
 
 function GenerateChallengeWord(challengeLength){
     var sec = 28;
-    gameController.isChallengeWord =true;
-    gameController.correctAnswersTally =0;
-    gameController.currentRound=0;
-    gameController.roundCounter =0;
     if(challengeLength === 9){
         var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
         gameController.lingoWord = nineLetterWords[randomIndex].word
@@ -394,10 +392,37 @@ function GenerateChallengeWord(challengeLength){
     else{
         console.log("Challenge length not identified")
     }
-    timer(sec)
+    pauseTimer =startTimer(32,challengeTimerCallBack)
+    
      
 }
-
+function timerCallback(timeLeft) {
+    remainingTime = timeLeft; // Update remaining time
+    gameController.timerDisplay.style.display="block"
+    gameController.timerDisplay.innerText = `Time left: ${timeLeft} seconds`
+    if(remainingTime <=0){
+        gameController.isInfinte =false;
+        endGame("red")
+        pauseTimer()
+    }
+}
+// Revised timer function call back
+function challengeTimerCallBack(timeLeft){
+    remainingTime = timeLeft
+    console.log(timeLeft)
+    if(timeLeft<=0){
+        gameController.isChallengeWord=false;
+        endGame("red")
+        pauseTimer()
+    }
+    else if(remainingTime%letterDisplayInterval === 0){
+        var randomIndex = givenIndexOrder.pop()
+        randomLetter = gameController.lingoWord[randomIndex]
+        console.log(randomLetter)
+        gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
+    }
+    
+}
 
 //  Revised Timer function 
 
@@ -513,7 +538,7 @@ function startGame(wordLength,roundsLength,gameRounds){
         for(y=0;y<wordLength;y++){
             startHtml += `<li class="round-${x}">.</li>`
         }
-        var endHtml = `</ul>`
+        var endHtml = `</ul> <p id="clue">`
         var html= startHtml+endHtml;
         divEl.innerHTML += html
     }
@@ -535,7 +560,13 @@ function startGame(wordLength,roundsLength,gameRounds){
     gameController.currentRound=0;
     gameController.gameTimer =28
     gameController.correctAnswersTally =0
-    GenerateLingo(wordLength)
+    if(!gameController.isChallengeWord){
+        GenerateLingo(wordLength)
+    }
+    else{
+        GenerateChallengeWord(9)
+    }
+    
 }
 function enterKeySubmit(){
     var userTextBox = document.getElementById("user-answer")
@@ -771,7 +802,8 @@ function finishGame(){
         if(gameController.LingoRoundStage===1){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
-            challengeQuestion(9)
+            gameController.isChallengeWord =true;
+            startGame(9,1,1)
         }
         else if(gameController.LingoRoundStage===2){
             divEl.innerHTML =""
