@@ -557,7 +557,7 @@ async function GenerateLingo(){
 }
 
 function GenerateChallengeWord(challengeLength){
-    var sec = 28;
+    givenIndexOrder = [2,6,7,8,1,3,4,5]
     if(challengeLength === 9){
         var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
         gameController.lingoWord = nineLetterWords[randomIndex].word
@@ -571,6 +571,8 @@ function GenerateChallengeWord(challengeLength){
         document.getElementById("clue").innerText = nineLetterWords[randomIndex].clue
         gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
         console.log(gameController.lingoWord)
+        givenIndexOrder.add(9)
+        
     }
     else{
         console.log("Challenge length not identified")
@@ -699,7 +701,7 @@ function submitAnswer(){
 
 // Onclick Start Game. create all tiles and initalise GameController variables
 
-function startGame(wordLength,roundsLength,gameRounds){
+function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
     document.getElementById("game-area").style.display="block"
     document.getElementById("back-button").style.display ="block"
     document.getElementById("control-area").style.display ="block"
@@ -738,7 +740,7 @@ function startGame(wordLength,roundsLength,gameRounds){
         GenerateLingo(wordLength)
     }
     else{
-        GenerateChallengeWord(9)
+        GenerateChallengeWord(challengeLetterLength)
     }
     
 }
@@ -989,7 +991,7 @@ function finishGame(){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =true;
-            startGame(9,1,1)
+            startGame(9,1,1,10)
         }
         else if(gameController.LingoRoundStage===4){
             divEl.innerHTML =""
@@ -1007,7 +1009,7 @@ function finishGame(){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =true;
-            startGame(9,1,1)
+            startGame(9,1,1,10)
         }
         else if(gameController.LingoRoundStage===7){
             divEl.innerHTML =""
