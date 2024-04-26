@@ -280,6 +280,7 @@ const gameController ={
     // round3Tiles: document.querySelectorAll(".round-3"),
     // round4Tiles: document.querySelectorAll(".round-4"),
     // round5Tiles: document.querySelectorAll(".round-5"),
+    timerDisplay:document.getElementById("timer-display"),
     userAnswer:"",
     correctLetters:[],
     playerMoney:0,
@@ -890,7 +891,8 @@ function startTimer(duration, callback, remainingTime = duration) {
 
 function timerCallback(timeLeft) {
     remainingTime = timeLeft; // Update remaining time
-    console.log(`Time left: ${timeLeft} seconds`);
+    gameController.timerDisplay.style.display="block"
+    gameController.timerDisplay.innerText = `Time left: ${timeLeft} seconds`
     if(remainingTime <=0){
         gameController.isInfinte =false;
         endGame("red")
@@ -937,6 +939,7 @@ function returnToMenu(){
     document.getElementById("options").style.display="none"
     document.getElementById("control-area").style.display="none"
     document.getElementById("back-button").style.display ="none"
+    gameController.timerDisplay.style.display="none"
     document.getElementById("game-menu").style.display ="block"
 }
 
