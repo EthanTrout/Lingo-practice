@@ -558,26 +558,30 @@ async function GenerateLingo(){
 
 function GenerateChallengeWord(challengeLength){
     givenIndexOrder = [2,6,7,8,1,3,4,5]
+    var clue=document.getElementById("clue")
+    gameController.timerDisplay.style.display="block";
     if(challengeLength === 9){
         var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
         gameController.lingoWord = nineLetterWords[randomIndex].word
-        document.getElementById("clue").innerText = nineLetterWords[randomIndex].clue
+        clue.innerText = nineLetterWords[randomIndex].clue
         gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
         console.log(gameController.lingoWord)
+        pauseTimer =startTimer(32,challengeTimerCallBack)
     }
     else if (challengeLength === 10){
-        var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
+        var randomIndex = Math.floor(Math.random()*tenLetterWords.length);
         gameController.lingoWord = tenLetterWords[randomIndex].word
-        document.getElementById("clue").innerText = nineLetterWords[randomIndex].clue
+        clue.innerText = tenLetterWords[randomIndex].clue
         gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
         console.log(gameController.lingoWord)
-        givenIndexOrder.add(9)
+        givenIndexOrder.push(9)
+        pauseTimer =startTimer(36,challengeTimerCallBack)
         
     }
     else{
         console.log("Challenge length not identified")
     }
-    pauseTimer =startTimer(32,challengeTimerCallBack)
+    
     
      
 }
@@ -586,6 +590,7 @@ function GenerateChallengeWord(challengeLength){
 function challengeTimerCallBack(timeLeft){
     remainingTime = timeLeft
     console.log(timeLeft)
+    gameController.timerDisplay.innerText=`Timer:${timeLeft}`
     if(timeLeft<=0){
         gameController.isChallengeWord=false;
         endGame("red")
@@ -594,7 +599,6 @@ function challengeTimerCallBack(timeLeft){
     else if(remainingTime%letterDisplayInterval === 0){
         var randomIndex = givenIndexOrder.pop()
         randomLetter = gameController.lingoWord[randomIndex]
-        console.log(randomLetter)
         gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
     }
     
@@ -721,7 +725,7 @@ function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="money-increment" class="column">£0</div>
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    <div id="player-money" class="column">£0</div>
+    <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`
     
     gameController.roundTiles =[]
@@ -762,37 +766,37 @@ function playLingo(){
 }
 
 // Onclick Challenge round 
-function challengeQuestion(challengeLength){
-    divEl = document.getElementById("game-area")
-    startHtml = `<p id="clue"></p>
-    <ul class="round>`
-    for(x=0;x<challengeLength+1;x++){
-        startHtml += `<li class="round-1".</li>`
-    }
-    var endHtml = `</ul>`
-    var html= startHtml+endHtml;
-    divEl.innerHTML = html
-    var timer =document.createElement("div")
-    timer.innerHTML =`
-    <div id="safeTimer">
-    <h2>Timer</h2>
-    <p id="timerDisplay">00:28</p>
-    </div>`
-    divEl.appendChild(timer)
-    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
-    <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    <div id="player-money" class="column">£0</div></div>`
-    document.getElementById("game-menu").style.visibility ="hidden"
-    enterKeySubmit();
-    gameController.roundTiles =[document.querySelectorAll(".round-1")]
-    gameController.userAnswer= document.getElementById("user-answer").value
-    gameController.gameRounds = 1
-    gameController.wordLength = challengeLength
-    gameController.gameTimer =28
-    resetDisplay()
-    GenerateChallengeWord(challengeLength)
+// function challengeQuestion(challengeLength){
+//     divEl = document.getElementById("game-area")
+//     startHtml = `<p id="clue"></p>
+//     <ul class="round>`
+//     for(x=0;x<challengeLength+1;x++){
+//         startHtml += `<li class="round-1".</li>`
+//     }
+//     var endHtml = `</ul>`
+//     var html= startHtml+endHtml;
+//     divEl.innerHTML = html
+//     var timer =document.createElement("div")
+//     timer.innerHTML =`
+//     <div id="safeTimer">
+//     <h2>Timer</h2>
+//     <p id="timerDisplay">00:28</p>
+//     </div>`
+//     divEl.appendChild(timer)
+//     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
+//     <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+//     <div id="player-money" class="column">£0</div></div>`
+//     document.getElementById("game-menu").style.visibility ="hidden"
+//     enterKeySubmit();
+//     gameController.roundTiles =[document.querySelectorAll(".round-1")]
+//     gameController.userAnswer= document.getElementById("user-answer").value
+//     gameController.gameRounds = 1
+//     gameController.wordLength = challengeLength
+//     gameController.gameTimer =28
+//     resetDisplay()
+//     GenerateChallengeWord(challengeLength)
 
-}
+// }
 
 // Onclick Play Lingo
 
@@ -948,7 +952,7 @@ function endGame(color){
         gameController.correctAnswersTally++;
     }
     if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
-        if(gameController.isFinal){pauseTimer()}
+        if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
         console.log(gameController.isFinal)
         displayLingo(color)
         setTimeout(finishGame,gameController.gameRoundDisplayDelay)
@@ -991,7 +995,7 @@ function finishGame(){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =true;
-            startGame(9,1,1,10)
+            startGame(10,1,1,10)
         }
         else if(gameController.LingoRoundStage===4){
             divEl.innerHTML =""
@@ -1009,7 +1013,7 @@ function finishGame(){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =true;
-            startGame(9,1,1,10)
+            startGame(10,1,1,10)
         }
         else if(gameController.LingoRoundStage===7){
             divEl.innerHTML =""
