@@ -477,7 +477,7 @@ const gameController ={
     isInfinte:false,
     isFinal:false,
     isChoiceMade:false,
-    LingoRoundStage:0,
+    LingoRoundStage:3,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -896,7 +896,10 @@ function verifyAnswer(isWord){
 
     }
     else if(gameController.userAnswer != gameController.lingoWord){
-        
+        if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
+            gameController.moneyIncrement -=50
+            document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
+        }
         for(x =0; x<gameController.userAnswer.length;x++){          // loops to get each letter of user answer 
             var letter = gameController.userAnswer[x]
             if(letter === gameController.lingoWord[x]){             // if the letter is the same as the lingo word letter
@@ -953,6 +956,7 @@ function endGame(color){
     if(color === "green"){
         gameController.playerMoney += gameController.moneyIncrement;
         gameController.correctAnswersTally++;
+        
     }
     if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
         if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
@@ -961,6 +965,9 @@ function endGame(color){
         setTimeout(finishGame,gameController.gameRoundDisplayDelay)
     }
     else{
+        if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
+            gameController.moneyIncrement =500;
+        }
         displayLingo(color)
         setTimeout(GenerateLingo,gameController.gameRoundDisplayDelay)
         
@@ -1004,13 +1011,13 @@ function finishGame(){
         else if(gameController.LingoRoundStage===4){
             divEl.innerHTML =""
             gameController.timerDisplay.style.display="none"
-            gameController.moneyIncrement=200;
+            gameController.moneyIncrement=500;
             gameController.isChallengeWord =false;
             startGame(4,5,2)
         }
         else if(gameController.LingoRoundStage===5){
             divEl.innerHTML =""
-            gameController.moneyIncrement=300;
+            gameController.moneyIncrement=500;
             gameController.isChallengeWord =false;
             startGame(5,5,2)
         }
