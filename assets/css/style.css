@@ -95,6 +95,6 @@ section{
 
 /* Hidden elements */
 
-#leader-board,#options,#back-button,#final,#timer-display{
+#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options{
     display: none;
 }

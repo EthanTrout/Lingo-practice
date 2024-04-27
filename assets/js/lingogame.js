@@ -477,7 +477,8 @@ const gameController ={
     isInfinte:false,
     isFinal:false,
     isChoiceMade:false,
-    LingoRoundStage:3,
+    isTimedGame:false,
+    LingoRoundStage:0,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -607,6 +608,18 @@ function challengeTimerCallBack(timeLeft){
     
 }
 
+// Timed game mode call back 
+
+function timedGameCallBack(timeLeft){
+    remainingTime = timeLeft
+    gameController.timerDisplay.style.display="block"
+    gameController.timerDisplay.innerText=`Timer:${timeLeft}`
+    if(timeLeft<=0){
+        endGame("red")
+        pauseTimer()
+    }
+}
+
 //  Revised Timer function 
 
 
@@ -688,6 +701,7 @@ function challengeTimerCallBack(timeLeft){
 function submitAnswer(){
     console.log(gameController)
     let lettersOnlyRegex = /^[a-zA-Z]+$/;
+    pauseTimer()
 
     if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
         gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
@@ -764,8 +778,14 @@ function enterKeySubmit(){
 }
 
 // Onclick Play Lingo
-function playLingo(){
-    startGame(4,5,1)
+function playLingo(isTimed){
+    gameController.isTimedGame =isTimed;
+    document.getElementById("play-lingo-options").style.display="none";
+    startGame(4,5,4)
+}
+function playLingoOptions(){
+    document.getElementById("game-menu").style.display="none"
+    document.getElementById("play-lingo-options").style.display="block"
 }
 
 // Onclick Challenge round 
@@ -928,6 +948,9 @@ function verifyAnswer(isWord){
         document.getElementById("user-answer").focus();
         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
         gameController.roundCounter++;
+        if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
+            pauseTimer = startTimer(10,timedGameCallBack)
+        }
     }
     
 
@@ -1059,6 +1082,7 @@ function finishGame(){
             gameController.moneyIncrement= 0;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
+            gameController.isFinal =true;
             startGame(6,5,1)
             pauseTimer = startTimer(90,timerCallback,remainingTime);
             gameController.isChoiceMade =true;
@@ -1070,12 +1094,14 @@ function finishGame(){
             gameController.moneyIncrement= 0;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
+            gameController.isFinal =true;
             startGame(7,5,1)
             pauseTimer = startTimer(90,timerCallback,remainingTime);
             gameController.isChoiceMade =true;
             
         }
         else{
+            gameController.isFinal =false;
             document.getElementById("game-over").style.display="block"
             document.getElementById("game-area").style.display="none"
             document.getElementById("game-over").innerHTML=""
@@ -1154,12 +1180,14 @@ function hideLeaderBoard(){
 }
 
 function returnToMenu(){
+        pauseTimer()
     gameController.playerMoney =0;
     gameController.correctAnswersTally =0;
     gameController.LingoRoundStage=0;
     gameController.currentRound=0;
     gameController.isChoiceMade=false;
     gameController.isFinal=false;
+    gameController.isTimedGame =false;
     document.getElementById("game-area").style.display="none"
     document.getElementById("game-over").style.display="none"
     document.getElementById("options").style.display="none"
@@ -1252,6 +1280,9 @@ function resetDisplay(){
         if(document.getElementById("reveal-lingo")){
             document.getElementById("reveal-lingo").remove();
         }
+    }
+    if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
+        pauseTimer = startTimer(10,timedGameCallBack)
     }
     document.getElementById("user-answer").focus();
     document.getElementById("user-answer").value =""
