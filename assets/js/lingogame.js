@@ -479,7 +479,7 @@ const gameController ={
     isGrandPrize:false,
     isChoiceMade:false,
     isTimedGame:false,
-    LingoRoundStage:11,
+    LingoRoundStage:6,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -1056,6 +1056,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===7){
             divEl.innerHTML =""
+            document.getElementById("skip-word").style.display="block"
             gameController.moneyIncrement= gameController.playerMoney/2;
             gameController.playerMoney =0;
             gameController.isChallengeWord =false;
@@ -1079,6 +1080,7 @@ function finishGame(){
         else if(gameController.LingoRoundStage===9 && gameController.timeLeft!=0){
             document.getElementById("game-area").style.display="none"
             document.getElementById("control-area").style.display="none"
+            document.getElementById("skip-word").style.display="none"
             document.getElementById("final").style.display="block"
             
         }
@@ -1117,6 +1119,7 @@ function finishGame(){
             }
             gameController.isFinal =false;
             document.getElementById("game-over").style.display="block"
+            document.getElementById("skip-word").style.display="none"
             document.getElementById("game-area").style.display="none"
             document.getElementById("game-over").innerHTML=""
             document.getElementById("game-over").innerHTML =`<h1> Game Over</h1>
