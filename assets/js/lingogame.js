@@ -476,9 +476,10 @@ const gameController ={
     isChallengeWord:false,
     isInfinte:false,
     isFinal:false,
+    isGrandPrize:false,
     isChoiceMade:false,
     isTimedGame:false,
-    LingoRoundStage:0,
+    LingoRoundStage:6,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -701,7 +702,9 @@ function timedGameCallBack(timeLeft){
 function submitAnswer(){
     console.log(gameController)
     let lettersOnlyRegex = /^[a-zA-Z]+$/;
-    pauseTimer()
+    if(gameController.isTimedGame){
+        pauseTimer()
+    }
 
     if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
         gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
@@ -781,7 +784,7 @@ function enterKeySubmit(){
 function playLingo(isTimed){
     gameController.isTimedGame =isTimed;
     document.getElementById("play-lingo-options").style.display="none";
-    startGame(4,5,4)
+    startGame(4,5,1)
 }
 function playLingoOptions(){
     document.getElementById("game-menu").style.display="none"
@@ -1012,6 +1015,9 @@ function finishGame(){
         if(!gameController.isInfinte){
             gameController.LingoRoundStage++
         }
+        if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
+            gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+        }
         if(gameController.LingoRoundStage===1){
             divEl.innerHTML =""
             gameController.moneyIncrement=500;
@@ -1052,7 +1058,8 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===7){
             divEl.innerHTML =""
-            gameController.moneyIncrement= 0;
+            gameController.moneyIncrement= gameController.playerMoney/2;
+            gameController.playerMoney =0;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
             gameController.isFinal =true;
@@ -1062,7 +1069,8 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===8 && gameController.timeLeft!=0){
             divEl.innerHTML =""
-            gameController.moneyIncrement= 0;
+            gameController.moneyIncrement= gameController.playerMoney*2;
+            gameController.playerMoney =0;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
             startGame(5,5,1)
@@ -1079,7 +1087,7 @@ function finishGame(){
         else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
             document.getElementById("final").style.display="none"
             divEl.innerHTML =""
-            gameController.moneyIncrement= 0;
+            gameController.moneyIncrement= gameController.playerMoney;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
             gameController.isFinal =true;
@@ -1091,10 +1099,12 @@ function finishGame(){
         else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
             document.getElementById("final").style.display="none"
             divEl.innerHTML =""
-            gameController.moneyIncrement= 0;
+            var incrementUpTo1500 = 15000 - gameController.playerMoney;
+            gameController.moneyIncrement= incrementUpTo1500;
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
             gameController.isFinal =true;
+            gameController.isGrandPrize =true;
             startGame(7,5,1)
             pauseTimer = startTimer(90,timerCallback,remainingTime);
             gameController.isChoiceMade =true;
@@ -1187,6 +1197,7 @@ function returnToMenu(){
     gameController.currentRound=0;
     gameController.isChoiceMade=false;
     gameController.isFinal=false;
+    gameController.isGrandPrize=false;
     gameController.isTimedGame =false;
     document.getElementById("game-area").style.display="none"
     document.getElementById("game-over").style.display="none"
