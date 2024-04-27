@@ -479,7 +479,7 @@ const gameController ={
     isGrandPrize:false,
     isChoiceMade:false,
     isTimedGame:false,
-    LingoRoundStage:6,
+    LingoRoundStage:11,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
@@ -983,6 +983,7 @@ function endGame(color){
         gameController.playerMoney += gameController.moneyIncrement;
         gameController.correctAnswersTally++;
         
+        
     }
     if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
         if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
@@ -1014,9 +1015,6 @@ function finishGame(){
         // If the Lingo game is infinte it is in the final and should be looped till timer ends.
         if(!gameController.isInfinte){
             gameController.LingoRoundStage++
-        }
-        if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
-            gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
         }
         if(gameController.LingoRoundStage===1){
             divEl.innerHTML =""
@@ -1111,6 +1109,12 @@ function finishGame(){
             
         }
         else{
+            if(gameController.isTimedGame){
+                var gameMode = "timedLingoHighScores"
+            }
+            else{
+                var gameMode = "lingoHighScores"
+            }
             gameController.isFinal =false;
             document.getElementById("game-over").style.display="block"
             document.getElementById("game-area").style.display="none"
@@ -1119,7 +1123,7 @@ function finishGame(){
             <p>You got ${gameController.playerMoney}
             <button onclick="returnToMenu()">Return to menu</button>
             <input id="user-name" type="text">
-            <button onclick="saveScoreToLeaderBoard()">Save Score</button>`
+            <button onclick="saveScoreToLeaderBoard('${gameMode}')">Save Score</button>`
         }
         
     }
@@ -1157,14 +1161,20 @@ function timerCallback(timeLeft) {
     gameController.timerDisplay.innerText = `Time left: ${timeLeft} seconds`
     if(remainingTime <=0){
         gameController.isInfinte =false;
+        if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
+            gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+        }
         endGame("red")
         pauseTimer()
     }
 }
 
 
-function saveScoreToLeaderBoard(){
-    var lingoHighScores = JSON.parse(localStorage.getItem("lingoHighScores") || "[]");
+function saveScoreToLeaderBoard(gameMode){
+    console.log(gameMode)
+    var lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
+    console.log(lingoHighScores)
+    
 
     var lingoScore ={
         name:document.getElementById("user-name").value,
@@ -1172,15 +1182,22 @@ function saveScoreToLeaderBoard(){
     lingoHighScores.push(lingoScore)
     lingoHighScores.sort((a,b)=> b.score - a.score)
     lingoHighScores.splice(5)
-    localStorage.setItem("lingoHighScores",JSON.stringify(lingoHighScores))
+    localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores))
     returnToMenu()
 }
 function displayLeaderBoard(){
     document.getElementById("game-menu").style.display ="none"
     document.getElementById("leader-board").style.display ="block"
+
     var highScoresUl = document.getElementById("high-scores")
     var highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || [])
     highScoresUl.innerHTML=highScoresObj.map(score=>{
+        return `<li class="leader-board-score">${score.name}-${score.score}</li>`
+    }).join("");
+
+    var timedHighScoresUl = document.getElementById("timed-high-scores")
+    var timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || [])
+    timedHighScoresUl.innerHTML=timedHighScoresObj.map(score=>{
         return `<li class="leader-board-score">${score.name}-${score.score}</li>`
     }).join("");
 }
@@ -1190,7 +1207,10 @@ function hideLeaderBoard(){
 }
 
 function returnToMenu(){
-        pauseTimer()
+       if(gameController.isChallengeWord || gameController.isTimedGame || gameController.isFinal) {
+            pauseTimer()
+       }
+    
     gameController.playerMoney =0;
     gameController.correctAnswersTally =0;
     gameController.LingoRoundStage=0;
