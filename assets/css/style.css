@@ -1,13 +1,14 @@
 body{
-    width: 100%;
-    height: 100%;
+   
 }
-section{
+.container{
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
 }
 
 /* Game Menu Buttons found on https://getcssscan.com/css-buttons-examples*/
@@ -75,8 +76,10 @@ section{
     margin: 2px;
     color: white;
 }
+/* User input  */
 #toggle-user-input{
     display: flex;
+    
 }
 #toggle-user-input .column{
     flex: 1;
@@ -93,6 +96,34 @@ section{
 }
 #user-input{
     background-color: #00225B;
+    padding: 20px;
+}
+
+/* UI back button, verify , return to menu  */
+.menu-button{
+    padding: 1rem;
+    background-color: orange;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    position:fixed;
+    top: 0;
+    left: 0;
+    margin-top: 0.5%;
+    margin-left: 0.5%;
+    
+}
+#submit-answer{
+    padding: 0.3rem;
+    background-color: orange;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+   
+
 }
 
 /* Hidden elements */

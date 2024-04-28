@@ -12,125 +12,144 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- Game Area -->
     <section>
-        <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button>
-            <div id="game-area"></div>
+        <div class ="container">
+            <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+                <div id="game-area"></div>
+            </div>
         </div>
+        <div class ="container">
+        <div>
+            <p id="timer-display"></p>
+            <button id="skip-word" onclick="endGame('red')">Skip</button>
+            
+        </div>
+        </div>
+        <div id="control-area"></div>
     </section>
+    <!-- Settings -->
     <section>
-    <div>
-        <p id="timer-display"></p>
-        <button id="skip-word" onclick="endGame('red')">Skip</button>
+        <div class ="container">
+            <div id="game-menu">
+                <button id="play" onclick="playLingoOptions()">Play Lingo</button>
+                <button id="practice" onclick="options()">Practice</button>
+                <button onclick="displayLeaderBoard()">Leaderboard</button>
+                <button onclick="showDict()">Dictonary</button>
+
+            </div>
+
+            <div id="play-lingo-options">
+                <div>
+                    <button onclick="playLingo(true)">Play Lingo Timed</button>
+                    <button onclick="playLingo(false)">Play Lingo Untimed</button>
+                </div>
+            </div>
+            <div id="options">
+                <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+                <h1>Word Length</h1>
         
-    </div>
-    </section>
-    <div id="control-area"></div>
-    <section>
-        <div id="game-menu">
-            <!-- <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
-            <button id="5-letter" onclick="options(5)">5 Letter Lingo</button>
-            <button id="challenge" onclick="challengeQuestion(9)">Challenge Words</button> -->
-            <button id="play" onclick="playLingoOptions()">Play Lingo</button>
-            <button id="practice" onclick="options()">Practice</button>
-            <button onclick="displayLeaderBoard()">Leaderboard</button>
-            <button onclick="showDict()">Dictonary</button>
+            <label for="w-four">4</label>
+            <input type="radio" name="wordLength" id="w-four" value="4" checked>
+            <label for="w-five">5</label>
+            <input type="radio" name="wordLength" id="w-five" value="5">
+            <label for="w-six">6</label>
+            <input type="radio" name="wordLength" id="w-six" value="6">
+            <label for="w-seven">7</label>
+            <input type="radio" name="wordLength"id="w-seven" value="7">
+        
 
-        </div>
-        <div id="play-lingo-options">
+            <h1>How many guesses?</h1>
             <div>
-                <button onclick="playLingo(true)">Play Lingo Timed</button>
-                <button onclick="playLingo(false)">Play Lingo Untimed</button>
+            <label for="g-four">4</label>
+                <input type="radio" name="guesses" id="g-four" value="4" >
+                <label for="g-five">5</label>
+                <input type="radio" name="guesses" id="g-five" value="5" checked>
+                <label for="g-six">6</label>
+                <input type="radio" name="guesses" id="g-six" value="6">
+            </div>
+            <br>
+            <h1>How many total words?</h1>
+            <div>
+                <label for="r-one">1</label>
+                <input type="radio" name="rounds" id="r-one" value="1"checked>
+                <label for="r-five">5</label>
+                <input type="radio" name="rounds" id="r-five" value="5"checked>
+                <label for="r-six">6</label>
+                <input type="radio" name="rounds" id="r-six" value="6">
+                <label for="r-seven">7</label>
+                <input type="radio" name="rounds" id="r-seven" value="7">
+                <label for="r-eight">8</label>
+                <input type="radio" name="rounds" id="r-eight" value="8">
+                <label for="r-nine">9</label>
+                <input type="radio" name="rounds" id="r-nine" value="9">
+                <label for="r-ten">10</label>
+                <input type="radio" name="rounds" id="r-ten" value="10">
+            </div>
+            <button id="confirm" onclick="addButton">Confirm</button>
+            <div id="play-button"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class ="container">
+            <div id="leader-board">
+                <h1> High Scores untimed</h1>
+                <ul id="high-scores"></ul>
+
+                <h1>High scores Timed</h1>
+                <ul id="timed-high-scores"></ul>
+                <button onclick="hideLeaderBoard()">Hide</button> 
             </div>
         </div>
-        <div id="options">
-            <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
-            <h1>Word Length</h1>
-    <div>
-        <label for="w-four">4</label>
-        <input type="radio" name="wordLength" id="w-four" value="4" checked>
-        <label for="w-five">5</label>
-        <input type="radio" name="wordLength" id="w-five" value="5">
-        <label for="w-six">6</label>
-        <input type="radio" name="wordLength" id="w-six" value="6">
-        <label for="w-seven">7</label>
-        <input type="radio" name="wordLength"id="w-seven" value="7">
-    </div>
-
-    <h1>How many guesses?</h1>
-    <div>
-    <label for="g-four">4</label>
-        <input type="radio" name="guesses" id="g-four" value="4" >
-        <label for="g-five">5</label>
-        <input type="radio" name="guesses" id="g-five" value="5" checked>
-        <label for="g-six">6</label>
-        <input type="radio" name="guesses" id="g-six" value="6">
-    </div>
-    <br>
-    <h1>How many total words?</h1>
-    <div>
-        <label for="r-one">1</label>
-        <input type="radio" name="rounds" id="r-one" value="1"checked>
-        <label for="r-five">5</label>
-        <input type="radio" name="rounds" id="r-five" value="5"checked>
-        <label for="r-six">6</label>
-        <input type="radio" name="rounds" id="r-six" value="6">
-        <label for="r-seven">7</label>
-        <input type="radio" name="rounds" id="r-seven" value="7">
-        <label for="r-eight">8</label>
-        <input type="radio" name="rounds" id="r-eight" value="8">
-        <label for="r-nine">9</label>
-        <input type="radio" name="rounds" id="r-nine" value="9">
-        <label for="r-ten">10</label>
-        <input type="radio" name="rounds" id="r-ten" value="10">
-    </div>
-    <button id="confirm" onclick="addButton">Confirm</button>
-    <div id="play-button"></div>
-
-    </section>
+            
+            <!-- Final Choice -->
     <section>
-        <div id="leader-board">
-            <h1> High Scores untimed</h1>
-            <ul id="high-scores"></ul>
-
-            <h1>High scores Timed</h1>
-            <ul id="timed-high-scores"></ul>
-            <button onclick="hideLeaderBoard()">Hide</button> 
-        </div>
-    </section>
-    <section>
-        <div id="final">
-            <h1 id="banked-message">You have Banked</h1>
-            <div id="final-buttons">
-                <div>
-                    <h2>6 letter lingo to double your money</h2>
-                    <p>Bank what you have and play for double money</p>
-                    <button onclick="finalSixLetterChoice()"></button>
+        <div class ="container">
+            <div id="final">
+                <h1 id="banked-message">You have Banked</h1>
+                <div id="final-buttons">
+                    <div>
+                        <h2>6 letter lingo to double your money</h2>
+                        <p>Bank what you have and play for double money</p>
+                        <button onclick="finalSixLetterChoice()"></button>
+                    </div>
+                    <div>
+                        <h2>7 letter lingo for the £15000 grand prize</h2>
+                        <p>Risk what you have and play the grand prize</p>
+                        <button onclick="finalSevenLetterChoice()"></button>
+                    </div>
                 </div>
                 <div>
-                    <h2>7 letter lingo for the £15000 grand prize</h2>
-                    <p>Risk what you have and play the grand prize</p>
-                    <button onclick="finalSevenLetterChoice()"></button>
+                    <h2>Time Remaining</h2>
+                    <p id="time-remaning"></p>
                 </div>
             </div>
-            <div>
-                <h2>Time Remaining</h2>
-                <p id="time-remaning"></p>
-            </div>
         </div>
-
+    </section>
+    <!-- Dictonary -->
+    <section>
         <div id="dictonary">
             <h1>Player Saved Words</h1>
             <ul id="saved-words"></ul>
         </div>
-</section>
-<section>
-    <div id="words-defi-list">
-        <ul id="all-words"></ul>
-        <button onclick="hideWordsAndDefi()">Back</button>
-    </div>
-</section>
+    </section>
+
+    <!-- Add to Dictonary -->
     <section>
-        <div id="game-over"></div>
+        <div class ="container">
+            <div id="words-defi-list">
+                <ul id="all-words"></ul>
+                <button onclick="hideWordsAndDefi()">Back</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game over -->
+    <section>
+        <div class ="container">
+            <div id="game-over"></div>
+        </div>
     </section>
     <!-- <script src="./assets/json/challengeLetters.js" type="module"></script> -->
     <script src="./assets/js/lingogame.js" ></script>
