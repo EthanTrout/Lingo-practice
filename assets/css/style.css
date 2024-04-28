@@ -1,5 +1,6 @@
 body{
-    
+    width: 100%;
+    height: 100%;
 }
 section{
     width: 100%;
@@ -56,6 +57,7 @@ section{
 }
 
 /* Lingo Game Tiles */
+
 #game-area ul{
     list-style: none;
     display: table;

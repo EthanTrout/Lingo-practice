@@ -479,7 +479,7 @@ const gameController ={
     isGrandPrize:false,
     isChoiceMade:false,
     isTimedGame:false,
-    LingoRoundStage:8,
+    LingoRoundStage:6,
     letterDisplayDelay:300,
     gameRoundDisplayDelay:3000
     
