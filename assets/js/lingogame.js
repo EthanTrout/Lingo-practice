@@ -492,7 +492,6 @@ let remainingTime; // Assuming 30 seconds remaining
 let pauseTimer;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5]
-let endLingoWordsAndDefi =[]
 
 // taken from WordsApi documentation //
 async function getNewWord(){
@@ -510,10 +509,6 @@ async function getNewWord(){
         const response = await fetch(url, options);
         const result = await response.json();
         gameController.lingoWord = result.word
-        var wordAndDesc ={}
-        wordAndDesc["word"] = result.word;
-        wordAndDesc["defi"] = result.results[0].definition;
-        endLingoWordsAndDefi.push(wordAndDesc)
     } catch (error) {
         console.error(error)
     }
@@ -779,6 +774,7 @@ function enterKeySubmit(){
     userTextBox.addEventListener("keyup",e =>{
         e.preventDefault();
         if(e.key === "Enter"){
+            console.log("enter key clicked")
             userSubmitBtn.click()
         }
     })
@@ -788,7 +784,7 @@ function enterKeySubmit(){
 function playLingo(isTimed){
     gameController.isTimedGame =isTimed;
     document.getElementById("play-lingo-options").style.display="none";
-    startGame(4,5,2)
+    startGame(4,5,1)
 }
 function playLingoOptions(){
     document.getElementById("game-menu").style.display="none"
@@ -1130,50 +1126,12 @@ function finishGame(){
             <p>You got ${gameController.playerMoney}
             <button onclick="returnToMenu()">Return to menu</button>
             <input id="user-name" type="text">
-            <button onclick="saveScoreToLeaderBoard('${gameMode}')">Save Score</button>
-            <button onclick="showWordsAndDefi()">All Lingo words</button>`
+            <button onclick="saveScoreToLeaderBoard('${gameMode}')">Save Score</button>`
         }
         
     }
     
     
-}
-
-// Dictonary functions
-function showWordsAndDefi(){
-    document.getElementById("game-over").style.display= "none"
-    var allWords =document.getElementById("all-words");
-    document.getElementById("words-defi-list").style.display="block"
-    allWords.innerHTML=endLingoWordsAndDefi.map(word=>{
-        return `<li class="all-words-list">${word.word}-${word.defi}</li> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button>`
-    }).join("");
-    
-}
-function hideWordsAndDefi(){
-    document.getElementById("words-defi-list").style.display="none"
-    document.getElementById("game-over").style.display= "block"
-}
-
-function addWordToDict(addWord,addDefi){
-    console.log(addWord,addDefi)
-    var dictonary = JSON.parse(localStorage.getItem("dictonary") || "[]");
-    var wordAndDefi ={
-        word:addWord,
-        defi:addDefi
-    }
-    dictonary.push(wordAndDefi)
-    localStorage.setItem(`dictonary`,JSON.stringify(dictonary))
-
-}
-function showDict(){
-    document.getElementById("game-menu").style.display ="none"
-    document.getElementById("dictonary").style.display ="block"
-
-    var savedWordsUl = document.getElementById("saved-words")
-    var savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || [])
-    savedWordsUl.innerHTML=savedWordsObj.map(word=>{
-        return `<li class="saved-words-list">${word.word}-${word.defi}</li>`
-    }).join("");
 }
 
 function startTimer(duration, callback, remainingTime = duration) {
@@ -1216,7 +1174,9 @@ function timerCallback(timeLeft) {
 
 
 function saveScoreToLeaderBoard(gameMode){
+    console.log(gameMode)
     var lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
+    console.log(lingoHighScores)
     
 
     var lingoScore ={

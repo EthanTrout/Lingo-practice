@@ -12,53 +12,19 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Main Game Area -->
     <section>
         <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button>
             <div id="game-area"></div>
         </div>
-        
-    
+    </section>
+    <section>
     <div>
         <p id="timer-display"></p>
         <button id="skip-word" onclick="endGame('red')">Skip</button>
         
     </div>
-    
     </section>
     <div id="control-area"></div>
-    <section>
-        <div id="final">
-            <h1 id="banked-message">You have Banked</h1>
-            <div id="final-buttons">
-                <div>
-                    <h2>6 letter lingo to double your money</h2>
-                    <p>Bank what you have and play for double money</p>
-                    <button onclick="finalSixLetterChoice()"></button>
-                </div>
-                <div>
-                    <h2>7 letter lingo for the £15000 grand prize</h2>
-                    <p>Risk what you have and play the grand prize</p>
-                    <button onclick="finalSevenLetterChoice()"></button>
-                </div>
-            </div>
-            <div>
-                <h2>Time Remaining</h2>
-                <p id="time-remaning"></p>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div id="words-defi-list">
-            <ul id="all-words"></ul>
-            <button onclick="hideWordsAndDefi()">Back</button>
-        </div>
-    </section>
-    <section>
-        <div id="game-over"></div>
-    </section>
-
-<!-- Settings Area -->
     <section>
         <div id="game-menu">
             <!-- <button id="4-letter" onclick="options(4)">4 Letter Lingo</button>
@@ -118,11 +84,10 @@
         <input type="radio" name="rounds" id="r-ten" value="10">
     </div>
     <button id="confirm" onclick="addButton">Confirm</button>
-    <div id="play-button">
+    <div id="play-button"></div>
 
-    </div>
-
-    
+    </section>
+    <section>
         <div id="leader-board">
             <h1> High Scores untimed</h1>
             <ul id="high-scores"></ul>
@@ -131,12 +96,42 @@
             <ul id="timed-high-scores"></ul>
             <button onclick="hideLeaderBoard()">Hide</button> 
         </div>
+    </section>
+    <section>
+        <div id="final">
+            <h1 id="banked-message">You have Banked</h1>
+            <div id="final-buttons">
+                <div>
+                    <h2>6 letter lingo to double your money</h2>
+                    <p>Bank what you have and play for double money</p>
+                    <button onclick="finalSixLetterChoice()"></button>
+                </div>
+                <div>
+                    <h2>7 letter lingo for the £15000 grand prize</h2>
+                    <p>Risk what you have and play the grand prize</p>
+                    <button onclick="finalSevenLetterChoice()"></button>
+                </div>
+            </div>
+            <div>
+                <h2>Time Remaining</h2>
+                <p id="time-remaning"></p>
+            </div>
+        </div>
 
         <div id="dictonary">
             <h1>Player Saved Words</h1>
             <ul id="saved-words"></ul>
         </div>
 </section>
+<section>
+    <div id="words-defi-list">
+        <ul id="all-words"></ul>
+        <button onclick="hideWordsAndDefi()">Back</button>
+    </div>
+</section>
+    <section>
+        <div id="game-over"></div>
+    </section>
     <!-- <script src="./assets/json/challengeLetters.js" type="module"></script> -->
     <script src="./assets/js/lingogame.js" ></script>
 </body>

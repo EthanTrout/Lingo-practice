@@ -97,6 +97,6 @@ section{
 
 /* Hidden elements */
 
-#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#words-defi-list,#dictonary{
+#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list{
     display: none;
 }
