@@ -747,11 +747,24 @@ for(x=1;x<roundsLength+1;x++){
     var html= startHtml+endHtml;
     divEl.innerHTML += html
 }
-document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
-<div id="money-increment" class="column">£0</div>
-<div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-<div id="player-money" class="column">£${gameController.playerMoney}</div>
-</div>`
+if(window.screen.width > 405){
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
+    <div id="money-increment" class="column">£0</div>
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="player-money" class="column">£${gameController.playerMoney}</div>
+    </div>`
+}
+else{
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    </div>
+    <div class="mobile-scores">
+    <div id="money-increment" class="column">£0</div>
+    <div id="player-money" class="column">£${gameController.playerMoney}</div>
+    </div>`
+
+    document.getElementById("back-button").style.display="none";
+}
 
 gameController.roundTiles =[]
 for(x=1;x<roundsLength+1;x++){
