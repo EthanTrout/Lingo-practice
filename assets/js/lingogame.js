@@ -1259,7 +1259,7 @@ timedHighScoresUl.innerHTML=timedHighScoresObj.map(score=>{
 }
 function hideLeaderBoard(){
 document.getElementById("leader-board").style.display ="none"
-document.getElementById("game-menu").style.display="block"
+document.getElementById("game-menu").style.display="flex"
 }
 
 function returnToMenu(){
@@ -1275,13 +1275,14 @@ gameController.isChoiceMade=false;
 gameController.isFinal=false;
 gameController.isGrandPrize=false;
 gameController.isTimedGame =false;
+gameController.moneyIncrement=200;
 document.getElementById("game-area").style.display="none"
 document.getElementById("game-over").style.display="none"
 document.getElementById("options").style.display="none"
 document.getElementById("control-area").style.display="none"
 document.getElementById("back-button").style.display ="none"
 gameController.timerDisplay.style.display="none"
-document.getElementById("game-menu").style.display ="block"
+document.getElementById("game-menu").style.display ="flex"
 }
 
 function displayLetter(letter,index){
@@ -1346,11 +1347,13 @@ else if(roundIndex >= gameController.roundTiles.length -1&&color ==="red"){
     var startHtml ="";
     for(x=0;x<gameController.lingoWord.length;x++){
         var liElement = document.createElement("li");
+        liElement.classList.add(`mobile-length-${gameController.lingoWord.length}`)
         liElement.innerText = `${gameController.lingoWord[x]}`
         liElement.style.backgroundColor = "green"
         ulElement.append(liElement);
         
     }
+    console.log(ulElement)
     document.getElementById("game-area").appendChild(ulElement)
     document.getElementById("toggle-user-input").style.display="none"
 }
