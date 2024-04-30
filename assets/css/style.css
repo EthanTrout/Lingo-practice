@@ -66,7 +66,7 @@ section{
     list-style: none;
     display: table;
 }
-#game-area li{
+.mobile-length-4,.mobile-length-5,.mobile-length-6,.mobile-length-7{
     display: block;
     width: 100px;
     height: 100px;
@@ -79,16 +79,84 @@ section{
     margin: 2px;
     color: white;
 }
-@media only screen and (max-width: 600px) {
-    #game-area li{
+
+.mobile-length-4{
+    width: 100px;
+    height: 100px;
+}
+.mobile-length-5{
+    width: 90px;
+    height: 90px;
+}
+.mobile-length-6{
+    width: 80px;
+    height: 80px;
+}
+.mobile-length-7{
+    width: 70px;
+    height: 70px;
+}
+
+@media only screen and (max-width: 950px) {
+    .mobile-length-4{
         width: 80px;
         height: 80px;
     }
-}
-@media only screen and (max-width: 406px) {
-    #game-area li{
+    .mobile-length-5{
+        width: 70px;
+        height: 70px;
+    }
+    .mobile-length-6{
         width: 60px;
         height: 60px;
+    }
+    .mobile-length-7{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .container{
+        justify-content: flex-start;
+        margin-left: 1rem;
+    }
+    .mobile-length-4{
+        width: 80px;
+        height: 80px;
+    }
+    .mobile-length-5{
+        width: 70px;
+        height: 70px;
+    }
+    .mobile-length-6{
+        width: 60px;
+        height: 60px;
+    }
+    .mobile-length-7{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media only screen and (max-width: 473px) {
+    .container{
+        justify-content: flex-start;
+        margin-left: 1rem;
+    }
+    .mobile-length-4{
+        width: 60px;
+        height: 60px;
+    }
+    .mobile-length-5{
+        width: 50px;
+        height: 50px;
+    }
+    .mobile-length-6{
+        width: 40px;
+        height: 40px;
+    }
+    .mobile-length-7{
+        width: 30px;
+        height: 30px;
     }
 }
 
@@ -142,6 +210,17 @@ section{
     margin-left: 0.5%;
     
 }
+@media only screen and (max-width: 821px) {
+    .menu-button{
+        padding:0.5rem;
+    }
+}
+@media only screen and (max-width: 473px) {
+    .menu-button{
+        padding:0.1rem;
+    }
+}
+
 #submit-answer{
     padding: 0.3rem;
     background-color: orange;

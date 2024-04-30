@@ -741,20 +741,20 @@ divEl.innerHTML="";
 for(x=1;x<roundsLength+1;x++){
     var startHtml = `<ul class ="round">`
     for(y=0;y<wordLength;y++){
-        startHtml += `<li class="round-${x}">.</li>`
+        startHtml += `<li class="round-${x} mobile-length-${wordLength}">.</li>`
     }
     var endHtml = `</ul> <p id="clue">`
     var html= startHtml+endHtml;
     divEl.innerHTML += html
 }
-if(window.screen.width > 405){
+if(window.screen.width > 473){
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="money-increment" class="column">£0</div>
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`
 }
-else{
+else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
     </div>
@@ -763,7 +763,7 @@ else{
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`
 
-    document.getElementById("back-button").style.display="none";
+    
 }
 
 gameController.roundTiles =[]
