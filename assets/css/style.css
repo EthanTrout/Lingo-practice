@@ -1,9 +1,12 @@
 body{
    
 }
+
 section{
     height: min-content;
 }
+
+/* Utilities  */
 .menu-container{
     width: 100%;
     height: 100%;
@@ -36,6 +39,8 @@ section{
     position: relative;
 
 }
+
+/* Menu */
 #game-menu{
     display: flex;
     flex-direction: column;
@@ -89,6 +94,11 @@ section{
     margin-top: 2em;
 } */
 
+/* Lingo Timer */
+#timer-display{
+    margin-top: 0;
+}
+
 /* Lingo Game Tiles */
 
 #game-area ul{
@@ -99,7 +109,7 @@ section{
     list-style: none;
     display: table;
 }
-.mobile-length-4,.mobile-length-5,.mobile-length-6,.mobile-length-7{
+.mobile-length-4,.mobile-length-5,.mobile-length-6,.mobile-length-7,.mobile-length-9,.mobile-length-10{
     display: block;
     width: 100px;
     height: 100px;
@@ -129,6 +139,14 @@ section{
     width: 70px;
     height: 70px;
 }
+.mobile-length-9{
+    width: 60px;
+    height: 60px;
+}
+.mobile-length-10{
+    width: 60px;
+    height: 60px;
+}
 
 @media only screen and (max-width: 950px) {
     .mobile-length-4{
@@ -146,6 +164,14 @@ section{
     .mobile-length-7{
         width: 50px;
         height: 50px;
+    }
+    .mobile-length-9{
+        width: 40px;
+        height: 40px;
+    }
+    .mobile-length-10{
+        width: 40px;
+        height: 40px;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -169,6 +195,14 @@ section{
         width: 50px;
         height: 50px;
     }
+    .mobile-length-9{
+        width: 30px;
+        height: 30px;
+    }
+    .mobile-length-10{
+        width: 20px;
+        height: 20px;
+    }
 }
 @media only screen and (max-width: 473px) {
     .container{
@@ -190,6 +224,14 @@ section{
     .mobile-length-7{
         width: 30px;
         height: 30px;
+    }
+    .mobile-length-9{
+        width: 20px;
+        height: 20px;
+    }
+    .mobile-length-10{
+        width: 20px;
+        height: 20px;
     }
 }
 
