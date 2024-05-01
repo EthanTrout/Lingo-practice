@@ -55,6 +55,16 @@ section{
     display: flex;
     flex-direction: column;
 }
+#game-menu button{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: large;
+}
+#play-buttons button{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: large;
+}
 
 /* Game Menu Buttons found on https://getcssscan.com/css-buttons-examples
 
