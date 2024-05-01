@@ -1183,7 +1183,8 @@ localStorage.setItem(`dictonary`,JSON.stringify(dictonary))
 
 }
 function showDict(){
-document.getElementById("game-menu").style.display ="none"
+document.getElementById("full-game-section").style.display ="none"
+document.getElementById("menu-options-section").style.display ="none"
 document.getElementById("dictonary-section").style.display ="block"
 document.getElementById("dictonary").style.display ="block"
 
@@ -1249,8 +1250,10 @@ localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores))
 returnToMenu()
 }
 function displayLeaderBoard(){
-document.getElementById("leader-board-section").style.display ="none"
+document.getElementById("leader-board-section").style.display ="block"
 document.getElementById("game-menu").style.display ="none"
+document.getElementById("full-game-section").style.display ="none"
+document.getElementById("menu-options-section").style.display ="none"
 document.getElementById("leader-board").style.display ="block"
 
 var highScoresUl = document.getElementById("high-scores")
@@ -1269,6 +1272,7 @@ function hideLeaderBoard(){
 document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("leader-board").style.display ="none"
 document.getElementById("game-menu").style.display="flex"
+document.getElementById("menu-options-section").style.display ="block"
 }
 
 function returnToMenu(){
