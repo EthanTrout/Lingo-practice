@@ -12,19 +12,54 @@
 </head>
 <body>
     <!-- Game Area -->
-    <section>
+    <section id="full-game-section">
         <div class ="container">
             <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button></div>
                 <div id="game-area"></div>
         </div>
         <div class ="container">
+            <div id="timer-skip-container">
                 <p id="timer-display"></p>
                 <button id="skip-word" onclick="endGame('red')">Skip</button>
+            </div>
         </div>
         <div id="control-area"></div>
+        <!-- Final Choice -->
+        <div class ="container">
+            <div id="final">
+                <h1 id="banked-message">You have Banked</h1>
+                <div id="final-buttons">
+                    <div>
+                        <h2>6 letter lingo to double your money</h2>
+                        <p>Bank what you have and play for double money</p>
+                        <button onclick="finalSixLetterChoice()"></button>
+                    </div>
+                    <div>
+                        <h2>7 letter lingo for the £15000 grand prize</h2>
+                        <p>Risk what you have and play the grand prize</p>
+                        <button onclick="finalSevenLetterChoice()"></button>
+                    </div>
+                </div>
+                <div>
+                    <h2>Time Remaining</h2>
+                    <p id="time-remaning"></p>
+                </div>
+            </div>
+        </div>
+        <!-- Add to Dictonary -->
+        <div class ="container">
+            <div id="words-defi-list">
+                <ul id="all-words"></ul>
+                <button onclick="hideWordsAndDefi()">Back</button>
+            </div>
+        </div>
+        <!-- Game over  -->
+        <div class ="menu-container">
+            <div id="game-over"></div>
+        </div>
     </section>
     <!-- Settings -->
-    <section>
+    <section id="menu-options-section">
         <div class ="menu-container">
             <div id="game-menu">
                 <button id="play" onclick="playLingoOptions()">Play Lingo</button>
@@ -86,7 +121,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="leader-board-section">
         <div class ="menu-container">
             <div id="leader-board">
                 <h1> High Scores untimed</h1>
@@ -97,55 +132,14 @@
                 <button onclick="hideLeaderBoard()">Hide</button> 
             </div>
         </div>
-            
-            <!-- Final Choice -->
-    <section>
-        <div class ="container">
-            <div id="final">
-                <h1 id="banked-message">You have Banked</h1>
-                <div id="final-buttons">
-                    <div>
-                        <h2>6 letter lingo to double your money</h2>
-                        <p>Bank what you have and play for double money</p>
-                        <button onclick="finalSixLetterChoice()"></button>
-                    </div>
-                    <div>
-                        <h2>7 letter lingo for the £15000 grand prize</h2>
-                        <p>Risk what you have and play the grand prize</p>
-                        <button onclick="finalSevenLetterChoice()"></button>
-                    </div>
-                </div>
-                <div>
-                    <h2>Time Remaining</h2>
-                    <p id="time-remaning"></p>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- Dictonary -->
-    <section>
+    <section id="dictonary-section">
         <div class="menu-container">
             <div id="dictonary">
                 <h1>Player Saved Words</h1>
                 <ul id="saved-words"></ul>
             </div>
-        </div>
-    </section>
-
-    <!-- Add to Dictonary -->
-    <section>
-        <div class ="container">
-            <div id="words-defi-list">
-                <ul id="all-words"></ul>
-                <button onclick="hideWordsAndDefi()">Back</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Game over -->
-    <section>
-        <div class ="menu-container">
-            <div id="game-over"></div>
         </div>
     </section>
     <!-- <script src="./assets/json/challengeLetters.js" type="module"></script> -->

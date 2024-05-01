@@ -887,7 +887,15 @@ I have most of the functionality of the Challenege words in place and the basic 
 # Quality of life touches 
 ## Things to make the User experince better 
 
-- Clicking enter will submit the answer X
-- if the answer is incorrect. display what the answer is before moving onto the next round. X
-- if the answer is correct. display that the answer is correct. X 
-- display money earned in main lingo game X
+- Clicking enter will submit the answer 
+- if the answer is incorrect. display what the answer is before moving onto the next round. 
+- if the answer is correct. display that the answer is correct. 
+- display money earned in main lingo game 
+
+
+# Leaderboard Functinality
+
+# Dictonary Functionality 
+
+# Timed Lingo Functionality 
+

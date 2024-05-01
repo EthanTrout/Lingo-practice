@@ -1,10 +1,14 @@
 body{
-   
+   height: 100vh;
+   overflow: hidden;
+}
+#menu-options-section{
+    height: 100%;
+}
+section{
+    height:min-content;
 }
 
-section{
-    height: min-content;
-}
 
 /* Utilities  */
 .menu-container{
@@ -32,12 +36,18 @@ section{
 }
 .container{
     width: 100%;
-    height: 100%;
+    height: min-content;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 
+}
+#timer-skip-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    
 }
 
 /* Menu */
@@ -96,7 +106,10 @@ section{
 
 /* Lingo Timer */
 #timer-display{
-    margin-top: 0;
+    margin-top: 0px;
+}
+#skip-button{
+    margin-top: 0px;
 }
 
 /* Lingo Game Tiles */
@@ -124,28 +137,28 @@ section{
 }
 
 .mobile-length-4{
-    width: 100px;
-    height: 100px;
-}
-.mobile-length-5{
-    width: 90px;
-    height: 90px;
-}
-.mobile-length-6{
-    width: 80px;
+    width: 80x;
     height: 80px;
 }
+.mobile-length-5{
+    width: 75px;
+    height: 75px;
+}
+.mobile-length-6{
+    width: 65px;
+    height: 65px;
+}
 .mobile-length-7{
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
 }
 .mobile-length-9{
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
 }
 .mobile-length-10{
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
 }
 
 @media only screen and (max-width: 950px) {
@@ -235,7 +248,10 @@ section{
     }
 }
 
-
+/* Control area */
+#control-area{
+    margin-top: 0px;
+}
 /* User input  */
 
 
@@ -307,9 +323,18 @@ section{
    
 
 }
+#skip-word{
+    background-color: orange;
+    padding: 0.2rem;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+}
 
 /* Hidden elements */
 
-#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list{
+#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section{
     display: none;
 }

@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:0,
+LingoRoundStage:6,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -565,6 +565,7 @@ gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0]
 
 function GenerateChallengeWord(challengeLength){
 givenIndexOrder = [2,6,3,8,1,7,4,5]
+gameController.roundCounter =0
 var clue=document.getElementById("clue")
 gameController.timerDisplay.style.display="block";
 if(challengeLength === 9){
@@ -731,9 +732,11 @@ else{
 // Onclick Start Game. create all tiles and initalise GameController variables
 
 function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
+document.getElementById("full-game-section").style.display ="block"
 document.getElementById("game-area").style.display="block"
 document.getElementById("back-button").style.display ="block"
 document.getElementById("control-area").style.display ="block"
+document.getElementById("menu-options-section").style.display ="none"
 document.getElementById("options").style.display ="none"
 document.getElementById("game-menu").style.display ="none"
 divEl = document.getElementById("game-area")
@@ -802,6 +805,7 @@ function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
 document.getElementById("play-lingo-options").style.display="none";
 startGame(4,5,2)
+
 }
 function playLingoOptions(){
 document.getElementById("game-menu").style.display="none"
@@ -1180,7 +1184,10 @@ localStorage.setItem(`dictonary`,JSON.stringify(dictonary))
 }
 function showDict(){
 document.getElementById("game-menu").style.display ="none"
+document.getElementById("dictonary-section").style.display ="block"
 document.getElementById("dictonary").style.display ="block"
+
+
 
 var savedWordsUl = document.getElementById("saved-words")
 var savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || [])
@@ -1242,6 +1249,7 @@ localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores))
 returnToMenu()
 }
 function displayLeaderBoard(){
+document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("game-menu").style.display ="none"
 document.getElementById("leader-board").style.display ="block"
 
@@ -1258,6 +1266,7 @@ timedHighScoresUl.innerHTML=timedHighScoresObj.map(score=>{
 }).join("");
 }
 function hideLeaderBoard(){
+document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("leader-board").style.display ="none"
 document.getElementById("game-menu").style.display="flex"
 }
@@ -1276,12 +1285,15 @@ gameController.isFinal=false;
 gameController.isGrandPrize=false;
 gameController.isTimedGame =false;
 gameController.moneyIncrement=200;
+document.getElementById("full-game-section").style.display="none"
 document.getElementById("game-area").style.display="none"
 document.getElementById("game-over").style.display="none"
 document.getElementById("options").style.display="none"
 document.getElementById("control-area").style.display="none"
 document.getElementById("back-button").style.display ="none"
 gameController.timerDisplay.style.display="none"
+document.getElementById("dictonary-section").style.display ="none"
+document.getElementById("menu-options-section").style.display ="block"
 document.getElementById("game-menu").style.display ="flex"
 }
 
