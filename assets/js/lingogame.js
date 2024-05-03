@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:8,
+LingoRoundStage:13,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -1029,8 +1029,7 @@ if(gameController.isPracticeGame){
     document.getElementById("game-area").style.display="none"
     document.getElementById("game-over").innerHTML =`
 <h1> Game Over</h1>
-<p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}
-<button onclick="returnToMenu()">Return to menu</button>`
+<p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`
 document.getElementById("control-area").innerHTML=""
 }else if(!gameController.isPracticeGame){
     // If the Lingo game is infinte it is in the final and should be looped till timer ends.
@@ -1142,13 +1141,18 @@ document.getElementById("control-area").innerHTML=""
         document.getElementById("game-over").style.display="block"
         document.getElementById("skip-word").style.display="none"
         document.getElementById("game-area").style.display="none"
+        document.getElementById("back-button").style.display="none"
         document.getElementById("game-over").innerHTML=""
-        document.getElementById("game-over").innerHTML =`<h1> Game Over</h1>
-        <p>You got ${gameController.playerMoney}
-        <button onclick="returnToMenu()">Return to menu</button>
+        document.getElementById("game-over").innerHTML =`<div id="game-over-container">
+        <h1> Game Over</h1>
+        <p>You got £${gameController.playerMoney}
+        <div id="addScoreContainer">
         <input id="user-name" type="text">
-        <button onclick="saveScoreToLeaderBoard('${gameMode}')">Save Score</button>
-        <button onclick="showWordsAndDefi()">All Lingo words</button>`
+        <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
+        </div>
+        <button onclick="showWordsAndDefi()">All Lingo words</button>
+        <button onclick="returnToMenu()"style="background: orange;">Exit</button>
+        </div>`
     }
     
 }
