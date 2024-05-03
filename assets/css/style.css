@@ -50,6 +50,17 @@ section{
     justify-content: start;
     
 }
+.column{
+    flex: 1;
+  margin: 10%;
+  margin-top: 1%;
+  padding: 15px;
+  text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    height: fit-content;
+}
 
 /* Menu */
 #menu-options-section{
@@ -307,17 +318,7 @@ section{
     min-height: 100px;
     
 }
-.column{
-    flex: 1;
-  margin: 10%;
-  margin-top: 1%;
-  padding: 15px;
-  text-align: center;
-    border: 3px solid #E0D6D1; 
-    border-radius: 6px;
-    color: white;
-    height: fit-content;
-}
+
 #money-increment, #player-money{
     background-color: green;
     height: fit-content;
@@ -336,7 +337,7 @@ section{
 /* UI back button, verify , return to menu  */
 .menu-button{
     padding: 1rem;
-    background-color: orange;
+    background-color: #00225B;
     text-align: center;
     border: 3px solid #E0D6D1; 
     border-radius: 6px;
