@@ -71,6 +71,8 @@ section{
     width: 90%;
     height: 80%;
 }
+
+
 /* Menu Radio buttons on options from tutorial https://www.youtube.com/watch?v=GDh9uToZkYg */
 .radio{
     display: inline-flex;
@@ -97,7 +99,24 @@ section{
     background: green;
 }
 
-  
+/* LeaderBoard */
+#leader-board{
+    display: flex;
+    flex-direction: row;
+}
+.leader-board-container{
+    margin: 2rem;
+    padding: 1rem;
+    background-color: #00225B;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    line-height: 2rem;
+}
+.leader-board-container ul{
+    list-style-type:none;
+}
+
 
 #game-menu{
     display: flex;
@@ -112,6 +131,25 @@ section{
     margin: 1rem;
     padding: 2rem;
     font-size: large;
+}
+
+/* Final choice message */
+.choice-container{
+    margin: 2rem;
+    padding: 1rem;
+    background-color: #00225B;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    line-height: 2rem;
+    text-align: center;
+}
+.choice-container button{
+    padding: 1rem;
+    background-color: orange;
+    text-align: center;
+    border: 6px;
+    color: white;
 }
 
 /* Game Menu Buttons found on https://getcssscan.com/css-buttons-examples
@@ -383,6 +421,6 @@ section{
 
 /* Hidden elements */
 
-#leader-board,#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section{
     display: none;
 }

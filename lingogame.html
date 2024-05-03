@@ -28,16 +28,16 @@
         <div class ="container">
             <div id="final">
                 <h1 id="banked-message">You have Banked</h1>
-                <div id="final-buttons">
-                    <div>
+                <div id="final-buttons menu-container">
+                    <div class="choice-container">
                         <h2>6 letter lingo to double your money</h2>
                         <p>Bank what you have and play for double money</p>
-                        <button onclick="finalSixLetterChoice()"></button>
+                        <button onclick="finalSixLetterChoice()">Six Letter Lingo</button>
                     </div>
-                    <div>
+                    <div class="choice-container">
                         <h2>7 letter lingo for the £15000 grand prize</h2>
                         <p>Risk what you have and play the grand prize</p>
-                        <button onclick="finalSevenLetterChoice()"></button>
+                        <button onclick="finalSevenLetterChoice()">Seven Letter Lingo</button>
                     </div>
                 </div>
                 <div>
@@ -126,14 +126,18 @@
     <section id="leader-board-section">
         <div class ="menu-container">
             <div id="leader-board">
-                <h1> High Scores untimed</h1>
-                <ul id="high-scores"></ul>
+                <div class="leader-board-container">
+                    <h1> High Scores untimed</h1>
+                    <ul id="high-scores"></ul>
+                </div>
 
-                <h1>High scores Timed</h1>
-                <ul id="timed-high-scores"></ul>
-                <button onclick="hideLeaderBoard()">Hide</button> 
+                <div class="leader-board-container">
+                    <h1>High scores Timed</h1>
+                    <ul id="timed-high-scores"></ul>
+                </div>
             </div>
         </div>
+        <button onclick="hideLeaderBoard()">Hide</button> 
     </section>
     <!-- Dictonary -->
     <section id="dictonary-section">

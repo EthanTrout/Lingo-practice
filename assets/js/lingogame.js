@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:6,
+LingoRoundStage:8,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -1254,23 +1254,22 @@ document.getElementById("leader-board-section").style.display ="block"
 document.getElementById("game-menu").style.display ="none"
 document.getElementById("full-game-section").style.display ="none"
 document.getElementById("menu-options-section").style.display ="none"
-document.getElementById("leader-board").style.display ="block"
+
 
 var highScoresUl = document.getElementById("high-scores")
 var highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || [])
 highScoresUl.innerHTML=highScoresObj.map(score=>{
-    return `<li class="leader-board-score">${score.name}-${score.score}</li>`
+    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`
 }).join("");
 
 var timedHighScoresUl = document.getElementById("timed-high-scores")
 var timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || [])
 timedHighScoresUl.innerHTML=timedHighScoresObj.map(score=>{
-    return `<li class="leader-board-score">${score.name}-${score.score}</li>`
+    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`
 }).join("");
 }
 function hideLeaderBoard(){
 document.getElementById("leader-board-section").style.display ="none"
-document.getElementById("leader-board").style.display ="none"
 document.getElementById("game-menu").style.display="flex"
 document.getElementById("menu-options-section").style.display ="block"
 }
