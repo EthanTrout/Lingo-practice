@@ -77,44 +77,46 @@
             </div>
             <div id="options">
                 <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+                
                 <h1>Word Length</h1>
-        
-            <label for="w-four">4</label>
-            <input type="radio" name="wordLength" id="w-four" value="4" checked>
-            <label for="w-five">5</label>
-            <input type="radio" name="wordLength" id="w-five" value="5">
-            <label for="w-six">6</label>
-            <input type="radio" name="wordLength" id="w-six" value="6">
-            <label for="w-seven">7</label>
-            <input type="radio" name="wordLength"id="w-seven" value="7">
-        
+                <div class="radio">
+                    <input type="radio" name="wordLength" id="w-four" value="4" checked>
+                    <label for="w-four">4</label>
+                    <input type="radio" name="wordLength" id="w-five" value="5">
+                    <label for="w-five">5</label>
+                    <input type="radio" name="wordLength" id="w-six" value="6">
+                    <label for="w-six">6</label>
+                    <input type="radio" name="wordLength"id="w-seven" value="7">
+                    <label for="w-seven">7</label>
+                    
+                </div>
 
             <h1>How many guesses?</h1>
-            <div>
-            <label for="g-four">4</label>
+            <div class="radio">
                 <input type="radio" name="guesses" id="g-four" value="4" >
-                <label for="g-five">5</label>
+                <label for="g-four">4</label>
                 <input type="radio" name="guesses" id="g-five" value="5" checked>
-                <label for="g-six">6</label>
+                <label for="g-five">5</label>
                 <input type="radio" name="guesses" id="g-six" value="6">
+                <label for="g-six">6</label>
             </div>
             <br>
             <h1>How many total words?</h1>
-            <div>
+            <div class="radio">
+                <input type="radio" name="rounds" id="r-one" value="1">
                 <label for="r-one">1</label>
-                <input type="radio" name="rounds" id="r-one" value="1"checked>
-                <label for="r-five">5</label>
                 <input type="radio" name="rounds" id="r-five" value="5"checked>
-                <label for="r-six">6</label>
+                <label for="r-five">5</label>
                 <input type="radio" name="rounds" id="r-six" value="6">
-                <label for="r-seven">7</label>
+                <label for="r-six">6</label>
                 <input type="radio" name="rounds" id="r-seven" value="7">
-                <label for="r-eight">8</label>
+                <label for="r-seven">7</label>
                 <input type="radio" name="rounds" id="r-eight" value="8">
-                <label for="r-nine">9</label>
+                <label for="r-eight">8</label>
                 <input type="radio" name="rounds" id="r-nine" value="9">
-                <label for="r-ten">10</label>
+                <label for="r-nine">9</label>
                 <input type="radio" name="rounds" id="r-ten" value="10">
+                <label for="r-ten">10</label>
             </div>
             <button id="confirm" onclick="addButton">Confirm</button>
             <div id="play-button"></div>
