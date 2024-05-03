@@ -1300,6 +1300,8 @@ document.getElementById("control-area").style.display="none"
 document.getElementById("back-button").style.display ="none"
 gameController.timerDisplay.style.display="none"
 document.getElementById("dictonary-section").style.display ="none"
+document.getElementById("leader-board-section").style.display ="none"
+document.getElementById("play-lingo-options").style.display ="none"
 document.getElementById("menu-options-section").style.display ="block"
 document.getElementById("game-menu").style.display ="flex"
 }
