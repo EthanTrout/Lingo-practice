@@ -1166,7 +1166,7 @@ document.getElementById("game-over").style.display= "none"
 var allWords =document.getElementById("all-words");
 document.getElementById("words-defi-list").style.display="block"
 allWords.innerHTML=endLingoWordsAndDefi.map(word=>{
-    return `<li class="all-words-list">${word.word}-${word.defi}</li> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button>`
+    return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}-${word.defi}</li> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`
 }).join("");
 
 }
@@ -1184,6 +1184,7 @@ var wordAndDefi ={
 }
 dictonary.push(wordAndDefi)
 localStorage.setItem(`dictonary`,JSON.stringify(dictonary))
+document.getElementById(`word-${addWord}`).remove();
 
 }
 function showDict(){

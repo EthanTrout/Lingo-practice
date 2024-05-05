@@ -117,6 +117,17 @@ section{
 .leader-board-container ul{
     list-style-type:none;
 }
+/* Add to leader board / Lingo words list  */
+
+.all-words-container{
+    background-color: #00225B;
+    text-align: center;
+    
+}
+.all-words-list{
+    background-color: green;
+    color: white;
+}
 
 
 #game-menu{
