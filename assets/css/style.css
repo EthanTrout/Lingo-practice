@@ -73,6 +73,7 @@ section{
 }
 
 
+
 /* Menu Radio buttons on options from tutorial https://www.youtube.com/watch?v=GDh9uToZkYg */
 .radio{
     display: inline-flex;
@@ -164,6 +165,11 @@ section{
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    border: 50px solid orange;
+    border-radius: 50%;
+    background-color: lightblue;
+    margin-left: 0;
+    
 
 }
 

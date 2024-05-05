@@ -1146,8 +1146,8 @@ document.getElementById("control-area").innerHTML=""
         document.getElementById("game-over").innerHTML =`<div id="game-over-container">
         <h1> Game Over</h1>
         <p>You got £${gameController.playerMoney}
-        <div id="addScoreContainer">
-        <input id="user-name" type="text">
+        <div id="add-score-container">
+        <input id="user-name" type="text" placeholder="Enter name here">
         <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
         </div>
         <button onclick="showWordsAndDefi()">All Lingo words</button>
