@@ -1,7 +1,9 @@
 body{
    height: 100vh;
    margin: 1rem;
-   
+   /* background-color: #102A52; */
+   background-color:#01183B;
+   color: white;
 }
 #menu-options-section{
     height: 100%;
@@ -19,6 +21,9 @@ section{
     align-items: center;
     justify-content: center;
     position: relative;
+    background: linear-gradient(#0B1D39 ,#00225B) ;
+    
+    border-radius: 50%;
 
 }
 .menu-container button {
@@ -64,12 +69,15 @@ section{
 
 /* Menu */
 #menu-options-section{
-    border: 50px solid orange;
+    border: 50px solid transparent ;
     border-radius: 50%;
-    background-color: lightblue;
     margin-left: 0;
     width: 90%;
     height: 80%;
+    background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    
 }
 
 
@@ -79,7 +87,9 @@ section{
     display: inline-flex;
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    box-shadow: 0 0 5px rgba(246,246,246,0.25);
+    font-size: x-large;
+    
 }
 .radio input{
     display: none;
@@ -93,7 +103,7 @@ section{
     transition: background 0.1s;
 }
 .radio label:not(:last-of-type){
-    border-right: 1px solid black;
+    border-right: 1px solid white;
 }
 
 .radio input:checked + label{
@@ -199,6 +209,7 @@ section{
     text-align: center;
     flex-direction: column;
     border: 50px solid orange;
+    border-image-slice: 1;
     border-radius: 50%;
     background-color: lightblue;
     margin-left: 0;
