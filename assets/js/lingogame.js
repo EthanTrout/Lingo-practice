@@ -1166,9 +1166,17 @@ document.getElementById("game-over").style.display= "none"
 var allWords =document.getElementById("all-words");
 document.getElementById("words-defi-list").style.display="block"
 allWords.innerHTML=endLingoWordsAndDefi.map(word=>{
-    return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}-${word.defi}</li> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`
+    return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}</li><div id="defi-${word.word}" class="display-defi"><span class="word-defi">${word.word}</span><span class="defi">${word.defi}</span></div> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`
 }).join("");
-
+// Add event for click showing the defintion//
+endLingoWordsAndDefi.forEach((obj)=>{
+    document.getElementById(`word-${obj.word}`).addEventListener("click",()=>{
+        document.getElementById(`defi-${obj.word}`).style.display ="flex"
+        setTimeout(()=>{
+            document.getElementById(`defi-${obj.word}`).style.display ="none"
+        },4000)
+    })
+})
 }
 function hideWordsAndDefi(){
 document.getElementById("words-defi-list").style.display="none"

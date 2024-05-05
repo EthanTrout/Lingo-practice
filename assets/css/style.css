@@ -120,13 +120,35 @@ section{
 /* Add to leader board / Lingo words list  */
 
 .all-words-container{
-    background-color: #00225B;
     text-align: center;
+    padding-bottom: 1rem;
     
 }
 .all-words-list{
     background-color: green;
     color: white;
+    padding-block: 1rem;
+    font-size: large;
+    border-radius: 1rem;
+}
+.display-defi{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  color: white;
+  padding-block: 1rem;
+  background-color: #00225B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.word-defi{
+    background-color: green;
+}
+.defi{
+    background-color: orange;
 }
 
 
@@ -453,6 +475,6 @@ section{
 
 /* Hidden elements */
 
-#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi{
     display: none;
 }
