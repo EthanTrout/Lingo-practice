@@ -14,13 +14,13 @@
     <!-- Game Area -->
     <section id="full-game-section">
         <div class ="container">
-            <div id="back-button"><button class ="menu-button" onclick="returnToMenu()">back to menu</button></div>
+            <div id="back-button"><button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button></div>
                 <div id="game-area"></div>
         </div>
         <div class ="container">
             <div id="timer-skip-container">
                 <p id="timer-display"></p>
-                <button id="skip-word" onclick="endGame('red')">Skip</button>
+                <button id="skip-word" onclick="endGame('red')" aria-label="Skip word">Skip</button>
             </div>
         </div>
         <div id="control-area"></div>
@@ -32,12 +32,12 @@
                     <div class="choice-container">
                         <h2>6 letter lingo to double your money</h2>
                         <p>Bank what you have and play for double money</p>
-                        <button onclick="finalSixLetterChoice()">Six Letter Lingo</button>
+                        <button onclick="finalSixLetterChoice()" aria-label="Six Letter Lingo">Six Letter Lingo</button>
                     </div>
                     <div class="choice-container">
                         <h2>7 letter lingo for the £15000 grand prize</h2>
                         <p>Risk what you have and play the grand prize</p>
-                        <button onclick="finalSevenLetterChoice()">Seven Letter Lingo</button>
+                        <button onclick="finalSevenLetterChoice()" aria-label="Five Letter Lingo">Seven Letter Lingo</button>
                     </div>
                 </div>
                 <div>
@@ -50,7 +50,7 @@
         <div class ="container">
             <div id="words-defi-list">
                 <ul id="all-words"></ul>
-                <button onclick="hideWordsAndDefi()">Back</button>
+                <button onclick="hideWordsAndDefi()" aria-label="Back">Back</button>
             </div>
         </div>
         <!-- Game over  -->
@@ -62,19 +62,19 @@
     <section id="menu-options-section">
         <div class ="menu-container">
             <div id="game-menu">
-                <button id="play" onclick="playLingoOptions()">Play Lingo</button>
-                <button id="practice" onclick="options()">Practice</button>
-                <button onclick="displayLeaderBoard()">Leaderboard</button>
-                <button onclick="showDict()">Dictonary</button>
+                <button id="play"  onclick="playLingoOptions()" aria-label="Play Lingo Game">Play Lingo</button>
+                <button id="practice" onclick="options()" aria-label="Practice Games">Practice</button>
+                <button onclick="displayLeaderBoard()" aria-label="View Leader board">Leaderboard</button>
+                <button onclick="showDict()" aria-label="View Dictonary">Dictonary</button>
 
             </div>
 
             <div id="play-lingo-options">
                 <div id="play-buttons">
-                    <button onclick="playLingo(true)">Play Lingo Timed</button>
-                    <button onclick="playLingo(false)">Play Lingo Untimed</button>
+                    <button onclick="playLingo(true)" aria-label="Play Lingo Timed">Play Lingo Timed</button>
+                    <button onclick="playLingo(false)"aria-label="Play Lingo un-timed">Play Lingo Untimed</button>
                 </div>
-                <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+                <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
             </div>
             <div id="options">
                 
@@ -118,9 +118,9 @@
                 <input type="radio" name="rounds" id="r-ten" value="10">
                 <label for="r-ten">10</label>
             </div>
-            <button id="confirm" onclick="addButton">Confirm</button>
+            <button id="confirm" onclick="addButton" aria-label="Confirm Choices">Confirm</button>
             <div id="play-button"></div>
-            <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
         </div>
     </section>
 
@@ -137,7 +137,7 @@
                     <ul id="timed-high-scores"></ul>
                 </div>
             </div>
-            <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
         </div>
     </section>
     <!-- Dictonary -->
@@ -147,7 +147,7 @@
                 <h1>Player Saved Words</h1>
                 <ul id="saved-words"></ul>
             </div>
-            <button class ="menu-button" onclick="returnToMenu()">back to menu</button>
+            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu" aria-label = "Return to menu">back to menu</button>
         </div>
     </section>
     <!-- <script src="./assets/json/challengeLetters.js" type="module"></script> -->
