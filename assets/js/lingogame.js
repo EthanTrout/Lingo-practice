@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:13,
+LingoRoundStage:6,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -576,6 +576,7 @@ if(challengeLength === 9){
     gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
     gameController.roundTiles[0][0].style.backgroundColor="green";
     console.log(gameController.lingoWord)
+    ProgressWidth=100;
     pauseTimer =startTimer(32,challengeTimerCallBack)
 }
 else if (challengeLength === 10){
@@ -598,10 +599,12 @@ else{
 }
 
 // Revised timer function call back
-function challengeTimerCallBack(timeLeft){
+function challengeTimerCallBack(timeLeft,widthDecrease){
 remainingTime = timeLeft
 console.log(timeLeft)
-gameController.timerDisplay.innerText=`Timer:${timeLeft}`
+document.getElementById("progress-bar").style.display="block"
+gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`
+ProgressWidth = ProgressWidth - widthDecrease
 if(timeLeft<=0){
     gameController.isChallengeWord=false;
     endGame("red")
@@ -620,6 +623,7 @@ else if(remainingTime%letterDisplayInterval === 0){
 
 function timedGameCallBack(timeLeft,widthDecrease){
 remainingTime = timeLeft
+document.getElementById("progress-bar").style.display="block"
 gameController.timerDisplay.style.display="block"
 console.log(gameController.timerDisplay.offsetWidth)
 gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`
@@ -970,14 +974,15 @@ else if(gameController.userAnswer != gameController.lingoWord){
          }
 
     }
-    
     document.getElementById("user-answer").value =""
     document.getElementById("user-answer").focus();
     gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
     gameController.roundCounter++;
     if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
+        ProgressWidth =100;
         pauseTimer = startTimer(10,timedGameCallBack)
     }
+
 }
 
 
@@ -1054,6 +1059,7 @@ document.getElementById("control-area").innerHTML=""
     else if(gameController.LingoRoundStage===3){
         divEl.innerHTML =""
         gameController.moneyIncrement=500;
+        ProgressWidth =100;
         gameController.isChallengeWord =true;
         startGame(10,1,1,10)
     }
@@ -1074,6 +1080,7 @@ document.getElementById("control-area").innerHTML=""
         divEl.innerHTML =""
         gameController.moneyIncrement=500;
         gameController.isChallengeWord =true;
+        ProgressWidth =100;
         startGame(10,1,1,10)
     }
     else if(gameController.LingoRoundStage===7){
@@ -1239,8 +1246,10 @@ return function pauseTimer() {
 
 function timerCallback(timeLeft) {
 remainingTime = timeLeft; // Update remaining time
-gameController.timerDisplay.style.display="block"
-gameController.timerDisplay.innerText = `Time left: ${timeLeft} seconds`
+gameController.timerDisplay.style.display="none"
+document.getElementById("progress-bar").style.display="none"
+document.getElementById("final-timer-display").style.display= "block" 
+document.getElementById("final-timer-display").innerText = `${timeLeft}s Remains`
 if(remainingTime <=0){
     gameController.isInfinte =false;
     if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
@@ -1311,6 +1320,9 @@ document.getElementById("options").style.display="none"
 document.getElementById("control-area").style.display="none"
 document.getElementById("back-button").style.display ="none"
 gameController.timerDisplay.style.display="none"
+document.getElementById("progress-bar").style.display ="none"
+document.getElementById("skip-word").style.display ="none"
+document.getElementById("final-timer-display").style.display ="none"
 document.getElementById("dictonary-section").style.display ="none"
 document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("play-lingo-options").style.display ="none"
@@ -1406,7 +1418,11 @@ if(document.getElementById("toggle-user-input").style.display==="none"){
 }
 if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
     ProgressWidth =100
+    document.getElementById("progress-bar").style.display="block"
     pauseTimer = startTimer(10,timedGameCallBack)
+}
+if(gameController.isChallengeWord){
+    document.getElementById("progress-bar").style.display="block"
 }
 document.getElementById("user-answer").focus();
 document.getElementById("user-answer").value =""

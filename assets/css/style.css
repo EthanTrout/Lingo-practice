@@ -328,6 +328,7 @@ section{
     margin-top: 0px;
     height: 10px;
     width: 300px;
+    background-color: grey;
 
 }
 #timer-display{
@@ -335,6 +336,11 @@ section{
     position:absolute;
     width: 100%;
     height: 100%;
+    
+}
+#final-timer-display{
+    margin-top: 0;
+    text-align: center;
 }
 #skip-button{
     margin-top: 0px;
@@ -568,6 +574,6 @@ section{
 
 /* Hidden elements */
 
-#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar{
     display: none;
 }
