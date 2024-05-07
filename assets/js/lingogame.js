@@ -719,11 +719,12 @@ if(timeLeft<=0){
 function submitAnswer(){
 console.log(gameController)
 let lettersOnlyRegex = /^[a-zA-Z]+$/;
-if(gameController.isTimedGame){
+let lingoFirstLetter = gameController.lingoWord[0];
+if(gameController.isTimedGame && !gameController.isFinal){
     pauseTimer()
 }
 
-if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
+if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0] === lingoFirstLetter){
     gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
     console.log(gameController.userAnswer)
     setTimeout(()=>{
@@ -734,7 +735,7 @@ if( lettersOnlyRegex.test(document.getElementById("user-answer").value)){
 }
 else{
     document.getElementById("user-answer").value=""
-    alert("There are only letters allowed in answers")
+    alert("There are only letters allowed in answers and Answers must start with the same Lingo letter")
     
 }
 
@@ -1253,7 +1254,7 @@ remainingTime = timeLeft; // Update remaining time
 gameController.timerDisplay.style.display="none"
 document.getElementById("progress-bar").style.display="none"
 document.getElementById("final-timer-display").style.display= "block" 
-document.getElementById("final-timer-display").innerText = `${timeLeft}s Remains`
+document.getElementById("final-timer-display").innerText = `${remainingTime}s Remains`
 if(remainingTime <=0){
     gameController.isInfinte =false;
     if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
