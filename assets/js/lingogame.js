@@ -555,6 +555,9 @@ try {
 // Starts a new round 
 async function GenerateLingo(){
 await getNewWord()
+while(!gameController.lingoWord.indexOf(" ") === -1){
+    getNewWord()
+}
 gameController.roundCounter =0;
 var roundIndex = gameController.roundCounter;
 document.getElementById("user-answer").value =""
