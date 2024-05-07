@@ -504,6 +504,24 @@ else if(gameController.userAnswer != gameController.lingoWord){
 - set lingoWord to found word 
 - display errors if server cannot be reached 
 
+#### bug with getNewWord
+As the player can only input the exact amoung of letters as there is tiles. words coming back from the api with a space beween were making them un winable Lingos. 
+
+By adding a while loop to GenerateLingo function we can use the IndexOf(" ") to determine if a word has a space and if it does then generate a new word. This can make the inital load take longer so i have also asked on the WordsAPI forumn if there is a modifier to the inital call to make sure only a single word is given back. but until i get an answer this fix works 
+
+#### fix
+```javascript
+async function GenerateLingo(){
+await getNewWord()
+while(gameController.lingoWord.indexOf(" ") != -1){
+    console.log(gameController.lingoWord)
+    await getNewWord()
+}
+ ```
+
+ - ![Evidence fix works](/assets/testing-images/GetNewWordFix.png)
+
+
 ## GenerateLingo 
 
 ### this function will:
