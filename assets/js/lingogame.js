@@ -490,6 +490,7 @@ gameRoundDisplayDelay:3000
 
 let remainingTime; // Assuming 30 seconds remaining
 let pauseTimer;
+let ProgressWidth =100;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5]
 let endLingoWordsAndDefi =[]
@@ -617,10 +618,12 @@ else if(remainingTime%letterDisplayInterval === 0){
 
 // Timed game mode call back 
 
-function timedGameCallBack(timeLeft){
+function timedGameCallBack(timeLeft,widthDecrease){
 remainingTime = timeLeft
 gameController.timerDisplay.style.display="block"
-gameController.timerDisplay.innerText=`Timer:${timeLeft}`
+console.log(gameController.timerDisplay.offsetWidth)
+gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`
+ProgressWidth = ProgressWidth - widthDecrease
 if(timeLeft<=0){
     endGame("red")
     pauseTimer()
@@ -1008,7 +1011,6 @@ if(color === "green"){
 }
 if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
     if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
-    console.log(gameController.isFinal)
     displayLingo(color)
     setTimeout(finishGame,gameController.gameRoundDisplayDelay)
 }
@@ -1213,6 +1215,7 @@ savedWordsUl.innerHTML=savedWordsObj.map(word=>{
 function startTimer(duration, callback, remainingTime = duration) {
 let timeLeft = remainingTime; // Use remaining time if provided, otherwise use the initial duration
 let timerInterval;
+let widthDecrease = ProgressWidth/duration 
 
 // Start the timer
 timerInterval = setInterval(() => {
@@ -1220,7 +1223,7 @@ timerInterval = setInterval(() => {
     timeLeft--;
 
     // Call the callback function with timeLeft
-    callback(timeLeft);
+    callback(timeLeft,widthDecrease);
 
     // Check if timeLeft is zero, and if so, stop the timer
     if (timeLeft <= 0) {
@@ -1402,6 +1405,7 @@ if(document.getElementById("toggle-user-input").style.display==="none"){
     }
 }
 if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
+    ProgressWidth =100
     pauseTimer = startTimer(10,timedGameCallBack)
 }
 document.getElementById("user-answer").focus();
