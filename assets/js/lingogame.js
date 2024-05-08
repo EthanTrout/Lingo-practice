@@ -1075,6 +1075,7 @@ if(window.screen.width > 473){
     else if(gameController.LingoRoundStage===2){
         divEl.innerHTML =""
         gameController.timerDisplay.style.display="none"
+        document.getElementById("progress-bar").style.display="none"
         gameController.moneyIncrement=300;
         gameController.isChallengeWord =false;
         startGame(5,5,4)
@@ -1089,6 +1090,7 @@ if(window.screen.width > 473){
     else if(gameController.LingoRoundStage===4){
         divEl.innerHTML =""
         gameController.timerDisplay.style.display="none"
+        document.getElementById("progress-bar").style.display="none"
         gameController.moneyIncrement=500;
         gameController.isChallengeWord =false;
         startGame(4,5,2)
@@ -1109,6 +1111,7 @@ if(window.screen.width > 473){
     else if(gameController.LingoRoundStage===7){
         divEl.innerHTML =""
         document.getElementById("skip-word").style.display="block"
+        document.getElementById("progress-bar").style.display="none"
         gameController.moneyIncrement= gameController.playerMoney/2;
         gameController.playerMoney =0;
         gameController.isChallengeWord =false;
