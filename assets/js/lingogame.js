@@ -452,6 +452,12 @@ const tenLetterWords = [
 
 //     };
 // })
+
+window.onload =(event) =>{
+    if(localStorage.getItem("apiKey")){
+        document.getElementById("input-api-key").style.display="none"
+    }
+}
 const gameController ={
 gameTimer:28,
 lingoWord: "",
@@ -488,12 +494,15 @@ gameRoundDisplayDelay:3000
 
 };
 
+
+
 let remainingTime; // Assuming 30 seconds remaining
 let pauseTimer;
 let ProgressWidth =100;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5]
 let endLingoWordsAndDefi =[]
+let apiKey;
 
 // taken from WordsApi documentation //
 async function getNewWord(){
@@ -502,11 +511,13 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${w
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '44fbfbc299msh07c047d4921cbfap162ff8jsnd35ae1cbf043',
+        'X-RapidAPI-Key': `${apiKey}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
+    
 };
 
+console.log(options)
 try {
     const response = await fetch(url, options);
     const result = await response.json();
@@ -551,6 +562,11 @@ try {
 
 }
 
+function addApiKey(){
+    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`) 
+    apiKey = localStorage.getItem("apiKey")
+    document.getElementById("input-api-key").style.display="none"
+}
 
 // Starts a new round 
 async function GenerateLingo(){
