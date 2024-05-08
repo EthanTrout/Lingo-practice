@@ -537,7 +537,7 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '44fbfbc299msh07c047d4921cbfap162ff8jsnd35ae1cbf043',
+        'X-RapidAPI-Key': `${apiKey}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
 };
