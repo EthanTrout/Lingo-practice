@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:12,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -816,7 +816,7 @@ userTextBox.addEventListener("keyup",e =>{
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
 document.getElementById("play-lingo-options").style.display="none";
-startGame(4,5,2)
+startGame(4,5,1)
 
 }
 function playLingoOptions(){
@@ -1326,7 +1326,10 @@ gameController.isFinal=false;
 gameController.isGrandPrize=false;
 gameController.isTimedGame =false;
 gameController.isPracticeGame =false;
+gameController.isChallengeWord=false;
 gameController.moneyIncrement=200;
+gameController.roundTiles =[];
+gameController.challengeClue =""
 document.getElementById("full-game-section").style.display="none"
 document.getElementById("game-area").style.display="none"
 document.getElementById("game-over").style.display="none"
@@ -1342,6 +1345,7 @@ document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("play-lingo-options").style.display ="none"
 document.getElementById("menu-options-section").style.display ="block"
 document.getElementById("game-menu").style.display ="flex"
+document.getElementById("clue").innerText=""
 }
 
 function displayLetter(letter,index){
