@@ -456,6 +456,7 @@ const tenLetterWords = [
 window.onload =(event) =>{
     if(localStorage.getItem("apiKey")){
         document.getElementById("input-api-key").style.display="none"
+        apiKey = localStorage.getItem("apiKey")
     }
 }
 const gameController ={
