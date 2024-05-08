@@ -456,7 +456,6 @@ const tenLetterWords = [
 window.onload =(event) =>{
     if(localStorage.getItem("apiKey")){
         document.getElementById("input-api-key").style.display="none"
-        apiKey = localStorage.getItem("apiKey")
     }
 }
 const gameController ={
@@ -503,7 +502,7 @@ let ProgressWidth =100;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5]
 let endLingoWordsAndDefi =[]
-let apiKey;
+
 
 // taken from WordsApi documentation //
 async function getNewWord(){
@@ -512,7 +511,7 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${w
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': `${apiKey}`,
+        'X-RapidAPI-Key': `${localStorage.getItem("apiKey")}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
     
@@ -538,7 +537,7 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': `${apiKey}`,
+        'X-RapidAPI-Key': `${localStorage.getItem("apiKey")}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
 };
@@ -565,7 +564,6 @@ try {
 
 function addApiKey(){
     localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`) 
-    apiKey = localStorage.getItem("apiKey")
     document.getElementById("input-api-key").style.display="none"
 }
 
