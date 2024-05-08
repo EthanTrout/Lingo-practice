@@ -479,7 +479,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:6,
+LingoRoundStage:12,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 
@@ -773,7 +773,7 @@ else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}" autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
     </div>
-    <div class="mobile-scores">
+    <div id="mobile-scores">
     <div id="money-increment" class="column">£0</div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`
@@ -1043,6 +1043,9 @@ if(gameController.isPracticeGame){
 <h1> Game Over</h1>
 <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`
 document.getElementById("control-area").innerHTML=""
+if(window.screen.width > 473){
+    document.getElementById("mobile-scores").style.display ="none"
+}
 }else if(!gameController.isPracticeGame){
     // If the Lingo game is infinte it is in the final and should be looped till timer ends.
     if(!gameController.isInfinte){
@@ -1116,6 +1119,7 @@ document.getElementById("control-area").innerHTML=""
         document.getElementById("control-area").style.display="none"
         document.getElementById("skip-word").style.display="none"
         document.getElementById("final").style.display="block"
+        document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `
         
     }
     else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
@@ -1156,6 +1160,9 @@ document.getElementById("control-area").innerHTML=""
         document.getElementById("skip-word").style.display="none"
         document.getElementById("game-area").style.display="none"
         document.getElementById("back-button").style.display="none"
+        if(window.screen.width <= 473){
+            document.getElementById("mobile-scores").style.display ="none"
+        }
         document.getElementById("game-over").innerHTML=""
         document.getElementById("game-over").innerHTML =`<div id="game-over-container">
         <h1> Game Over</h1>
@@ -1167,6 +1174,7 @@ document.getElementById("control-area").innerHTML=""
         <button onclick="showWordsAndDefi()">All Lingo words</button>
         <button onclick="returnToMenu()"style="background: orange;">Exit</button>
         </div>`
+        
     }
     
 }
