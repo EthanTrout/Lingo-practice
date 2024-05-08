@@ -865,7 +865,7 @@ document.getElementById("play-lingo-options").style.display="block"
 function options(){
 // hides game menu and shows options 
 document.getElementById("game-menu").style.display="none"
-document.getElementById("options").style.display ="block"
+document.getElementById("options").style.display ="flex"
 gameController.isPracticeGame =true;
 document.getElementById("confirm").addEventListener("click",addButton)
 if(document.getElementById("playWithOptions")){

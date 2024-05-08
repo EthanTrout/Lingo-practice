@@ -1,3 +1,82 @@
+/* Css Variables */
+/* /* Desktop screen Game tiles sizeing */ 
+@media only screen and (min-width: 950px){
+    :root{
+        --4-letter-size:80px;
+        --5-letter-size:75px;
+        --6-letter-size:65px;
+        --7-letter-size:55px;
+        --9-letter-size:55px;
+        --10-letter-size:55px;
+
+        --4-letter-line-height:4.7rem;
+        --5-letter-line-height:4.7rem;
+        --6-letter-line-height:4.7rem;
+        --7-letter-line-height:3rem;
+        --9-letter-line-height:3rem;
+        --10-letter-line-height:3rem;
+
+    }
+}
+/* Small laptop/ large tablet sizing screen Game tiles sizeing */
+@media only screen and (max-width: 950px) {
+    :root{
+        --4-letter-size:80px;
+        --5-letter-size:70px;
+        --6-letter-size:60px;
+        --7-letter-size:50px;
+        --9-letter-size:40px;
+        --10-letter-size:40px;
+
+        --4-letter-line-height:4.7rem;
+        --5-letter-line-height:4.7rem;
+        --6-letter-line-height:4rem;
+        --7-letter-line-height:3rem;
+        --9-letter-line-height:3rem;
+        --10-letter-line-height:3rem;
+    }
+    
+}
+/* Tablet/Small laptop screen Game tiles sizeing */
+@media only screen and (max-width: 600px) {
+    :root{
+        --4-letter-size:80px;
+        --5-letter-size:70px;
+        --6-letter-size:60px;
+        --7-letter-size:50px;
+        --9-letter-size:30px;
+        --10-letter-size:30px;
+
+        --4-letter-line-height:4.7rem;
+        --5-letter-line-height:4.2rem;
+        --6-letter-line-height:4rem;
+        --7-letter-line-height:3rem;
+        --9-letter-line-height:3rem;
+        --10-letter-line-height:3rem;
+    }
+    
+}
+/* Mobile screen Game tiles sizeing */
+@media only screen and (max-width: 473px) {
+    :root{
+        --4-letter-size:60px;
+        --5-letter-size:50px;
+        --6-letter-size:40px;
+        --7-letter-size:30px;
+        --9-letter-size:30px;
+        --10-letter-size:30px;
+
+        --4-letter-line-height:3.5rem;
+        --5-letter-line-height:3rem;
+        --6-letter-line-height:2.5rem;
+        --7-letter-line-height:1.5rem;
+        --9-letter-line-height:1.5rem;
+        --10-letter-line-height:1.5rem;
+    }
+    
+}
+
+    
 body{
    height: 100vh;
    margin: 1rem;
@@ -6,15 +85,12 @@ body{
    color: white;
    /* background-image:url(/assets/images/bermuda-circle.png); */
 }
-#menu-options-section{
-    height: 100%;
-}
+
+/* All Start Menu and Game containers */
+
 section{
     height:min-content;
 }
-
-
-/* Utilities  */
 .menu-container{
     width: 100%;
     height: 100%;
@@ -72,6 +148,7 @@ section{
     }
 }
 
+/* 3 Column layout for Game Controls */
 .column{
     flex: 1;
   margin: 10%;
@@ -98,6 +175,53 @@ section{
     animation-duration: 20s; */
     
 }
+
+/* Menu Buttons */
+#game-menu{
+    display: flex;
+    flex-direction: column;
+}
+#play-buttons{
+    display: flex;
+    justify-content: center;
+}
+#options{
+    flex-direction: column;
+    align-items: center;
+}
+#game-menu button{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: large;
+}
+#play-buttons button{
+    margin: 1rem;
+    padding: 2rem;
+    font-size: large;
+}
+
+/* Mobile Game menu and game container sizing And Menu Button sizing */
+@media only screen and (max-width: 473px) {
+    #menu-options-section{
+        width: 75%;
+        border: 35px solid transparent ;
+    }
+    #play-buttons{
+        flex-direction: row;
+    }
+    .container{
+        justify-content: flex-start;
+        
+    }
+    /* Buttons  */
+    #game-menu button, #play-buttons button{
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+    
+
+}
+
 /* @keyframes border-anim {
     0% {background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);}
     10% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 500px 500px, #E35F00, orange);}
@@ -113,7 +237,7 @@ section{
 } */
 
 
-/* Menu Radio buttons on options from tutorial https://www.youtube.com/watch?v=GDh9uToZkYg */
+/* Menu Radio buttons on Practice Options from tutorial https://www.youtube.com/watch?v=GDh9uToZkYg */
 .radio{
     display: inline-flex;
     overflow: hidden;
@@ -140,6 +264,7 @@ section{
 .radio input:checked + label{
     background: green;
 }
+
 
 /* LeaderBoard */
 #leader-board-section{
@@ -168,6 +293,20 @@ section{
 .leader-board-container ul{
     list-style-type:none;
 }
+/* Mobile leaderboard sizing */
+@media only screen and (max-width: 473px) {
+    #leader-board-section{
+        width: 75%;
+        border: 35px solid transparent ;
+    }
+    #leader-board{
+        flex-direction: column;
+    }
+    .leader-board-container{
+        line-height: 1.3rem;
+        padding: 0.5rem;
+    }
+}
 /* Add to leader board / Lingo words list  */
 
 .all-words-container{
@@ -186,7 +325,6 @@ section{
     position: fixed;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
   color: white;
   padding-block: 1rem;
@@ -201,6 +339,7 @@ section{
 .defi{
     background-color: orange;
 }
+
 /* Dictonary  */
 #dictonary-section{
     border: 50px solid transparent ;
@@ -215,20 +354,17 @@ section{
 #dictonary h1{
     text-align: center;
 }
-
-#game-menu{
-    display: flex;
-    flex-direction: column;
-}
-#game-menu button{
-    margin: 1rem;
-    padding: 2rem;
-    font-size: large;
-}
-#play-buttons button{
-    margin: 1rem;
-    padding: 2rem;
-    font-size: large;
+/* Mobile Dictonary sizing  */
+@media only screen and (max-width: 473px) {
+    #dictonary-section{
+        width: 75%;
+        border: 35px solid transparent ;
+    }
+    #dictonary{
+        height: 50%;
+        width: 75%;
+        font-size: x-small;
+    }
 }
 
 /* Final choice message */
@@ -375,35 +511,38 @@ section{
 }
 
 .mobile-length-4{
-    width: 80px;
-    height: 80px;
+    width: var(--4-letter-size);
+    height: var(--4-letter-size);
+    line-height: var(--4-letter-line-height);
     
 }
 .mobile-length-5{
-    width: 75px;
-    height: 75px;
+    width: var(--5-letter-size);
+    height: var(--5-letter-size);
+    line-height: var(--5-letter-line-height);
 }
 .mobile-length-6{
-    width: 65px;
-    height: 65px;
+    width: var(--6-letter-size);
+    height: var(--6-letter-size);
+    line-height: var(--6-letter-line-height);
 }
 .mobile-length-7{
-    width: 55px;
-    height: 55px;
-    line-height: 3rem;
+    width: var(--7-letter-size);
+    height: var(--7-letter-size);
+    line-height: var(--7-letter-line-height);
 }
 .mobile-length-9{
-    width: 55px;
-    height: 55px;
-    line-height: 3rem;
+    width: var(--9-letter-size);
+    height: var(--9-letter-size);
+    line-height: var(--9-letter-line-height);
 }
 .mobile-length-10{
-    width: 55px;
-    height: 55px;
-    line-height: 3rem;
+    width: var(--10-letter-size);
+    height: var(--10-letter-size);
+    line-height: var(--10-letter-line-height);
 }
 
-@media only screen and (max-width: 950px) {
+/* @media only screen and (max-width: 950px) {
     .mobile-length-4{
         width: 80px;
         height: 80px;
@@ -495,12 +634,13 @@ section{
         height: 20px;
         line-height: 1.5rem;
     }
-}
+} */
 
 /* Control area */
 #control-area{
     margin-top: 0px;
 }
+
 /* User input  */
 
 
