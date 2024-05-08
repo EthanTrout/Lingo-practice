@@ -1323,6 +1323,7 @@ gameController.LingoRoundStage=0;
 gameController.currentRound=0;
 gameController.isChoiceMade=false;
 gameController.isFinal=false;
+gameController.isInfinte =false;
 gameController.isGrandPrize=false;
 gameController.isTimedGame =false;
 gameController.isPracticeGame =false;
