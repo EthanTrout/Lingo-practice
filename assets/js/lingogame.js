@@ -588,6 +588,10 @@ givenIndexOrder = [2,6,3,8,1,7,4,5]
 gameController.roundCounter =0
 var clue=document.getElementById("clue")
 gameController.timerDisplay.style.display="block";
+document.getElementById("user-answer").focus();
+document.getElementById("user-answer").value =""
+document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
+document.getElementById("player-money").innerText = `£${gameController.playerMoney}`
 if(challengeLength === 9){
     var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
     gameController.lingoWord = nineLetterWords[randomIndex].word
@@ -1411,7 +1415,13 @@ var roundIndex =gameController.roundCounter;
 }
 function delayLoop(x){
 setTimeout(()=>{
-    gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
+    if(gameController.userAnswer[x] != undefined){
+        gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
+    }
+    else{
+        gameController.roundTiles[gameController.roundCounter][x].innerText = ".";
+    }
+    
 },x*gameController.letterDisplayDelay)
 }
 function displayLingo(color){
