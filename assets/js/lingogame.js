@@ -1325,6 +1325,7 @@ gameController.isChoiceMade=false;
 gameController.isFinal=false;
 gameController.isGrandPrize=false;
 gameController.isTimedGame =false;
+gameController.isPracticeGame =false;
 gameController.moneyIncrement=200;
 document.getElementById("full-game-section").style.display="none"
 document.getElementById("game-area").style.display="none"
