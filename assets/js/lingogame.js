@@ -831,7 +831,7 @@ userTextBox.addEventListener("keyup",e =>{
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
 document.getElementById("play-lingo-options").style.display="none";
-startGame(4,5,1)
+startGame(4,5,4)
 
 }
 function playLingoOptions(){
