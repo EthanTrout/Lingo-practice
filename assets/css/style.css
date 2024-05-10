@@ -561,6 +561,11 @@ section{
     line-height: var(--10-letter-line-height);
 }
 
+#clue{
+    text-align: center;
+    background-color: #E35F00;
+    border-radius: 6px;
+}
 /* @media only screen and (max-width: 950px) {
     .mobile-length-4{
         width: 80px;
