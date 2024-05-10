@@ -205,6 +205,7 @@ section{
     #menu-options-section{
         width: 75%;
         border: 35px solid transparent ;
+        background-image: none;
     }
     #play-buttons{
         flex-direction: row;
@@ -298,6 +299,7 @@ section{
     #leader-board-section{
         width: 75%;
         border: 35px solid transparent ;
+        background-image: none;
     }
     #leader-board{
         flex-direction: column;
@@ -359,6 +361,7 @@ section{
     #dictonary-section{
         width: 75%;
         border: 35px solid transparent ;
+        background-image: none;
     }
     #dictonary{
         height: 50%;
