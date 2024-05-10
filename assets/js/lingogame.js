@@ -504,6 +504,7 @@ let givenIndexOrder = [2,6,7,8,1,3,4,5]
 let endLingoWordsAndDefi =[]
 
 
+
 // taken from WordsApi documentation //
 async function getNewWord(){
 var wordLength =gameController.wordLength;
@@ -878,6 +879,267 @@ document.getElementById("play-lingo-options").style.display="block"
 
 // Onclick Play Lingo
 
+// Onclick Tutorial
+function tutorial(){
+    document.getElementById("tutorial-section").style.display ="block"
+    document.getElementById("menu-options-section").style.display="none"
+}
+
+// Tutorial steps
+
+
+function nextTutorialStep(tutorialStep){
+    var tutorialSection = document.getElementById("tutorial-section")
+    if(tutorialStep === 1){
+        tutorialSection.innerHTML=`
+        <div class="container">
+            <div id="tutorial-area">
+                <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
+                <ul class="round">
+                    <li class="round-1 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">a</li>
+                    <li class="round-1 mobile-length-4" style="background-color: orange;">d</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">e</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-2 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-2 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-2 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-2 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+            </div>
+        </div>
+        <div id="tutorial-control-area">
+            <div id="tutorial-toggle-user-input">
+                <div id="money-increment" class="column">£200</div>
+                <div id="user-input" class="column"><input id="user-answer" value="word" type="text" autocomplete="off" spellcheck="false" readonly><button id="submit-answer" >Verify</button></div>
+                <div id="player-money" class="column">£0</div>
+            </div>
+        </div>
+        <div id="overlay"></div>
+        <div id="rules-display">
+            <div id="rules-display-inner">
+                <h1>Game Play</h1>
+                <ul>
+                    <li>The word length is determined by the amount of horizontal tiles</li>
+                    <li>the amount of guesses you get is determined by the vertical tiles</li>
+                    <li>The game will give you the first letter of the lingo word</li>
+                    <li>you will then guess the word</li>
+                    <li>You can click verify or the enter key to submit your answer</li>
+                </ul>
+                <div class ="tutorial-buttons">
+                    <button id="show" onclick="nextTutorialStep(1)">Show</button>
+                </div>
+            </div>
+        </div>`
+        document.getElementById("overlay").style.display="none"
+        document.getElementById("rules-display").style.display ="none"
+        setTimeout(()=>{
+            document.getElementById("overlay").style.display="block"
+            document.getElementById("rules-display").style.display ="block"
+            document.getElementById("rules-display").innerHTML=`
+            <div id="rules-display-inner">
+            <h1>Game Play</h1>
+            <ul>
+                <li>The tile goes orange if its in the Lingo word but its not in the correct place</li>
+                <li>the tile goes green if its in the correct place</li>
+                <li>The game will give any letter that is correct into your next guess</li>
+                <li>you will then guess the word</li>
+                <li>You can click verify or the enter key to submit your answer</li>
+            </ul>
+            <div class ="tutorial-buttons">
+                <button id="show" onclick="nextTutorialStep(2)">Show</button>
+            </div>
+        </div>`
+        },5000)
+        
+    }
+    else if(tutorialStep === 2){
+        tutorialSection.innerHTML=`
+        <div class="container">
+            <div id="tutorial-area">
+                <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
+                <ul class="round">
+                    <li class="round-1 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">a</li>
+                    <li class="round-1 mobile-length-4" style="background-color: orange;">d</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">e</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-2 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-2 mobile-length-4" style="background-color: green;">o</li>
+                    <li class="round-2 mobile-length-4" style="background-color: green;">r</li>
+                    <li class="round-2 mobile-length-4" style="background-color: green;">d</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-3 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+            </div>
+        </div>
+        <div id="tutorial-control-area">
+            <div id="tutorial-toggle-user-input">
+                <div id="money-increment" class="column">£200</div>
+                <div id="user-input" class="column"><input id="user-answer" type="text" autocomplete="off" spellcheck="false" readonly><button id="submit-answer" >Verify</button></div>
+                <div id="player-money" class="column">£200</div>
+            </div>
+        </div>
+        <div id="overlay"></div>
+        <div id="rules-display">
+            <div id="rules-display-inner">
+                <h1>Game Play</h1>
+                <ul>
+                    <li>The word length is determined by the amount of horizontal tiles</li>
+                    <li>the amount of guesses you get is determined by the vertical tiles</li>
+                    <li>The game will give you the first letter of the lingo word</li>
+                    <li>you will then guess the word</li>
+                    <li>You can click verify or the enter key to submit your answer</li>
+                </ul>
+                <div class ="tutorial-buttons">
+                    <button id="show" onclick="nextTutorialStep(2)">Show</button>
+                </div>
+            </div>
+        </div>`
+        document.getElementById("overlay").style.display="none"
+        document.getElementById("rules-display").style.display ="none"
+        setTimeout(()=>{
+            document.getElementById("overlay").style.display="block"
+            document.getElementById("rules-display").style.display ="block"
+            document.getElementById("rules-display").innerHTML=`
+            <div id="rules-display-inner">
+            <h1>Win</h1>
+            <ul>
+                <li>If you guess the correct word the tiles will all highlight green</li>
+                <li>the money that the word is worth is shown on the left</li>
+                <li>this will be added to your score on the right</li>
+                <li>all tiles will then be reset</li>
+                <li>a new word will be generate for you to guess</li>
+            </ul>
+            <div class ="tutorial-buttons">
+                <button id="show" onclick="nextTutorialStep(3)">Show</button>
+            </div>
+        </div>`
+        },5000)
+    }
+    else if(tutorialStep === 3){
+        tutorialSection.innerHTML=`
+        <div class="container">
+            <div id="tutorial-area">
+                <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
+                <ul class="round">
+                    <li class="round-1 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">a</li>
+                    <li class="round-1 mobile-length-4" style="background-color: orange;">d</li>
+                    <li class="round-1 mobile-length-4" style="background-color: rgb(0, 34, 91);">e</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-2 mobile-length-4" style="background-color: red;">w</li>
+                    <li class="round-2 mobile-length-4" style="background-color: red;">o</li>
+                    <li class="round-2 mobile-length-4" style="background-color: red;">r</li>
+                    <li class="round-2 mobile-length-4" style="background-color: red;">b</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-3 mobile-length-4" style="background-color: green;">w</li>
+                    <li class="round-3 mobile-length-4" style="background-color: green;">o</li>
+                    <li class="round-3 mobile-length-4" style="background-color: green;">r</li>
+                    <li class="round-3 mobile-length-4" style="background-color: green;">d</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-4 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+                <ul class="round">
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                    <li class="round-5 mobile-length-4" style="background-color: rgb(0, 34, 91);">.</li>
+                </ul> 
+            </div>
+        </div>
+        <div id="tutorial-control-area">
+            <div id="tutorial-toggle-user-input">
+                <div id="money-increment" class="column">£200</div>
+                <div id="user-input" class="column"><input id="user-answer" type="text" autocomplete="off" spellcheck="false" readonly><button id="submit-answer" >Verify</button></div>
+                <div id="player-money" class="column">£0</div>
+            </div>
+        </div>
+        <div id="overlay"></div>
+        <div id="rules-display">
+            <div id="rules-display-inner">
+                <h1>Game Play</h1>
+                <ul>
+                    <li>The word length is determined by the amount of horizontal tiles</li>
+                    <li>the amount of guesses you get is determined by the vertical tiles</li>
+                    <li>The game will give you the first letter of the lingo word</li>
+                    <li>you will then guess the word</li>
+                    <li>You can click verify or the enter key to submit your answer</li>
+                </ul>
+                <div class ="tutorial-buttons">
+                    <button id="show" onclick="nextTutorialStep(3)">Show</button>
+                </div>
+            </div>
+        </div>`
+        document.getElementById("overlay").style.display="none"
+        document.getElementById("rules-display").style.display ="none"
+        setTimeout(()=>{
+            document.getElementById("overlay").style.display="block"
+            document.getElementById("rules-display").style.display ="block"
+            document.getElementById("rules-display").style.backgroundColor ="rgba(128,0,0,0.75)"
+
+            document.getElementById("rules-display").innerHTML=`
+            <div id="rules-display-inner">
+            <h1>Lose</h1>
+            <ul>
+                <li>If you guess a word that isnt in the english dictonary the tiles will highlight red</li>
+                <li>If you run out of guesses the tiles will highlight red</li>
+                <li>the correct lingo will be displayed on the next set of tiles</li>
+                <li>You will not win any money and it will move the the next game</li>
+                <li>a new word will be generate for you to guess</li>
+            </ul>
+            <div class ="tutorial-buttons">
+                <button onclick= "returnToMenu()">Exit</button>
+                <button id="show" onclick="nextTutorialStep(4)">Challenege Words</button>
+            </div>
+        </div>`
+        },5000)
+    }
+    
+
+}
 
 // Onclick Extra options for practice questions
 
@@ -1360,6 +1622,7 @@ document.getElementById("options").style.display="none"
 document.getElementById("control-area").style.display="none"
 document.getElementById("back-button").style.display ="none"
 gameController.timerDisplay.style.display="none"
+document.getElementById("tutorial-section").style.display ="none"
 document.getElementById("progress-bar").style.display ="none"
 document.getElementById("skip-word").style.display ="none"
 document.getElementById("final-timer-display").style.display ="none"
@@ -1485,6 +1748,13 @@ for(x=0; x<gameController.roundTiles.length;x++){
         }
     }
 }
+
+
+
+
+
+
+
 
 
 }

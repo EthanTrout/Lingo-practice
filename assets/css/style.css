@@ -508,6 +508,10 @@ section{
     display: table;
     
 }
+#tutorial-area ul{
+    list-style: none;
+    display: table;
+}
 
 #reveal-lingo{
     list-style: none;
@@ -673,6 +677,10 @@ section{
     min-height: 100px;
     
 }
+#tutorial-toggle-user-input{
+    display: flex;
+    min-height: 100px;
+}
 
 #money-increment, #player-money{
     background-color: green;
@@ -736,8 +744,37 @@ section{
     margin-top: 10px;
 }
 
+/* Tutorial Styles */
+#overlay{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#rules-display{
+    height: min-content;
+    width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,128,0,0.75);
+    display: flex;
+    justify-content: center;
+    
+}
+#rules-display h1{
+    text-align: center;
+}
+#rules-display-inner{
+    
+}
+
 /* Hidden elements */
 
-#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over,#tutorial-section{
     display: none;
 }
