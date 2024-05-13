@@ -72,7 +72,7 @@
             <div id="play-lingo-options">
                 <div id="play-buttons">
                     <button onclick="playLingo(true)" aria-label="Play Lingo Timed">Play Lingo Timed</button>
-                    <button onclick="playLingo(false)"aria-label="Play Lingo un-timed">Play Lingo Untimed</button>
+                    <button onclick="playLingo(false)" aria-label="Play Lingo un-timed">Play Lingo Untimed</button>
                 </div>
                 <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
             </div>
@@ -91,36 +91,38 @@
                     
                 </div>
 
-            <h1>How many guesses?</h1>
-            <div class="radio">
-                <input type="radio" name="guesses" id="g-four" value="4" >
-                <label for="g-four">4</label>
-                <input type="radio" name="guesses" id="g-five" value="5" checked>
-                <label for="g-five">5</label>
-                <input type="radio" name="guesses" id="g-six" value="6">
-                <label for="g-six">6</label>
+                <h1>How many guesses?</h1>
+                <div class="radio">
+                    <input type="radio" name="guesses" id="g-four" value="4" >
+                    <label for="g-four">4</label>
+                    <input type="radio" name="guesses" id="g-five" value="5" checked>
+                    <label for="g-five">5</label>
+                    <input type="radio" name="guesses" id="g-six" value="6">
+                    <label for="g-six">6</label>
+                </div>
+                <br>
+                <h1>How many total words?</h1>
+                <div class="radio">
+                    <input type="radio" name="rounds" id="r-one" value="1">
+                    <label for="r-one">1</label>
+                    <input type="radio" name="rounds" id="r-five" value="5" checked>
+                    <label for="r-five">5</label>
+                    <input type="radio" name="rounds" id="r-six" value="6">
+                    <label for="r-six">6</label>
+                    <input type="radio" name="rounds" id="r-seven" value="7">
+                    <label for="r-seven">7</label>
+                    <input type="radio" name="rounds" id="r-eight" value="8">
+                    <label for="r-eight">8</label>
+                    <input type="radio" name="rounds" id="r-nine" value="9">
+                    <label for="r-nine">9</label>
+                    <input type="radio" name="rounds" id="r-ten" value="10">
+                    <label for="r-ten">10</label>
+                </div>
+            
+                <button id="confirm" onclick="addButton" aria-label="Confirm Choices">Confirm</button>
+                <div id="play-button"></div>
+                <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
             </div>
-            <br>
-            <h1>How many total words?</h1>
-            <div class="radio">
-                <input type="radio" name="rounds" id="r-one" value="1">
-                <label for="r-one">1</label>
-                <input type="radio" name="rounds" id="r-five" value="5" checked>
-                <label for="r-five">5</label>
-                <input type="radio" name="rounds" id="r-six" value="6">
-                <label for="r-six">6</label>
-                <input type="radio" name="rounds" id="r-seven" value="7">
-                <label for="r-seven">7</label>
-                <input type="radio" name="rounds" id="r-eight" value="8">
-                <label for="r-eight">8</label>
-                <input type="radio" name="rounds" id="r-nine" value="9">
-                <label for="r-nine">9</label>
-                <input type="radio" name="rounds" id="r-ten" value="10">
-                <label for="r-ten">10</label>
-            </div>
-            <button id="confirm" onclick="addButton" aria-label="Confirm Choices">Confirm</button>
-            <div id="play-button"></div>
-            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
         </div>
     </section>
     <section id="input-api-key">
@@ -153,7 +155,7 @@
                 <h1>Player Saved Words</h1>
                 <ul id="saved-words"></ul>
             </div>
-            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu" aria-label = "Return to menu">back to menu</button>
+            <button class ="menu-button" onclick="returnToMenu()" aria-label = "Return to menu">back to menu</button>
         </div>
     </section>
     <section id="tutorial-section">
