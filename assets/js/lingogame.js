@@ -744,7 +744,7 @@ if(gameController.isTimedGame && !gameController.isFinal){
     pauseTimer()
 }
 
-if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0] === lingoFirstLetter){
+if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0].toLowerCase() === lingoFirstLetter){
     gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
     console.log(gameController.userAnswer)
     setTimeout(()=>{
