@@ -1,63 +1,4 @@
 
-// const lingoWord =["bent","best","beet","part","pent","rake","rent"]
-// var answerSubmitted;
-// var generatedLingo;
-// var correctLetters =[]
-// var gameLetters = (document.querySelectorAll(".letter"))
-
-
-
-// function submitAnswer(){
-//     answerSubmitted = document.getElementById("userAnswer").value
-//     if(generatedLingo === answerSubmitted){
-//         console.log("correct")
-//         for(let i=0;i<generatedLingo.length;i++){
-//             if(generatedLingo[i] === answerSubmitted[i]){
-//                 correctLetters.push(i)
-//             }
-//         }
-//         for(let x=0; x<correctLetters.length;x++){
-//             var z =correctLetters[x];
-//             gameLetters[z].innerText = generatedLingo[z]
-//         }
-//         GenerateLingo()
-//         alert("correct")
-        
-
-        
-//     }
-//     else{
-//         for(let i=0;i<generatedLingo.length;i++){
-//             if(generatedLingo[i] === answerSubmitted[i]){
-//                 correctLetters.push(i)
-//             }
-//         }
-//         for(let x=0; x<correctLetters.length;x++){
-//             var z =correctLetters[x];
-//             gameLetters[z].innerText = generatedLingo[z]
-//         }
-        
-
-        
-//     }
-// }
-
-// function GenerateLingo(){
-//     var lingo = lingoWord[Math.floor(Math.random()*7)]
-//     // document.getElementById("answer").innerText = lingo
-//     generatedLingo = lingo
-//     correctLetters =[]
-//     gameLetters[0]. innerText = generatedLingo[0];
-//     for(let x =1; x<gameLetters.length;x++){
-//         gameLetters[x].innerText =""
-//     }
-    
-// }
-
-
-
-
-// window.onload =GenerateLingo
 const nineLetterWords=[
     { word: "available", clue: "Accessible or obtainable" },
     { word: "copyright", clue: "Legal right to produce and sell" },
@@ -427,31 +368,7 @@ const tenLetterWords = [
   ];
   
 
-// document.addEventListener("DOMContentLoaded",()=>{
-//     const gameController ={
-//         gameTimer:28,
-//         lingoWord: "",
-//         challengeClue:"",
-//         roundCounter:0,
-//         roundTiles:[],
-//         // round1Tiles: document.querySelectorAll(".round-1"),
-//         // round2Tiles: document.querySelectorAll(".round-2"),
-//         // round3Tiles: document.querySelectorAll(".round-3"),
-//         // round4Tiles: document.querySelectorAll(".round-4"),
-//         // round5Tiles: document.querySelectorAll(".round-5"),
-//         userAnswer:"",
-//         correctLetters:[],
-//         playerMoney:0,
-//         moneyIncrement:200,
-//         wordLength:4,
-//         gameRounds:4,
-//         currentRound:0,
-//         correctAnswersTally:0,
-//         isPracticeGame:false
-    
 
-//     };
-// })
 
 window.onload =(event) =>{
     if(localStorage.getItem("apiKey")){
@@ -464,11 +381,6 @@ lingoWord: "",
 challengeClue:"",
 roundCounter:0,
 roundTiles:[],
-// round1Tiles: document.querySelectorAll(".round-1"),
-// round2Tiles: document.querySelectorAll(".round-2"),
-// round3Tiles: document.querySelectorAll(".round-3"),
-// round4Tiles: document.querySelectorAll(".round-4"),
-// round5Tiles: document.querySelectorAll(".round-5"),
 timerDisplay:document.getElementById("timer-display"),
 userAnswer:"",
 correctLetters:[],
@@ -658,83 +570,6 @@ if(timeLeft<=0){
 }
 }
 
-//  Revised Timer function 
-
-
-// function challenegWordCheck() {
-//     const myInterval = setInterval(myTimer, 1000);
-//     function myTimer(){
-//         document.getElementById('timerDisplay').innerHTML='00:'+gameController.gameTimer;
-//         var interval =0;
-//         var givenIndexOrder = [2,6,7,8,1,3,4,5]
-//         if(interval % 4 == 0){
-//             var randomIndex = givenIndexOrder.pop()
-//             randomLetter = gameController.lingoWord[randomIndex]
-//             if(gameController.roundTiles[0][randomIndex].innerText === ""){
-//                 gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
-//             }
-//         }
-//         gameController.gameTimer--;
-//         interval++;
-//         if(gameController.gameTimer>0 && gameController.userAnswer === gameController.lingoWord){
-//             endGame("green")
-//             clearInterval(myInterval)
-//         }
-//         else if (gameController.gameTimer <= 0 ) {
-//             endGame("red")
-//             clearInterval(myInterval)
-//         }
-//     }
-// }
-
-// function myStopFunction() {
-//   clearInterval(myInterval);
-// }
-// Timer function
-// function timer(sec){
-//     console.log(sec)
-//     var interval =0;
-//     var givenIndexOrder = [2,6,7,8,1,3,4,5]
-//     var timer = setInterval(function(){
-//         if(document.getElementById('timerDisplay')){
-//             document.getElementById('timerDisplay').innerHTML='00:'+sec;
-//             console.log(sec)
-//             if (sec === 1 ) {
-//                 endGame("red")
-//                 clearInterval(timer);
-//             }
-//             else if(sec>0 && gameController.userAnswer === gameController.lingoWord){
-//                 endGame("green")
-//                 clearInterval(timer);
-//             }
-//             else if(gameController.isChallengeWord === false){
-//                 clearInterval(timer);
-//             }
-//             else if(interval % 4 == 0){
-//                 var randomIndex = givenIndexOrder.pop()
-//                 randomLetter = gameController.lingoWord[randomIndex]
-//                 gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
-//             }
-//             sec--;
-//             interval++;
-//         }else{clearInterval(timer)}
-//     }, 1000);
-// }
-
-// Onlcick verify button
-// function submitAnswer(){
-//     console.log(gameController)
-//     if(gameController.gameTimer != 0){
-//         gameController.userAnswer = document.getElementById("user-answer").value;
-//         setTimeout(()=>{
-//             checkWord(gameController.userAnswer,verifyAnswer);
-//         },gameController.wordLength * gameController.letterDisplayDelay)
-//         displayAnswer(gameController.userAnswer);
-   
-//     }
-
-// }
-
 // Regular expressions learn about here and implemented into code https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/
 function submitAnswer(){
 console.log(gameController)
@@ -844,41 +679,6 @@ document.getElementById("game-menu").style.display="none"
 document.getElementById("play-lingo-options").style.display="block"
 }
 
-// Onclick Challenge round 
-// function challengeQuestion(challengeLength){
-//     divEl = document.getElementById("game-area")
-//     startHtml = `<p id="clue"></p>
-//     <ul class="round>`
-//     for(x=0;x<challengeLength+1;x++){
-//         startHtml += `<li class="round-1".</li>`
-//     }
-//     var endHtml = `</ul>`
-//     var html= startHtml+endHtml;
-//     divEl.innerHTML = html
-//     var timer =document.createElement("div")
-//     timer.innerHTML =`
-//     <div id="safeTimer">
-//     <h2>Timer</h2>
-//     <p id="timerDisplay">00:28</p>
-//     </div>`
-//     divEl.appendChild(timer)
-//     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input"><div id="money-increment" class="column">£0</div>
-//     <div id="user-input" class="column"><input id="user-answer" type="text"><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-//     <div id="player-money" class="column">£0</div></div>`
-//     document.getElementById("game-menu").style.visibility ="hidden"
-//     enterKeySubmit();
-//     gameController.roundTiles =[document.querySelectorAll(".round-1")]
-//     gameController.userAnswer= document.getElementById("user-answer").value
-//     gameController.gameRounds = 1
-//     gameController.wordLength = challengeLength
-//     gameController.gameTimer =28
-//     resetDisplay()
-//     GenerateChallengeWord(challengeLength)
-
-// }
-
-// Onclick Play Lingo
-
 // Onclick Tutorial
 function tutorial(){
     document.getElementById("tutorial-section").style.display ="block"
@@ -886,7 +686,6 @@ function tutorial(){
 }
 
 // Tutorial steps
-
 
 function nextTutorialStep(tutorialStep){
     var tutorialSection = document.getElementById("tutorial-section")
@@ -1440,49 +1239,6 @@ gameController.LingoRoundStage =10; // one less because finish game adds 1
 finishGame()
 }
 
-// Verifys if the Answer is correct or Inocrrect and calls to set tiles to approprite color 
-// function verifyAnswer(isWord){
-//     console.log(isWord)
-//     gameController.orangeLetters.clear();
-//     gameController.matchedIndices.clear();
-//     if(gameController.userAnswer === gameController.lingoWord ){
-//         endGame("green");
-//     }
-//     else if(gameController.roundCounter === gameController.roundTiles.length -1 ){
-//         endGame("red")
-
-//     }
-//     else if(gameController.userAnswer != gameController.lingoWord){
-//         var guessedLettersAndColor=[];
-//         for(x =0; x<gameController.userAnswer.length;x++){
-//             var letter = gameController.userAnswer[x]
-//             if(letter === gameController.lingoWord[x]){
-//                 guessedLettersAndColor.push({"green":[x,letter]})
-//                 setTileGreen(x);
-//             }
-//         }
-//         for(z =0; z<gameController.userAnswer.length;z++){
-//             var letter = gameController.userAnswer[z]
-//             for(y=0; y<gameController.lingoWord.length;y++){
-//                 if(letter === gameController.lingoWord[y]){
-//                     if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
-//                     guessedLettersAndColor.push({"orange":[y,letter]})
-//                     setTileOrange(z);
-//                 }
-//             }
-
-//         }
-//         console.log(guessedLettersAndColor)
-//         document.getElementById("user-answer").value =""
-//         gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
-//         gameController.roundCounter++;
-//     }
-
-
-
-
-// }
-
 function verifyAnswer(isWord){
 console.log(isWord)
 // Object to store Lingo word letters and indexs
@@ -1904,35 +1660,6 @@ function displayLetter(letter,index){
 gameController.roundTiles[gameController.roundCounter][index].innerText = letter;
 }
 
-
-// function displayAnswer(){
-//     if(gameController.roundCounter ===1){
-//         for(x =0; x<gameController.round1Tiles.length;x++){
-//             gameController.round1Tiles[x].innerText = gameController.userAnswer[x];
-//         }
-//     }
-//     else if(gameController.roundCounter ===2){
-//         for(x =0; x<gameController.round2Tiles.length;x++){
-//             gameController.round2Tiles[x].innerText = gameController.userAnswer[x];
-//         }
-//     }
-//     else if(gameController.roundCounter ===3){
-//         for(x =0; x<gameController.round3Tiles.length;x++){
-//             gameController.round3Tiles[x].innerText = gameController.userAnswer[x];
-//         }
-//     }
-//     else if(gameController.roundCounter ===4){
-//         for(x =0; x<gameController.round4Tiles.length;x++){
-//             gameController.round4Tiles[x].innerText = gameController.userAnswer[x];
-//         }
-//     }
-//     else if(gameController.roundCounter ===5){
-//         for(x =0; x<gameController.round5Tiles.length;x++){
-//             gameController.round5Tiles[x].innerText = gameController.userAnswer[x];
-//         }
-//     }
-// }
-
 // Sets user input onto tiles
 function displayAnswer(answer){
 var roundIndex =gameController.roundCounter;
@@ -2015,14 +1742,6 @@ for(x=0; x<gameController.roundTiles.length;x++){
     }
 }
 
-
-
-
-
-
-
-
-
 }
 // sets tile passed to green
 function setTileGreen (index){
@@ -2033,38 +1752,6 @@ if(roundIndex != gameController.lingoWord.length){
 }
 }
 
-
-// function setTileGreen (index){
-// if(gameController.roundCounter ===0){
-//     gameController.round1Tiles[index].style.backgroundColor = "green";
-//     gameController.round2Tiles[index].innerText = gameController.userAnswer[index];
-
-// }
-// else if (gameController.roundCounter ===1){
-//     gameController.round2Tiles[index].style.backgroundColor = "green";
-//     gameController.round3Tiles[index].innerText = gameController.userAnswer[index];
-
-// }
-// else if (gameController.roundCounter ===2){
-//     gameController.round3Tiles[index].style.backgroundColor = "green";
-//     gameController.round4Tiles[index].innerText = gameController.userAnswer[index];
-
-// }
-// else if (gameController.roundCounter ===3){
-//     gameController.round4Tiles[index].style.backgroundColor = "green";
-//     gameController.round5Tiles[index].innerText = gameController.userAnswer[index];
-
-// }
-// else if (gameController.roundCounter ===4){
-//     gameController.round5Tiles[index].style.backgroundColor = "green";
-// }
-// else{
-
-// }
-
-// }
-
-
 // sets tile passed to orange
 function setTileOrange(index,letter){
 var roundIndex = gameController.roundCounter;
@@ -2073,79 +1760,5 @@ if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"
     gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange"
 } 
 }
-// function setTileOrange(index) {
-//     var roundIndex = gameController.roundCounter;
-//     var letter = gameController.userAnswer[index];
-//     var letterFound = false; // Flag to check if the letter is already matched
-//     if (gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green") {
-//         // Check if the letter has already been matched
-//         if (!gameController.orangeLetters.has(letter)) {
-//             for (var y = 0; y < gameController.lingoWord.length; y++) {
-//                 if (letter === gameController.lingoWord[y]) {
-//                     // If the letter is found in the lingo word, mark it orange
-//                     gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
-//                 }
-//             }
-//             // Add the letter to the set to indicate it has been marked orange
-//             gameController.orangeLetters.add(letter);
-//         }
-//     }
-// }
-
-// function setTileOrange(index) {
-//     var roundIndex = gameController.roundCounter;
-//     var letter = gameController.userAnswer[index];
-//     var letterFound = false; // Flag to check if the letter is already matched
-
-//     if (gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green") {
-//         // Check if the letter has already been matched
-//         if (!gameController.orangeLetters.has(letter)) {
-//             for (var y = 0; y < gameController.lingoWord.length; y++) {
-//                 if (letter === gameController.lingoWord[y]) {
-//                     // If the letter is found in the lingo word, check if its index has been matched before
-//                     if (!gameController.matchedIndices.has(y)) {
-//                         // Mark the tile as orange
-//                         gameController.roundTiles[roundIndex][y].style.backgroundColor = "orange";
-//                         // Add the index to the set of matched indices
-//                         gameController.matchedIndices.add(y);
-//                         // Mark the letter as matched
-//                         letterFound = true;
-//                         // Exit the loop if we found a match for this letter
-//                         break;
-//                     }
-//                 }
-//             }
-//             // If the letter is not found in the lingo word or all its occurrences have been matched, mark it as orange in the user answer
-//             if (!letterFound) {
-//                 gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
-//             }
-//             // Add the letter to the set to indicate it has been marked orange
-//             gameController.orangeLetters.add(letter);
-//         }
-//     }
-// }
-
-
-
-// function setTileOrange(index){
-//     if(gameController.roundCounter ===0 && gameController.round1Tiles[index].style.backgroundColor != "green"){
-//         gameController.round1Tiles[index].style.backgroundColor = "orange";
-//     }
-//     else if(gameController.roundCounter ===1 && gameController.round2Tiles[index].style.backgroundColor != "green"){
-//         gameController.round2Tiles[index].style.backgroundColor = "orange";
-//     }
-//     else if(gameController.roundCounter ===2 && gameController.round3Tiles[index].style.backgroundColor != "green"){
-//         gameController.round3Tiles[index].style.backgroundColor = "orange";
-//     }
-//     else if(gameController.roundCounter ===3 && gameController.round4Tiles[index].style.backgroundColor != "green"){
-//         gameController.round4Tiles[index].style.backgroundColor = "orange";
-//     }
-//     else if(gameController.roundCounter ===4 && gameController.round5Tiles[index].style.backgroundColor != "green"){
-//         gameController.round5Tiles[index].style.backgroundColor = "orange";
-//     }
-//     else{
-    
-//     }
-// }
 
 
