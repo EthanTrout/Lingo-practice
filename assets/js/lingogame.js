@@ -1283,7 +1283,7 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
-        },4000)
+        },8000)
         setTimeout(()=>{
             document.getElementById("round-1").innerHTML=`
             <li class="round-1 mobile-length-9" style="background-color: green">l</li>
@@ -1295,7 +1295,7 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
-        },4000)
+        },12000)
         setTimeout(()=>{
             document.getElementById("overlay").style.display="block"
             document.getElementById("rules-display").style.display ="block"
@@ -1312,7 +1312,7 @@ function nextTutorialStep(tutorialStep){
                 <button id="show" onclick="nextTutorialStep(6)">final</button>
             </div>
         </div>`
-        },5000)
+        },17000)
     }
     else if(tutorialStep === 6){
         tutorialSection.innerHTML=`
