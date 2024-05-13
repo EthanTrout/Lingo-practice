@@ -1279,7 +1279,7 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: green;">n</li>
             <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91)">.</li>
-            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
+            <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
@@ -1290,7 +1290,7 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: green;">n</li>
             <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
-            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91)">.</li>
+            <li class="round-1 mobile-length-9" style="background-color: green">o</li>
             <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
