@@ -397,13 +397,9 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:0,
+LingoRoundStage:8,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
-
-
-
-
 };
 
 
@@ -1325,6 +1321,9 @@ if(color === "green"){
 if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
     if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
     displayLingo(color)
+    if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
+        gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+    }
     setTimeout(finishGame,gameController.gameRoundDisplayDelay)
 }
 else{
@@ -1433,7 +1432,7 @@ if(window.screen.width > 473){
         divEl.innerHTML =""
         gameController.moneyIncrement= gameController.playerMoney;
         gameController.isChallengeWord =false;
-        gameController.isInfinte =true;
+        gameController.isInfinte =false;
         gameController.isFinal =true;
         startGame(6,5,1)
         pauseTimer = startTimer(90,timerCallback,remainingTime);
@@ -1446,7 +1445,7 @@ if(window.screen.width > 473){
         var incrementUpTo1500 = 15000 - gameController.playerMoney;
         gameController.moneyIncrement= incrementUpTo1500;
         gameController.isChallengeWord =false;
-        gameController.isInfinte =true;
+        gameController.isInfinte =false;
         gameController.isFinal =true;
         gameController.isGrandPrize =true;
         startGame(7,5,1)
@@ -1653,7 +1652,10 @@ document.getElementById("leader-board-section").style.display ="none"
 document.getElementById("play-lingo-options").style.display ="none"
 document.getElementById("menu-options-section").style.display ="block"
 document.getElementById("game-menu").style.display ="flex"
-document.getElementById("clue").innerText=""
+if(document.getElementById("clue")){
+    document.getElementById("clue").innerText=""
+}
+
 }
 
 function displayLetter(letter,index){
