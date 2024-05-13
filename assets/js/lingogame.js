@@ -397,7 +397,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:8,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 };
@@ -509,7 +509,7 @@ if(challengeLength === 9){
     gameController.roundTiles[0][0].style.backgroundColor="green";
     console.log(gameController.lingoWord)
     ProgressWidth=100;
-    pauseTimer =startTimer(32,challengeTimerCallBack)
+    pauseTimer =startTimer(20,challengeTimerCallBack)
 }
 else if (challengeLength === 10){
     var randomIndex = Math.floor(Math.random()*tenLetterWords.length);
@@ -519,7 +519,7 @@ else if (challengeLength === 10){
     gameController.roundTiles[0][0].style.backgroundColor="green";
     console.log(gameController.lingoWord)
     givenIndexOrder.push(9)
-    pauseTimer =startTimer(36,challengeTimerCallBack)
+    pauseTimer =startTimer(20,challengeTimerCallBack)
     
 }
 else{
@@ -544,6 +544,8 @@ if(timeLeft<=0){
 }
 else if(remainingTime%letterDisplayInterval === 0){
     var randomIndex = givenIndexOrder.pop()
+    gameController.moneyIncrement = gameController.moneyIncrement -40;
+    document.getElementById("money-increment").innerText =`£${gameController.moneyIncrement}`
     randomLetter = gameController.lingoWord[randomIndex]
     gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
     gameController.roundTiles[0][randomIndex].style.backgroundColor ="green"
@@ -1355,7 +1357,7 @@ if(window.screen.width > 473){
     }
     if(gameController.LingoRoundStage===1){
         divEl.innerHTML =""
-        gameController.moneyIncrement=500;
+        gameController.moneyIncrement=300;
         gameController.isChallengeWord =true;
         startGame(9,1,1)
     }
@@ -1369,7 +1371,7 @@ if(window.screen.width > 473){
     }
     else if(gameController.LingoRoundStage===3){
         divEl.innerHTML =""
-        gameController.moneyIncrement=500;
+        gameController.moneyIncrement=400;
         ProgressWidth =100;
         gameController.isChallengeWord =true;
         startGame(10,1,1,10)
@@ -1390,7 +1392,7 @@ if(window.screen.width > 473){
     }
     else if(gameController.LingoRoundStage===6){
         divEl.innerHTML =""
-        gameController.moneyIncrement=500;
+        gameController.moneyIncrement=750;
         gameController.isChallengeWord =true;
         ProgressWidth =100;
         startGame(10,1,1,10)
