@@ -160,5 +160,82 @@ The leaderboard section displays the 5 highest score both for Timed Gamed and Un
 The dictonary Displays the words added by the user at the end of each lingo game 
 
 
+# Testing
 
+## validator testing
+
+- HTML
+    - No errors were found when passing through the offical W3C markup validator
+    - [W3C Validator results](https://validator.w3.org/nu/?doc=https%3A%2F%2Fethantrout.github.io%2FLingo-practice%2F)
+
+- CSS
+    - No errors were found when passing through the offical W3C markup validator
+    - [W3C Validator results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fethantrout.github.io%2FLingo-practice%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+
+- Javascript 
+    - do the JSLint validator
+
+
+# Acessibility
+
+## Lighthouse score 
+
+### Browser Testing
+- The Website was tested on Google Chrome, Firefox, Microsoft Edge, Safari browsers with no issues noted.
+    
+### Device Testing
+- The website was viewed on a variety of devices such as Desktop, Laptop, iPhone 8, iPhoneX and iPad to ensure responsiveness on various screen sizes. The website performed as intended. The responsive design was also checked using Chrome developer tools across multiple devices with structural integrity holding for the various sizes.
+
+    
+# Technologies used
+## Languages 
+- HTML5
+- CSS3
+- JavaScript
+
+## frameworks -libraries - API - programs Used
+- Chrome dev tools- used for overall development and testing, including responsivness and preformance
+- GitHub -Used for version control and hosting of the page
+- W3C -used for validation testing of HTML and CSS
+- WordsAPI - used for Getting random words, checking words exist and generating definitions for player dictonary 
+
+# Deployment
+## The site was deployed using GitHub pages. The steps to deploy using GitHub pages are:
+
+1. Go to the repository on GitHub.com
+2. Select 'Settings' near the top of the page.
+3. Select 'Pages' from the menu bar on the left of the page.
+4. Under 'Source' select the 'Branch' dropdown menu and select the main branch.
+5. Once selected, click the 'Save'.
+6. Deployment should be confirmed by a message on a green background saying "Your site is published at" followed by the web address.
+
+The Live link can be found here [LingoPractice](https://ethantrout.github.io/Lingo-practice/)
+
+## The API key was generated using WordsAPI. the steps to get a key are
+1. Go to wordsapi.com
+2. Go  to 'pricing' near the top of the page
+3. Sign up for free using rapidAPI
+4. Enter personal details
+5. click generate API key 
+
+Note: i have created a input feild at the start of the game for Demo purposes. if you choose to deploy this you can enter your API key there as to not save it to your own Github and compromise the key
+
+## Cloning
+To clone this repository follow the below steps:
+
+1. Locate the repository at this link [Lingo Practice Repository](https://github.com/EthanTrout/Lingo-practice).
+2. Under 'Code', see the different cloning options, HTTPS, SSH, and GitHub CLI. Click the prefered cloning option, and then copy the link provided.
+3. Open Terminal.
+4. In Terminal, change the current working directory to the desired location of the cloned directory.
+5. Type 'git clone', and then paste the URL copied from GitHub earlier.
+6. Type 'Enter' to create the local clone.
+
+Note: you will need to generate your own API key for the game to work
+
+# Credits
+
+## Content 
+The inspiration for this game came from the UK tv show Lingo. This tv show is always on at my work and there have been multiple occasions where people have said they would love to see how well they would do on this show. There are other apps such as wordle that allow you to play but none that are accurate to the Shows game mecanics and can actually score you on this.
+
+## Resources used
 
