@@ -406,7 +406,8 @@ let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5];
 let endLingoWordsAndDefi =[];
 
-// taken from WordsApi documentation //
+// All Api calls --- code found on wordsAPI documentation //
+
 async function getNewWord(){
 let wordLength =gameController.wordLength;
 const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${wordLength}&lettersMax=${wordLength}&partOfSpeech=verb`;
@@ -458,12 +459,7 @@ try {
 }
 }
 
-function addApiKey(){
-    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
-    document.getElementById("input-api-key").style.display="none";
-}
-
-// Starts a new round 
+// Starts a new Lingo round 
 async function generateLingo(){
 await getNewWord();
 while(gameController.lingoWord.indexOf(" ") !== -1){
@@ -477,6 +473,7 @@ resetDisplay();
 gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
 }
 
+// starts a new ChallengeWord round
 function GenerateChallengeWord(challengeLength){
 givenIndexOrder = [2,6,3,8,1,7,4,5];
 gameController.roundCounter =0;
@@ -512,146 +509,49 @@ else{
 }
 }
 
-// Revised timer function call back
-function challengeTimerCallBack(timeLeft,widthDecrease){
-remainingTime = timeLeft;
-console.log(timeLeft);
-document.getElementById("progress-bar").style.display="block";
-gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
-ProgressWidth = ProgressWidth - widthDecrease;
-if(timeLeft<=0){
-    gameController.isChallengeWord=false;
-    endGame("red");
-    pauseTimer();
-}
-else if(remainingTime%letterDisplayInterval === 0){
-    let randomIndex = givenIndexOrder.pop();
-    gameController.moneyIncrement = gameController.moneyIncrement -40;
-    document.getElementById("money-increment").innerText =`£${gameController.moneyIncrement}`;
-    gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
-    gameController.roundTiles[0][randomIndex].style.backgroundColor ="green";
-}
+// End Api calls
+
+
+// All main menu buttons
+
+// On click API key submit
+function addApiKey(){
+    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
+    document.getElementById("input-api-key").style.display="none";
 }
 
-// Timed game mode call back 
-
-function timedGameCallBack(timeLeft,widthDecrease){
-remainingTime = timeLeft;
-document.getElementById("progress-bar").style.display="block";
-gameController.timerDisplay.style.display="block";
-gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
-ProgressWidth = ProgressWidth - widthDecrease;
-if(timeLeft<=0){
-    endGame("red");
-    pauseTimer();
-}
-}
-
-// Regular expressions learn about here and implemented into code https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/
-function submitAnswer(){
-let lettersOnlyRegex = /^[a-zA-Z]+$/;
-let lingoFirstLetter = gameController.lingoWord[0];
-if(gameController.isTimedGame && !gameController.isFinal){
-    pauseTimer();
-}
-
-if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0].toLowerCase() === lingoFirstLetter){
-    gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
-    setTimeout(function(){
-        checkWord(gameController.userAnswer,verifyAnswer);
-    },gameController.wordLength * gameController.letterDisplayDelay);
-    displayAnswer(gameController.userAnswer);
-   
-}
-else{
-    document.getElementById("user-answer").value="";
-    alert("There are only letters allowed in answers and Answers must start with the same Lingo letter");
-    
-}
-
-}
-
-// Onclick Start Game. create all tiles and initalise GameController variables
-
-function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
-document.getElementById("full-game-section").style.display ="block";
-document.getElementById("game-area").style.display="block";
-document.getElementById("back-button").style.display ="block";
-document.getElementById("control-area").style.display ="block";
-document.getElementById("menu-options-section").style.display ="none";
-document.getElementById("options").style.display ="none";
-document.getElementById("game-menu").style.display ="none";
-let divEl = document.getElementById("game-area");
-divEl.innerHTML="";
-for(let x=1;x<roundsLength+1;x++){
-    let startHtml = `<ul class ="round">`;
-    for(let y=0;y<wordLength;y++){
-        startHtml += `<li class="round-${x} mobile-length-${wordLength}">.</li>`;
-    }
-    let endHtml = `</ul> <p id="clue">`;
-    let html= startHtml+endHtml;
-    divEl.innerHTML += html;
-}
-if(window.screen.width > 473){
-    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
-    <div id="money-increment" class="column">£0</div>
-    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    <div id="player-money" class="column">£${gameController.playerMoney}</div>
-    </div>`;
-}
-else{ // Change of CSS if screens are smaller for each word length
-    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
-    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}" autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
-    </div>
-    <div id="mobile-scores">
-    <div id="money-increment" class="column">£0</div>
-    <div id="player-money" class="column">£${gameController.playerMoney}</div>
-    </div>`;
-
-    
-}
-
-gameController.roundTiles =[];
-for(let x=1;x<roundsLength+1;x++){
-    let tileObj =document.querySelectorAll(`.round-${x}`);
-    gameController.roundTiles.push(tileObj);
-}
-enterKeySubmit();
-gameController.userAnswer= document.getElementById("user-answer").value;
-gameController.gameRounds = gameRounds;
-gameController.wordLength = wordLength;
-gameController.currentRound=0;
-gameController.gameTimer =28;
-gameController.correctAnswersTally =0;
-if(!gameController.isChallengeWord){
-    generateLingo(wordLength);
-}
-else{
-    GenerateChallengeWord(challengeLetterLength);
-}
-
-}
-function enterKeySubmit(){
-let userTextBox = document.getElementById("user-answer");
-let userSubmitBtn = document.getElementById("submit-answer");
-userTextBox.addEventListener("keyup",function(e ){
-    e.preventDefault();
-    if(e.key === "Enter"){
-        userSubmitBtn.click();
-    }
-});
-}
-
-// Onclick Play Lingo
+// Onclick Play Lingo - Main Lingo Game
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
 document.getElementById("play-lingo-options").style.display="none";
 startGame(4,5,4);
 
 }
+
+// Onclick main Lingo game options
 function playLingoOptions(){
 document.getElementById("game-menu").style.display="none";
 document.getElementById("play-lingo-options").style.display="block";
+}
+
+//Onclick practice game options
+function options(){
+    // hides game menu and shows options 
+    document.getElementById("game-menu").style.display="none";
+    document.getElementById("options").style.display ="flex";
+    gameController.isPracticeGame =true;
+    document.getElementById("confirm").addEventListener("click",addButton);
+    if(document.getElementById("playWithOptions")){
+        document.getElementById("playWithOptions").remove();
+    }
+}
+// Onclick Confirm practice game options -add button
+function addButton(){
+    let button = document.getElementById("play-button");
+    let rounds = document.querySelector('input[name = rounds]:checked').value;
+    let guesses = document.querySelector('input[name = guesses]:checked').value;
+    let wordLength = document.querySelector('input[name = wordLength]:checked').value;
+    button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`;
 }
 
 // Onclick Tutorial
@@ -659,9 +559,7 @@ function tutorial(){
     document.getElementById("tutorial-section").style.display ="block";
     document.getElementById("menu-options-section").style.display="none";
 }
-
 // Tutorial steps
-
 function nextTutorialStep(tutorialStep){
     let tutorialSection = document.getElementById("tutorial-section");
     if(tutorialStep === 1){
@@ -1179,37 +1077,147 @@ function nextTutorialStep(tutorialStep){
     
 }
 
-// Onclick Extra options for practice questions
-
-function options(){
-// hides game menu and shows options 
-document.getElementById("game-menu").style.display="none";
-document.getElementById("options").style.display ="flex";
-gameController.isPracticeGame =true;
-document.getElementById("confirm").addEventListener("click",addButton);
-if(document.getElementById("playWithOptions")){
-    document.getElementById("playWithOptions").remove();
-}
-}
-// Find better way to do this V
-function addButton(){
-let button = document.getElementById("play-button");
-let rounds = document.querySelector('input[name = rounds]:checked').value;
-let guesses = document.querySelector('input[name = guesses]:checked').value;
-let wordLength = document.querySelector('input[name = wordLength]:checked').value;
-button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`;
-}
-
-// Onclick Final choices
-function finalSixLetterChoice(){
-gameController.LingoRoundStage =9; // one less because finish game adds 1
-finishGame();
-}
-function finalSevenLetterChoice(){
-gameController.LingoRoundStage =10; // one less because finish game adds 1
-finishGame();
+// Onclick LeaderBoard
+function displayLeaderBoard(){
+    document.getElementById("leader-board-section").style.display ="block";
+    document.getElementById("game-menu").style.display ="none";
+    document.getElementById("full-game-section").style.display ="none";
+    document.getElementById("menu-options-section").style.display ="none";
+    
+    let highScoresUl = document.getElementById("high-scores");
+    let highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || []);
+    highScoresUl.innerHTML=highScoresObj.map(function(score){
+        return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
+    }).join("");
+    
+    let timedHighScoresUl = document.getElementById("timed-high-scores");
+    let timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || []);
+    timedHighScoresUl.innerHTML=timedHighScoresObj.map(function(score){
+        return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
+    }).join("");
 }
 
+// Onclick Dictonary
+function showDict(){
+    document.getElementById("full-game-section").style.display ="none";
+    document.getElementById("menu-options-section").style.display ="none";
+    document.getElementById("dictonary-section").style.display ="block";
+    document.getElementById("dictonary").style.display ="block";
+    
+    let savedWordsUl = document.getElementById("saved-words");
+    let savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || []);
+    savedWordsUl.innerHTML=savedWordsObj.map(function(word){
+        return `<li class="saved-words-list">${word.word}-${word.defi}</li>`;
+    }).join("");
+}
+
+// Return to menu function 
+function returnToMenu(){
+    if(gameController.isChallengeWord || gameController.isTimedGame || gameController.isFinal) {
+         pauseTimer();
+    }
+ 
+ gameController.playerMoney =0;
+ gameController.correctAnswersTally =0;
+ gameController.LingoRoundStage=0;
+ gameController.currentRound=0;
+ gameController.isChoiceMade=false;
+ gameController.isFinal=false;
+ gameController.isInfinte =false;
+ gameController.isGrandPrize=false;
+ gameController.isTimedGame =false;
+ gameController.isPracticeGame =false;
+ gameController.isChallengeWord=false;
+ gameController.moneyIncrement=200;
+ gameController.roundTiles =[];
+ gameController.challengeClue ="";
+ document.getElementById("full-game-section").style.display="none";
+ document.getElementById("game-area").style.display="none";
+ document.getElementById("game-over").style.display="none";
+ document.getElementById("options").style.display="none";
+ document.getElementById("control-area").style.display="none";
+ document.getElementById("back-button").style.display ="none";
+ gameController.timerDisplay.style.display="none";
+ document.getElementById("tutorial-section").style.display ="none";
+ document.getElementById("progress-bar").style.display ="none";
+ document.getElementById("skip-word").style.display ="none";
+ document.getElementById("final-timer-display").style.display ="none";
+ document.getElementById("dictonary-section").style.display ="none";
+ document.getElementById("leader-board-section").style.display ="none";
+ document.getElementById("play-lingo-options").style.display ="none";
+ document.getElementById("menu-options-section").style.display ="block";
+ document.getElementById("game-menu").style.display ="flex";
+ if(document.getElementById("clue")){
+     document.getElementById("clue").innerText="";
+ }
+ 
+ }
+
+// End main menu buttons
+
+// All core game logic
+
+// Start Game function . create all tiles and initalise GameController variables.
+function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
+document.getElementById("full-game-section").style.display ="block";
+document.getElementById("game-area").style.display="block";
+document.getElementById("back-button").style.display ="block";
+document.getElementById("control-area").style.display ="block";
+document.getElementById("menu-options-section").style.display ="none";
+document.getElementById("options").style.display ="none";
+document.getElementById("game-menu").style.display ="none";
+let divEl = document.getElementById("game-area");
+divEl.innerHTML="";
+for(let x=1;x<roundsLength+1;x++){
+    let startHtml = `<ul class ="round">`;
+    for(let y=0;y<wordLength;y++){
+        startHtml += `<li class="round-${x} mobile-length-${wordLength}">.</li>`;
+    }
+    let endHtml = `</ul> <p id="clue">`;
+    let html= startHtml+endHtml;
+    divEl.innerHTML += html;
+}
+if(window.screen.width > 473){
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
+    <div id="money-increment" class="column">£0</div>
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="player-money" class="column">£${gameController.playerMoney}</div>
+    </div>`;
+}
+else{ // Change of CSS if screens are smaller for each word length
+    document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}" autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    </div>
+    <div id="mobile-scores">
+    <div id="money-increment" class="column">£0</div>
+    <div id="player-money" class="column">£${gameController.playerMoney}</div>
+    </div>`;
+
+    
+}
+
+gameController.roundTiles =[];
+for(let x=1;x<roundsLength+1;x++){
+    let tileObj =document.querySelectorAll(`.round-${x}`);
+    gameController.roundTiles.push(tileObj);
+}
+enterKeySubmit();
+gameController.userAnswer= document.getElementById("user-answer").value;
+gameController.gameRounds = gameRounds;
+gameController.wordLength = wordLength;
+gameController.currentRound=0;
+gameController.gameTimer =28;
+gameController.correctAnswersTally =0;
+if(!gameController.isChallengeWord){
+    generateLingo(wordLength);
+}
+else{
+    GenerateChallengeWord(challengeLetterLength);
+}
+
+}
+
+// Verify answer function. verifies answer to Lingo word. updates rounds. calls end game . calls to set tile colors
 function verifyAnswer(isWord){
 // Object to store Lingo word letters and indexs
 let lingoLettersAndIndex ={};
@@ -1265,6 +1273,7 @@ else if(gameController.userAnswer !== gameController.lingoWord){
 
 }
 
+// End game function. is called after game concludes. or skip is clicked. determins if game continues or ends. calls to modify tiles
 function endGame(color){
 gameController.currentRound++;
 if(gameController.isInfinte && color ==="green"){
@@ -1303,6 +1312,8 @@ else{
 
 // Finish game function - Game rounds for Lingo game
 }
+
+// Finish game function. is called at the very end of a practice run. is called every completed game on lingo main game. sets next stage or displays Game over
 function finishGame(){
 let divEl = document.getElementById("game-area");
 if(gameController.isPracticeGame){
@@ -1448,56 +1459,10 @@ if(window.screen.width > 473){
 
 }
 
-// Dictonary functions
-function showWordsAndDefi(){
-    document.getElementById("game-over").style.display= "none";
-    let allWords =document.getElementById("all-words");
-    document.getElementById("words-defi-list").style.display="block";
-    allWords.innerHTML=endLingoWordsAndDefi.map(function(word){
-        return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}</li><div id="defi-${word.word}" class="display-defi"><span class="word-defi">${word.word}</span><span class="defi">${word.defi}</span></div> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`;
-    }).join("");
+// End core game logic
 
-    // Add event for click showing the defintion//
-    endLingoWordsAndDefi.forEach(function(obj){
-        document.getElementById(`word-${obj.word}`).addEventListener("click",function(){
-            document.getElementById(`defi-${obj.word}`).style.display ="flex";
-            setTimeout(function(){
-                document.getElementById(`defi-${obj.word}`).style.display ="none";
-            },4000);
-        });
-    });
-}
-// Hides words and definition screen goes back to game over
-function hideWordsAndDefi(){
-document.getElementById("words-defi-list").style.display="none";
-document.getElementById("game-over").style.display= "block";
-}
 
-// Onclick adds words to player dictonary
-function addWordToDict(addWord,addDefi){
-let dictonary = JSON.parse(localStorage.getItem("dictonary") || "[]");
-let wordAndDefi ={
-    word:addWord,
-    defi:addDefi
-};
-dictonary.push(wordAndDefi);
-localStorage.setItem(`dictonary`,JSON.stringify(dictonary));
-document.getElementById(`word-${addWord}`).remove();
-}
-
-function showDict(){
-document.getElementById("full-game-section").style.display ="none";
-document.getElementById("menu-options-section").style.display ="none";
-document.getElementById("dictonary-section").style.display ="block";
-document.getElementById("dictonary").style.display ="block";
-
-let savedWordsUl = document.getElementById("saved-words");
-let savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || []);
-savedWordsUl.innerHTML=savedWordsObj.map(function(word){
-    return `<li class="saved-words-list">${word.word}-${word.defi}</li>`;
-}).join("");
-}
-
+// Timer function
 function startTimer(duration, callback, remainingTime = duration) {
 let timeLeft = remainingTime; // Use remaining time if provided, otherwise use the initial duration
 let timerInterval;
@@ -1523,6 +1488,9 @@ return function pauseTimer() {
 };
 }
 
+// All timer call back functions
+
+// Final Game timer callback
 function timerCallback(timeLeft) {
 remainingTime = timeLeft; // Update remaining time
 gameController.timerDisplay.style.display="none";
@@ -1539,6 +1507,79 @@ if(remainingTime <=0){
 }
 }
 
+// challenge game timer callback
+function challengeTimerCallBack(timeLeft,widthDecrease){
+    remainingTime = timeLeft;
+    console.log(timeLeft);
+    document.getElementById("progress-bar").style.display="block";
+    gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
+    ProgressWidth = ProgressWidth - widthDecrease;
+    if(timeLeft<=0){
+        gameController.isChallengeWord=false;
+        endGame("red");
+        pauseTimer();
+    }
+    else if(remainingTime%letterDisplayInterval === 0){
+        let randomIndex = givenIndexOrder.pop();
+        gameController.moneyIncrement = gameController.moneyIncrement -40;
+        document.getElementById("money-increment").innerText =`£${gameController.moneyIncrement}`;
+        gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
+        gameController.roundTiles[0][randomIndex].style.backgroundColor ="green";
+    }
+}
+
+// Timed game mode call back 
+function timedGameCallBack(timeLeft,widthDecrease){
+    remainingTime = timeLeft;
+    document.getElementById("progress-bar").style.display="block";
+    gameController.timerDisplay.style.display="block";
+    gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
+    ProgressWidth = ProgressWidth - widthDecrease;
+    if(timeLeft<=0){
+        endGame("red");
+        pauseTimer();
+    }
+}
+
+// All in game buttons
+
+// Regular expressions learn about here and implemented into code https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/
+// Onclick Submit Answer and Handle
+function submitAnswer(){
+    let lettersOnlyRegex = /^[a-zA-Z]+$/;
+    let lingoFirstLetter = gameController.lingoWord[0];
+    if(gameController.isTimedGame && !gameController.isFinal){
+        pauseTimer();
+    }
+    
+    if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0].toLowerCase() === lingoFirstLetter){
+        gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
+        setTimeout(function(){
+            checkWord(gameController.userAnswer,verifyAnswer);
+        },gameController.wordLength * gameController.letterDisplayDelay);
+        displayAnswer(gameController.userAnswer);
+       
+    }
+    else{
+        document.getElementById("user-answer").value="";
+        alert("There are only letters allowed in answers and Answers must start with the same Lingo letter");
+        
+    }
+    
+    }
+
+// Create Enter key handler
+function enterKeySubmit(){
+let userTextBox = document.getElementById("user-answer");
+let userSubmitBtn = document.getElementById("submit-answer");
+userTextBox.addEventListener("keyup",function(e ){
+    e.preventDefault();
+    if(e.key === "Enter"){
+        userSubmitBtn.click();
+    }
+});
+}
+// Onclick Save Score 
 function saveScoreToLeaderBoard(gameMode){
 let lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
 
@@ -1552,75 +1593,57 @@ localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores));
 
 returnToMenu();
 }
-function displayLeaderBoard(){
-document.getElementById("leader-board-section").style.display ="block";
-document.getElementById("game-menu").style.display ="none";
-document.getElementById("full-game-section").style.display ="none";
-document.getElementById("menu-options-section").style.display ="none";
 
-let highScoresUl = document.getElementById("high-scores");
-let highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || []);
-highScoresUl.innerHTML=highScoresObj.map(function(score){
-    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
-}).join("");
+// Onclick Show list of generated lingo words throughout the whole game
+function showWordsAndDefi(){
+    document.getElementById("game-over").style.display= "none";
+    let allWords =document.getElementById("all-words");
+    document.getElementById("words-defi-list").style.display="block";
+    allWords.innerHTML=endLingoWordsAndDefi.map(function(word){
+        return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}</li><div id="defi-${word.word}" class="display-defi"><span class="word-defi">${word.word}</span><span class="defi">${word.defi}</span></div> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`;
+    }).join("");
 
-let timedHighScoresUl = document.getElementById("timed-high-scores");
-let timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || []);
-timedHighScoresUl.innerHTML=timedHighScoresObj.map(function(score){
-    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
-}).join("");
+    // Add event for click showing the defintion//
+    endLingoWordsAndDefi.forEach(function(obj){
+        document.getElementById(`word-${obj.word}`).addEventListener("click",function(){
+            document.getElementById(`defi-${obj.word}`).style.display ="flex";
+            setTimeout(function(){
+                document.getElementById(`defi-${obj.word}`).style.display ="none";
+            },4000);
+        });
+    });
+}
+// Hides words and definition screen goes back to game over
+function hideWordsAndDefi(){
+document.getElementById("words-defi-list").style.display="none";
+document.getElementById("game-over").style.display= "block";
+}
+// Onclick adds words to player dictonary
+function addWordToDict(addWord,addDefi){
+let dictonary = JSON.parse(localStorage.getItem("dictonary") || "[]");
+let wordAndDefi ={
+    word:addWord,
+    defi:addDefi
+};
+dictonary.push(wordAndDefi);
+localStorage.setItem(`dictonary`,JSON.stringify(dictonary));
+document.getElementById(`word-${addWord}`).remove();
 }
 
-function hideLeaderBoard(){
-document.getElementById("leader-board-section").style.display ="none";
-document.getElementById("game-menu").style.display="flex";
-document.getElementById("menu-options-section").style.display ="block";
+// Onclick Final choices
+function finalSixLetterChoice(){
+gameController.LingoRoundStage =9; // one less because finish game adds 1
+finishGame();
+}
+function finalSevenLetterChoice(){
+gameController.LingoRoundStage =10; // one less because finish game adds 1
+finishGame();
 }
 
-function returnToMenu(){
-   if(gameController.isChallengeWord || gameController.isTimedGame || gameController.isFinal) {
-        pauseTimer();
-   }
+// End in game buttons
 
-gameController.playerMoney =0;
-gameController.correctAnswersTally =0;
-gameController.LingoRoundStage=0;
-gameController.currentRound=0;
-gameController.isChoiceMade=false;
-gameController.isFinal=false;
-gameController.isInfinte =false;
-gameController.isGrandPrize=false;
-gameController.isTimedGame =false;
-gameController.isPracticeGame =false;
-gameController.isChallengeWord=false;
-gameController.moneyIncrement=200;
-gameController.roundTiles =[];
-gameController.challengeClue ="";
-document.getElementById("full-game-section").style.display="none";
-document.getElementById("game-area").style.display="none";
-document.getElementById("game-over").style.display="none";
-document.getElementById("options").style.display="none";
-document.getElementById("control-area").style.display="none";
-document.getElementById("back-button").style.display ="none";
-gameController.timerDisplay.style.display="none";
-document.getElementById("tutorial-section").style.display ="none";
-document.getElementById("progress-bar").style.display ="none";
-document.getElementById("skip-word").style.display ="none";
-document.getElementById("final-timer-display").style.display ="none";
-document.getElementById("dictonary-section").style.display ="none";
-document.getElementById("leader-board-section").style.display ="none";
-document.getElementById("play-lingo-options").style.display ="none";
-document.getElementById("menu-options-section").style.display ="block";
-document.getElementById("game-menu").style.display ="flex";
-if(document.getElementById("clue")){
-    document.getElementById("clue").innerText="";
-}
 
-}
-
-function displayLetter(letter,index){
-gameController.roundTiles[gameController.roundCounter][index].innerText = letter;
-}
+// All GameBoard tile modifiers
 
 // Sets user input onto tiles
 function displayAnswer(answer){
@@ -1722,5 +1745,7 @@ if(gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green
     gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
 } 
 }
+
+// End GameBoard tile modifiers
 
 
