@@ -366,15 +366,12 @@ const tenLetterWords = [
     { word: "adventures", clue: "An unusual and exciting or daring experience" },
     { word: "appreciate", clue: "Recognize the full worth of" }
   ];
-  
 
-
-
-window.onload =(event) =>{
+window.onload =function(event) {
     if(localStorage.getItem("apiKey")){
-        document.getElementById("input-api-key").style.display="none"
+        document.getElementById("input-api-key").style.display="none";
     }
-}
+};
 const gameController ={
 gameTimer:28,
 lingoWord: "",
@@ -402,20 +399,16 @@ letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 };
 
-
-
 let remainingTime; // Assuming 30 seconds remaining
 let pauseTimer;
 let ProgressWidth =100;
 let letterDisplayInterval=4;
-let givenIndexOrder = [2,6,7,8,1,3,4,5]
-let endLingoWordsAndDefi =[]
-
-
+let givenIndexOrder = [2,6,7,8,1,3,4,5];
+let endLingoWordsAndDefi =[];
 
 // taken from WordsApi documentation //
 async function getNewWord(){
-var wordLength =gameController.wordLength;
+let wordLength =gameController.wordLength;
 const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${wordLength}&lettersMax=${wordLength}&partOfSpeech=verb`;
 const options = {
     method: 'GET',
@@ -425,18 +418,16 @@ const options = {
     }
     
 };
-
-console.log(options)
 try {
     const response = await fetch(url, options);
     const result = await response.json();
-    gameController.lingoWord = result.word
-    var wordAndDesc ={}
+    gameController.lingoWord = result.word;
+    let wordAndDesc ={};
     wordAndDesc["word"] = result.word;
     wordAndDesc["defi"] = result.results[0].definition;
-    endLingoWordsAndDefi.push(wordAndDesc)
+    endLingoWordsAndDefi.push(wordAndDesc);
 } catch (error) {
-    console.error(error)
+    console.error(error);
 }
 }
 
@@ -450,145 +441,131 @@ const options = {
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
 };
-console.log(word)
 try {
     const response = await fetch(url, options);
     
     if(response.ok){
-        cb(true)
+        cb(true);
     }
     else if(response.status === 404){
-        cb(false)
+        cb(false);
     }
     
     
     
 } catch (error) {
-    console.log("error")
-    console.error(error)
-    
+       
 }
-
 }
 
 function addApiKey(){
-    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`) 
-    document.getElementById("input-api-key").style.display="none"
+    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
+    document.getElementById("input-api-key").style.display="none";
 }
 
 // Starts a new round 
-async function GenerateLingo(){
-await getNewWord()
-while(gameController.lingoWord.indexOf(" ") != -1){
-    console.log(gameController.lingoWord)
-    await getNewWord()
+async function generateLingo(){
+await getNewWord();
+while(gameController.lingoWord.indexOf(" ") !== -1){
+    await getNewWord();
 }
 gameController.roundCounter =0;
-var roundIndex = gameController.roundCounter;
-document.getElementById("user-answer").value =""
-console.log(gameController.lingoWord)
-resetDisplay()
+let roundIndex = gameController.roundCounter;
+document.getElementById("user-answer").value ="";
+console.log(gameController.lingoWord);
+resetDisplay();
 gameController.roundTiles[roundIndex][0].innerText = gameController.lingoWord[0];
-
 }
 
 function GenerateChallengeWord(challengeLength){
-givenIndexOrder = [2,6,3,8,1,7,4,5]
-gameController.roundCounter =0
-var clue=document.getElementById("clue")
+givenIndexOrder = [2,6,3,8,1,7,4,5];
+gameController.roundCounter =0;
+let clue=document.getElementById("clue");
 gameController.timerDisplay.style.display="block";
 document.getElementById("user-answer").focus();
-document.getElementById("user-answer").value =""
-document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
-document.getElementById("player-money").innerText = `£${gameController.playerMoney}`
+document.getElementById("user-answer").value ="";
+document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
+document.getElementById("player-money").innerText = `£${gameController.playerMoney}`;
 if(challengeLength === 9){
-    var randomIndex = Math.floor(Math.random()*nineLetterWords.length);
-    gameController.lingoWord = nineLetterWords[randomIndex].word
-    clue.innerText = nineLetterWords[randomIndex].clue
+    let randomIndex = Math.floor(Math.random()*nineLetterWords.length);
+    gameController.lingoWord = nineLetterWords[randomIndex].word;
+    clue.innerText = nineLetterWords[randomIndex].clue;
     gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
     gameController.roundTiles[0][0].style.backgroundColor="green";
-    console.log(gameController.lingoWord)
+    console.log(gameController.lingoWord);
     ProgressWidth=100;
-    pauseTimer =startTimer(20,challengeTimerCallBack)
+    pauseTimer =startTimer(20,challengeTimerCallBack);
 }
 else if (challengeLength === 10){
-    var randomIndex = Math.floor(Math.random()*tenLetterWords.length);
-    gameController.lingoWord = tenLetterWords[randomIndex].word
-    clue.innerText = tenLetterWords[randomIndex].clue
+    let randomIndex = Math.floor(Math.random()*tenLetterWords.length);
+    gameController.lingoWord = tenLetterWords[randomIndex].word;
+    clue.innerText = tenLetterWords[randomIndex].clue;
     gameController.roundTiles[0][0].innerText = gameController.lingoWord[0];
     gameController.roundTiles[0][0].style.backgroundColor="green";
-    console.log(gameController.lingoWord)
-    givenIndexOrder.push(9)
-    pauseTimer =startTimer(20,challengeTimerCallBack)
+    console.log(gameController.lingoWord);
+    givenIndexOrder.push(9);
+    pauseTimer =startTimer(20,challengeTimerCallBack);
     
 }
 else{
-    console.log("Challenge length not identified")
+    console.log("Challenge length not identified");
 }
-
-
- 
 }
 
 // Revised timer function call back
 function challengeTimerCallBack(timeLeft,widthDecrease){
-remainingTime = timeLeft
-console.log(timeLeft)
-document.getElementById("progress-bar").style.display="block"
-gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`
-ProgressWidth = ProgressWidth - widthDecrease
+remainingTime = timeLeft;
+console.log(timeLeft);
+document.getElementById("progress-bar").style.display="block";
+gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
+ProgressWidth = ProgressWidth - widthDecrease;
 if(timeLeft<=0){
     gameController.isChallengeWord=false;
-    endGame("red")
-    pauseTimer()
+    endGame("red");
+    pauseTimer();
 }
 else if(remainingTime%letterDisplayInterval === 0){
-    var randomIndex = givenIndexOrder.pop()
+    let randomIndex = givenIndexOrder.pop();
     gameController.moneyIncrement = gameController.moneyIncrement -40;
-    document.getElementById("money-increment").innerText =`£${gameController.moneyIncrement}`
-    randomLetter = gameController.lingoWord[randomIndex]
+    document.getElementById("money-increment").innerText =`£${gameController.moneyIncrement}`;
     gameController.roundTiles[0][randomIndex].innerText = gameController.lingoWord[randomIndex];
-    gameController.roundTiles[0][randomIndex].style.backgroundColor ="green"
+    gameController.roundTiles[0][randomIndex].style.backgroundColor ="green";
 }
-
 }
 
 // Timed game mode call back 
 
 function timedGameCallBack(timeLeft,widthDecrease){
-remainingTime = timeLeft
-document.getElementById("progress-bar").style.display="block"
-gameController.timerDisplay.style.display="block"
-console.log(gameController.timerDisplay.offsetWidth)
-gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`
-ProgressWidth = ProgressWidth - widthDecrease
+remainingTime = timeLeft;
+document.getElementById("progress-bar").style.display="block";
+gameController.timerDisplay.style.display="block";
+gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
+ProgressWidth = ProgressWidth - widthDecrease;
 if(timeLeft<=0){
-    endGame("red")
-    pauseTimer()
+    endGame("red");
+    pauseTimer();
 }
 }
 
 // Regular expressions learn about here and implemented into code https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/
 function submitAnswer(){
-console.log(gameController)
 let lettersOnlyRegex = /^[a-zA-Z]+$/;
 let lingoFirstLetter = gameController.lingoWord[0];
 if(gameController.isTimedGame && !gameController.isFinal){
-    pauseTimer()
+    pauseTimer();
 }
 
 if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0].toLowerCase() === lingoFirstLetter){
     gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
-    console.log(gameController.userAnswer)
-    setTimeout(()=>{
+    setTimeout(function(){
         checkWord(gameController.userAnswer,verifyAnswer);
-    },gameController.wordLength * gameController.letterDisplayDelay)
+    },gameController.wordLength * gameController.letterDisplayDelay);
     displayAnswer(gameController.userAnswer);
    
 }
 else{
-    document.getElementById("user-answer").value=""
-    alert("There are only letters allowed in answers and Answers must start with the same Lingo letter")
+    document.getElementById("user-answer").value="";
+    alert("There are only letters allowed in answers and Answers must start with the same Lingo letter");
     
 }
 
@@ -597,30 +574,30 @@ else{
 // Onclick Start Game. create all tiles and initalise GameController variables
 
 function startGame(wordLength,roundsLength,gameRounds,challengeLetterLength=9){
-document.getElementById("full-game-section").style.display ="block"
-document.getElementById("game-area").style.display="block"
-document.getElementById("back-button").style.display ="block"
-document.getElementById("control-area").style.display ="block"
-document.getElementById("menu-options-section").style.display ="none"
-document.getElementById("options").style.display ="none"
-document.getElementById("game-menu").style.display ="none"
-divEl = document.getElementById("game-area")
+document.getElementById("full-game-section").style.display ="block";
+document.getElementById("game-area").style.display="block";
+document.getElementById("back-button").style.display ="block";
+document.getElementById("control-area").style.display ="block";
+document.getElementById("menu-options-section").style.display ="none";
+document.getElementById("options").style.display ="none";
+document.getElementById("game-menu").style.display ="none";
+let divEl = document.getElementById("game-area");
 divEl.innerHTML="";
-for(x=1;x<roundsLength+1;x++){
-    var startHtml = `<ul class ="round">`
-    for(y=0;y<wordLength;y++){
-        startHtml += `<li class="round-${x} mobile-length-${wordLength}">.</li>`
+for(let x=1;x<roundsLength+1;x++){
+    let startHtml = `<ul class ="round">`;
+    for(let y=0;y<wordLength;y++){
+        startHtml += `<li class="round-${x} mobile-length-${wordLength}">.</li>`;
     }
-    var endHtml = `</ul> <p id="clue">`
-    var html= startHtml+endHtml;
-    divEl.innerHTML += html
+    let endHtml = `</ul> <p id="clue">`;
+    let html= startHtml+endHtml;
+    divEl.innerHTML += html;
 }
 if(window.screen.width > 473){
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="money-increment" class="column">£0</div>
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
-    </div>`
+    </div>`;
 }
 else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
@@ -629,64 +606,64 @@ else{ // Change of CSS if screens are smaller for each word length
     <div id="mobile-scores">
     <div id="money-increment" class="column">£0</div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
-    </div>`
+    </div>`;
 
     
 }
 
-gameController.roundTiles =[]
-for(x=1;x<roundsLength+1;x++){
-    var tileObj =document.querySelectorAll(`.round-${x}`)
-    gameController.roundTiles.push(tileObj)
+gameController.roundTiles =[];
+for(let x=1;x<roundsLength+1;x++){
+    let tileObj =document.querySelectorAll(`.round-${x}`);
+    gameController.roundTiles.push(tileObj);
 }
 enterKeySubmit();
-gameController.userAnswer= document.getElementById("user-answer").value
-gameController.gameRounds = gameRounds
-gameController.wordLength = wordLength
+gameController.userAnswer= document.getElementById("user-answer").value;
+gameController.gameRounds = gameRounds;
+gameController.wordLength = wordLength;
 gameController.currentRound=0;
-gameController.gameTimer =28
-gameController.correctAnswersTally =0
+gameController.gameTimer =28;
+gameController.correctAnswersTally =0;
 if(!gameController.isChallengeWord){
-    GenerateLingo(wordLength)
+    generateLingo(wordLength);
 }
 else{
-    GenerateChallengeWord(challengeLetterLength)
+    GenerateChallengeWord(challengeLetterLength);
 }
 
 }
 function enterKeySubmit(){
-var userTextBox = document.getElementById("user-answer")
-var userSubmitBtn = document.getElementById("submit-answer")
-userTextBox.addEventListener("keyup",e =>{
+let userTextBox = document.getElementById("user-answer");
+let userSubmitBtn = document.getElementById("submit-answer");
+userTextBox.addEventListener("keyup",function(e ){
     e.preventDefault();
     if(e.key === "Enter"){
-        userSubmitBtn.click()
+        userSubmitBtn.click();
     }
-})
+});
 }
 
 // Onclick Play Lingo
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
 document.getElementById("play-lingo-options").style.display="none";
-startGame(4,5,4)
+startGame(4,5,4);
 
 }
 function playLingoOptions(){
-document.getElementById("game-menu").style.display="none"
-document.getElementById("play-lingo-options").style.display="block"
+document.getElementById("game-menu").style.display="none";
+document.getElementById("play-lingo-options").style.display="block";
 }
 
 // Onclick Tutorial
 function tutorial(){
-    document.getElementById("tutorial-section").style.display ="block"
-    document.getElementById("menu-options-section").style.display="none"
+    document.getElementById("tutorial-section").style.display ="block";
+    document.getElementById("menu-options-section").style.display="none";
 }
 
 // Tutorial steps
 
 function nextTutorialStep(tutorialStep){
-    var tutorialSection = document.getElementById("tutorial-section")
+    let tutorialSection = document.getElementById("tutorial-section");
     if(tutorialStep === 1){
         tutorialSection.innerHTML=`
         <div class="container">
@@ -746,12 +723,12 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(1)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
             <h1>Game Play</h1>
@@ -765,8 +742,8 @@ function nextTutorialStep(tutorialStep){
             <div class ="tutorial-buttons">
                 <button id="show" onclick="nextTutorialStep(2)">Show</button>
             </div>
-        </div>`
-        },5000)
+        </div>`;
+        },5000);
         
     }
     else if(tutorialStep === 2){
@@ -828,12 +805,12 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
             <h1>Win</h1>
@@ -847,8 +824,8 @@ function nextTutorialStep(tutorialStep){
             <div class ="tutorial-buttons">
                 <button id="show" onclick="nextTutorialStep(3)">Show</button>
             </div>
-        </div>`
-        },5000)
+        </div>`;
+        },5000);
     }
     else if(tutorialStep === 3){
         tutorialSection.innerHTML=`
@@ -909,13 +886,13 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(3)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
-            document.getElementById("rules-display").style.backgroundColor ="rgba(128,0,0,0.75)"
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
+            document.getElementById("rules-display").style.backgroundColor ="rgba(128,0,0,0.75)";
 
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
@@ -931,8 +908,8 @@ function nextTutorialStep(tutorialStep){
                 <button onclick= "returnToMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(4)">Challenege Words</button>
             </div>
-        </div>`
-        },5000)
+        </div>`;
+        },5000);
     }
     else if(tutorialStep === 4){
         tutorialSection.innerHTML=`
@@ -983,12 +960,12 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
             <h1>Challenge Word</h1>
@@ -1002,8 +979,8 @@ function nextTutorialStep(tutorialStep){
             <div class ="tutorial-buttons">
                 <button id="show" onclick="nextTutorialStep(5)">show</button>
             </div>
-        </div>`
-        },5000)
+        </div>`;
+        },5000);
     }
     else if(tutorialStep === 5){
         tutorialSection.innerHTML=`
@@ -1054,10 +1031,10 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
             document.getElementById("round-1").innerHTML=`
             <li class="round-1 mobile-length-9" style="background-color: green">l</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
@@ -1067,9 +1044,9 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
-            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
-        },4000)
-        setTimeout(()=>{
+            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`;
+        },4000);
+        setTimeout(function(){
             document.getElementById("round-1").innerHTML=`
             <li class="round-1 mobile-length-9" style="background-color: green">l</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
@@ -1079,9 +1056,9 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
-            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
-        },8000)
-        setTimeout(()=>{
+            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`;
+        },8000);
+        setTimeout(function(){
             document.getElementById("round-1").innerHTML=`
             <li class="round-1 mobile-length-9" style="background-color: green">l</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
@@ -1091,12 +1068,12 @@ function nextTutorialStep(tutorialStep){
             <li class="round-1 mobile-length-9" style="background-color: green;">g</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
             <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>
-            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`
-        },12000)
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
-            document.getElementById("rules-display").style.backgroundColor ="rgba(128,0,0,0.75)"
+            <li class="round-1 mobile-length-9" style="background-color: rgb(0, 34, 91);">.</li>`;
+        },12000);
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
+            document.getElementById("rules-display").style.backgroundColor ="rgba(128,0,0,0.75)";
 
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
@@ -1108,8 +1085,8 @@ function nextTutorialStep(tutorialStep){
                 <button onclick= "returnToMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(6)">final</button>
             </div>
-        </div>`
-        },17000)
+        </div>`;
+        },17000);
     }
     else if(tutorialStep === 6){
         tutorialSection.innerHTML=`
@@ -1176,12 +1153,12 @@ function nextTutorialStep(tutorialStep){
                     <button id="show" onclick="nextTutorialStep(1)">Show</button>
                 </div>
             </div>
-        </div>`
-        document.getElementById("overlay").style.display="none"
-        document.getElementById("rules-display").style.display ="none"
-        setTimeout(()=>{
-            document.getElementById("overlay").style.display="block"
-            document.getElementById("rules-display").style.display ="block"
+        </div>`;
+        document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";
             document.getElementById("rules-display").innerHTML=`
             <div id="rules-display-inner">
             <h1>Final</h1>
@@ -1195,83 +1172,78 @@ function nextTutorialStep(tutorialStep){
             <div class ="tutorial-buttons">
                 <button id="show" onclick="nextTutorialStep(2)">Show</button>
             </div>
-        </div>`
-        },5000)
+        </div>`;
+        },5000);
         
     }
     
-    
-
 }
 
 // Onclick Extra options for practice questions
 
 function options(){
 // hides game menu and shows options 
-document.getElementById("game-menu").style.display="none"
-document.getElementById("options").style.display ="flex"
+document.getElementById("game-menu").style.display="none";
+document.getElementById("options").style.display ="flex";
 gameController.isPracticeGame =true;
-document.getElementById("confirm").addEventListener("click",addButton)
+document.getElementById("confirm").addEventListener("click",addButton);
 if(document.getElementById("playWithOptions")){
-    document.getElementById("playWithOptions").remove()
+    document.getElementById("playWithOptions").remove();
 }
-
 }
 // Find better way to do this V
 function addButton(){
-var button = document.getElementById("play-button")
-var rounds = document.querySelector('input[name = rounds]:checked').value
-var guesses = document.querySelector('input[name = guesses]:checked').value
-var wordLength = document.querySelector('input[name = wordLength]:checked').value
-button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`
+let button = document.getElementById("play-button");
+let rounds = document.querySelector('input[name = rounds]:checked').value;
+let guesses = document.querySelector('input[name = guesses]:checked').value;
+let wordLength = document.querySelector('input[name = wordLength]:checked').value;
+button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`;
 }
 
 // Onclick Final choices
-
 function finalSixLetterChoice(){
 gameController.LingoRoundStage =9; // one less because finish game adds 1
-finishGame()
+finishGame();
 }
 function finalSevenLetterChoice(){
 gameController.LingoRoundStage =10; // one less because finish game adds 1
-finishGame()
+finishGame();
 }
 
 function verifyAnswer(isWord){
-console.log(isWord)
 // Object to store Lingo word letters and indexs
-lingoLettersAndIndex ={};
+let lingoLettersAndIndex ={};
 // creates key and value as indexs and letters
-for(z=0;z<gameController.lingoWord.length;z++){
-    lingoLettersAndIndex[z] = gameController.lingoWord[z]
+for(let z=0;z<gameController.lingoWord.length;z++){
+    lingoLettersAndIndex[z] = gameController.lingoWord[z];
 }
 if(gameController.userAnswer === gameController.lingoWord && isWord ){
     endGame("green"); // ends game if answer is correct and is a word
 }
 else if(gameController.roundCounter === gameController.roundTiles.length -1 || !isWord ){
-    endGame("red") // ends the game if all guesses have been used or word entered is not a word 
+    endGame("red"); // ends the game if all guesses have been used or word entered is not a word 
 
 }
-else if(gameController.userAnswer != gameController.lingoWord){
+else if(gameController.userAnswer !== gameController.lingoWord){
     if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
-        gameController.moneyIncrement -=50
-        document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
+        gameController.moneyIncrement -=50;
+        document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
     }
-    for(x =0; x<gameController.userAnswer.length;x++){          // loops to get each letter of user answer 
-        var letter = gameController.userAnswer[x]
+    for(let x =0; x<gameController.userAnswer.length;x++){          // loops to get each letter of user answer 
+        let letter = gameController.userAnswer[x];
         if(letter === gameController.lingoWord[x]){             // if the letter is the same as the lingo word letter
-            delete lingoLettersAndIndex[x]                          // removes it from the object
-            setTileGreen(x)  
+            delete lingoLettersAndIndex[x];                          // removes it from the object
+            setTileGreen(x);  
         }
     }
-    for(z =0; z<gameController.userAnswer.length;z++){                  // loops to get each letter of user answer
-        var letter = gameController.userAnswer[z]
+    for(let z =0; z<gameController.userAnswer.length;z++){                  // loops to get each letter of user answer
+        let letter = gameController.userAnswer[z];
          if(Object.values(lingoLettersAndIndex).includes(letter)){          // if the letter is still in object
-            for( var prop in lingoLettersAndIndex ) {                       // finds the values key
+            for(let prop in lingoLettersAndIndex ) {                       // finds the values key
                 if( lingoLettersAndIndex.hasOwnProperty( prop ) ) {
                      if( lingoLettersAndIndex[ prop ] === letter ){
-                        delete lingoLettersAndIndex[prop]               // removes that specific letter from the index
-                        setTileOrange(z)
+                        delete lingoLettersAndIndex[prop];               // removes that specific letter from the index
+                        setTileOrange(z);
                         break;
                      }
                 }
@@ -1280,19 +1252,16 @@ else if(gameController.userAnswer != gameController.lingoWord){
          }
 
     }
-    document.getElementById("user-answer").value =""
+    document.getElementById("user-answer").value ="";
     document.getElementById("user-answer").focus();
     gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
     gameController.roundCounter++;
     if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
         ProgressWidth =100;
-        pauseTimer = startTimer(10,timedGameCallBack)
+        pauseTimer = startTimer(10,timedGameCallBack);
     }
 
 }
-
-
-
 
 }
 
@@ -1305,172 +1274,164 @@ if(gameController.isInfinte){
     gameController.gameRounds = gameController.currentRound +1;
 }
 // Set all tiles to correct color//
-
-
-for(x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
+for(let x=0; x< gameController.roundTiles[gameController.roundCounter].length;x++){
     gameController.roundTiles[gameController.roundCounter][x].style.backgroundColor =color;
     if(color ==="green"){
-        gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__animated")
-        gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__headShake")
+        gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__animated");
+        gameController.roundTiles[gameController.roundCounter][x].classList.add("animate__headShake");
     }
 }
 if(color === "green"){
     gameController.playerMoney += gameController.moneyIncrement;
     gameController.correctAnswersTally++;
-    
-    
 }
 if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
-    if(gameController.isFinal || gameController.isChallengeWord){pauseTimer()}
-    displayLingo(color)
+    if(gameController.isFinal || gameController.isChallengeWord){pauseTimer();}
+    displayLingo(color);
     if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
-    setTimeout(finishGame,gameController.gameRoundDisplayDelay)
+    setTimeout(finishGame,gameController.gameRoundDisplayDelay);
 }
 else{
     if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
         gameController.moneyIncrement =500;
     }
-    displayLingo(color)
-    setTimeout(GenerateLingo,gameController.gameRoundDisplayDelay)
-    
+    displayLingo(color);
+    setTimeout(generateLingo,gameController.gameRoundDisplayDelay);
 }
 
+// Finish game function - Game rounds for Lingo game
 }
 function finishGame(){
-divEl = document.getElementById("game-area")
+let divEl = document.getElementById("game-area");
 if(gameController.isPracticeGame){
-    document.getElementById("game-over").style.display="block"
-    document.getElementById("game-area").style.display="none"
-    document.getElementById("game-over").innerHTML =`
+    document.getElementById("game-over").style.display="block";
+    document.getElementById("game-area").style.display="none";
+    document.getElementById("game-over").innerHTML =`;
 <h1> Game Over</h1>
-<p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`
-document.getElementById("control-area").innerHTML=""
+<p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
+document.getElementById("control-area").innerHTML="";
 if(window.screen.width > 473){
-    document.getElementById("mobile-scores").style.display ="none"
+    document.getElementById("mobile-scores").style.display ="none";
 }
 }else if(!gameController.isPracticeGame){
     // If the Lingo game is infinte it is in the final and should be looped till timer ends.
     if(!gameController.isInfinte){
-        gameController.LingoRoundStage++
+        gameController.LingoRoundStage++;
     }
     if(gameController.LingoRoundStage===1){
-        divEl.innerHTML =""
+        divEl.innerHTML ="";
         gameController.moneyIncrement=300;
         gameController.isChallengeWord =true;
-        startGame(9,1,1)
+        startGame(9,1,1);
     }
     else if(gameController.LingoRoundStage===2){
-        divEl.innerHTML =""
-        gameController.timerDisplay.style.display="none"
-        document.getElementById("progress-bar").style.display="none"
+        divEl.innerHTML ="";
+        gameController.timerDisplay.style.display="none";
+        document.getElementById("progress-bar").style.display="none";
         gameController.moneyIncrement=300;
         gameController.isChallengeWord =false;
-        startGame(5,5,4)
+        startGame(5,5,4);
     }
     else if(gameController.LingoRoundStage===3){
-        divEl.innerHTML =""
+        divEl.innerHTML ="";
         gameController.moneyIncrement=400;
         ProgressWidth =100;
         gameController.isChallengeWord =true;
-        startGame(10,1,1,10)
+        startGame(10,1,1,10);
     }
     else if(gameController.LingoRoundStage===4){
-        divEl.innerHTML =""
-        gameController.timerDisplay.style.display="none"
-        document.getElementById("progress-bar").style.display="none"
+        divEl.innerHTML ="";
+        gameController.timerDisplay.style.display="none";
+        document.getElementById("progress-bar").style.display="none";
         gameController.moneyIncrement=500;
         gameController.isChallengeWord =false;
-        startGame(4,5,2)
+        startGame(4,5,2);
     }
     else if(gameController.LingoRoundStage===5){
-        divEl.innerHTML =""
+        divEl.innerHTML ="";
         gameController.moneyIncrement=500;
         gameController.isChallengeWord =false;
-        startGame(5,5,2)
+        startGame(5,5,2);
     }
     else if(gameController.LingoRoundStage===6){
-        divEl.innerHTML =""
+        divEl.innerHTML ="";
         gameController.moneyIncrement=750;
         gameController.isChallengeWord =true;
         ProgressWidth =100;
-        startGame(10,1,1,10)
+        startGame(10,1,1,10);
     }
     else if(gameController.LingoRoundStage===7){
-        divEl.innerHTML =""
-        document.getElementById("skip-word").style.display="block"
-        document.getElementById("progress-bar").style.display="none"
+        divEl.innerHTML ="";
+        document.getElementById("skip-word").style.display="block";
+        document.getElementById("progress-bar").style.display="none";
         gameController.moneyIncrement= gameController.playerMoney/2;
         gameController.playerMoney =0;
         gameController.isChallengeWord =false;
         gameController.isInfinte =true;
         gameController.isFinal =true;
-        startGame(4,5,1)
+        startGame(4,5,1);
         pauseTimer = startTimer(90, timerCallback);
         
     }
-    else if(gameController.LingoRoundStage===8 && gameController.timeLeft!=0){
-        divEl.innerHTML =""
+    else if(gameController.LingoRoundStage===8 && gameController.timeLeft!==0){
+        divEl.innerHTML ="";
         gameController.moneyIncrement= gameController.playerMoney*2;
         gameController.playerMoney =0;
         gameController.isChallengeWord =false;
         gameController.isInfinte =true;
-        startGame(5,5,1)
+        startGame(5,5,1);
         pauseTimer = startTimer(90,timerCallback,remainingTime);
-        
-        
     }
-    else if(gameController.LingoRoundStage===9 && gameController.timeLeft!=0){
-        document.getElementById("game-area").style.display="none"
-        document.getElementById("control-area").style.display="none"
-        document.getElementById("skip-word").style.display="none"
-        document.getElementById("final").style.display="block"
-        document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `
-        
+    else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0){
+        document.getElementById("game-area").style.display="none";
+        document.getElementById("control-area").style.display="none";
+        document.getElementById("skip-word").style.display="none";
+        document.getElementById("final").style.display="block";
+        document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
     }
     else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
-        document.getElementById("final").style.display="none"
-        divEl.innerHTML =""
+        document.getElementById("final").style.display="none";
+        divEl.innerHTML ="";
         gameController.moneyIncrement= gameController.playerMoney;
         gameController.isChallengeWord =false;
         gameController.isInfinte =false;
         gameController.isFinal =true;
-        startGame(6,5,1)
+        startGame(6,5,1);
         pauseTimer = startTimer(90,timerCallback,remainingTime);
         gameController.isChoiceMade =true;
-        
     }
     else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
-        document.getElementById("final").style.display="none"
-        divEl.innerHTML =""
-        var incrementUpTo1500 = 15000 - gameController.playerMoney;
+        document.getElementById("final").style.display="none";
+        divEl.innerHTML ="";
+        let incrementUpTo1500 = 15000 - gameController.playerMoney;
         gameController.moneyIncrement= incrementUpTo1500;
         gameController.isChallengeWord =false;
         gameController.isInfinte =false;
         gameController.isFinal =true;
         gameController.isGrandPrize =true;
-        startGame(7,5,1)
+        startGame(7,5,1);
         pauseTimer = startTimer(90,timerCallback,remainingTime);
         gameController.isChoiceMade =true;
-        
     }
     else{
+        let gameMode;
         if(gameController.isTimedGame){
-            var gameMode = "timedLingoHighScores"
+            gameMode = "timedLingoHighScores";
         }
         else{
-            var gameMode = "lingoHighScores"
+            gameMode = "lingoHighScores";
         }
         gameController.isFinal =false;
-        document.getElementById("game-over").style.display="block"
-        document.getElementById("skip-word").style.display="none"
-        document.getElementById("game-area").style.display="none"
-        document.getElementById("back-button").style.display="none"
+        document.getElementById("game-over").style.display="block";
+        document.getElementById("skip-word").style.display="none";
+        document.getElementById("game-area").style.display="none";
+        document.getElementById("back-button").style.display="none";
         if(window.screen.width <= 473){
-            document.getElementById("mobile-scores").style.display ="none"
+            document.getElementById("mobile-scores").style.display ="none";
         }
-        document.getElementById("game-over").innerHTML=""
+        document.getElementById("game-over").innerHTML="";
         document.getElementById("game-over").innerHTML =`<div id="game-over-container">
         <h1> Game Over</h1>
         <p>You got £${gameController.playerMoney}
@@ -1480,72 +1441,70 @@ if(window.screen.width > 473){
         </div>
         <button onclick="showWordsAndDefi()">All Lingo words</button>
         <button onclick="returnToMenu()"style="background: orange;">Exit</button>
-        </div>`
-        
+        </div>`;
     }
     
 }
-
 
 }
 
 // Dictonary functions
 function showWordsAndDefi(){
-document.getElementById("game-over").style.display= "none"
-var allWords =document.getElementById("all-words");
-document.getElementById("words-defi-list").style.display="block"
-allWords.innerHTML=endLingoWordsAndDefi.map(word=>{
-    return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}</li><div id="defi-${word.word}" class="display-defi"><span class="word-defi">${word.word}</span><span class="defi">${word.defi}</span></div> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`
-}).join("");
-// Add event for click showing the defintion//
-endLingoWordsAndDefi.forEach((obj)=>{
-    document.getElementById(`word-${obj.word}`).addEventListener("click",()=>{
-        document.getElementById(`defi-${obj.word}`).style.display ="flex"
-        setTimeout(()=>{
-            document.getElementById(`defi-${obj.word}`).style.display ="none"
-        },4000)
-    })
-})
+    document.getElementById("game-over").style.display= "none";
+    let allWords =document.getElementById("all-words");
+    document.getElementById("words-defi-list").style.display="block";
+    allWords.innerHTML=endLingoWordsAndDefi.map(function(word){
+        return `<div id = "word-${word.word}"class="all-words-container"><li class="all-words-list">${word.word}</li><div id="defi-${word.word}" class="display-defi"><span class="word-defi">${word.word}</span><span class="defi">${word.defi}</span></div> <button onclick="addWordToDict('${word.word}','${word.defi}')">Add</button></div>`;
+    }).join("");
+
+    // Add event for click showing the defintion//
+    endLingoWordsAndDefi.forEach(function(obj){
+        document.getElementById(`word-${obj.word}`).addEventListener("click",function(){
+            document.getElementById(`defi-${obj.word}`).style.display ="flex";
+            setTimeout(function(){
+                document.getElementById(`defi-${obj.word}`).style.display ="none";
+            },4000);
+        });
+    });
 }
+// Hides words and definition screen goes back to game over
 function hideWordsAndDefi(){
-document.getElementById("words-defi-list").style.display="none"
-document.getElementById("game-over").style.display= "block"
+document.getElementById("words-defi-list").style.display="none";
+document.getElementById("game-over").style.display= "block";
 }
 
+// Onclick adds words to player dictonary
 function addWordToDict(addWord,addDefi){
-console.log(addWord,addDefi)
-var dictonary = JSON.parse(localStorage.getItem("dictonary") || "[]");
-var wordAndDefi ={
+let dictonary = JSON.parse(localStorage.getItem("dictonary") || "[]");
+let wordAndDefi ={
     word:addWord,
     defi:addDefi
-}
-dictonary.push(wordAndDefi)
-localStorage.setItem(`dictonary`,JSON.stringify(dictonary))
+};
+dictonary.push(wordAndDefi);
+localStorage.setItem(`dictonary`,JSON.stringify(dictonary));
 document.getElementById(`word-${addWord}`).remove();
-
 }
+
 function showDict(){
-document.getElementById("full-game-section").style.display ="none"
-document.getElementById("menu-options-section").style.display ="none"
-document.getElementById("dictonary-section").style.display ="block"
-document.getElementById("dictonary").style.display ="block"
+document.getElementById("full-game-section").style.display ="none";
+document.getElementById("menu-options-section").style.display ="none";
+document.getElementById("dictonary-section").style.display ="block";
+document.getElementById("dictonary").style.display ="block";
 
-
-
-var savedWordsUl = document.getElementById("saved-words")
-var savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || [])
-savedWordsUl.innerHTML=savedWordsObj.map(word=>{
-    return `<li class="saved-words-list">${word.word}-${word.defi}</li>`
+let savedWordsUl = document.getElementById("saved-words");
+let savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || []);
+savedWordsUl.innerHTML=savedWordsObj.map(function(word){
+    return `<li class="saved-words-list">${word.word}-${word.defi}</li>`;
 }).join("");
 }
 
 function startTimer(duration, callback, remainingTime = duration) {
 let timeLeft = remainingTime; // Use remaining time if provided, otherwise use the initial duration
 let timerInterval;
-let widthDecrease = ProgressWidth/duration 
+let widthDecrease = ProgressWidth/duration;
 
 // Start the timer
-timerInterval = setInterval(() => {
+timerInterval = setInterval(function() {
     // Decrease time left
     timeLeft--;
 
@@ -1566,62 +1525,61 @@ return function pauseTimer() {
 
 function timerCallback(timeLeft) {
 remainingTime = timeLeft; // Update remaining time
-gameController.timerDisplay.style.display="none"
-document.getElementById("progress-bar").style.display="none"
-document.getElementById("final-timer-display").style.display= "block" 
-document.getElementById("final-timer-display").innerText = `${remainingTime}s Remains`
+gameController.timerDisplay.style.display="none";
+document.getElementById("progress-bar").style.display="none";
+document.getElementById("final-timer-display").style.display= "block"; 
+document.getElementById("final-timer-display").innerText = `${remainingTime}s Remains`;
 if(remainingTime <=0){
     gameController.isInfinte =false;
     if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
-    endGame("red")
-    pauseTimer()
+    endGame("red");
+    pauseTimer();
 }
 }
-
 
 function saveScoreToLeaderBoard(gameMode){
-var lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
+let lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
 
-
-var lingoScore ={
+let lingoScore ={
     name:document.getElementById("user-name").value,
-    score:gameController.playerMoney}
-lingoHighScores.push(lingoScore)
-lingoHighScores.sort((a,b)=> b.score - a.score)
-lingoHighScores.splice(5)
-localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores))
-returnToMenu()
+    score:gameController.playerMoney};
+lingoHighScores.push(lingoScore);
+lingoHighScores.sort((a,b)=> b.score - a.score);
+lingoHighScores.splice(5);
+localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores));
+
+returnToMenu();
 }
 function displayLeaderBoard(){
-document.getElementById("leader-board-section").style.display ="block"
-document.getElementById("game-menu").style.display ="none"
-document.getElementById("full-game-section").style.display ="none"
-document.getElementById("menu-options-section").style.display ="none"
+document.getElementById("leader-board-section").style.display ="block";
+document.getElementById("game-menu").style.display ="none";
+document.getElementById("full-game-section").style.display ="none";
+document.getElementById("menu-options-section").style.display ="none";
 
-
-var highScoresUl = document.getElementById("high-scores")
-var highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || [])
-highScoresUl.innerHTML=highScoresObj.map(score=>{
-    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`
+let highScoresUl = document.getElementById("high-scores");
+let highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || []);
+highScoresUl.innerHTML=highScoresObj.map(function(score){
+    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
 }).join("");
 
-var timedHighScoresUl = document.getElementById("timed-high-scores")
-var timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || [])
-timedHighScoresUl.innerHTML=timedHighScoresObj.map(score=>{
-    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`
+let timedHighScoresUl = document.getElementById("timed-high-scores");
+let timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || []);
+timedHighScoresUl.innerHTML=timedHighScoresObj.map(function(score){
+    return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
 }).join("");
 }
+
 function hideLeaderBoard(){
-document.getElementById("leader-board-section").style.display ="none"
-document.getElementById("game-menu").style.display="flex"
-document.getElementById("menu-options-section").style.display ="block"
+document.getElementById("leader-board-section").style.display ="none";
+document.getElementById("game-menu").style.display="flex";
+document.getElementById("menu-options-section").style.display ="block";
 }
 
 function returnToMenu(){
    if(gameController.isChallengeWord || gameController.isTimedGame || gameController.isFinal) {
-        pauseTimer()
+        pauseTimer();
    }
 
 gameController.playerMoney =0;
@@ -1637,25 +1595,25 @@ gameController.isPracticeGame =false;
 gameController.isChallengeWord=false;
 gameController.moneyIncrement=200;
 gameController.roundTiles =[];
-gameController.challengeClue =""
-document.getElementById("full-game-section").style.display="none"
-document.getElementById("game-area").style.display="none"
-document.getElementById("game-over").style.display="none"
-document.getElementById("options").style.display="none"
-document.getElementById("control-area").style.display="none"
-document.getElementById("back-button").style.display ="none"
-gameController.timerDisplay.style.display="none"
-document.getElementById("tutorial-section").style.display ="none"
-document.getElementById("progress-bar").style.display ="none"
-document.getElementById("skip-word").style.display ="none"
-document.getElementById("final-timer-display").style.display ="none"
-document.getElementById("dictonary-section").style.display ="none"
-document.getElementById("leader-board-section").style.display ="none"
-document.getElementById("play-lingo-options").style.display ="none"
-document.getElementById("menu-options-section").style.display ="block"
-document.getElementById("game-menu").style.display ="flex"
+gameController.challengeClue ="";
+document.getElementById("full-game-section").style.display="none";
+document.getElementById("game-area").style.display="none";
+document.getElementById("game-over").style.display="none";
+document.getElementById("options").style.display="none";
+document.getElementById("control-area").style.display="none";
+document.getElementById("back-button").style.display ="none";
+gameController.timerDisplay.style.display="none";
+document.getElementById("tutorial-section").style.display ="none";
+document.getElementById("progress-bar").style.display ="none";
+document.getElementById("skip-word").style.display ="none";
+document.getElementById("final-timer-display").style.display ="none";
+document.getElementById("dictonary-section").style.display ="none";
+document.getElementById("leader-board-section").style.display ="none";
+document.getElementById("play-lingo-options").style.display ="none";
+document.getElementById("menu-options-section").style.display ="block";
+document.getElementById("game-menu").style.display ="flex";
 if(document.getElementById("clue")){
-    document.getElementById("clue").innerText=""
+    document.getElementById("clue").innerText="";
 }
 
 }
@@ -1666,51 +1624,51 @@ gameController.roundTiles[gameController.roundCounter][index].innerText = letter
 
 // Sets user input onto tiles
 function displayAnswer(answer){
-var roundIndex =gameController.roundCounter;
-    for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
-        delayLoop(x)
+let roundIndex =gameController.roundCounter;
+    for(let x =0; x<gameController.roundTiles[roundIndex].length;x++){
+        delayLoop(x);
     }
     
     
 }
+// Delay input to tiles
 function delayLoop(x){
-setTimeout(()=>{
-    if(gameController.userAnswer[x] != undefined){
-        gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x]
+setTimeout(function(){
+    if(gameController.userAnswer[x] !== undefined){
+        gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x];
     }
     else{
         gameController.roundTiles[gameController.roundCounter][x].innerText = ".";
     }
     
-},x*gameController.letterDisplayDelay)
+},x*gameController.letterDisplayDelay);
 }
 function displayLingo(color){
-var roundIndex =gameController.roundCounter;
+let roundIndex =gameController.roundCounter;
 if(roundIndex < gameController.roundTiles.length -1 &&color ==="red"){
-    for(x =0; x<gameController.roundTiles[roundIndex].length;x++){
+    for(let x =0; x<gameController.roundTiles[roundIndex].length;x++){
         gameController.roundTiles[roundIndex+1][x].innerText = gameController.lingoWord[x];
-        gameController.roundTiles[roundIndex+1][x].style.backgroundColor ="green"
+        gameController.roundTiles[roundIndex+1][x].style.backgroundColor ="green";
     }
-    document.getElementById("toggle-user-input").style.display="none"
+    document.getElementById("toggle-user-input").style.display="none";
 }
 else if(roundIndex >= gameController.roundTiles.length -1&&color ==="red"){
-    var ulElement =document.createElement("ul")
-    ulElement.setAttribute("id","reveal-lingo")
-    var startHtml ="";
-    for(x=0;x<gameController.lingoWord.length;x++){
-        var liElement = document.createElement("li");
-        liElement.classList.add(`mobile-length-${gameController.lingoWord.length}`)
-        liElement.innerText = `${gameController.lingoWord[x]}`
-        liElement.style.backgroundColor = "green"
+    let ulElement =document.createElement("ul");
+    ulElement.setAttribute("id","reveal-lingo");
+    let startHtml ="";
+    for(let x=0;x<gameController.lingoWord.length;x++){
+        let liElement = document.createElement("li");
+        liElement.classList.add(`mobile-length-${gameController.lingoWord.length}`);
+        liElement.innerText = `${gameController.lingoWord[x]}`;
+        liElement.style.backgroundColor = "green";
         ulElement.append(liElement);
         
     }
-    console.log(ulElement)
-    document.getElementById("game-area").appendChild(ulElement)
-    document.getElementById("toggle-user-input").style.display="none"
+    document.getElementById("game-area").appendChild(ulElement);
+    document.getElementById("toggle-user-input").style.display="none";
 }
 else{
-    document.getElementById("toggle-user-input").style.display="none"
+    document.getElementById("toggle-user-input").style.display="none";
 }
 
 }
@@ -1724,24 +1682,24 @@ if(document.getElementById("toggle-user-input").style.display==="none"){
     }
 }
 if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
-    ProgressWidth =100
-    document.getElementById("progress-bar").style.display="block"
-    pauseTimer = startTimer(10,timedGameCallBack)
+    ProgressWidth =100;
+    document.getElementById("progress-bar").style.display="block";
+    pauseTimer = startTimer(10,timedGameCallBack);
 }
 if(gameController.isChallengeWord){
-    document.getElementById("progress-bar").style.display="block"
+    document.getElementById("progress-bar").style.display="block";
 }
 document.getElementById("user-answer").focus();
-document.getElementById("user-answer").value =""
-document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`
-document.getElementById("player-money").innerText = `£${gameController.playerMoney}`
-for(x=0; x<gameController.roundTiles.length;x++){
-    for(y =0; y<gameController.roundTiles[x].length;y++){
+document.getElementById("user-answer").value ="";
+document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
+document.getElementById("player-money").innerText = `£${gameController.playerMoney}`;
+for(let x=0; x<gameController.roundTiles.length;x++){
+    for(let y =0; y<gameController.roundTiles[x].length;y++){
         gameController.roundTiles[x][y].innerText = ".";
-        gameController.roundTiles[x][y].style.backgroundColor ="#00225B"
+        gameController.roundTiles[x][y].style.backgroundColor ="#00225B";
         if(gameController.roundTiles[x][y].classList.contains("animate__animated") && gameController.roundTiles[x][y].classList.contains("animate__headShake")){
-            gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__animated")
-            gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__headShake")
+            gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__animated");
+            gameController.roundTiles[gameController.roundCounter][y].classList.remove("animate__headShake");
         }
     }
 }
@@ -1749,19 +1707,19 @@ for(x=0; x<gameController.roundTiles.length;x++){
 }
 // sets tile passed to green
 function setTileGreen (index){
-var roundIndex = gameController.roundCounter;
+let roundIndex = gameController.roundCounter;
 gameController.roundTiles[roundIndex][index].style.backgroundColor ="green";
-if(roundIndex != gameController.lingoWord.length){
+if(roundIndex !== gameController.lingoWord.length){
     gameController.roundTiles[roundIndex+1][index].innerText = gameController.userAnswer[index];
 }
 }
 
 // sets tile passed to orange
 function setTileOrange(index,letter){
-var roundIndex = gameController.roundCounter;
-if(gameController.roundTiles[roundIndex][index].style.backgroundColor != "green"){
+let roundIndex = gameController.roundCounter;
+if(gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green"){
 
-    gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange"
+    gameController.roundTiles[roundIndex][index].style.backgroundColor = "orange";
 } 
 }
 
