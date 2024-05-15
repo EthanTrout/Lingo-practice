@@ -419,7 +419,7 @@ for(x =0; x<gameController.userAnswer.length;x++){
             }
         }
 ```
-- the orange tile was harder as i neede to check if it was contained in the object with
+- the orange tile was harder as i needed to check if it was contained in the object with
 
 ```javascript
 Object.values(lingoLettersAndIndex).includes(letter)
@@ -911,9 +911,7 @@ I have most of the functionality of the Challenege words in place and the basic 
 - display money earned in main lingo game 
 
 
-# Leaderboard Functinality
+# User Testing
 
-# Dictonary Functionality 
 
-# Timed Lingo Functionality 
 

@@ -226,10 +226,242 @@ The dictonary Displays the words added by the user at the end of each lingo game
     - I have used [] notation as a value in API shares the same variable name as in my object
     - randomIndex is redefined as it is meant to be in the function. only one variation will be called at a time. i did not find it neccisary to change the variable name as it has the same purpose and it is scoped to each if/ IfElse statement. having the same variable name helps with the readability of the code
 
+## Manual and Automatic testing
+- I Mainly used Automatic Testing as my knowledge of Automatic testings is only small. I have documented all my of own manual testing in the document linked. 
+
+- The main core logic behind the lingo game was developed and tested at the very beginning of the project. before anything was displayed. i realise in hinesight that i could of used Jest to automatiicaly test the inputs and outputs and it would have saved me alot of time refactoring the code. You will see in the Testing document that i refactored the VerifyAnswer function many times to get the desired out.
+
+The reason i manually tested VerifyAnswer was because i set the outputs to be visual. setting the tiles green or orange. Had i of created an array to store these outputs i could of more easily tested this with JEST
+
+[Testing Document](TESTING.md)
+## User Testing
+
+## Bug fixes
+alot of major bug fixes to the Core functionality of the lingo game are on the supporting Testing Document but will highlight some of the bugs i faced here.
+
+### Verify Answer setting tiles orange and green
+I had alot of issues with the core verifcation. and refactored the code multiple times when encountering new issues.
+
+#### first bug - Excert from Testing Documet 
+
+- set tile orange doesnt currently only tests for if the current tile is not green. 
+- the function is not testing for if the letter is already green in another tile and the letter isnt repeated and therefore the letter does not need to be set to orange.
+
+- word: Step
+    - ![Examples](/assets/testing-images/setTileOrangeTest1.png)
+
+- word: Dart
+    - ![Examples](/assets/testing-images/setTileOrangeTest2.png)
+
+
+##### Previous code in VerifyAnswer function
+
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    setTileOrange(x);
+                }
+            }
+        }
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+```
+
+##### Fix 
+
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
+                    setTileOrange(x);
+                }
+            }
+        }
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+``` 
+The for loop checks to see if the letter is found elsewhere in the lingoWord. the index for this is Y
+Because the lingoWord and the tiles will always be the same length we can use the index of the found lingoWord letter to also check to see if that letter has already been found and set green.
+
+- ![Fix](/assets/testing-images/setTileOrangeFix.png)
+
+This has created a new issue that the code will only work if the letter is after the orange one:
+
+- ![New Error](/assets/testing-images/setTileOrangeNewError.png)
+
+
+This is easily fixed by turning all the tiles green before checking if the tiles need to be made orange
+
+```javascript 
+else if(gameController.userAnswer != gameController.lingoWord){
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                setTileGreen(x);
+            }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
+            for(y=0; y<gameController.lingoWord.length;y++){
+                if(letter === gameController.lingoWord[y]){
+                    if(gameController.roundTiles[gameController.roundCounter][y].style.backgroundColor !="green")
+                    setTileOrange(z);
+                }
+            }
+
+        }
+}
+```
+
+#### Second Bug Excert from Testing Document
+- set tile orange will still trigger if the user enters two letters and one should be orange. it makes both orange
+
+##### Examples
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters.png.png)
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
+
+##### Fix
+- I need to find a way to store the letter and its index if it is being turned green or orange 
+
+###### Sudo Code
+Object{W:0 O:1 R:2 D:3}
+
+loop user-answer letters
+if letter index = key and letter = key
+remove key and value 
+set tile green
+
+loop user-answer letters
+if letter is in Object 
+find object key 
+remove key and value 
+set tile orange
+
+- i created the object with indexs 
+
+```javascript
+lingoLettersAndIndex ={};
+    for(z=0;z<gameController.lingoWord.length;z++){
+        lingoLettersAndIndex[z] = gameController.lingoWord[z]
+    }
+```
+
+- i didnt need to search the obj for Green letters as they needed to have the same index so i stuck with the previous loop
+
+```javascript
+for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                delete lingoLettersAndIndex[x]
+                setTileGreen(x)
+            }
+        }
+```
+- the orange tile was harder as i needed to check if it was contained in the object with
+
+```javascript
+Object.values(lingoLettersAndIndex).includes(letter)
+```
+
+- i searched online for how to find a key from its value in an object and found this on stack overflow
+[stackoverflow][https://stackoverflow.com/questions/9907419/how-to-get-a-key-in-a-javascript-object-by-its-value]
+
+```javascript
+Object.prototype.getKeyByValue = function( value ) {
+    for( var prop in this ) {
+        if( this.hasOwnProperty( prop ) ) {
+             if( this[ prop ] === value )
+                 return prop;
+        }
+    }
+}
+
+var test = {
+   key1: 42,
+   key2: 'foo'
+};
+
+test.getKeyByValue( 42 );  // returns 'key1'
+```
+
+using this i could complete the function 
+
+###### Refactored code
+```javascript
+else if(gameController.userAnswer != gameController.lingoWord){
+        
+        for(x =0; x<gameController.userAnswer.length;x++){
+            var letter = gameController.userAnswer[x]
+            if(letter === gameController.lingoWord[x]){
+                delete lingoLettersAndIndex[x]
+                setTileGreen(x)
+            }
+        }
+        for(z =0; z<gameController.userAnswer.length;z++){
+            var letter = gameController.userAnswer[z]
+             if(Object.values(lingoLettersAndIndex).includes(letter)){
+                for( var prop in lingoLettersAndIndex ) {
+                    if( lingoLettersAndIndex.hasOwnProperty( prop ) ) {
+                         if( lingoLettersAndIndex[ prop ] === letter ){
+                            delete lingoLettersAndIndex[prop]
+                            setTileOrange(z)
+                            break;
+                         }
+                    }
+                }        
+                
+             }
+
+        }
+        
+        document.getElementById("user-answer").value =""
+        gameController.roundTiles[gameController.roundCounter][0].innerText = gameController.lingoWord[0];
+        gameController.roundCounter++;
+    }
+    
+```
+### API bugs
+I had issues with the API when querying for longer Lingo words retuning words with spaces inbetween
+
+i then had to create a loop in the GenerateLingo function to check for empty char spaces and call the API again until a word without this was shown
+
+#### bug with getNewWord - Excert from Testing Document
+As the player can only input the exact amoung of letters as there is tiles. words coming back from the api with a space beween were making them un winable Lingos. 
+
+By adding a while loop to GenerateLingo function we can use the IndexOf(" ") to determine if a word has a space and if it does then generate a new word. This can make the inital load take longer so i have also asked on the WordsAPI forumn if there is a modifier to the inital call to make sure only a single word is given back. but until i get an answer this fix works 
+
+#### fix
+```javascript
+async function GenerateLingo(){
+await getNewWord()
+while(gameController.lingoWord.indexOf(" ") != -1){
+    console.log(gameController.lingoWord)
+    await getNewWord()
+}
+ ```
+
+ - ![Evidence fix works](/assets/testing-images/GetNewWordFix.png)
 
 # Acessibility
 
 ## Lighthouse score 
+- The site achieved a Lighthouse accessibility score of 100% on both mobile and desktop which confirms that the colours and fonts chosen are easy to read and accessible
+![Lighthouse score](/assets/readme-images/google-lighthouse.png)
 
 ### Browser Testing
 - The Website was tested on Google Chrome, Firefox, Microsoft Edge, Safari browsers with no issues noted.
@@ -237,7 +469,7 @@ The dictonary Displays the words added by the user at the end of each lingo game
 ### Device Testing
 - The website was viewed on a variety of devices such as Desktop, Laptop, iPhone 8, iPhoneX and iPad to ensure responsiveness on various screen sizes. The website performed as intended. The responsive design was also checked using Chrome developer tools across multiple devices with structural integrity holding for the various sizes.
 
-    
+
 # Technologies used
 ## Languages 
 - HTML5
