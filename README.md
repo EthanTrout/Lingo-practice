@@ -41,7 +41,7 @@ The game can also be used by people learning English or people who want to incre
 - The imagery in the game were given carful consideration. i wanted the game to feel as if the player is on the TV show lingo and therefore used a similar color scheme to that on the show.
 
 ## color scheme
-![Color pallet from coolors](/assets/readme-images/lingo-color-pallet.png)
+![Color pallet from coolors](./assets/readme-images/lingo-color-pallet.png)
 
 The color pallet has high contrast and makes it easy for a user to determin a correct answer and incorrect answer. 
 
@@ -79,17 +79,17 @@ The Home page is the Game menu. The user will come back to this page at the end 
 - LeaderBoard
 - Dictonary
 
-![Home page/ game menu](/assets/readme-images/game-menu.png)
+![Home page/ game menu](./assets/readme-images/game-menu.png)
 
 You can see here the inspiration for the look and feel of the Website comes from the Orginal Tv show
 
-![Lingo tv show image](/assets/readme-images/lingo-show.png)
+![Lingo tv show image](./assets/readme-images/lingo-show.png)
 ## Play Lingo
 
 
 - When the user clicks this button the game becomes occupied with two options. Timed and untimed.
     - This allows the user to decide a diffculty. its much harder when every answer needs to be made quickly!
-![play Lingo options](/assets/readme-images/play-lingo-options.png)
+![play Lingo options](./assets/readme-images/play-lingo-options.png)
 
 
 ### The board
@@ -97,26 +97,26 @@ You can see here the inspiration for the look and feel of the Website comes from
 - A board is created and a new Lingo word is generated for the player to guess. This will be new everytime
 - The player has 5 guesses and therefore 5 rows of boxes are shown.
 - The first letter of the Lingo Word is given to the player 
-![Untimed board](/assets/readme-images/untimed-board.png)
+![Untimed board](./assets/readme-images/untimed-board.png)
 
 #### Timed board
 - when a game is timed a progress bar is shown for each answer.
 - the player has 10s to enter there answer or the round will end and the next one will start
-![Timed board](/assets/readme-images/timed-board.png)
+![Timed board](./assets/readme-images/timed-board.png)
 
 ### User input
 - A box under the board is highlighted and is where a user can enter the word. they can click verify or enter to guess
 - to the left of this box the money increment is displayed. the player will get this money if they guess correctly
 - to the right of this box the players gained money is displayed
 
-![User controls](/assets/readme-images/user-controls-desktop.png)
+![User controls](./assets/readme-images/user-controls-desktop.png)
 
 #### User input mobile
 - On mobile the increment and player money are moved under the user input for a better UI experience
 
 Note: this is done via JS not CSS when a game is started so will not be visible if game is started and Dev tools are used to decrease the screen width
 
-![Mobile user controls](/assets/readme-images/user-controls-mobile.png)
+![Mobile user controls](./assets/readme-images/user-controls-mobile.png)
 
 ### GamePlay 
 #### Player input
@@ -126,30 +126,30 @@ Note: this is done via JS not CSS when a game is started so will not be visible 
 - the round then moves down to the next set of gueses 
 
 Note: word is Bias
-![First Guess](/assets/readme-images/gameplay-guess.png)
+![First Guess](./assets/readme-images/gameplay-guess.png)
 
 #### Player Input incorrect 
 - if the word is not a word or the player is out of guesses then the game will display the tiles as red and show the Lingo word in the next set of tile 
 - If there are not any tiles left it will create them 
 - The user input area will hide its self to stop the user from entering another word
 
-![Incorrect Answer](/assets/readme-images/Incorrect-guess.png)
-![Last Guess](/assets/readme-images/last-guess.png)
+![Incorrect Answer](./assets/readme-images/Incorrect-guess.png)
+![Last Guess](./assets/readme-images/last-guess.png)
 
 #### Player Input correct 
 - if the guess is correct the tiles will animate and show all tiles as green before moving onto the next game.
 - The user input area will hide its self to stop the user from entering another word
 
-![Correct Answer](/assets/readme-images/correct-guess.png)
+![Correct Answer](./assets/readme-images/correct-guess.png)
 
 ### Challenge rounds
 - a challenege round is timed 
 - the money decreases with each letter given.
 - The player only gets one guess
 - a clue is given to the player
-![ChallenegeRound1](/assets/readme-images/challenge-round-1.png)
-![ChallenegeRound2](/assets/readme-images/challenge-round-2.png)
-![ChallenegeRound3](/assets/readme-images/challenge-round-3.png)
+![ChallenegeRound1](./assets/readme-images/challenge-round-1.png)
+![ChallenegeRound2](./assets/readme-images/challenge-round-2.png)
+![ChallenegeRound3](./assets/readme-images/challenge-round-3.png)
 
 ### Game Structure 
 The game structure is the same as the TV show Lingo. all rounds Except Challenege rounds get five guesses
@@ -177,7 +177,7 @@ The player can enter there Name to save a highscore. this will redirect to the m
 
 The player can also check all the lingo words that were given to them in the game.
 
-![Game over](/assets/readme-images/game-over.png)
+![Game over](./assets/readme-images/game-over.png)
 
 #### All Lingo words 
 - when the player clicks this button it displays a list of the lingo words from all Stages. with a Add button
@@ -188,7 +188,7 @@ The player can also check all the lingo words that were given to them in the gam
 ## Practice 
 This section displays setting for a practice round. allowing the user to set the word length. how many guesses. and how many total rounds 
 
-![Practice settings](/assets/readme-images/practice-settings.png)
+![Practice settings](./assets/readme-images/practice-settings.png)
 ### Practice game play
 Practice game play is the same as the main lingo game without different rounds. the user sets these indvidualy. 
 
@@ -197,12 +197,12 @@ The game over screen will display how many you got correct out of the total roun
 
 Note:You can not save scores for practice rounds 
 
-![Practice game over](/assets/readme-images/practice-game-over.png)
+![Practice game over](./assets/readme-images/practice-game-over.png)
 
 ## LeaderBoard 
 The leaderboard section displays the 5 highest score both for Timed Gamed and Untimed Games
 
-![Leader Board](/assets/readme-images/leader-board.png)
+![Leader Board](./assets/readme-images/leader-board.png)
 ## Dictonary 
 The dictonary Displays the words added by the user at the end of each lingo game 
 
@@ -221,7 +221,7 @@ The dictonary Displays the words added by the user at the end of each lingo game
 
 - Javascript 
     - No Major errors were found when passing through the offical JSLint validator
-    ![js Lint](/assets/readme-images/jsLint.png)
+    ![js Lint](./assets/readme-images/jsLint.png)
 
     - I have used [] notation as a value in API shares the same variable name as in my object
     - randomIndex is redefined as it is meant to be in the function. only one variation will be called at a time. i did not find it neccisary to change the variable name as it has the same purpose and it is scoped to each if/ IfElse statement. having the same variable name helps with the readability of the code
@@ -248,10 +248,10 @@ I had alot of issues with the core verifcation. and refactored the code multiple
 - the function is not testing for if the letter is already green in another tile and the letter isnt repeated and therefore the letter does not need to be set to orange.
 
 - word: Step
-    - ![Examples](/assets/testing-images/setTileOrangeTest1.png)
+    - ![Examples](./assets/testing-images/setTileOrangeTest1.png)
 
 - word: Dart
-    - ![Examples](/assets/testing-images/setTileOrangeTest2.png)
+    - ![Examples](./assets/testing-images/setTileOrangeTest2.png)
 
 
 ##### Previous code in VerifyAnswer function
@@ -299,11 +299,11 @@ else if(gameController.userAnswer != gameController.lingoWord){
 The for loop checks to see if the letter is found elsewhere in the lingoWord. the index for this is Y
 Because the lingoWord and the tiles will always be the same length we can use the index of the found lingoWord letter to also check to see if that letter has already been found and set green.
 
-- ![Fix](/assets/testing-images/setTileOrangeFix.png)
+- ![Fix](./assets/testing-images/setTileOrangeFix.png)
 
 This has created a new issue that the code will only work if the letter is after the orange one:
 
-- ![New Error](/assets/testing-images/setTileOrangeNewError.png)
+- ![New Error](./assets/testing-images/setTileOrangeNewError.png)
 
 
 This is easily fixed by turning all the tiles green before checking if the tiles need to be made orange
@@ -332,8 +332,8 @@ else if(gameController.userAnswer != gameController.lingoWord){
 - set tile orange will still trigger if the user enters two letters and one should be orange. it makes both orange
 
 ##### Examples
-- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters.png.png)
-- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
+- ![New Error](./assets/testing-images/setTileOrangeErrorMultipleLetters.png.png)
+- ![New Error](./assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
 
 ##### Fix
 - I need to find a way to store the letter and its index if it is being turned green or orange 
@@ -455,13 +455,13 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 }
  ```
 
- - ![Evidence fix works](/assets/testing-images/GetNewWordFix.png)
+ - ![Evidence fix works](./assets/testing-images/GetNewWordFix.png)
 
 # Acessibility
 
 ## Lighthouse score 
 - The site achieved a Lighthouse accessibility score of 100% on both mobile and desktop which confirms that the colours and fonts chosen are easy to read and accessible
-![Lighthouse score](/assets/readme-images/google-lighthouse.png)
+![Lighthouse score](./assets/readme-images/google-lighthouse.png)
 
 ### Browser Testing
 - The Website was tested on Google Chrome, Firefox, Microsoft Edge, Safari browsers with no issues noted.
