@@ -379,8 +379,8 @@ else if(gameController.userAnswer != gameController.lingoWord){
 - set tile orange will still trigger if the user enters two letters and one should be orange. it makes both orange
 
 ##### Examples
-- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters.png.png)
-- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png.png)
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters.png)
+- ![New Error](/assets/testing-images/setTileOrangeErrorMultipleLetters2.png)
 
 #### Fix
 - I need to find a way to store the letter and its index if it is being turned green or orange 
