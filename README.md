@@ -6,7 +6,7 @@ The game allows users to play the exact game seen on tv and see how much money t
 
 The game also offers practice rounds for each letter length 
 
-The game can be used for recration and learning. 
+The game can be used for recreation and learning. 
 
 Indviduals that are going to go onto the show can use the game as practice as the rounds are Identical.
 
@@ -47,7 +47,10 @@ The color pallet has high contrast and makes it easy for a user to determin a co
 
 
 # Layout 
-The a site is a signle page with 4 sections 
+The a site is a single page with 4 sections 
+- The Tutorial section
+    - Runs through the game rules
+    - displays the game board and explains what each element does
 
 - The full game area 
     - Displays the game area
@@ -70,25 +73,50 @@ The a site is a signle page with 4 sections
 ## Homepage 
 
 The Home page is the Game menu. The user will come back to this page at the end of every game. The user can choose from 4 interactive buttons that are:
+- How to play
 - PlayLingo
 - Practice
 - LeaderBoard
 - Dictonary
 
+![Home page/ game menu](/assets/readme-images/game-menu.png)
+
+You can see here the inspiration for the look and feel of the Website comes from the Orginal Tv show
+
+![Lingo tv show image](/assets/readme-images/lingo-show.png)
 ## Play Lingo
 
-When the user clicks this button the main game area will be become visible. 
+
+- When the user clicks this button the game becomes occupied with two options. Timed and untimed.
+    - This allows the user to decide a diffculty. its much harder when every answer needs to be made quickly!
+![play Lingo options](/assets/readme-images/play-lingo-options.png)
+
 
 ### The board
 - a back button allows the player to exit the game 
-- A board is created and a new Lingo word is generated for the player to guess.
+- A board is created and a new Lingo word is generated for the player to guess. This will be new everytime
 - The player has 5 guesses and therefore 5 rows of boxes are shown.
 - The first letter of the Lingo Word is given to the player 
+![Untimed board](/assets/readme-images/untimed-board.png)
+
+#### Timed board
+- when a game is timed a progress bar is shown for each answer.
+- the player has 10s to enter there answer or the round will end and the next one will start
+![Timed board](/assets/readme-images/timed-board.png)
 
 ### User input
 - A box under the board is highlighted and is where a user can enter the word. they can click verify or enter to guess
 - to the left of this box the money increment is displayed. the player will get this money if they guess correctly
 - to the right of this box the players gained money is displayed
+
+![User controls](/assets/readme-images/user-controls-desktop.png)
+
+#### User input mobile
+- On mobile the increment and player money are moved under the user input for a better UI experience
+
+Note: this is done via JS not CSS when a game is started so will not be visible if game is started and Dev tools are used to decrease the screen width
+
+![Mobile user controls](/assets/readme-images/user-controls-mobile.png)
 
 ### GamePlay 
 #### Player input
@@ -97,43 +125,59 @@ When the user clicks this button the main game area will be become visible.
 - the game Highlights any letter that is correct but in the wrong place as being orange.
 - the round then moves down to the next set of gueses 
 
+Note: word is Bias
+![First Guess](/assets/readme-images/gameplay-guess.png)
 
 #### Player Input incorrect 
 - if the word is not a word or the player is out of guesses then the game will display the tiles as red and show the Lingo word in the next set of tile 
 - If there are not any tiles left it will create them 
 - The user input area will hide its self to stop the user from entering another word
 
+![Incorrect Answer](/assets/readme-images/Incorrect-guess.png)
+![Last Guess](/assets/readme-images/last-guess.png)
 
 #### Player Input correct 
 - if the guess is correct the tiles will animate and show all tiles as green before moving onto the next game.
 - The user input area will hide its self to stop the user from entering another word
 
+![Correct Answer](/assets/readme-images/correct-guess.png)
+
 ### Challenge rounds
-a challenege round is timed and the money decreases with each letter given. The player only gets one guess
+- a challenege round is timed 
+- the money decreases with each letter given.
+- The player only gets one guess
+- a clue is given to the player
+![ChallenegeRound1](/assets/readme-images/challenge-round-1.png)
+![ChallenegeRound2](/assets/readme-images/challenge-round-2.png)
+![ChallenegeRound3](/assets/readme-images/challenge-round-3.png)
+
 ### Game Structure 
 The game structure is the same as the TV show Lingo. all rounds Except Challenege rounds get five guesses
 
 - Stage 1: 4 letter Lingo word. 4 games worth £200 each. 
-- Stage 2: a Challenge Lingo round 9 letter word.
+- Stage 2: A Challenge Lingo round 9 letter word.
 - Stage 3: 5 letter Lingo word. 4 games worth £300 each.
-- Stage 4: a challenege Lingo round. 10 letter word.
+- Stage 4: A challenege Lingo round. 10 letter word.
 - Stage 5: 4 letter Lingo Word. 2 games starting at £500 but decreases by £50 each guess
 - Stage 6: 5 letter Lingo Word. 2 games starting at £500 but decreases by £50 each guess
-- Stage 7: a Challeneg round 10 letter word
+- Stage 7: A Challeneg round 10 letter word
 - Final: The user gets 90 sections on the clock. They must answer a 4 letter word and a 5 letter word. They can skip each word and the game will only end when the timer runs out.
     - 4 letter win: the player gets half of there money 
     - 5 letter win: the player banks all of there money and can move onto next round
 - User Choice: the user can choose to play: 
     - a 6 letter lingo with the remaning time. doing so they can bank there current money. and if they win double it. 
     - a seven letter lingo with the remaning time. doing so they risk there current money but could win £1500.
+    Note: the user can not skip the 6 letter or 7 letter
 
 
 ### Game over 
-The game over screen displays the players Total money earned. 
+The game over screen displays the players Total money earned and time remaning if any.
 
-The player can enter there Name to save a highscore 
+The player can enter there Name to save a highscore. this will redirect to the main menu
 
 The player can also check all the lingo words that were given to them in the game.
+
+![Game over](/assets/readme-images/game-over.png)
 
 #### All Lingo words 
 - when the player clicks this button it displays a list of the lingo words from all Stages. with a Add button
@@ -144,18 +188,21 @@ The player can also check all the lingo words that were given to them in the gam
 ## Practice 
 This section displays setting for a practice round. allowing the user to set the word length. how many guesses. and how many total rounds 
 
+![Practice settings](/assets/readme-images/practice-settings.png)
 ### Practice game play
 Practice game play is the same as the main lingo game without different rounds. the user sets these indvidualy. 
 
 ### Game over 
 The game over screen will display how many you got correct out of the total rounds. 
 
-You can not save scores for practice rounds 
+Note:You can not save scores for practice rounds 
 
+![Practice game over](/assets/readme-images/practice-game-over.png)
 
 ## LeaderBoard 
 The leaderboard section displays the 5 highest score both for Timed Gamed and Untimed Games
 
+![Leader Board](/assets/readme-images/leader-board.png)
 ## Dictonary 
 The dictonary Displays the words added by the user at the end of each lingo game 
 

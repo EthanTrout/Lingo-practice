@@ -394,7 +394,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:0,
+LingoRoundStage:8,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 };
@@ -1319,7 +1319,7 @@ let divEl = document.getElementById("game-area");
 if(gameController.isPracticeGame){
     document.getElementById("game-over").style.display="block";
     document.getElementById("game-area").style.display="none";
-    document.getElementById("game-over").innerHTML =`;
+    document.getElementById("game-over").innerHTML =`
 <h1> Game Over</h1>
 <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
 document.getElementById("control-area").innerHTML="";
