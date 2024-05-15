@@ -299,11 +299,12 @@ else if(gameController.userAnswer != gameController.lingoWord){
 The for loop checks to see if the letter is found elsewhere in the lingoWord. the index for this is Y
 Because the lingoWord and the tiles will always be the same length we can use the index of the found lingoWord letter to also check to see if that letter has already been found and set green.
 
-- ![Fix](./assets/testing-images/setTileOrangeFix.png)
+![Fix](./assets/testing-images/setTileOrangeFix.png)
+
 
 This has created a new issue that the code will only work if the letter is after the orange one:
 
-- ![New Error](./assets/testing-images/setTileOrangeNewError.png)
+![New Error](./assets/testing-images/setTileOrangeNewError.png)
 
 
 This is easily fixed by turning all the tiles green before checking if the tiles need to be made orange
