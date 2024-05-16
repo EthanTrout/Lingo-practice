@@ -394,7 +394,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:8,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 };
@@ -1447,7 +1447,7 @@ if(window.screen.width > 473){
         <h1> Game Over</h1>
         <p>You got £${gameController.playerMoney}
         <div id="add-score-container">
-        <input id="user-name" type="text" placeholder="Enter name here">
+        <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
         <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
         </div>
         <button onclick="showWordsAndDefi()">All Lingo words</button>
@@ -1551,18 +1551,20 @@ function submitAnswer(){
     if(gameController.isTimedGame && !gameController.isFinal){
         pauseTimer();
     }
-    
-    if( lettersOnlyRegex.test(document.getElementById("user-answer").value) && document.getElementById("user-answer").value[0].toLowerCase() === lingoFirstLetter){
+    if(!lettersOnlyRegex.test(document.getElementById("user-answer").value) ){
+        document.getElementById("user-answer").value="";
+        alert("There are only letters allowed in Answers");
+    }
+    else if(document.getElementById("user-answer").value[0].toLowerCase() !== lingoFirstLetter){
+        document.getElementById("user-answer").value="";
+        alert("Answers must start with the same Lingo letter");
+    }
+    else{
         gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
         setTimeout(function(){
             checkWord(gameController.userAnswer,verifyAnswer);
         },gameController.wordLength * gameController.letterDisplayDelay);
         displayAnswer(gameController.userAnswer);
-       
-    }
-    else{
-        document.getElementById("user-answer").value="";
-        alert("There are only letters allowed in answers and Answers must start with the same Lingo letter");
         
     }
     
@@ -1581,17 +1583,26 @@ userTextBox.addEventListener("keyup",function(e ){
 }
 // Onclick Save Score 
 function saveScoreToLeaderBoard(gameMode){
-let lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
+let lettersOnlyRegex = /^[a-zA-Z]+$/;
+if(!lettersOnlyRegex.test(document.getElementById("user-name").value) ){
+    document.getElementById("user-name").value="";
+    alert("There are only letters allowed in usernames and no spaces");
+}
+else{
+    let lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
+    let lingoScore ={
+        name:document.getElementById("user-name").value,
+        score:gameController.playerMoney};
 
-let lingoScore ={
-    name:document.getElementById("user-name").value,
-    score:gameController.playerMoney};
-lingoHighScores.push(lingoScore);
-lingoHighScores.sort((a,b)=> b.score - a.score);
-lingoHighScores.splice(5);
-localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores));
+    lingoHighScores.push(lingoScore);
+    lingoHighScores.sort((a,b)=> b.score - a.score);
+    lingoHighScores.splice(5);
+    localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores));
 
 returnToMenu();
+
+}
+
 }
 
 // Onclick Show list of generated lingo words throughout the whole game
