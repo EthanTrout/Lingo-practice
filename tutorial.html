@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Lingo Tutorial</title>
+</head>
+<body>
+    <section id="tutorial">
+        <a href="./index.html"><button class ="menu-button" aria-label = "Return to Game menu">back to menu</button></a>
+        <div class ="menu-container">
+            <div id="game-menu">
+                <button id="game-play-btn" onclick="tutorial();nextTutorialStep(0)">GamePlay</button>
+                <button id="challenge-word-btn"  onclick="tutorial();nextTutorialStep(4)" aria-label="Challenge questions">Challenge questions</button>
+                <button id="final-btn" onclick="tutorial();nextTutorialStep(6)" aria-label="Final">Final</button>
+                <button onclick="displayLeaderBoard()" aria-label="Add to leaderboard">Add to leaderboard</button>
+                <button onclick="showDict()" aria-label="Add to dictonary">Add to dictonary</button>
+
+            </div>
+
+    </section>
+    <section id="tutorial-section"></section>
+    <script src="./assets/js/tutorial.js"></script>
+</body>
+</html>

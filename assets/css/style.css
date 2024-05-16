@@ -175,6 +175,19 @@ section{
     animation-duration: 20s; */
     
 }
+/* Tutorial Menu */
+#tutorial{
+    border: 50px solid transparent ;
+    border-radius: 50%;
+    margin-left: 0;
+    width: 90%;
+    height: 80%;
+    background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    /* animation-name:border-anim;
+    animation-duration: 20s; */
+}
 
 /* Menu Buttons */
 #game-menu{
