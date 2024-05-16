@@ -619,7 +619,6 @@ function returnToMenu(){
  document.getElementById("control-area").style.display="none";
  document.getElementById("back-button").style.display ="none";
  gameController.timerDisplay.style.display="none";
- document.getElementById("tutorial-section").style.display ="none";
  document.getElementById("progress-bar").style.display ="none";
  document.getElementById("skip-word").style.display ="none";
  document.getElementById("final-timer-display").style.display ="none";

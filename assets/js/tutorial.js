@@ -63,7 +63,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(1)">Show</button>
                 </div>
             </div>
@@ -131,7 +131,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(1)">Show</button>
                 </div>
             </div>
@@ -152,7 +152,7 @@ function nextTutorialStep(tutorialStep){
                 <li>You can click verify or the enter key to submit your answer</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(2)">Show</button>
             </div>
         </div>`;
@@ -215,7 +215,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
@@ -236,7 +236,7 @@ function nextTutorialStep(tutorialStep){
                 <li>a new word will be generate for you to guess</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(3)">Show</button>
             </div>
         </div>`;
@@ -298,7 +298,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(3)">Show</button>
                 </div>
             </div>
@@ -321,7 +321,7 @@ function nextTutorialStep(tutorialStep){
                 <li>a new word will be generate for you to guess</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(4)">Challenege Words</button>
             </div>
         </div>`;
@@ -374,7 +374,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
@@ -395,7 +395,7 @@ function nextTutorialStep(tutorialStep){
                 <li>the money you will earn will decrease with every letter given</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(5)">show</button>
             </div>
         </div>`;
@@ -447,7 +447,7 @@ function nextTutorialStep(tutorialStep){
                     <li>You can click verify or the enter key to submit your answer</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(2)">Show</button>
                 </div>
             </div>
@@ -502,7 +502,7 @@ function nextTutorialStep(tutorialStep){
                 <li>Good luck with your challenge words. you can win alot of money</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(6)">final</button>
             </div>
         </div>`;
@@ -571,7 +571,7 @@ function nextTutorialStep(tutorialStep){
                     <li>if you answer the 7 letter lingo in 90s you get the grand prize of £15000 but you risk all of your money</li>
                 </ul>
                 <div class ="tutorial-buttons">
-                    <button onclick= "returnToMenu()">Exit</button>
+                    <button onclick= "returnToTutorialMenu()">Exit</button>
                     <button id="show" onclick="nextTutorialStep(1)">Show</button>
                 </div>
             </div>
@@ -590,7 +590,7 @@ function nextTutorialStep(tutorialStep){
             <li>if you answer the 5 letter lingo in 90s you get all the money you banked</li>
             </ul>
             <div class ="tutorial-buttons">
-                <button onclick= "returnToMenu()">Exit</button>
+                <button onclick= "returnToTutorialMenu()">Exit</button>
                 <button id="show" onclick="nextTutorialStep(7)">Show</button>
             </div>
         </div>`;
@@ -613,7 +613,7 @@ function nextTutorialStep(tutorialStep){
                         <li>if you answer the 7 letter lingo in the reamining time you get the grand prize of £15000 but you risk all of your money</li>
                     </ul>
                     <div class ="tutorial-buttons">
-                        <button onclick= "returnToMenu()">Exit</button>
+                        <button onclick= "returnToTutorialMenu()">Exit</button>
                         <button id="show" onclick="nextTutorialStep(8)">Show</button>
                     </div>
                 </div>
@@ -622,7 +622,7 @@ function nextTutorialStep(tutorialStep){
     }
     
 }
-function returnToMenu(){
+function returnToTutorialMenu(){
     document.getElementById("tutorial-section").style.display ="none";
     document.getElementById("tutorial").style.display="block";
     isExited =true;
