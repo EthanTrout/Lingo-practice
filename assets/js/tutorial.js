@@ -69,6 +69,11 @@ function nextTutorialStep(tutorialStep){
             </div>
         </div>
     </section>`
+    document.getElementById("overlay").style.display="none";
+        document.getElementById("rules-display").style.display ="none";
+        setTimeout(function(){
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("rules-display").style.display ="block";},5000)
     }
     if(tutorialStep === 1){
         tutorialSection.innerHTML=`
@@ -580,19 +585,40 @@ function nextTutorialStep(tutorialStep){
             <div id="rules-display-inner">
             <h1>Final</h1>
             <ul>
-            <li>In the final you get 90s on the clock to answer 1-3 lingo words</li>
+            <li>In the final you get 90s on the clock to answer 1-3 a 4 letter lingo and a 5 letter lingo</li>
             <li>if you answer the 4 letter lingo in 90s you get half the money you banked</li>
             <li>if you answer the 5 letter lingo in 90s you get all the money you banked</li>
-            <li>if you answer the 6 letter lingo in 90s you get double the money you banked</li>
-            <li>if you answer the 7 letter lingo in 90s you get the grand prize of £15000 but you risk all of your money</li>
             </ul>
             <div class ="tutorial-buttons">
                 <button onclick= "returnToMenu()">Exit</button>
-                <button id="show" onclick="nextTutorialStep(2)">Show</button>
+                <button id="show" onclick="nextTutorialStep(7)">Show</button>
             </div>
         </div>`;
         },5000);
         
+    }
+    else if(tutorialStep===7){
+        tutorialSection.style.display="none"
+        document.getElementById("final").style.display="block"
+        setTimeout(function(){
+            document.getElementById("final").style.display="none"
+            tutorialSection.style.display="block"
+            tutorialSection.innerHTML=`<div id="overlay"></div>
+            <div id="rules-display">
+                <div id="rules-display-inner">
+                    <h1>Final</h1>
+                    <ul>
+                        <li>if both are answered correct. you get a choice</li>
+                        <li>if you answer the 6 letter lingo in the reamining time you get double the money you banked</li>
+                        <li>if you answer the 7 letter lingo in the reamining time you get the grand prize of £15000 but you risk all of your money</li>
+                    </ul>
+                    <div class ="tutorial-buttons">
+                        <button onclick= "returnToMenu()">Exit</button>
+                        <button id="show" onclick="nextTutorialStep(8)">Show</button>
+                    </div>
+                </div>
+            </div>`
+        },5000)
     }
     
 }
