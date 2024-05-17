@@ -609,6 +609,7 @@ function nextTutorialStep(tutorialStep){
                     <h1>Final</h1>
                     <ul>
                         <li>if both are answered correct. you get a choice</li>
+                        <li> You will not be able to pick the grand prize unless you have earned over £3000</li>
                         <li>if you answer the 6 letter lingo in the reamining time you get double the money you banked</li>
                         <li>if you answer the 7 letter lingo in the reamining time you get the grand prize of £15000 but you risk all of your money</li>
                     </ul>
