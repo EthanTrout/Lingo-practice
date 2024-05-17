@@ -369,6 +369,13 @@ section{
 #dictonary h1{
     text-align: center;
 }
+#word-list{
+    height: 45vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    line-height: 2rem;
+    
+}
 /* Mobile Dictonary sizing  */
 @media only screen and (max-width: 473px) {
     #dictonary-section{
