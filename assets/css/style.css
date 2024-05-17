@@ -324,10 +324,10 @@ section{
 }
 /* Add to leader board / Lingo words list  */
 
+#word-defi-list{}
 .all-words-container{
     text-align: center;
     padding-bottom: 1rem;
-    
 }
 .all-words-list{
     background-color: green;
@@ -375,6 +375,13 @@ section{
     overflow-y: scroll;
     line-height: 2rem;
     
+}
+#word-list::-webkit-scrollbar{
+    width: 12px;
+}
+#word-list::-webkit-scrollbar-thumb{
+    background-color: orange;
+    border-radius: 6px;
 }
 /* Mobile Dictonary sizing  */
 @media only screen and (max-width: 473px) {
