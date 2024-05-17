@@ -200,11 +200,14 @@ Note:You can not save scores for practice rounds
 ![Practice game over](./assets/readme-images/practice-game-over.png)
 
 ## LeaderBoard 
-The leaderboard section displays the 5 highest score both for Timed Gamed and Untimed Games
+- The leaderboard section displays the 5 highest score both for Timed Gamed and Untimed Games
 
 ![Leader Board](./assets/readme-images/leader-board.png)
 ## Dictonary 
-The dictonary Displays the words added by the user at the end of each lingo game 
+- The dictonary Displays the words added by the user at the end of each lingo game 
+- A scroll is in built so the words remain within the container
+
+![dictonary](./assets/readme-images/dictonary.png)
 
 
 # Testing
@@ -481,7 +484,8 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 - Chrome dev tools- used for overall development and testing, including responsivness and preformance
 - GitHub -Used for version control and hosting of the page
 - W3C -used for validation testing of HTML and CSS
-- WordsAPI - used for Getting random words, checking words exist and generating definitions for player dictonary 
+- WordsAPI - used for Getting random words, checking words exist and generating definitions for player dictonary
+- ChatGPT3 - used for generating the 9 letter and 10 letter lingos along with clues 
 
 # Deployment
 ## The site was deployed using GitHub pages. The steps to deploy using GitHub pages are:
@@ -515,6 +519,46 @@ To clone this repository follow the below steps:
 6. Type 'Enter' to create the local clone.
 
 Note: you will need to generate your own API key for the game to work
+
+# Features left to develop 
+As the scope of this project is quite large and i had a deadline as this is being done as project 2 of the code insitite course. There are some features left that i would still like to add before taking this game public
+
+## Challenege word practice
+I did not add a section for practicing the challenege words as i have generated all the challenge words and clues using chatGPT. i have included a limited amount just due to time inputting into chatGPT and the costs accosiated. 
+
+there are about 200 challenge words with clues for each 9 letter and 10 letter words. This works for the main game as you only encounter 4 total in each game. however putting this into a practice mode would soon have the words repeating
+
+Currently the challenege words are just stored as a const but if i was to develop this further i would create an API with thousands of these words and clues. that the game could call for better repeatabillity
+
+## Online mulitplayer
+I brought up this idea when first concerptualising the game as the TV show has multiple players and each player can buzz in to steal others lingowords if they have got it incorrect.
+
+This feature would make the game more replayable as people compete against others online
+
+i was not able to implement this for the scope of this project but if i was to continue or another developer was to pick this up this would be some of my ideas of implementation
+
+### GamePlay
+All these games would follow the timed lingo game i have implemeted however this would now become turn based
+
+3 players would wait for there indivdual go as they watch the other compete 
+
+as i have set up stages for each lingo round this would invove player 1 playing stage 1. if an answer is incorrect then the other players would have an opptuninty to hit a key and the first person that clicked would get an opptunity to steal the answer adding to there total money.
+
+once stage 1 is complete for player 1, player 2 starts and so on
+
+The final would only then initalise for the player that has the most money
+
+### LeaderBoard 
+with the online leaderboard this would change to total money earened over there entire time playing. 
+
+this would insentivise players to return 
+
+### Montisation
+A item/skin system could be implemted with different challeneges or achievements that grant skins or items
+
+equally the player could be allowed to watch an add to skip a word or guarantee a steal 
+
+this could be used via ads or items that a player could purchase
 
 # Credits
 
