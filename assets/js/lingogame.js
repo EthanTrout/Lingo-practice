@@ -394,7 +394,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:4,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000
 };
@@ -625,6 +625,7 @@ function returnToMenu(){
  document.getElementById("dictonary-section").style.display ="none";
  document.getElementById("leader-board-section").style.display ="none";
  document.getElementById("play-lingo-options").style.display ="none";
+ document.getElementById("grand-prize").style.display ="none"
  document.getElementById("menu-options-section").style.display ="block";
  document.getElementById("game-menu").style.display ="flex";
  if(document.getElementById("clue")){
@@ -881,6 +882,9 @@ if(window.screen.width > 473){
         document.getElementById("skip-word").style.display="none";
         document.getElementById("final").style.display="block";
         document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
+        if(gameController.playerMoney>=3000){
+            document.getElementById("grand-prize").style.display ="block"
+        }
     }
     else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
         document.getElementById("final").style.display="none";
