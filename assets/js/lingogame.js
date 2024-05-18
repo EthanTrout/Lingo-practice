@@ -368,9 +368,9 @@ const tenLetterWords = [
   ];
 
 window.onload =function(event) {
-    if(localStorage.getItem("apiKey")){
-        document.getElementById("input-api-key").style.display="none";
-        document.getElementById("menu-overlay").style.display="none"
+    if(!localStorage.getItem("apiKey")){
+        document.getElementById("input-api-key").style.display="flex";
+        document.getElementById("menu-overlay").style.display="block"
     }
 };
 const gameController ={

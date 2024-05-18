@@ -859,6 +859,6 @@ section{
 
 /* Hidden elements */
 
-#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over,#tutorial-section,#grand-prize{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over,#tutorial-section,#grand-prize,#input-api-key,#menu-overlay{
     display: none;
 }
