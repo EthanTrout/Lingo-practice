@@ -446,15 +446,17 @@ const options = {
 try {
     const response = await fetch(url, options);
     
-    if(response.ok){
-        cb(true);
-    }
-    else if(response.status === 404){
+    if(!response.ok){
         cb(false);
+        return;
     }
     
+    cb(true);
+    
+    
 } catch (error) {
-       return;
+    cb(false);
+    return;
 }
 }
 
