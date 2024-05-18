@@ -370,6 +370,7 @@ const tenLetterWords = [
 window.onload =function(event) {
     if(localStorage.getItem("apiKey")){
         document.getElementById("input-api-key").style.display="none";
+        document.getElementById("menu-overlay").style.display="none"
     }
 };
 const gameController ={
@@ -454,10 +455,10 @@ try {
     cb(true);
     
     
-} catch (error) {
+    } catch (error) {
     cb(false);
     return;
-}
+    }
 }
 
 // Starts a new Lingo round 
@@ -530,7 +531,8 @@ async function addApiKey(){
         const response = await fetch(url,options);
 
         if(!response.ok){
-            alert("Api key might be invalid, re enter the api key")
+            document.getElementById("api-error").innerText ="Api key might be invalid, re enter the api key"
+            document.getElementById("api-key").value =""
             throw new Error("Api key might be invalid, re enter the api key")
         }
     }catch(err){
@@ -540,6 +542,7 @@ async function addApiKey(){
 
     localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
     document.getElementById("input-api-key").style.display="none";
+    document.getElementById("menu-overlay").style.display="none"
 }
 
 // Onclick Play Lingo - Main Lingo Game
