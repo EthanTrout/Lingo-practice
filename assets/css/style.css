@@ -712,6 +712,10 @@ section{
 #control-area{
     margin-top: 0px;
 }
+#game-input-error{
+    color: red;
+    font-size: small;
+}
 
 /* User input  */
 

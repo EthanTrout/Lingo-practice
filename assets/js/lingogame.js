@@ -693,13 +693,13 @@ for(let x=1;x<roundsLength+1;x++){
 if(window.screen.width > 473){
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
     <div id="money-increment" class="column">£0</div>
-    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button><p id="game-input-error"></p></div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`;
 }
 else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
-    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}" autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button></div>
+    <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}" autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button><p id="game-input-error"></p></div>
     </div>
     <div id="mobile-scores">
     <div id="money-increment" class="column">£0</div>
@@ -1064,19 +1064,20 @@ function timedGameCallBack(timeLeft,widthDecrease){
 function submitAnswer(){
     let lettersOnlyRegex = /^[a-zA-Z]+$/;
     let lingoFirstLetter = gameController.lingoWord[0];
-    if(gameController.isTimedGame && !gameController.isFinal){
-        pauseTimer();
-    }
     if(!lettersOnlyRegex.test(document.getElementById("user-answer").value) ){
         document.getElementById("user-answer").value="";
-        alert("There are only letters allowed in Answers");
+        document.getElementById("game-input-error").innerText="Only letters allowed in answers";
     }
     else if(document.getElementById("user-answer").value[0].toLowerCase() !== lingoFirstLetter){
         document.getElementById("user-answer").value="";
-        alert("Answers must start with the same Lingo letter");
+        document.getElementById("game-input-error").innerText="Must start with the same letter";
     }
     else{
+        if(gameController.isTimedGame && !gameController.isFinal){
+            pauseTimer();
+        }
         gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
+        document.getElementById("game-input-error").innerText=""
         setTimeout(function(){
             checkWord(gameController.userAnswer,verifyAnswer);
         },gameController.wordLength * gameController.letterDisplayDelay);
