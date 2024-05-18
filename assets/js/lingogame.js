@@ -428,6 +428,7 @@ try {
     wordAndDesc["defi"] = result.results[0].definition;
     endLingoWordsAndDefi.push(wordAndDesc);
 } catch (error) {
+    
     console.error(error);
 }
 }
@@ -452,10 +453,8 @@ try {
         cb(false);
     }
     
-    
-    
 } catch (error) {
-       console.error(error)
+       return;
 }
 }
 
@@ -515,7 +514,28 @@ else{
 // All main menu buttons
 
 // On click API key submit
-function addApiKey(){
+async function addApiKey(){
+    const apiKey = document.getElementById("api-key").value;
+    try{
+        const url = "https://wordsapiv1.p.rapidapi.com/words/test";
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': `${apiKey}`,
+                'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+            }
+        };
+        const response = await fetch(url,options);
+
+        if(!response.ok){
+            alert("Api key might be invalid, re enter the api key")
+            throw new Error("Api key might be invalid, re enter the api key")
+        }
+    }catch(err){
+        console.log(err)
+        return
+    }
+
     localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
     document.getElementById("input-api-key").style.display="none";
 }
@@ -593,7 +613,7 @@ function showDict(){
     document.getElementById("dictonary").style.display ="block";
     
     let savedWordsUl = document.getElementById("saved-words");
-    let savedWordsObj = JSON.parse(localStorage.getItem("dictonary") || []);
+    let savedWordsObj = JSON.parse(localStorage.getItem("dictonary")) || [];
     savedWordsUl.innerHTML=savedWordsObj.map(function(word){
         return `<li class="saved-words-list">${word.word}-${word.defi}</li>`;
     }).join("");
