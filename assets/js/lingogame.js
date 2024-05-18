@@ -566,16 +566,23 @@ function displayLeaderBoard(){
     document.getElementById("menu-options-section").style.display ="none";
     
     let highScoresUl = document.getElementById("high-scores");
-    let highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores") || []);
-    highScoresUl.innerHTML=highScoresObj.map(function(score){
-        return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
-    }).join("");
+    let highScoresObj = JSON.parse(localStorage.getItem("lingoHighScores")) || [];
+    if(highScoresObj.length >= 1){
+        highScoresUl.innerHTML=highScoresObj.map(function(score){
+            return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
+        }).join("");
+    }
+    
     
     let timedHighScoresUl = document.getElementById("timed-high-scores");
-    let timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores") || []);
-    timedHighScoresUl.innerHTML=timedHighScoresObj.map(function(score){
-        return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
-    }).join("");
+    let timedHighScoresObj = JSON.parse(localStorage.getItem("timedLingoHighScores")) || [];
+    if(timedHighScoresObj.length >=1){
+        timedHighScoresUl.innerHTML=timedHighScoresObj.map(function(score){
+            return `<li class="leader-board-score">${score.name}----£${score.score}</li>`;
+        }).join("");
+
+    }
+    
 }
 
 // Onclick Dictonary
