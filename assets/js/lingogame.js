@@ -395,6 +395,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
+isFinalTimerEnd:false,
 LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000,
@@ -651,6 +652,7 @@ function returnToMenu(){
  gameController.isTimedGame =false;
  gameController.isPracticeGame =false;
  gameController.isChallengeWord=false;
+ gameController.isFinalTimerEnd = false;
  gameController.moneyIncrement=200;
  gameController.roundTiles =[];
  gameController.challengeClue ="";
@@ -756,7 +758,7 @@ else if(gameController.roundCounter === gameController.roundTiles.length -1 || !
 
 }
 else if(gameController.userAnswer !== gameController.lingoWord){
-    if(gameController.LingoRoundStage === 6 || gameController.LingoRoundStage===7){
+    if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
         gameController.moneyIncrement -=50;
         document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
     }
@@ -823,6 +825,10 @@ if((gameController.currentRound === gameController.gameRounds || gameController.
     displayLingo(color);
     if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+    }
+    if(gameController.LingoRoundStage === 8 || gameController.LingoRoundStage === 9 || gameController.LingoRoundStage === 11){
+        gameController.playerMoney = gameController.moneyIncrement;
+        gameController.isFinalTimerEnd = true;
     }
     setTimeout(finishGame,gameController.gameRoundDisplayDelay);
 }
@@ -1229,7 +1235,7 @@ function finishGame(){
             gameController.LingoRoundStage++;
         }
         if(gameController.LingoRoundStage===1){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.moneyIncrement=300;
             gameController.isChallengeWord =true;
             //  new round screen
@@ -1240,12 +1246,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(9,1,1);
             },gameController.newStageDelay)
             
         }
         else if(gameController.LingoRoundStage===2){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=300;
@@ -1258,12 +1265,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(5,5,4);
             },gameController.newStageDelay)
              
         }
         else if(gameController.LingoRoundStage===3){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.moneyIncrement=400;
             ProgressWidth =100;
             gameController.isChallengeWord =true;
@@ -1275,12 +1283,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(10,1,1,10);
             },gameController.newStageDelay)
             
         }
         else if(gameController.LingoRoundStage===4){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=500;
@@ -1293,12 +1302,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(4,5,2);
             },gameController.newStageDelay)
              
         }
         else if(gameController.LingoRoundStage===5){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =false;
             // new round screen
@@ -1309,12 +1319,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(5,5,2);
             },gameController.newStageDelay)
              
         }
         else if(gameController.LingoRoundStage===6){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             gameController.moneyIncrement=750;
             gameController.isChallengeWord =true;
             ProgressWidth =100;
@@ -1326,12 +1337,13 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 startGame(10,1,1,10);
             },gameController.newStageDelay)
                
         }
         else if(gameController.LingoRoundStage ===7){
-            divEl.innerHTML ="";
+            divEl.style.display ="none";
             document.getElementById("new-stage-display").style.display ="flex";
             document.getElementById("stage-header").innerText="Final";
             document.getElementById("stage-subheader").innerText="4 and 5 letter word";
@@ -1341,6 +1353,7 @@ function finishGame(){
             gameController.isInfinte = false;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                divEl.style.display ="table";
                 finishGame()
             },gameController.newStageDelay)
     
@@ -1367,7 +1380,7 @@ function finishGame(){
             startGame(5,5,1);
             pauseTimer = startTimer(90,timerCallback,remainingTime);
         }
-        else if(gameController.LingoRoundStage===10 && gameController.timeLeft!==0){
+        else if(gameController.LingoRoundStage===10 && gameController.timeLeft!==0 && !gameController.isFinalTimerEnd){
             document.getElementById("game-area").style.display="none";
             document.getElementById("control-area").style.display="none";
             document.getElementById("skip-word").style.display="none";
