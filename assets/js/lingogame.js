@@ -549,8 +549,14 @@ async function addApiKey(){
 // Onclick Play Lingo - Main Lingo Game
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
-document.getElementById("play-lingo-options").style.display="none";
-startGame(4,5,4);
+document.getElementById("menu-options-section").style.display="none";
+ // new round screen
+ document.getElementById("new-stage-display").style.display ="flex";
+ setTimeout(function(){
+     document.getElementById("new-stage-display").style.display ="none";
+     startGame(4,5,4);
+ },gameController.newStageDelay)
+
 
 }
 
@@ -628,7 +634,10 @@ function showDict(){
 // Return to menu function 
 function returnToMenu(){
     if(gameController.isChallengeWord || gameController.isTimedGame || gameController.isFinal) {
-         pauseTimer();
+        if(pauseTimer){
+            pauseTimer();
+        }
+         
     }
  
  gameController.playerMoney =0;

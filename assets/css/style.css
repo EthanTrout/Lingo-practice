@@ -864,14 +864,13 @@ section{
 /* New round display */
 #new-stage-display{
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 49%;
+    left: 49%;
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     border: 50px solid transparent ;
     border-radius: 50%;
     margin-left: 0;
@@ -880,7 +879,17 @@ section{
     background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
     background-origin: border-box;
     background-clip: content-box, border-box;
+    margin-left: 0;
+
     
+    
+}
+@media only screen and (max-width: 473px) {
+    #new-stage-display{
+        width: 75%;
+        border: 35px solid transparent ;
+        background-image: none;
+    }
 }
 .new-stage-container{
     width: 100%;
@@ -891,8 +900,8 @@ section{
     flex-direction: column;
     position: relative;
     background: linear-gradient(#0B1D39 ,#00225B) ;
-    
     border-radius: 50%;
+
 
 }
 #stage-header {
