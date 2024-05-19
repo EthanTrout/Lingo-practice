@@ -395,9 +395,10 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:0,
+LingoRoundStage:6,
 letterDisplayDelay:300,
-gameRoundDisplayDelay:3000
+gameRoundDisplayDelay:3000,
+newStageDelay:5000
 };
 
 let remainingTime; // Assuming 30 seconds remaining
@@ -746,7 +747,7 @@ else if(gameController.roundCounter === gameController.roundTiles.length -1 || !
 
 }
 else if(gameController.userAnswer !== gameController.lingoWord){
-    if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
+    if(gameController.LingoRoundStage === 6 || gameController.LingoRoundStage===7){
         gameController.moneyIncrement -=50;
         document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
     }
@@ -809,8 +810,9 @@ if(color === "green"){
 }
 if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
     if(gameController.isFinal || gameController.isChallengeWord){pauseTimer();}
+    if(gameController.isChallengeWord){pauseTimer()}
     displayLingo(color);
-    if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
+    if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
     setTimeout(finishGame,gameController.gameRoundDisplayDelay);
@@ -822,157 +824,604 @@ else{
     displayLingo(color);
     setTimeout(generateLingo,gameController.gameRoundDisplayDelay);
 }
-
-// Finish game function - Game rounds for Lingo game
 }
+// Finish game function - Game rounds for Lingo game
+// }
 
 // Finish game function. is called at the very end of a practice run. is called every completed game on lingo main game. sets next stage or displays Game over
-function finishGame(){
-let divEl = document.getElementById("game-area");
-if(gameController.isPracticeGame){
-    document.getElementById("game-over").style.display="block";
-    document.getElementById("game-area").style.display="none";
-    document.getElementById("game-over").innerHTML =`
-<h1> Game Over</h1>
-<p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
-document.getElementById("control-area").innerHTML="";
-if(window.screen.width > 473){
-    document.getElementById("mobile-scores").style.display ="none";
-}
-}else if(!gameController.isPracticeGame){
-    // If the Lingo game is infinte it is in the final and should be looped till timer ends.
-    if(!gameController.isInfinte){
-        gameController.LingoRoundStage++;
-    }
-    if(gameController.LingoRoundStage===1){
-        divEl.innerHTML ="";
-        gameController.moneyIncrement=300;
-        gameController.isChallengeWord =true;
-        startGame(9,1,1);
-    }
-    else if(gameController.LingoRoundStage===2){
-        divEl.innerHTML ="";
-        gameController.timerDisplay.style.display="none";
-        document.getElementById("progress-bar").style.display="none";
-        gameController.moneyIncrement=300;
-        gameController.isChallengeWord =false;
-        startGame(5,5,4);
-    }
-    else if(gameController.LingoRoundStage===3){
-        divEl.innerHTML ="";
-        gameController.moneyIncrement=400;
-        ProgressWidth =100;
-        gameController.isChallengeWord =true;
-        startGame(10,1,1,10);
-    }
-    else if(gameController.LingoRoundStage===4){
-        divEl.innerHTML ="";
-        gameController.timerDisplay.style.display="none";
-        document.getElementById("progress-bar").style.display="none";
-        gameController.moneyIncrement=500;
-        gameController.isChallengeWord =false;
-        startGame(4,5,2);
-    }
-    else if(gameController.LingoRoundStage===5){
-        divEl.innerHTML ="";
-        gameController.moneyIncrement=500;
-        gameController.isChallengeWord =false;
-        startGame(5,5,2);
-    }
-    else if(gameController.LingoRoundStage===6){
-        divEl.innerHTML ="";
-        gameController.moneyIncrement=750;
-        gameController.isChallengeWord =true;
-        ProgressWidth =100;
-        startGame(10,1,1,10);
-    }
-    else if(gameController.LingoRoundStage===7){
-        divEl.innerHTML ="";
-        document.getElementById("skip-word").style.display="block";
-        document.getElementById("progress-bar").style.display="none";
-        gameController.moneyIncrement= gameController.playerMoney/2;
-        gameController.playerMoney =0;
-        gameController.isChallengeWord =false;
-        gameController.isInfinte =true;
-        gameController.isFinal =true;
-        startGame(4,5,1);
-        pauseTimer = startTimer(90, timerCallback);
+// function finishGame(){
+// let divEl = document.getElementById("game-area");
+// if(gameController.isPracticeGame){
+//     document.getElementById("game-over").style.display="block";
+//     document.getElementById("game-area").style.display="none";
+//     document.getElementById("game-over").innerHTML =`
+// <h1> Game Over</h1>
+// <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
+// document.getElementById("control-area").innerHTML="";
+// if(window.screen.width > 473){
+//     document.getElementById("mobile-scores").style.display ="none";
+// }
+// }else if(!gameController.isPracticeGame){
+//     // If the Lingo game is infinte it is in the final and should be looped till timer ends.
+//     if(!gameController.isInfinte){
+//         gameController.LingoRoundStage++;
+//     }
+//     if(gameController.LingoRoundStage===1){
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement=300;
+//         gameController.isChallengeWord =true;
+//         startGame(9,1,1);
+//     }
+//     else if(gameController.LingoRoundStage===2){
+//         divEl.innerHTML ="";
+//         gameController.timerDisplay.style.display="none";
+//         document.getElementById("progress-bar").style.display="none";
+//         gameController.moneyIncrement=300;
+//         gameController.isChallengeWord =false;
+//         startGame(5,5,4);
+//     }
+//     else if(gameController.LingoRoundStage===3){
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement=400;
+//         ProgressWidth =100;
+//         gameController.isChallengeWord =true;
+//         startGame(10,1,1,10);
+//     }
+//     else if(gameController.LingoRoundStage===4){
+//         divEl.innerHTML ="";
+//         gameController.timerDisplay.style.display="none";
+//         document.getElementById("progress-bar").style.display="none";
+//         gameController.moneyIncrement=500;
+//         gameController.isChallengeWord =false;
+//         startGame(4,5,2);
+//     }
+//     else if(gameController.LingoRoundStage===5){
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement=500;
+//         gameController.isChallengeWord =false;
+//         startGame(5,5,2);
+//     }
+//     else if(gameController.LingoRoundStage===6){
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement=750;
+//         gameController.isChallengeWord =true;
+//         ProgressWidth =100;
+//         startGame(10,1,1,10);
+//     }
+//     else if(gameController.LingoRoundStage===7){
+//         divEl.innerHTML ="";
+//         document.getElementById("skip-word").style.display="block";
+//         document.getElementById("progress-bar").style.display="none";
+//         gameController.moneyIncrement= gameController.playerMoney/2;
+//         gameController.playerMoney =0;
+//         gameController.isChallengeWord =false;
+//         gameController.isInfinte =true;
+//         gameController.isFinal =true;
+//         startGame(4,5,1);
+//         pauseTimer = startTimer(90, timerCallback);
         
-    }
-    else if(gameController.LingoRoundStage===8 && gameController.timeLeft!==0){
-        divEl.innerHTML ="";
-        gameController.moneyIncrement= gameController.playerMoney*2;
-        gameController.playerMoney =0;
-        gameController.isChallengeWord =false;
-        gameController.isInfinte =true;
-        startGame(5,5,1);
-        pauseTimer = startTimer(90,timerCallback,remainingTime);
-    }
-    else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0){
+//     }
+//     else if(gameController.LingoRoundStage===8 && gameController.timeLeft!==0){
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement= gameController.playerMoney*2;
+//         gameController.playerMoney =0;
+//         gameController.isChallengeWord =false;
+//         gameController.isInfinte =true;
+//         startGame(5,5,1);
+//         pauseTimer = startTimer(90,timerCallback,remainingTime);
+//     }
+//     else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0){
+//         document.getElementById("game-area").style.display="none";
+//         document.getElementById("control-area").style.display="none";
+//         document.getElementById("skip-word").style.display="none";
+//         document.getElementById("final").style.display="block";
+//         document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
+//         if(gameController.playerMoney>=3000){
+//             document.getElementById("grand-prize").style.display ="block"
+//         }
+//     }
+//     else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
+//         document.getElementById("final").style.display="none";
+//         divEl.innerHTML ="";
+//         gameController.moneyIncrement= gameController.playerMoney;
+//         gameController.isChallengeWord =false;
+//         gameController.isInfinte =false;
+//         gameController.isFinal =true;
+//         startGame(6,5,1);
+//         pauseTimer = startTimer(90,timerCallback,remainingTime);
+//         gameController.isChoiceMade =true;
+//     }
+//     else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
+//         document.getElementById("final").style.display="none";
+//         divEl.innerHTML ="";
+//         let incrementUpTo1500 = 15000 - gameController.playerMoney;
+//         gameController.moneyIncrement= incrementUpTo1500;
+//         gameController.isChallengeWord =false;
+//         gameController.isInfinte =false;
+//         gameController.isFinal =true;
+//         gameController.isGrandPrize =true;
+//         startGame(7,5,1);
+//         pauseTimer = startTimer(90,timerCallback,remainingTime);
+//         gameController.isChoiceMade =true;
+//     }
+//     else{
+//         let gameMode;
+//         if(gameController.isTimedGame){
+//             gameMode = "timedLingoHighScores";
+//         }
+//         else{
+//             gameMode = "lingoHighScores";
+//         }
+//         gameController.isFinal =false;
+//         document.getElementById("game-over").style.display="block";
+//         document.getElementById("skip-word").style.display="none";
+//         document.getElementById("game-area").style.display="none";
+//         document.getElementById("back-button").style.display="none";
+//         if(window.screen.width <= 473){
+//             document.getElementById("mobile-scores").style.display ="none";
+//         }
+//         document.getElementById("game-over").innerHTML="";
+//         document.getElementById("game-over").innerHTML =`<div id="game-over-container">
+//         <h1> Game Over</h1>
+//         <p>You got £${gameController.playerMoney}
+//         <div id="add-score-container">
+//         <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
+//         <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
+//         </div>
+//         <button onclick="showWordsAndDefi()">All Lingo words</button>
+//         <button onclick="returnToMenu()"style="background: orange;">Exit</button>
+//         </div>`;
+//     }
+    
+// }
+
+// }
+
+// function finishGame(){
+//     let divEl = document.getElementById("game-area");
+//     if(gameController.isPracticeGame){
+//         document.getElementById("game-over").style.display="block";
+//         document.getElementById("game-area").style.display="none";
+//         document.getElementById("game-over").innerHTML =`
+//     <h1> Game Over</h1>
+//     <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
+//     document.getElementById("control-area").innerHTML="";
+//     if(window.screen.width > 473){
+//         document.getElementById("mobile-scores").style.display ="none";
+//     }
+//     }else if(!gameController.isPracticeGame){
+//         // If the Lingo game is infinte it is in the final and should be looped till timer ends.
+//         if(!gameController.isInfinte){
+//             gameController.LingoRoundStage++;
+//         }
+//         if(gameController.LingoRoundStage===1){
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement=300;
+//             gameController.isChallengeWord =true;
+//             // new round screen
+//             document.getElementById("new-stage-display").style.display ="flex";
+//             document.getElementById("stage-header").innerText="Challenege word";
+//             document.getElementById("stage-subheader").innerText="9 letter challenge";
+//             document.getElementById("stage-p").innerText ="Timed game";
+//             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//             document.getElementById("stage-button").addEventListener("click",()=>{
+//                 document.getElementById("new-stage-display").style.display ="none";
+//                 startGame(9,1,1)
+//             });
+//         }
+//         else if(gameController.LingoRoundStage===2){
+//              // new round screen
+//              document.getElementById("new-stage-display").style.display ="flex";
+//              document.getElementById("stage-header").innerText="Stage 2";
+//              document.getElementById("stage-subheader").innerText="5 letter words";
+//              document.getElementById("stage-p").innerText ="4 chances to earn money";
+//              document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//              gameController.isChallengeWord =false;
+//              document.getElementById("stage-button").addEventListener("click",()=>{
+//              document.getElementById("new-stage-display").style.display ="none";
+//              finishGame()
+//              });
+//         }
+//         else if(gameController.LingoRoundStage===3){
+//             divEl.innerHTML ="";
+//             gameController.timerDisplay.style.display="none";
+//             document.getElementById("progress-bar").style.display="none";
+//             gameController.moneyIncrement=300;
+//             gameController.isChallengeWord =false;
+//             startGame(5,5,4)
+
+//         }
+//         else if(gameController.LingoRoundStage===4){
+//             divEl.innerHTML ="";
+//             gameController.isChallengeWord =false;
+//             // new round screen
+//             document.getElementById("new-stage-display").style.display ="flex";
+//             document.getElementById("stage-header").innerText="Challenege word";
+//             document.getElementById("stage-subheader").innerText="10 letter challenge";
+//             document.getElementById("stage-p").innerText ="Timed game";
+//             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//             document.getElementById("stage-button").addEventListener("click",()=>{
+//                 document.getElementById("new-stage-display").style.display ="none";
+//                 finishGame()
+//             });
+//         }
+//         else if(gameController.LingoRoundStage===5){
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement=400;
+//             ProgressWidth =100;
+//             gameController.isChallengeWord =true;
+//             startGame(10,1,1,10)
+//         }
+//         else if(gameController.LingoRoundStage===6){
+//             divEl.innerHTML ="";
+//             gameController.timerDisplay.style.display="none";
+//             document.getElementById("progress-bar").style.display="none";
+//             gameController.moneyIncrement=500;
+//             gameController.isChallengeWord =false;
+//              // new round screen
+//              document.getElementById("new-stage-display").style.display ="flex";
+//              document.getElementById("stage-header").innerText="Stage 3";
+//              document.getElementById("stage-subheader").innerText="4 letter words";
+//              document.getElementById("stage-p").innerText ="2 chances to earn money. Money decreases by £50 each guess";
+//              document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//              document.getElementById("stage-button").addEventListener("click",()=>{
+//                  document.getElementById("new-stage-display").style.display ="none";
+//                  startGame(4,5,2)
+//              });
+//         }
+//         else if(gameController.LingoRoundStage===7){
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement=500;
+//             gameController.isChallengeWord =false;
+//              // new round screen
+//              document.getElementById("new-stage-display").style.display ="flex";
+//              document.getElementById("stage-header").innerText="Stage 4";
+//              document.getElementById("stage-subheader").innerText="5 letter words";
+//              document.getElementById("stage-p").innerText ="2 chances to earn money. Money decreases by £50 each guess";
+//              document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//              document.getElementById("stage-button").addEventListener("click",()=>{
+//                  document.getElementById("new-stage-display").style.display ="none";
+//                  startGame(5,5,2)
+//              });
+//         }
+//         else if(gameController.LingoRoundStage===8){
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement=750;
+//             gameController.isChallengeWord =true;
+//             ProgressWidth =100;
+//                // new round screen
+//                document.getElementById("new-stage-display").style.display ="flex";
+//                document.getElementById("stage-header").innerText="Challenege word";
+//                document.getElementById("stage-subheader").innerText="10 letter challenge";
+//                document.getElementById("stage-p").innerText ="Timed game";
+//                document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+//                document.getElementById("stage-button").addEventListener("click",()=>{
+//                    document.getElementById("new-stage-display").style.display ="none";
+//                    startGame(10,1,1,10)
+//                });
+//         }
+//         else if(gameController.LingoRoundStage ===9){
+//                 document.getElementById("new-stage-display").style.display ="flex";
+//                 document.getElementById("stage-header").innerText="Final";
+//                 document.getElementById("stage-subheader").innerText="4 and 5 letter word";
+//                 document.getElementById("stage-p").innerText ="90s on the clock. make sure you have time left for the 6 or 7 letter lingo";
+//                 document.getElementById("stage-money-display").innerText ="";
+//                 gameController.isChallengeWord =false;
+//                 gameController.isInfinte = false;
+//                 document.getElementById("stage-button").addEventListener("click",()=>{
+//                     finishGame()
+//                 })
+    
+//         }
+//         else if(gameController.LingoRoundStage===10){
+//             divEl.innerHTML ="";
+//             document.getElementById("skip-word").style.display="block";
+//             document.getElementById("progress-bar").style.display="none";
+//             gameController.moneyIncrement= gameController.playerMoney/2;
+//             gameController.playerMoney =0;
+//             gameController.isChallengeWord =false;
+//             gameController.isInfinte =true;
+//             gameController.isFinal =true;
+//             startGame(4,5,1);
+//             pauseTimer = startTimer(90, timerCallback);
+            
+//         }
+//         else if(gameController.LingoRoundStage===11 && gameController.timeLeft!==0){
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement= gameController.playerMoney*2;
+//             gameController.playerMoney =0;
+//             gameController.isChallengeWord =false;
+//             gameController.isInfinte =true;
+//             startGame(5,5,1);
+//             pauseTimer = startTimer(90,timerCallback,remainingTime);
+//         }
+//         else if(gameController.LingoRoundStage===12 && gameController.timeLeft!==0){
+//             document.getElementById("game-area").style.display="none";
+//             document.getElementById("control-area").style.display="none";
+//             document.getElementById("skip-word").style.display="none";
+//             document.getElementById("final").style.display="block";
+//             document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
+//             if(gameController.playerMoney>=3000){
+//                 document.getElementById("grand-prize").style.display ="block"
+//             }
+//         }
+//         else if(gameController.LingoRoundStage===13 && !gameController.isChoiceMade){
+//             document.getElementById("final").style.display="none";
+//             divEl.innerHTML ="";
+//             gameController.moneyIncrement= gameController.playerMoney;
+//             gameController.isChallengeWord =false;
+//             gameController.isInfinte =false;
+//             gameController.isFinal =true;
+//             startGame(6,5,1);
+//             pauseTimer = startTimer(90,timerCallback,remainingTime);
+//             gameController.isChoiceMade =true;
+//         }
+//         else if(gameController.LingoRoundStage===13 && !gameController.isChoiceMade){
+//             document.getElementById("final").style.display="none";
+//             divEl.innerHTML ="";
+//             let incrementUpTo1500 = 15000 - gameController.playerMoney;
+//             gameController.moneyIncrement= incrementUpTo1500;
+//             gameController.isChallengeWord =false;
+//             gameController.isInfinte =false;
+//             gameController.isFinal =true;
+//             gameController.isGrandPrize =true;
+//             startGame(7,5,1);
+//             pauseTimer = startTimer(90,timerCallback,remainingTime);
+//             gameController.isChoiceMade =true;
+//         }
+//         else{
+//             let gameMode;
+//             if(gameController.isTimedGame){
+//                 gameMode = "timedLingoHighScores";
+//             }
+//             else{
+//                 gameMode = "lingoHighScores";
+//             }
+//             gameController.isFinal =false;
+//             document.getElementById("game-over").style.display="block";
+//             document.getElementById("skip-word").style.display="none";
+//             document.getElementById("game-area").style.display="none";
+//             document.getElementById("back-button").style.display="none";
+//             if(window.screen.width <= 473){
+//                 document.getElementById("mobile-scores").style.display ="none";
+//             }
+//             document.getElementById("game-over").innerHTML="";
+//             document.getElementById("game-over").innerHTML =`<div id="game-over-container">
+//             <h1> Game Over</h1>
+//             <p>You got £${gameController.playerMoney}
+//             <div id="add-score-container">
+//             <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
+//             <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
+//             </div>
+//             <button onclick="showWordsAndDefi()">All Lingo words</button>
+//             <button onclick="returnToMenu()"style="background: orange;">Exit</button>
+//             </div>`;
+//         }
+        
+//     }
+    
+//     }
+
+function finishGame(){
+    let divEl = document.getElementById("game-area");
+    if(gameController.isPracticeGame){
+        document.getElementById("game-over").style.display="block";
         document.getElementById("game-area").style.display="none";
-        document.getElementById("control-area").style.display="none";
-        document.getElementById("skip-word").style.display="none";
-        document.getElementById("final").style.display="block";
-        document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
-        if(gameController.playerMoney>=3000){
-            document.getElementById("grand-prize").style.display ="block"
+        document.getElementById("game-over").innerHTML =`
+    <h1> Game Over</h1>
+    <p>You got ${gameController.correctAnswersTally}/${gameController.gameRounds}`;
+    document.getElementById("control-area").innerHTML="";
+    if(window.screen.width > 473){
+        document.getElementById("mobile-scores").style.display ="none";
+    }
+    }else if(!gameController.isPracticeGame){
+        // If the Lingo game is infinte it is in the final and should be looped till timer ends.
+        if(!gameController.isInfinte){
+            gameController.LingoRoundStage++;
         }
-    }
-    else if(gameController.LingoRoundStage===10 && !gameController.isChoiceMade){
-        document.getElementById("final").style.display="none";
-        divEl.innerHTML ="";
-        gameController.moneyIncrement= gameController.playerMoney;
-        gameController.isChallengeWord =false;
-        gameController.isInfinte =false;
-        gameController.isFinal =true;
-        startGame(6,5,1);
-        pauseTimer = startTimer(90,timerCallback,remainingTime);
-        gameController.isChoiceMade =true;
-    }
-    else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
-        document.getElementById("final").style.display="none";
-        divEl.innerHTML ="";
-        let incrementUpTo1500 = 15000 - gameController.playerMoney;
-        gameController.moneyIncrement= incrementUpTo1500;
-        gameController.isChallengeWord =false;
-        gameController.isInfinte =false;
-        gameController.isFinal =true;
-        gameController.isGrandPrize =true;
-        startGame(7,5,1);
-        pauseTimer = startTimer(90,timerCallback,remainingTime);
-        gameController.isChoiceMade =true;
-    }
-    else{
-        let gameMode;
-        if(gameController.isTimedGame){
-            gameMode = "timedLingoHighScores";
+        if(gameController.LingoRoundStage===1){
+            divEl.innerHTML ="";
+            gameController.moneyIncrement=300;
+            gameController.isChallengeWord =true;
+            //  new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-subheader").innerText="9 letter challenge";
+            document.getElementById("stage-p").innerText ="Timed game";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(9,1,1);
+            },gameController.newStageDelay)
+            
+        }
+        else if(gameController.LingoRoundStage===2){
+            divEl.innerHTML ="";
+            gameController.timerDisplay.style.display="none";
+            document.getElementById("progress-bar").style.display="none";
+            gameController.moneyIncrement=300;
+            gameController.isChallengeWord =false;
+            // new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Stage 2";
+            document.getElementById("stage-subheader").innerText="5 letter words";
+            document.getElementById("stage-p").innerText ="4 chances to earn money";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(5,5,4);
+            },gameController.newStageDelay)
+             
+        }
+        else if(gameController.LingoRoundStage===3){
+            divEl.innerHTML ="";
+            gameController.moneyIncrement=400;
+            ProgressWidth =100;
+            gameController.isChallengeWord =true;
+            // new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-subheader").innerText="10 letter challenge";
+            document.getElementById("stage-p").innerText ="Timed game";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(10,1,1,10);
+            },gameController.newStageDelay)
+            
+        }
+        else if(gameController.LingoRoundStage===4){
+            divEl.innerHTML ="";
+            gameController.timerDisplay.style.display="none";
+            document.getElementById("progress-bar").style.display="none";
+            gameController.moneyIncrement=500;
+            gameController.isChallengeWord =false;
+            // new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Stage 3";
+            document.getElementById("stage-subheader").innerText="4 letter words";
+            document.getElementById("stage-p").innerText ="2 chances to earn money. Money decreases by £50 each guess";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(4,5,2);
+            },gameController.newStageDelay)
+             
+        }
+        else if(gameController.LingoRoundStage===5){
+            divEl.innerHTML ="";
+            gameController.moneyIncrement=500;
+            gameController.isChallengeWord =false;
+            // new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Stage 4";
+            document.getElementById("stage-subheader").innerText="5 letter words";
+            document.getElementById("stage-p").innerText ="2 chances to earn money. Money decreases by £50 each guess";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(5,5,2);
+            },gameController.newStageDelay)
+             
+        }
+        else if(gameController.LingoRoundStage===6){
+            divEl.innerHTML ="";
+            gameController.moneyIncrement=750;
+            gameController.isChallengeWord =true;
+            ProgressWidth =100;
+            // new round screen
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-subheader").innerText="10 letter challenge";
+            document.getElementById("stage-p").innerText ="Timed game";
+            document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                startGame(10,1,1,10);
+            },gameController.newStageDelay)
+               
+        }
+        else if(gameController.LingoRoundStage ===7){
+            divEl.innerHTML ="";
+            document.getElementById("new-stage-display").style.display ="flex";
+            document.getElementById("stage-header").innerText="Final";
+            document.getElementById("stage-subheader").innerText="4 and 5 letter word";
+            document.getElementById("stage-p").innerText ="90s on the clock. make sure you have time left for the 6 or 7 letter lingo";
+            document.getElementById("stage-money-display").innerText ="";
+            gameController.isChallengeWord =false;
+            gameController.isInfinte = false;
+            setTimeout(function(){
+                document.getElementById("new-stage-display").style.display ="none";
+                finishGame()
+            },gameController.newStageDelay)
+    
+        }
+        else if(gameController.LingoRoundStage===8){
+            divEl.innerHTML ="";
+            document.getElementById("skip-word").style.display="block";
+            document.getElementById("progress-bar").style.display="none";
+            gameController.moneyIncrement= gameController.playerMoney/2;
+            gameController.playerMoney =0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            gameController.isFinal =true;
+            startGame(4,5,1);
+            pauseTimer = startTimer(90, timerCallback);
+            
+        }
+        else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0){
+            divEl.innerHTML ="";
+            gameController.moneyIncrement= gameController.playerMoney*2;
+            gameController.playerMoney =0;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =true;
+            startGame(5,5,1);
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+        }
+        else if(gameController.LingoRoundStage===10 && gameController.timeLeft!==0){
+            document.getElementById("game-area").style.display="none";
+            document.getElementById("control-area").style.display="none";
+            document.getElementById("skip-word").style.display="none";
+            document.getElementById("final").style.display="block";
+            document.getElementById("banked-message").innerText=`You Have Banked £${gameController.playerMoney} `;
+            if(gameController.playerMoney>=3000){
+                document.getElementById("grand-prize").style.display ="block"
+            }
+        }
+        else if(gameController.LingoRoundStage===11 && !gameController.isChoiceMade){
+            document.getElementById("final").style.display="none";
+            divEl.innerHTML ="";
+            gameController.moneyIncrement= gameController.playerMoney;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =false;
+            gameController.isFinal =true;
+            startGame(6,5,1);
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            gameController.isChoiceMade =true;
+        }
+        else if(gameController.LingoRoundStage===12 && !gameController.isChoiceMade){
+            document.getElementById("final").style.display="none";
+            divEl.innerHTML ="";
+            let incrementUpTo1500 = 15000 - gameController.playerMoney;
+            gameController.moneyIncrement= incrementUpTo1500;
+            gameController.isChallengeWord =false;
+            gameController.isInfinte =false;
+            gameController.isFinal =true;
+            gameController.isGrandPrize =true;
+            startGame(7,5,1);
+            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            gameController.isChoiceMade =true;
         }
         else{
-            gameMode = "lingoHighScores";
+            let gameMode;
+            if(gameController.isTimedGame){
+                gameMode = "timedLingoHighScores";
+            }
+            else{
+                gameMode = "lingoHighScores";
+            }
+            gameController.isFinal =false;
+            document.getElementById("game-over").style.display="block";
+            document.getElementById("skip-word").style.display="none";
+            document.getElementById("game-area").style.display="none";
+            document.getElementById("back-button").style.display="none";
+            if(window.screen.width <= 473){
+                document.getElementById("mobile-scores").style.display ="none";
+            }
+            document.getElementById("game-over").innerHTML="";
+            document.getElementById("game-over").innerHTML =`<div id="game-over-container">
+            <h1> Game Over</h1>
+            <p>You got £${gameController.playerMoney}
+            <div id="add-score-container">
+            <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
+            <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
+            </div>
+            <button onclick="showWordsAndDefi()">All Lingo words</button>
+            <button onclick="returnToMenu()"style="background: orange;">Exit</button>
+            </div>`;
         }
-        gameController.isFinal =false;
-        document.getElementById("game-over").style.display="block";
-        document.getElementById("skip-word").style.display="none";
-        document.getElementById("game-area").style.display="none";
-        document.getElementById("back-button").style.display="none";
-        if(window.screen.width <= 473){
-            document.getElementById("mobile-scores").style.display ="none";
-        }
-        document.getElementById("game-over").innerHTML="";
-        document.getElementById("game-over").innerHTML =`<div id="game-over-container">
-        <h1> Game Over</h1>
-        <p>You got £${gameController.playerMoney}
-        <div id="add-score-container">
-        <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
-        <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
-        </div>
-        <button onclick="showWordsAndDefi()">All Lingo words</button>
-        <button onclick="returnToMenu()"style="background: orange;">Exit</button>
-        </div>`;
+        
     }
-    
-}
-
 }
 
 // End core game logic
@@ -1015,7 +1464,7 @@ document.getElementById("final-timer-display").style.display= "block";
 document.getElementById("final-timer-display").innerText = `${remainingTime}s Remains`;
 if(remainingTime <=0){
     gameController.isInfinte =false;
-    if(gameController.LingoRoundStage===11 && gameController.isGrandPrize){
+    if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
     endGame("red");
@@ -1160,11 +1609,11 @@ document.getElementById(`word-${addWord}`).remove();
 
 // Onclick Final choices
 function finalSixLetterChoice(){
-gameController.LingoRoundStage =9; // one less because finish game adds 1
+gameController.LingoRoundStage =11; // one less because finish game adds 1
 finishGame();
 }
 function finalSevenLetterChoice(){
-gameController.LingoRoundStage =10; // one less because finish game adds 1
+gameController.LingoRoundStage =12; // one less because finish game adds 1
 finishGame();
 }
 

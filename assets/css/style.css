@@ -861,8 +861,61 @@ section{
     background-color: rgba(0,0,0,0.5);
 }
 
+/* New round display */
+#new-stage-display{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border: 50px solid transparent ;
+    border-radius: 50%;
+    margin-left: 0;
+    width: 90%;
+    height: 80%;
+    background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    
+}
+.new-stage-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(#0B1D39 ,#00225B) ;
+    
+    border-radius: 50%;
+
+}
+#stage-header {
+    font-size: 35px;
+}
+#stage-subheader{
+    font-size: large;
+}
+#stage-button{
+    background-color: orange;
+    padding: 1rem;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+}
+#stage-button:hover{
+    background-color: green;
+}
+
 /* Hidden elements */
 
-#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over,#tutorial-section,#grand-prize,#input-api-key,#menu-overlay{
+#options,#back-button,#final,#timer-display,#play-lingo-options,#skip-word,#dictonary,#words-defi-list,#full-game-section,#leader-board-section,#dictonary-section,.display-defi,#final-timer-display,#progress-bar,#game-over,#tutorial-section,#grand-prize,#input-api-key,#menu-overlay,#new-stage-display{
     display: none;
 }
