@@ -819,7 +819,7 @@ if(color === "green"){
 }
 if((gameController.currentRound === gameController.gameRounds || gameController.gameTimer ===0)&& !gameController.isInfinte){
     if(gameController.isFinal || gameController.isChallengeWord){pauseTimer();}
-    if(gameController.isChallengeWord){pauseTimer()}
+    if(gameController.isChallengeWord){pauseTimer();}
     displayLingo(color);
     if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
@@ -1489,6 +1489,7 @@ function challengeTimerCallBack(timeLeft,widthDecrease){
     gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
     ProgressWidth = ProgressWidth - widthDecrease;
     if(timeLeft<=0){
+        document.getElementById("control-area").style.display ="none"
         gameController.isChallengeWord=false;
         endGame("red");
         pauseTimer();
@@ -1642,6 +1643,13 @@ let roundIndex =gameController.roundCounter;
 }
 // Delay input to tiles
 function delayLoop(x){
+    let letterDelay;
+    if(gameController.isChallengeWord){
+        letterDelay= 1;
+    }
+    else{
+        letterDelay = gameController.letterDisplayDelay;
+    }
 setTimeout(function(){
     if(gameController.userAnswer[x] !== undefined){
         gameController.roundTiles[gameController.roundCounter][x].innerText = gameController.userAnswer[x];
@@ -1650,7 +1658,7 @@ setTimeout(function(){
         gameController.roundTiles[gameController.roundCounter][x].innerText = ".";
     }
     
-},x*gameController.letterDisplayDelay);
+},x*letterDelay);
 }
 function displayLingo(color){
 let roundIndex =gameController.roundCounter;
