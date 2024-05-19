@@ -395,7 +395,7 @@ isFinal:false,
 isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
-LingoRoundStage:6,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000,
 newStageDelay:5000
