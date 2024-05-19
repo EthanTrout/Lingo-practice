@@ -151,6 +151,11 @@ Note: word is Bias
 ![ChallenegeRound2](./assets/readme-images/challenge-round-2.png)
 ![ChallenegeRound3](./assets/readme-images/challenge-round-3.png)
 
+### New Game stage display
+- After entering a new stage of the main game a display will apear highlighting the new stage
+- It displays the stage and how much money the player has
+- this will apear for 5s before moving onto the game
+![New stage display](./assets/readme-images/newStageDisplay.png)
 ### Game Structure 
 The game structure is the same as the TV show Lingo. all rounds Except Challenege rounds get five guesses
 
