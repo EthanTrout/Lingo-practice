@@ -396,7 +396,7 @@ isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
 isFinalTimerEnd:false,
-LingoRoundStage:0,
+LingoRoundStage:6,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000,
 newStageDelay:5000
@@ -672,6 +672,11 @@ function returnToMenu(){
  document.getElementById("grand-prize").style.display ="none"
  document.getElementById("menu-options-section").style.display ="block";
  document.getElementById("game-menu").style.display ="flex";
+ //  new round screen
+ document.getElementById("stage-header").innerText="Round 1";
+ document.getElementById("stage-subheader").innerText="4 letter words";
+ document.getElementById("stage-p").innerText ="4 chances to earn money";
+ document.getElementById("stage-money-display").innerText ="You have earned:£0";
  if(document.getElementById("clue")){
      document.getElementById("clue").innerText="";
  }
@@ -823,10 +828,13 @@ if((gameController.currentRound === gameController.gameRounds || gameController.
     if(gameController.isFinal || gameController.isChallengeWord){pauseTimer();}
     if(gameController.isChallengeWord){pauseTimer();}
     displayLingo(color);
-    if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
+    if(gameController.LingoRoundStage===12 && gameController.isGrandPrize && color ==="red"){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
-    if(gameController.LingoRoundStage === 8 || gameController.LingoRoundStage === 9 || gameController.LingoRoundStage === 11){
+    if(gameController.LingoRoundStage === 11 && color==="red"){
+        gameController.playerMoney = gameController.playerMoney + moneyIncrement;
+    }
+    if((gameController.LingoRoundStage === 8 || gameController.LingoRoundStage === 9) && color ==="red"){
         gameController.playerMoney = gameController.moneyIncrement;
         gameController.isFinalTimerEnd = true;
     }
@@ -1344,6 +1352,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage ===7){
             divEl.style.display ="none";
+            document.getElementById("progress-bar").style.display="none";
             document.getElementById("new-stage-display").style.display ="flex";
             document.getElementById("stage-header").innerText="Final";
             document.getElementById("stage-subheader").innerText="4 and 5 letter word";
@@ -1371,7 +1380,7 @@ function finishGame(){
             pauseTimer = startTimer(90, timerCallback);
             
         }
-        else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0){
+        else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0 && !gameController.isFinalTimerEnd){
             divEl.innerHTML ="";
             gameController.moneyIncrement= gameController.playerMoney*2;
             gameController.playerMoney =0;
@@ -1489,6 +1498,13 @@ if(remainingTime <=0){
     if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
+    if(gameController.LingoRoundStage === 8 ||gameController.LingoRoundStage === 11 ){
+        gameController.moneyIncrement =0;
+    }
+    if(gameController.LingoRoundStage === 9){
+        gameController.moneyIncrement = gameController.moneyIncrement/2;
+    }
+    gameController.isFinalTimerEnd =true;
     endGame("red");
     pauseTimer();
 }
@@ -1632,11 +1648,11 @@ document.getElementById(`word-${addWord}`).remove();
 
 // Onclick Final choices
 function finalSixLetterChoice(){
-gameController.LingoRoundStage =11; // one less because finish game adds 1
+gameController.LingoRoundStage =10; // one less because finish game adds 1
 finishGame();
 }
 function finalSevenLetterChoice(){
-gameController.LingoRoundStage =12; // one less because finish game adds 1
+gameController.LingoRoundStage =11; // one less because finish game adds 1
 finishGame();
 }
 
