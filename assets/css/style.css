@@ -51,8 +51,8 @@
         --5-letter-line-height:4.2rem;
         --6-letter-line-height:4rem;
         --7-letter-line-height:3rem;
-        --9-letter-line-height:3rem;
-        --10-letter-line-height:3rem;
+        --9-letter-line-height:2rem;
+        --10-letter-line-height:2rem;
     }
     
 }
@@ -63,15 +63,15 @@
         --5-letter-size:50px;
         --6-letter-size:40px;
         --7-letter-size:30px;
-        --9-letter-size:30px;
-        --10-letter-size:30px;
+        --9-letter-size:20px;
+        --10-letter-size:20px;
 
         --4-letter-line-height:3.5rem;
         --5-letter-line-height:3rem;
         --6-letter-line-height:2.5rem;
         --7-letter-line-height:1.5rem;
-        --9-letter-line-height:1.5rem;
-        --10-letter-line-height:1.5rem;
+        --9-letter-line-height:1.2rem;
+        --10-letter-line-height:1.2rem;
     }
     
 }
@@ -545,6 +545,10 @@ section{
     margin-top: 0px;
 }
 
+#tutorial-control-area{
+    
+}
+
 /* Lingo Game Tiles */
 
 #game-area ul{
@@ -827,9 +831,16 @@ section{
 #rules-display h1{
     text-align: center;
 }
-#rules-display-inner{
-    
+@media only screen and (max-width: 473px) {
+    #tutorial-toggle-user-input{
+        display: none;
+    }
+    #rules-display{
+        width: 70%;
+        height: 50%;
+    }
 }
+
 
 /* API key enter */
 #input-api-key{

@@ -615,7 +615,6 @@ function nextTutorialStep(tutorialStep){
                     </ul>
                     <div class ="tutorial-buttons">
                         <button onclick= "returnToTutorialMenu()">Exit</button>
-                        <button id="show" onclick="nextTutorialStep(8)">Show</button>
                     </div>
                 </div>
             </div>`
