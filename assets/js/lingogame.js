@@ -396,7 +396,7 @@ isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
 isFinalTimerEnd:false,
-LingoRoundStage:6,
+LingoRoundStage:0,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000,
 newStageDelay:5000
@@ -832,7 +832,7 @@ if((gameController.currentRound === gameController.gameRounds || gameController.
         gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
     if(gameController.LingoRoundStage === 11 && color==="red"){
-        gameController.playerMoney = gameController.playerMoney + moneyIncrement;
+        gameController.playerMoney = gameController.playerMoney + gameController.moneyIncrement;
     }
     if((gameController.LingoRoundStage === 8 || gameController.LingoRoundStage === 9) && color ==="red"){
         gameController.playerMoney = gameController.moneyIncrement;
@@ -1244,6 +1244,7 @@ function finishGame(){
         }
         if(gameController.LingoRoundStage===1){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.moneyIncrement=300;
             gameController.isChallengeWord =true;
             //  new round screen
@@ -1255,12 +1256,14 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
+                document.getElementById("back-button").style.display = "block"
                 startGame(9,1,1);
             },gameController.newStageDelay)
             
         }
         else if(gameController.LingoRoundStage===2){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=300;
@@ -1274,12 +1277,14 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
+                document.getElementById("back-button").style.display = "block"
                 startGame(5,5,4);
             },gameController.newStageDelay)
              
         }
         else if(gameController.LingoRoundStage===3){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.moneyIncrement=400;
             ProgressWidth =100;
             gameController.isChallengeWord =true;
@@ -1291,6 +1296,7 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                document.getElementById("back-button").style.display = "block"
                 divEl.style.display ="table";
                 startGame(10,1,1,10);
             },gameController.newStageDelay)
@@ -1298,6 +1304,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===4){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=500;
@@ -1310,6 +1317,7 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                document.getElementById("back-button").style.display = "block"
                 divEl.style.display ="table";
                 startGame(4,5,2);
             },gameController.newStageDelay)
@@ -1317,6 +1325,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===5){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =false;
             // new round screen
@@ -1327,6 +1336,7 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                document.getElementById("back-button").style.display = "block"
                 divEl.style.display ="table";
                 startGame(5,5,2);
             },gameController.newStageDelay)
@@ -1334,6 +1344,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage===6){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none"
             gameController.moneyIncrement=750;
             gameController.isChallengeWord =true;
             ProgressWidth =100;
@@ -1345,6 +1356,7 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
+                document.getElementById("back-button").style.display = "block"
                 divEl.style.display ="table";
                 startGame(10,1,1,10);
             },gameController.newStageDelay)
@@ -1352,6 +1364,7 @@ function finishGame(){
         }
         else if(gameController.LingoRoundStage ===7){
             divEl.style.display ="none";
+            document.getElementById("back-button").style.display = "none";
             document.getElementById("progress-bar").style.display="none";
             document.getElementById("new-stage-display").style.display ="flex";
             document.getElementById("stage-header").innerText="Final";
@@ -1363,6 +1376,7 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
+                document.getElementById("back-button").style.display = "block"
                 finishGame()
             },gameController.newStageDelay)
     
