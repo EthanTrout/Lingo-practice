@@ -1,77 +1,93 @@
 /* Css Variables */
 /* /* Desktop screen Game tiles sizeing */ 
+:root{
+    --letter-size-4:80px;
+    --letter-size-5:75px;
+    --letter-size-6:65px;
+    --letter-size-7:55px;
+    --letter-size-9:55px;
+    --letter-size-10:55px;
+
+    --letter-line-height-4:4.7rem;
+    --letter-line-height-5:4.7rem;
+    --letter-line-height-6:4.7rem;
+    --letter-line-height-7:3rem;
+    --letter-line-height-9:3rem;
+    --letter-line-height-10:3rem;
+
+}
 @media only screen and (min-width: 950px){
     :root{
-        --4-letter-size:80px;
-        --5-letter-size:75px;
-        --6-letter-size:65px;
-        --7-letter-size:55px;
-        --9-letter-size:55px;
-        --10-letter-size:55px;
+        --letter-size-4:80px;
+        --letter-size-5:75px;
+        --letter-size-6:65px;
+        --letter-size-7:55px;
+        --letter-size-9:55px;
+        --letter-size-10:55px;
 
-        --4-letter-line-height:4.7rem;
-        --5-letter-line-height:4.7rem;
-        --6-letter-line-height:4.7rem;
-        --7-letter-line-height:3rem;
-        --9-letter-line-height:3rem;
-        --10-letter-line-height:3rem;
+        --letter-line-height-4:4.7rem;
+        --letter-line-height-5:4.7rem;
+        --letter-line-height-6:4.7rem;
+        --letter-line-height-7:3rem;
+        --letter-line-height-9:3rem;
+        --letter-line-height-10:3rem;
 
     }
 }
 /* Small laptop/ large tablet sizing screen Game tiles sizeing */
 @media only screen and (max-width: 950px) {
     :root{
-        --4-letter-size:80px;
-        --5-letter-size:70px;
-        --6-letter-size:60px;
-        --7-letter-size:50px;
-        --9-letter-size:40px;
-        --10-letter-size:40px;
+        --letter-size-4:80px;
+        --letter-size-5:70px;
+        --letter-size-6:60px;
+        --letter-size-7:50px;
+        --letter-size-9:40px;
+        --letter-size-10:40px;
 
-        --4-letter-line-height:4.7rem;
-        --5-letter-line-height:4.7rem;
-        --6-letter-line-height:4rem;
-        --7-letter-line-height:3rem;
-        --9-letter-line-height:3rem;
-        --10-letter-line-height:3rem;
+        --letter-line-height-4:4.7rem;
+        --letter-line-height-5:4.7rem;
+        --letter-line-height-6:4rem;
+        --letter-line-height-7:3rem;
+        --letter-line-height-9:3rem;
+        --letter-line-height-10:3rem;
     }
     
 }
 /* Tablet/Small laptop screen Game tiles sizeing */
 @media only screen and (max-width: 600px) {
     :root{
-        --4-letter-size:80px;
-        --5-letter-size:70px;
-        --6-letter-size:60px;
-        --7-letter-size:50px;
-        --9-letter-size:30px;
-        --10-letter-size:30px;
+        --letter-size-4:80px;
+        --letter-size-5:70px;
+        --letter-size-6:60px;
+        --letter-size-7:50px;
+        --letter-size-9:30px;
+        --letter-size-10:30px;
 
-        --4-letter-line-height:4.7rem;
-        --5-letter-line-height:4.2rem;
-        --6-letter-line-height:4rem;
-        --7-letter-line-height:3rem;
-        --9-letter-line-height:2rem;
-        --10-letter-line-height:2rem;
+        --letter-line-height-4:4.7rem;
+        --letter-line-height-5:4.2rem;
+        --letter-line-height-6:4rem;
+        --letter-line-height-7:3rem;
+        --letter-line-height-9:2rem;
+        --letter-line-height-10:2rem;
     }
     
 }
 /* Mobile screen Game tiles sizeing */
 @media only screen and (max-width: 473px) {
     :root{
-        --4-letter-size:60px;
-        --5-letter-size:50px;
-        --6-letter-size:40px;
-        --7-letter-size:30px;
-        --9-letter-size:20px;
-        --10-letter-size:20px;
+        --letter-size-4:60px;
+        --letter-size-5:50px;
+        --letter-size-6:40px;
+        --letter-size-7:30px;
+        --letter-size-9:20px;
+        --letter-size-10:20px;
 
-        --4-letter-line-height:3.5rem;
-        --5-letter-line-height:3rem;
-        --6-letter-line-height:2.5rem;
-        --7-letter-line-height:1.5rem;
-        --9-letter-line-height:1.2rem;
-        --10-letter-line-height:1.2rem;
+        --letter-line-height-4:3.5rem;
+        --letter-line-height-5:3rem;
+        --letter-line-height-6:2.5rem;
+        --letter-line-height-7:1.5rem;
+        --letter-line-height-9:1.2rem;
+        --letter-line-height-10:1.2rem;
     }
     
 }
@@ -545,9 +561,6 @@ section{
     margin-top: 0px;
 }
 
-#tutorial-control-area{
-    
-}
 
 /* Lingo Game Tiles */
 
@@ -582,35 +595,35 @@ section{
 }
 
 .mobile-length-4{
-    width: var(--4-letter-size);
-    height: var(--4-letter-size);
-    line-height: var(--4-letter-line-height);
+    width: var(--letter-size-4);
+    height: var(--letter-size-4);
+    line-height: var(--letter-line-height-4);
     
 }
 .mobile-length-5{
-    width: var(--5-letter-size);
-    height: var(--5-letter-size);
-    line-height: var(--5-letter-line-height);
+    width: var(--letter-size-5);
+    height: var(--letter-size-5);
+    line-height: var(--letter-line-height-5);
 }
 .mobile-length-6{
-    width: var(--6-letter-size);
-    height: var(--6-letter-size);
-    line-height: var(--6-letter-line-height);
+    width: var(--letter-size-6);
+    height: var(--letter-size-6);
+    line-height: var(--letter-line-height-6);
 }
 .mobile-length-7{
-    width: var(--7-letter-size);
-    height: var(--7-letter-size);
-    line-height: var(--7-letter-line-height);
+    width: var(--letter-size-7);
+    height: var(--letter-size-7);
+    line-height: var(--letter-line-height-7);
 }
 .mobile-length-9{
-    width: var(--9-letter-size);
-    height: var(--9-letter-size);
-    line-height: var(--9-letter-line-height);
+    width: var(--letter-size-9);
+    height: var(--letter-size-9);
+    line-height: var(--letter-line-height-9);
 }
 .mobile-length-10{
-    width: var(--10-letter-size);
-    height: var(--10-letter-size);
-    line-height: var(--10-letter-line-height);
+    width: var(--letter-size-10);
+    height: var(--letter-size-10);
+    line-height: var(--letter-line-height-10);
 }
 
 #clue{
@@ -828,8 +841,30 @@ section{
     justify-content: center;
     
 }
+#rules-display li{
+    margin-top: 1%;
+}
 #rules-display h1{
     text-align: center;
+}
+.tutorial-buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.tutorial-buttons button{
+    padding: 0.3rem;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+    color: #00225B;
+
+}
+.tutorial-buttons button:first-child{
+    background-color: orange;
+    color: white;
 }
 @media only screen and (max-width: 473px) {
     #tutorial-toggle-user-input{

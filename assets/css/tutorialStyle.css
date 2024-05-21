@@ -1,0 +1,92 @@
+#tutorial-progress-bar{
+    position: relative;
+    margin-top: 0px;
+    height: 10px;
+    width: 300px;
+    background-color: red;
+}
+#tutorial-timer-display{
+    background-color: lightblue;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+}
+#tutorial-final-timer-display{
+    margin-top: 0;
+    text-align: center;
+}
+
+#tutorial-area ul{
+    list-style: none;
+    display: table;
+}
+#tutorial-toggle-user-input{
+    display: flex;
+    min-height: 100px;
+}
+#tutorial-skip-word{
+    background-color: orange;
+    padding: 0.2rem;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+
+}
+
+#overlay{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#rules-display{
+    height: min-content;
+    width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,128,0,0.75);
+    display: flex;
+    justify-content: center;
+    
+}
+#rules-display li{
+    margin-top: 1%;
+}
+#rules-display h1{
+    text-align: center;
+}
+.tutorial-buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.tutorial-buttons button{
+    padding: 0.3rem;
+    text-align: center;
+    border: 3px solid #E0D6D1; 
+    border-radius: 6px;
+    color: white;
+    margin-top: 10px;
+    color: #00225B;
+
+}
+.tutorial-buttons button:first-child{
+    background-color: orange;
+    color: white;
+}
+@media only screen and (max-width: 473px) {
+    #tutorial-toggle-user-input{
+        display: none;
+    }
+    #rules-display{
+        width: 70%;
+        height: 50%;
+    }
+}
