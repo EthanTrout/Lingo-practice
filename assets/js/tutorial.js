@@ -73,7 +73,7 @@ function nextTutorialStep(tutorialStep){
         document.getElementById("rules-display").style.display ="none";
         setTimeout(function(){
             document.getElementById("overlay").style.display="block";
-            document.getElementById("rules-display").style.display ="block";},5000)
+            document.getElementById("rules-display").style.display ="block";},3000)
     }
     if(tutorialStep === 1){
         tutorialSection.innerHTML=`

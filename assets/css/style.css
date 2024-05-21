@@ -345,6 +345,15 @@ section{
     text-align: center;
     padding-bottom: 1rem;
 }
+#all-words{
+    list-style-type:none;
+}
+#all-words button{
+    padding-block: 0.25rem;
+    border-radius: 12px;
+    background-color: orange;
+    color: white;
+}
 .all-words-list{
     background-color: green;
     color: white;
