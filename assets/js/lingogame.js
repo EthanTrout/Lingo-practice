@@ -871,7 +871,7 @@ function finishGame(){
             gameController.isChallengeWord =true;
             //  new round screen
             document.getElementById("new-stage-display").style.display ="flex";
-            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-header").innerText="Challenge word";
             document.getElementById("stage-subheader").innerText="9 letter challenge";
             document.getElementById("stage-p").innerText ="Timed game";
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
@@ -912,7 +912,7 @@ function finishGame(){
             gameController.isChallengeWord =true;
             // new round screen
             document.getElementById("new-stage-display").style.display ="flex";
-            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-header").innerText="Challenge word";
             document.getElementById("stage-subheader").innerText="10 letter challenge";
             document.getElementById("stage-p").innerText ="Timed game";
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
@@ -972,7 +972,7 @@ function finishGame(){
             ProgressWidth =100;
             // new round screen
             document.getElementById("new-stage-display").style.display ="flex";
-            document.getElementById("stage-header").innerText="Challenege word";
+            document.getElementById("stage-header").innerText="Challenge word";
             document.getElementById("stage-subheader").innerText="10 letter challenge";
             document.getElementById("stage-p").innerText ="Timed game";
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
