@@ -189,6 +189,8 @@ The player can also check all the lingo words that were given to them in the gam
 - when the player clicks on a word it will display its decription
 - when the player clicks add it will remove the word from the list and add it to there Dictonary on the home screen
 - the section includes a back button to go to the previous menu to update there score
+![All lingo words list](./assets/readme-images/all-lingo-words-list.png)
+![ALl lingo words description pop up](./assets/readme-images/lingo-word-pop-up.png)
 
 ## Practice 
 This section displays setting for a practice round. allowing the user to set the word length. how many guesses. and how many total rounds 
