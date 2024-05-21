@@ -1,6 +1,6 @@
 # Lingo Practice Game 
 
-The Lingo Practice game is a word game inspired from the uk TV show Lingo. 
+The Lingo Practice game is a word game inspired from the uk TV show Lingo.
 
 The game allows users to play the exact game seen on tv and see how much money they could get in the hit TV show.
 
@@ -11,6 +11,13 @@ The game can be used for recreation and learning.
 Indviduals that are going to go onto the show can use the game as practice as the rounds are Identical.
 
 The game can also be used by people learning English or people who want to increase there vocabulary as it has an inbuilt dictonary system that the user can save the Lingo words that have been generated and look back on these with there definitions
+
+There are other games that use this similar format for a game such as woordle, however i see that there are no others that follow the format of the popular TV with the same scoring and game format such as the Challenge questions or final.
+
+The Live link can be found here [LingoPractice](https://ethantrout.github.io/Lingo-practice/)
+Note: you will need a words API key to play. see Deployment section on how to get one
+
+
 
 # Site Owner Goals
 - To create a visually apealing site that is easy for users to navigate 
