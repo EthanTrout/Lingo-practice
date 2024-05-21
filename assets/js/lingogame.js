@@ -370,7 +370,7 @@ const tenLetterWords = [
 window.onload =function(event) {
     if(!localStorage.getItem("apiKey")){
         document.getElementById("input-api-key").style.display="flex";
-        document.getElementById("menu-overlay").style.display="block"
+        document.getElementById("menu-overlay").style.display="block";
     }
 };
 const gameController ={
@@ -530,18 +530,18 @@ async function addApiKey(){
         const response = await fetch(url,options);
 
         if(!response.ok){
-            document.getElementById("api-error").innerText ="Api key might be invalid, re enter the api key"
-            document.getElementById("api-key").value =""
-            throw new Error("Api key might be invalid, re enter the api key")
+            document.getElementById("api-error").innerText ="Api key might be invalid, re enter the api key";
+            document.getElementById("api-key").value ="";
+            throw new Error("Api key might be invalid, re enter the api key");
         }
     }catch(err){
-        console.log(err)
-        return
+        console.log(err);
+        return;
     }
 
     localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
     document.getElementById("input-api-key").style.display="none";
-    document.getElementById("menu-overlay").style.display="none"
+    document.getElementById("menu-overlay").style.display="none";
 }
 
 // Onclick Play Lingo - Main Lingo Game
@@ -666,7 +666,7 @@ function returnToMenu(){
  document.getElementById("dictonary-section").style.display ="none";
  document.getElementById("leader-board-section").style.display ="none";
  document.getElementById("play-lingo-options").style.display ="none";
- document.getElementById("grand-prize").style.display ="none"
+ document.getElementById("grand-prize").style.display ="none";
  document.getElementById("menu-options-section").style.display ="block";
  document.getElementById("game-menu").style.display ="flex";
  //  new round screen
@@ -866,7 +866,7 @@ function finishGame(){
         }
         if(gameController.LingoRoundStage===1){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.moneyIncrement=300;
             gameController.isChallengeWord =true;
             //  new round screen
@@ -878,14 +878,14 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 startGame(9,1,1);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
             
         }
         else if(gameController.LingoRoundStage===2){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=300;
@@ -899,14 +899,14 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 startGame(5,5,4);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
              
         }
         else if(gameController.LingoRoundStage===3){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.moneyIncrement=400;
             ProgressWidth =100;
             gameController.isChallengeWord =true;
@@ -918,15 +918,15 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 divEl.style.display ="table";
                 startGame(10,1,1,10);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
             
         }
         else if(gameController.LingoRoundStage===4){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.timerDisplay.style.display="none";
             document.getElementById("progress-bar").style.display="none";
             gameController.moneyIncrement=500;
@@ -939,15 +939,15 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 divEl.style.display ="table";
                 startGame(4,5,2);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
              
         }
         else if(gameController.LingoRoundStage===5){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.moneyIncrement=500;
             gameController.isChallengeWord =false;
             // new round screen
@@ -958,15 +958,15 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 divEl.style.display ="table";
                 startGame(5,5,2);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
              
         }
         else if(gameController.LingoRoundStage===6){
             divEl.style.display ="none";
-            document.getElementById("back-button").style.display = "none"
+            document.getElementById("back-button").style.display = "none";
             gameController.moneyIncrement=750;
             gameController.isChallengeWord =true;
             ProgressWidth =100;
@@ -978,10 +978,10 @@ function finishGame(){
             document.getElementById("stage-money-display").innerText =`You have earned: £${gameController.playerMoney}`;
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
-                document.getElementById("back-button").style.display = "block"
+                document.getElementById("back-button").style.display = "block";
                 divEl.style.display ="table";
                 startGame(10,1,1,10);
-            },gameController.newStageDelay)
+            },gameController.newStageDelay);
                
         }
         else if(gameController.LingoRoundStage ===7){
@@ -998,9 +998,9 @@ function finishGame(){
             setTimeout(function(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
-                document.getElementById("back-button").style.display = "block"
-                finishGame()
-            },gameController.newStageDelay)
+                document.getElementById("back-button").style.display = "block";
+                finishGame();
+            },gameController.newStageDelay);
     
         }
         else if(gameController.LingoRoundStage===8){
@@ -1153,7 +1153,7 @@ function challengeTimerCallBack(timeLeft,widthDecrease){
     gameController.timerDisplay.style.width = `${ProgressWidth -widthDecrease}%`;
     ProgressWidth = ProgressWidth - widthDecrease;
     if(timeLeft<=0){
-        document.getElementById("control-area").style.display ="none"
+        document.getElementById("control-area").style.display ="none";
         gameController.isChallengeWord=false;
         endGame("red");
         pauseTimer();
@@ -1200,7 +1200,7 @@ function submitAnswer(){
             pauseTimer();
         }
         gameController.userAnswer = (document.getElementById("user-answer").value).toLowerCase();
-        document.getElementById("game-input-error").innerText=""
+        document.getElementById("game-input-error").innerText="";
         setTimeout(function(){
             checkWord(gameController.userAnswer,verifyAnswer);
         },gameController.wordLength * gameController.letterDisplayDelay);

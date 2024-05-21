@@ -466,6 +466,16 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 
  - ![Evidence fix works](./assets/testing-images/GetNewWordFix.png)
 
+ #### Fetch Default behaviour 
+ 
+ The checkWord function validates if the word the user enters is a real word in the dictonary.
+
+ it does this by fetching the WordsAPI with the word and if a 404 is given then it is known that the word is not in the dictonary. this is then handeled by alrting the user by ending the round.
+
+ The default behaviour of a fetch will always log the 404 status to the console. i have tried many things to stop this behaviour but it is a brower behaviour and cannot be modified by the Javascript. This could be handeled by the server rather than the client side but this project is only CSS HTML and JS.
+
+ ![404 error](/assets/readme-images/404error.png)
+
 # Acessibility
 
 ## Lighthouse score 
