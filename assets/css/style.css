@@ -96,10 +96,8 @@
 body{
    height: 100vh;
    margin: 1rem;
-   /* background-color: #102A52; */
    background-color:#01183B;
    color: white;
-   /* background-image:url(/assets/images/bermuda-circle.png); */
 }
 
 /* All Start Menu and Game containers */
@@ -187,9 +185,6 @@ section{
     background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
     background-origin: border-box;
     background-clip: content-box, border-box;
-    /* animation-name:border-anim;
-    animation-duration: 20s; */
-    
 }
 /* Tutorial Menu */
 #tutorial{
@@ -201,8 +196,6 @@ section{
     background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);
     background-origin: border-box;
     background-clip: content-box, border-box;
-    /* animation-name:border-anim;
-    animation-duration: 20s; */
 }
 
 /* Menu Buttons */
@@ -481,54 +474,6 @@ section{
 
 }
 
-/* Game Menu Buttons found on https://getcssscan.com/css-buttons-examples
-
-
-#game-menu button{
-    align-items: center;
-      background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-      border: 0;
-      border-radius: 8px;
-      box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-      box-sizing: border-box;
-      color: #FFFFFF;
-      display: flex;
-      font-family: Phantomsans, sans-serif;
-      font-size: 20px;
-      justify-content: center;
-      line-height: 2em;
-      max-width: 100%;
-      min-width: 140px;
-      padding: 19px 24px;
-      text-decoration: none;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      white-space: nowrap;
-      cursor: pointer;
-      margin-bottom: 2em;
-}
-#game-menu .btn-red{
-    background-image: linear-gradient(144deg,#F19C3D, #bfed35 50%,#D8601F)
-}
-#game-menu  button:active,
-    button:hover {
-      outline: 0;
-    }
-    
-    @media (min-width: 768px) {
-      .button-63 {
-        font-size: 24px;
-        min-width: 196px;
-      }
-    }
-
-
-
-#game-menu button:first-of-type{
-    margin-top: 2em;
-} */
-
 /* Lingo Timer */
 #progress-bar{
     position: relative;
@@ -640,99 +585,6 @@ section{
     background-color: #E35F00;
     border-radius: 6px;
 }
-/* @media only screen and (max-width: 950px) {
-    .mobile-length-4{
-        width: 80px;
-        height: 80px;
-    }
-    .mobile-length-5{
-        width: 70px;
-        height: 70px;
-    }
-    .mobile-length-6{
-        width: 60px;
-        height: 60px;
-        line-height: 4rem;
-    }
-    .mobile-length-7{
-        width: 50px;
-        height: 50px;
-    }
-    .mobile-length-9{
-        width: 40px;
-        height: 40px;
-    }
-    .mobile-length-10{
-        width: 40px;
-        height: 40px;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .container{
-        margin-left: 1rem;
-    }
-    .mobile-length-4{
-        width: 80px;
-        height: 80px;
-    }
-    .mobile-length-5{
-        width: 70px;
-        height: 70px;
-        line-height: 4.2rem;
-    }
-    .mobile-length-6{
-        width: 60px;
-        height: 60px;
-    }
-    .mobile-length-7{
-        width: 50px;
-        height: 50px;
-    }
-    .mobile-length-9{
-        width: 30px;
-        height: 30px;
-    }
-    .mobile-length-10{
-        width: 20px;
-        height: 20px;
-    }
-}
-@media only screen and (max-width: 473px) {
-    .container{
-        justify-content: flex-start;
-        margin-left: 1rem;
-    }
-    .mobile-length-4{
-        width: 60px;
-        height: 60px;
-        line-height: 3.5rem;
-    }
-    .mobile-length-5{
-        width: 50px;
-        height: 50px;
-        line-height: 3rem;
-    }
-    .mobile-length-6{
-        width: 40px;
-        height: 40px;
-        line-height: 2.5rem;
-    }
-    .mobile-length-7{
-        width: 30px;
-        height: 30px;
-        line-height: 1.5rem;
-    }
-    .mobile-length-9{
-        width: 20px;
-        height: 20px;
-        line-height: 1.5rem;
-    }
-    .mobile-length-10{
-        width: 20px;
-        height: 20px;
-        line-height: 1.5rem;
-    }
-} */
 
 /* Control area */
 #control-area{
