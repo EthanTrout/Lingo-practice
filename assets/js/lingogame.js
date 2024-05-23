@@ -708,7 +708,6 @@ if(window.screen.width > 473){
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button><p id="game-input-error"></p></div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`;
-    document.getElementById("user-answer").addEventListener("click",scrollToTop);
 }
 else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
@@ -1186,6 +1185,9 @@ function timedGameCallBack(timeLeft,widthDecrease){
 function submitAnswer(){
     let lettersOnlyRegex = /^[a-zA-Z]+$/;
     let lingoFirstLetter = gameController.lingoWord[0];
+    if(window.screen.width <= 473){
+        scrollToTop()
+    }
     if(!lettersOnlyRegex.test(document.getElementById("user-answer").value) ){
         document.getElementById("user-answer").value="";
         document.getElementById("game-input-error").innerText="Only letters allowed in answers";
