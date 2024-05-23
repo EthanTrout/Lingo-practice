@@ -791,7 +791,7 @@ else if(gameController.userAnswer !== gameController.lingoWord){
     gameController.roundCounter++;
     if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
         ProgressWidth =100;
-        pauseTimer = startTimer(10,timedGameCallBack);
+        pauseTimer = startTimer(15,timedGameCallBack);
     }
 
 }
@@ -1371,7 +1371,7 @@ if(document.getElementById("toggle-user-input").style.display==="none"){
 if(gameController.isTimedGame && !gameController.isChallengeWord && !gameController.isFinal){
     ProgressWidth =100;
     document.getElementById("progress-bar").style.display="block";
-    pauseTimer = startTimer(10,timedGameCallBack);
+    pauseTimer = startTimer(15,timedGameCallBack);
 }
 if(gameController.isChallengeWord){
     document.getElementById("progress-bar").style.display="block";

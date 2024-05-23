@@ -43,19 +43,22 @@ Note: you will need a words API key to play. see Deployment section on how to ge
     - As a frequent user i want to be able to beat my highscore on the leaderboard
     - As a frequent user i want to be able to save words that i like to my personal dictionary
 
-# Imagery 
+# Design
+## Imagery 
 
 - The imagery in the game were given carful consideration. i wanted the game to feel as if the player is on the TV show lingo and therefore used a similar color scheme to that on the show.
 
-## color scheme
+### color scheme
 ![Color pallet from coolors](./assets/readme-images/lingo-color-pallet.png)
 
 The color pallet has high contrast and makes it easy for a user to determin a correct answer and incorrect answer. 
 
 
-# Layout 
-The a site is a single page with 4 sections 
-- The Tutorial section
+
+## Layout 
+The a site has single page with 4 sections 
+
+- The Tutorial section (links to new page)
     - Runs through the game rules
     - displays the game board and explains what each element does
 
@@ -75,6 +78,27 @@ The a site is a single page with 4 sections
 - The Dictonary Section
     - Displays the user added words and there descriptions
 
+## wireframes
+
+<details>
+
+ <summary>Desktop Wireframe</summary>
+
+![Desktop Wireframe](./assets/readme-images/desktop-wireframe.png)
+
+ </details>
+
+ <details>
+    <summary>Mobile Wireframe</summary>
+
+![Mobile Wireframe](./assets/readme-images/mobile-writeframe.png)
+
+ </details>
+
+Orginally i did not conceive of a Dictonary Section but when working with the API i realised there was a way to allow the game to be more educational and reach another set of users. Indviduals that are trying to learn English or increase there vocabulary
+
+equally i did not conceive of having two main game modes. timed and untimed as the show only has timed games. However from play testing i realised that the timed game modes are much harder. In the game show you say the word aloud but in this game you have to type it in which makes it much more difficult
+
 # Features
 
 Note: Webpage may not work without API key. if this project has already been examined then i will have made the key used unavalible. You will have to get your own. see the Deployment section from how to do so
@@ -93,6 +117,23 @@ The Home page is the Game menu. The user will come back to this page at the end 
 You can see here the inspiration for the look and feel of the Website comes from the Orginal Tv show
 
 ![Lingo tv show image](./assets/readme-images/lingo-show.png)
+## Tutorial page
+- The Tutorial page is a menu. the player can choose between 3 interactive buttons that are:
+- Game play
+- Challenge words
+- Final 
+
+![Tutorial page](./assets/readme-images/tutorial-page.png)
+
+### Tutorial sections
+All sections work the same.
+- show an image of the board 
+- followed by a set of instructions/ tasks 
+- buttons to move to the next display or exit 
+![GamePlay](./assets/readme-images/gameplay.png)
+![Rules](./assets/readme-images/rules.png)
+
+
 ## Play Lingo
 
 
@@ -486,6 +527,9 @@ while(gameController.lingoWord.indexOf(" ") != -1){
  The default behaviour of a fetch will always log the 404 status to the console. i have tried many things to stop this behaviour but it is a brower behaviour and cannot be modified by the Javascript. This could be handeled by the server rather than the client side but this project is only CSS HTML and JS.
 
  ![404 error](/assets/readme-images/404error.png)
+
+ #### Mobile text box behaviour 
+ I have had feeback from users that on mobile screens when entering text into the text box the browser will zoom in and scroll down. this means the player cannot see the lingo word being entered when submiting the answer and they have to scroll back up to the top of the page.
 
 # Acessibility
 
