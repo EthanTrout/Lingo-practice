@@ -529,6 +529,11 @@ while(gameController.lingoWord.indexOf(" ") != -1){
  #### Mobile text box behaviour 
  I have had feeback from users that on mobile screens when entering text into the text box the browser will zoom in and scroll down. this means the player cannot see the lingo word being entered when submiting the answer and they have to scroll back up to the top of the page.
 
+##### fix
+ I have modified it so that when a user submits there answer the page scrolls back to the top of the page. 
+
+ Users have reported that this change is much better.
+
 # Acessibility
 
 ## Lighthouse score 
