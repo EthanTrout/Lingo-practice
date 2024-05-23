@@ -733,20 +733,20 @@ else if(gameController.userAnswer !== gameController.lingoWord){
         gameController.moneyIncrement -=50;
         document.getElementById("money-increment").innerText = `£${gameController.moneyIncrement}`;
     }
-    for(let x =0; x<gameController.userAnswer.length;x++){          // loops to get each letter of user answer 
+    for(let x =0; x<gameController.userAnswer.length;x++){  // loops to get each letter of user answer 
         let letter = gameController.userAnswer[x];
-        if(letter === gameController.lingoWord[x]){             // if the letter is the same as the lingo word letter
-            delete lingoLettersAndIndex[x];                          // removes it from the object
+        if(letter === gameController.lingoWord[x]){// if the letter is the same as the lingo word letter
+            delete lingoLettersAndIndex[x]; // removes it from the object
             setTileGreen(x);  
         }
     }
-    for(let z =0; z<gameController.userAnswer.length;z++){                  // loops to get each letter of user answer
+    for(let z =0; z<gameController.userAnswer.length;z++){ // loops to get each letter of user answer
         let letter = gameController.userAnswer[z];
-         if(Object.values(lingoLettersAndIndex).includes(letter)){          // if the letter is still in object
-            for(let prop in lingoLettersAndIndex ) {                       // finds the values key
+         if(Object.values(lingoLettersAndIndex).includes(letter)){ // if the letter is still in object
+            for(let prop in lingoLettersAndIndex ) { // finds the values key
                 if( lingoLettersAndIndex.hasOwnProperty( prop ) ) {
                      if( lingoLettersAndIndex[ prop ] === letter ){
-                        delete lingoLettersAndIndex[prop];               // removes that specific letter from the index
+                        delete lingoLettersAndIndex[prop]; // removes that specific letter from the index
                         setTileOrange(z);
                         break;
                      }
@@ -795,7 +795,7 @@ if((gameController.currentRound === gameController.gameRounds || gameController.
     if(gameController.isChallengeWord){pauseTimer();}
     displayLingo(color);
     if(gameController.LingoRoundStage===12 && gameController.isGrandPrize && color ==="red"){
-        gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+        gameController.playerMoney =0;   // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
     if(gameController.LingoRoundStage === 11 && color==="red"){
         gameController.playerMoney = gameController.playerMoney + gameController.moneyIncrement;
@@ -1102,7 +1102,7 @@ document.getElementById("final-timer-display").innerText = `${remainingTime}s Re
 if(remainingTime <=0){
     gameController.isInfinte =false;
     if(gameController.LingoRoundStage===12 && gameController.isGrandPrize){
-        gameController.playerMoney =0;          // if the player picks a seven letter lingo and runs out of time they take nothing home
+        gameController.playerMoney =0; // if the player picks a seven letter lingo and runs out of time they take nothing home
     }
     if(gameController.LingoRoundStage === 8 ||gameController.LingoRoundStage === 11 ){
         gameController.moneyIncrement =0;

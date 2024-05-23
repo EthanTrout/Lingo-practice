@@ -642,5 +642,11 @@ this could be used via ads or items that a player could purchase
 ## Content 
 The inspiration for this game came from the UK tv show Lingo. This tv show is always on at my work and there have been multiple occasions where people have said they would love to see how well they would do on this show. There are other apps such as wordle that allow you to play but none that are accurate to the Shows game mecanics and can actually score you on this.
 
-## Resources used
+You can watch this TV show on ITV Player [Here](https://www.itv.com/watch/lingo/10a0540/10a0540a0107)
+
+## Resources used 
+- [Stack overflow](https://stackoverflow.com/)
+- [obfuscator](https://obfuscator.io/) for API key
+- [WordsAPI Docs](https://www.wordsapi.com/docs/)
+- RegX learned about through this article [geeksforgeeks](https://www.geeksforgeeks.org/javascript-program-to-check-if-a-string-contains-only-alphabetic-characters/)
 
