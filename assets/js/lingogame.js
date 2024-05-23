@@ -1224,7 +1224,7 @@ userTextBox.addEventListener("keyup",function(e ){
 }
 
 function scrollToTop(){
-    window.scrollTo(0,0);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 
 // Onclick Save Score 
