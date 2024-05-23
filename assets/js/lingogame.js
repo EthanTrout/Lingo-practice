@@ -708,6 +708,7 @@ if(window.screen.width > 473){
     <div id="user-input" class="column"><input id="user-answer" type="text" minlength="${wordLength}" maxlength ="${wordLength}"autocomplete="off" spellcheck="false" required><button id="submit-answer" onclick="submitAnswer()">Verify</button><p id="game-input-error"></p></div>
     <div id="player-money" class="column">£${gameController.playerMoney}</div>
     </div>`;
+    document.getElementById("user-answer").addEventListener("click",scrollToTop);
 }
 else{ // Change of CSS if screens are smaller for each word length
     document.getElementById("control-area").innerHTML=`<div id="toggle-user-input">
@@ -1219,6 +1220,11 @@ userTextBox.addEventListener("keyup",function(e ){
     }
 });
 }
+
+function scrollToTop(){
+    window.scrollTo(0,0);
+}
+
 // Onclick Save Score 
 function saveScoreToLeaderBoard(gameMode){
 let lettersOnlyRegex = /^[a-zA-Z]+$/;
