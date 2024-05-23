@@ -101,8 +101,6 @@ equally i did not conceive of having two main game modes. timed and untimed as t
 
 # Features
 
-Note: Webpage may not work without API key. if this project has already been examined then i will have made the key used unavalible. You will have to get your own. see the Deployment section from how to do so
-
 ## Homepage 
 
 The Home page is the Game menu. The user will come back to this page at the end of every game. The user can choose from 4 interactive buttons that are:
