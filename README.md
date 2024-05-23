@@ -282,6 +282,10 @@ Note:You can not save scores for practice rounds
     ![js Lint](./assets/readme-images/jsHint.png)
 
 
+## Input testing 
+- The player input word is validated to only accept letters and only begin with a letter that is the same as the lingo word 
+- Username input when adding to score is validated to only accept letters and no spaces.
+
 ## Manual and Automatic testing
 - I Mainly used Automatic Testing as my knowledge of Automatic testings is only small. I have documented all my of own manual testing in the document linked. 
 

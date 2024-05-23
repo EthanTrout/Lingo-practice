@@ -600,7 +600,7 @@ section{
 #control-area{
     margin-top: 0px;
 }
-#game-input-error{
+#game-input-error,#username-error{
     color: red;
     font-size: small;
 }

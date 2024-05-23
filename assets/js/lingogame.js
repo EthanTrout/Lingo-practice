@@ -393,7 +393,7 @@ isGrandPrize:false,
 isChoiceMade:false,
 isTimedGame:false,
 isFinalTimerEnd:false,
-LingoRoundStage:0,
+LingoRoundStage:6,
 letterDisplayDelay:300,
 gameRoundDisplayDelay:3000,
 newStageDelay:5000
@@ -1051,6 +1051,7 @@ function finishGame(){
             <div id="add-score-container">
             <input id="user-name" type="text" placeholder="Enter name here" maxlength="10">
             <button id="save-score-button" onclick="saveScoreToLeaderBoard('${gameMode}')">Save</button>
+            <p id="username-error"></p>
             </div>
             <button onclick="showWordsAndDefi()">All Lingo words</button>
             <button onclick="returnToMenu()"style="background: orange;">Exit</button>
@@ -1203,7 +1204,7 @@ function saveScoreToLeaderBoard(gameMode){
 let lettersOnlyRegex = /^[a-zA-Z]+$/;
 if(!lettersOnlyRegex.test(document.getElementById("user-name").value) ){
     document.getElementById("user-name").value="";
-    alert("There are only letters allowed in usernames and no spaces");
+    document.getElementById("username-error").innerText ="There are only letters allowed in usernames and no spaces";
 }
 else{
     let lingoHighScores = JSON.parse(localStorage.getItem(`${gameMode}`) || "[]");
@@ -1215,6 +1216,7 @@ else{
     lingoHighScores.sort((a,b)=> b.score - a.score);
     lingoHighScores.splice(5);
     localStorage.setItem(`${gameMode}`,JSON.stringify(lingoHighScores));
+    document.getElementById("username-error").innerText = "";
 
 returnToMenu();
 
