@@ -77,6 +77,8 @@ The a site is a single page with 4 sections
 
 # Features
 
+Note: Webpage may not work without API key. if this project has already been examined then i will have made the key used unavalible. You will have to get your own. see the Deployment section from how to do so
+
 ## Homepage 
 
 The Home page is the Game menu. The user will come back to this page at the end of every game. The user can choose from 4 interactive buttons that are:
@@ -530,7 +532,7 @@ The Live link can be found here [LingoPractice](https://ethantrout.github.io/Lin
 4. Enter personal details
 5. click generate API key 
 
-Note: i have created a input feild at the start of the game for Demo purposes. if you choose to deploy this you can enter your API key there as to not save it to your own Github and compromise the key
+Note: You can put your API key into the variable apiKey and the game should now run
 
 ## Cloning
 To clone this repository follow the below steps:

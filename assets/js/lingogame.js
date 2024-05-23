@@ -367,12 +367,9 @@ const tenLetterWords = [
     { word: "appreciate", clue: "Recognize the full worth of" }
   ];
 
-window.onload =function(event) {
-    if(!localStorage.getItem("apiKey")){
-        document.getElementById("input-api-key").style.display="flex";
-        document.getElementById("menu-overlay").style.display="block";
-    }
-};
+// https://obfuscator.io/ code to set API key to stop AI scrollers from using API key//
+(function(_0x31a15e,_0x2936c5){var _0x2f0020=_0x51d2,_0x58c4f7=_0x31a15e();while(!![]){try{var _0x9c3abc=-parseInt(_0x2f0020(0x10b))/0x1*(parseInt(_0x2f0020(0x108))/0x2)+-parseInt(_0x2f0020(0x109))/0x3+-parseInt(_0x2f0020(0x10d))/0x4+-parseInt(_0x2f0020(0x105))/0x5+-parseInt(_0x2f0020(0x10a))/0x6*(-parseInt(_0x2f0020(0x10c))/0x7)+parseInt(_0x2f0020(0x104))/0x8+parseInt(_0x2f0020(0x106))/0x9;if(_0x9c3abc===_0x2936c5)break;else _0x58c4f7['push'](_0x58c4f7['shift']());}catch(_0x27cb57){_0x58c4f7['push'](_0x58c4f7['shift']());}}}(_0x2774,0x83f81));function returnMyApiKey(){var _0x2357bb=_0x51d2;return _0x2357bb(0x107);}function _0x51d2(_0x491b7e,_0x3d4b23){var _0x27742e=_0x2774();return _0x51d2=function(_0x51d2b6,_0x8e1c12){_0x51d2b6=_0x51d2b6-0x104;var _0x5a9584=_0x27742e[_0x51d2b6];return _0x5a9584;},_0x51d2(_0x491b7e,_0x3d4b23);}function _0x2774(){var _0x3062a0=['1783424CwHngA','2052104rdqZzB','2624335eGLHdQ','21839094nwIXOj','7b311075acmsh7ce98eac79c5140p1ee3d2jsn4f972455f44a','15494sEGDrC','2604654jniIlY','107874MDbMvc','74AFsilP','105hpyJYv'];_0x2774=function(){return _0x3062a0;};return _0x2774();}
+
 const gameController ={
 gameTimer:28,
 lingoWord: "",
@@ -408,6 +405,7 @@ let ProgressWidth =100;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5];
 let endLingoWordsAndDefi =[];
+let apiKey = returnMyApiKey();
 
 // All Api calls --- code found on wordsAPI documentation //
 
@@ -417,7 +415,7 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=${w
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': `${localStorage.getItem("apiKey")}`,
+        'X-RapidAPI-Key': `${apiKey}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
     
@@ -442,7 +440,7 @@ const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': `${localStorage.getItem("apiKey")}`,
+        'X-RapidAPI-Key': `${apiKey}`,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
     }
 };
