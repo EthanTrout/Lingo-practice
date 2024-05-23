@@ -278,11 +278,9 @@ Note:You can not save scores for practice rounds
     - [W3C Validator results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fethantrout.github.io%2FLingo-practice%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 
 - Javascript 
-    - No Major errors were found when passing through the offical JSLint validator
-    ![js Lint](./assets/readme-images/jsLint.png)
+    - No Major errors were found when passing through the offical JSHint validator
+    ![js Lint](./assets/readme-images/jsHint.png)
 
-    - I have used [] notation as a value in API shares the same variable name as in my object
-    - randomIndex is redefined as it is meant to be in the function. only one variation will be called at a time. i did not find it neccisary to change the variable name as it has the same purpose and it is scoped to each if/ IfElse statement. having the same variable name helps with the readability of the code
 
 ## Manual and Automatic testing
 - I Mainly used Automatic Testing as my knowledge of Automatic testings is only small. I have documented all my of own manual testing in the document linked. 
