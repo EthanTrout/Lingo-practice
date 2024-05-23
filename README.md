@@ -536,6 +536,10 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 
  Users have reported that this change is much better.
 
+## Known bugs
+
+There are no known bugs
+
 # Acessibility
 
 ## Lighthouse score 
