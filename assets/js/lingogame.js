@@ -513,35 +513,6 @@ else{
 
 // All main menu buttons
 
-// On click API key submit
-async function addApiKey(){
-    const apiKey = document.getElementById("api-key").value;
-    try{
-        const url = "https://wordsapiv1.p.rapidapi.com/words/test";
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': `${apiKey}`,
-                'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-            }
-        };
-        const response = await fetch(url,options);
-
-        if(!response.ok){
-            document.getElementById("api-error").innerText ="Api key might be invalid, re enter the api key";
-            document.getElementById("api-key").value ="";
-            throw new Error("Api key might be invalid, re enter the api key");
-        }
-    }catch(err){
-        console.log(err);
-        return;
-    }
-
-    localStorage.setItem("apiKey",`${document.getElementById("api-key").value}`); 
-    document.getElementById("input-api-key").style.display="none";
-    document.getElementById("menu-overlay").style.display="none";
-}
-
 // Onclick Play Lingo - Main Lingo Game
 function playLingo(isTimed){
 gameController.isTimedGame =isTimed;
