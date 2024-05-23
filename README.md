@@ -17,7 +17,7 @@ There are other games that use this similar format for a game such as woordle, h
 The Live link can be found here [LingoPractice](https://ethantrout.github.io/Lingo-practice/)
 Note: you will need a words API key to play. see Deployment section on how to get one
 
-
+![Am I responsive image](./assets/readme-images/am-i-responsive.png)
 
 # Site Owner Goals
 - To create a visually apealing site that is easy for users to navigate 
