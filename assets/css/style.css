@@ -255,21 +255,6 @@ section{
 
 }
 
-/* @keyframes border-anim {
-    0% {background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);}
-    10% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 500px 500px, #E35F00, orange);}
-    20% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 400px 400px, #E35F00, orange);}
-    30% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 300px 300px, #E35F00, orange);}
-    40% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 200px 200px, #E35F00, orange);}
-    50% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 100px 100px, #E35F00, orange);}
-    60% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 200px 200px, #E35F00, orange);}
-    70% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 300px 300px, #E35F00, orange);}
-    80% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 400px 400px, #E35F00, orange);}
-    90% {background-image:linear-gradient(white, white), radial-gradient(farthest-corner at 500px 500px, #E35F00, orange);}
-    100% {background-image: linear-gradient(white, white), radial-gradient(farthest-corner at 600px 600px, #E35F00, orange);}
-} */
-
-
 /* Menu Radio buttons on Practice Options from tutorial https://www.youtube.com/watch?v=GDh9uToZkYg */
 .radio{
     display: inline-flex;

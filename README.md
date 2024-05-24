@@ -536,6 +536,7 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 
  The default behaviour of a fetch will always log the 404 status to the console. i have tried many things to stop this behaviour but it is a brower behaviour and cannot be modified by the Javascript. This could be handeled by the server rather than the client side but this project is only CSS HTML and JS.
 
+Note: this doesnt cause a bug with the game at all as the 404 is handled but displaying the 404 is not desired.
  ![404 error](/assets/readme-images/404error.png)
 
 # Acessibility

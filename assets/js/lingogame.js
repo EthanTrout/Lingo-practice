@@ -1,4 +1,4 @@
-
+// Challenge word arrays
 const nineLetterWords=[
     { word: "available", clue: "Accessible or obtainable" },
     { word: "copyright", clue: "Legal right to produce and sell" },
@@ -181,8 +181,6 @@ const nineLetterWords=[
     { word: "catalogue", clue: "Complete list of items, typically one in alphabetical or other systematic order" },
     { word: "remaining", clue: "Still existing after the rest have been used or destroyed" }
 ];
-
-
 
 const tenLetterWords = [
     { word: "university", clue: "A place of higher education and research" },
@@ -370,6 +368,7 @@ const tenLetterWords = [
 // https://obfuscator.io/ code to set API key to stop AI scrollers from using API key//
 (function(_0x31a15e,_0x2936c5){var _0x2f0020=_0x51d2,_0x58c4f7=_0x31a15e();while(!![]){try{var _0x9c3abc=-parseInt(_0x2f0020(0x10b))/0x1*(parseInt(_0x2f0020(0x108))/0x2)+-parseInt(_0x2f0020(0x109))/0x3+-parseInt(_0x2f0020(0x10d))/0x4+-parseInt(_0x2f0020(0x105))/0x5+-parseInt(_0x2f0020(0x10a))/0x6*(-parseInt(_0x2f0020(0x10c))/0x7)+parseInt(_0x2f0020(0x104))/0x8+parseInt(_0x2f0020(0x106))/0x9;if(_0x9c3abc===_0x2936c5)break;else _0x58c4f7['push'](_0x58c4f7['shift']());}catch(_0x27cb57){_0x58c4f7['push'](_0x58c4f7['shift']());}}}(_0x2774,0x83f81));function returnMyApiKey(){var _0x2357bb=_0x51d2;return _0x2357bb(0x107);}function _0x51d2(_0x491b7e,_0x3d4b23){var _0x27742e=_0x2774();return _0x51d2=function(_0x51d2b6,_0x8e1c12){_0x51d2b6=_0x51d2b6-0x104;var _0x5a9584=_0x27742e[_0x51d2b6];return _0x5a9584;},_0x51d2(_0x491b7e,_0x3d4b23);}function _0x2774(){var _0x3062a0=['1783424CwHngA','2052104rdqZzB','2624335eGLHdQ','21839094nwIXOj','7b311075acmsh7ce98eac79c5140p1ee3d2jsn4f972455f44a','15494sEGDrC','2604654jniIlY','107874MDbMvc','74AFsilP','105hpyJYv'];_0x2774=function(){return _0x3062a0;};return _0x2774();}
 
+// Game variable object
 const gameController ={
 gameTimer:28,
 lingoWord: "",
@@ -399,8 +398,9 @@ gameRoundDisplayDelay:3000,
 newStageDelay:5000
 };
 
+
 let remainingTime; // Assuming 30 seconds remaining
-let pauseTimer;
+let pauseTimer; 
 let ProgressWidth =100;
 let letterDisplayInterval=4;
 let givenIndexOrder = [2,6,7,8,1,3,4,5];
@@ -544,6 +544,7 @@ function options(){
         document.getElementById("playWithOptions").remove();
     }
 }
+
 // Onclick Confirm practice game options -add button
 function addButton(){
     let button = document.getElementById("play-button");
@@ -552,10 +553,6 @@ function addButton(){
     let wordLength = document.querySelector('input[name = wordLength]:checked').value;
     button.innerHTML =`<button id="playWithOptions" onclick="startGame(${wordLength},${guesses},${rounds})">Play Lingo</button>`;
 }
-
-// Onclick Tutorial
-
-
 
 // Onclick LeaderBoard
 function displayLeaderBoard(){
@@ -804,7 +801,7 @@ if((gameController.currentRound === gameController.gameRounds || gameController.
         gameController.playerMoney = gameController.moneyIncrement;
         gameController.isFinalTimerEnd = true;
     }
-    setTimeout(finishGame,gameController.gameRoundDisplayDelay);
+    setTimeout(nextLingoStage,gameController.gameRoundDisplayDelay);
 }
 else{
     if(gameController.LingoRoundStage === 4 || gameController.LingoRoundStage===5){
@@ -815,8 +812,8 @@ else{
 }
 }
 
-// Finish game function. is called at the very end of a practice run. is called every completed game on lingo main game. sets next stage or displays Game over
-function finishGame(){
+// Next lingo stage function. is called at the very end of a practice run. is called every completed game on lingo main game. sets next stage or displays Game over
+function nextLingoStage(){
     let divEl = document.getElementById("game-area");
     if(gameController.isPracticeGame){
         document.getElementById("game-over").style.display="block";
@@ -968,7 +965,7 @@ function finishGame(){
                 document.getElementById("new-stage-display").style.display ="none";
                 divEl.style.display ="table";
                 document.getElementById("back-button").style.display = "block";
-                finishGame();
+                nextLingoStage();
             },gameController.newStageDelay);
     
         }
@@ -982,7 +979,7 @@ function finishGame(){
             gameController.isInfinte =true;
             gameController.isFinal =true;
             startGame(4,5,1);
-            pauseTimer = startTimer(90, timerCallback);
+            pauseTimer = startTimer(90, finalTimerCallback);
             
         }
         else if(gameController.LingoRoundStage===9 && gameController.timeLeft!==0 && !gameController.isFinalTimerEnd){
@@ -992,7 +989,7 @@ function finishGame(){
             gameController.isChallengeWord =false;
             gameController.isInfinte =true;
             startGame(5,5,1);
-            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            pauseTimer = startTimer(90,finalTimerCallback,remainingTime);
         }
         else if(gameController.LingoRoundStage===10 && gameController.timeLeft!==0 && !gameController.isFinalTimerEnd){
             document.getElementById("game-area").style.display="none";
@@ -1012,7 +1009,7 @@ function finishGame(){
             gameController.isInfinte =false;
             gameController.isFinal =true;
             startGame(6,5,1);
-            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            pauseTimer = startTimer(90,finalTimerCallback,remainingTime);
             gameController.isChoiceMade =true;
         }
         else if(gameController.LingoRoundStage===12 && !gameController.isChoiceMade){
@@ -1025,7 +1022,7 @@ function finishGame(){
             gameController.isFinal =true;
             gameController.isGrandPrize =true;
             startGame(7,5,1);
-            pauseTimer = startTimer(90,timerCallback,remainingTime);
+            pauseTimer = startTimer(90,finalTimerCallback,remainingTime);
             gameController.isChoiceMade =true;
         }
         else{
@@ -1093,7 +1090,7 @@ return function pauseTimer() {
 // All timer call back functions
 
 // Final Game timer callback
-function timerCallback(timeLeft) {
+function finalTimerCallback(timeLeft) {
 remainingTime = timeLeft; // Update remaining time
 gameController.timerDisplay.style.display="none";
 document.getElementById("progress-bar").style.display="none";
@@ -1195,10 +1192,6 @@ userTextBox.addEventListener("keyup",function(e ){
 });
 }
 
-function scrollToTop(){
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-}
-
 // Onclick Save Score 
 function saveScoreToLeaderBoard(gameMode){
 let lettersOnlyRegex = /^[a-zA-Z]+$/;
@@ -1263,11 +1256,11 @@ document.getElementById(`word-${addWord}`).remove();
 // Onclick Final choices
 function finalSixLetterChoice(){
 gameController.LingoRoundStage =10; // one less because finish game adds 1
-finishGame();
+nextLingoStage();
 }
 function finalSevenLetterChoice(){
 gameController.LingoRoundStage =11; // one less because finish game adds 1
-finishGame();
+nextLingoStage();
 }
 
 // End in game buttons
@@ -1303,6 +1296,7 @@ setTimeout(function(){
     
 },x*letterDelay);
 }
+// Displays incorrect or correct lingo on next set of tiles. creates the tiles if not there
 function displayLingo(color){
 let roundIndex =gameController.roundCounter;
 if(roundIndex < gameController.roundTiles.length -1 &&color ==="red"){
@@ -1365,6 +1359,7 @@ for(let x=0; x<gameController.roundTiles.length;x++){
 }
 
 }
+
 // sets tile passed to green
 function setTileGreen (index){
 let roundIndex = gameController.roundCounter;
@@ -1383,6 +1378,10 @@ if(gameController.roundTiles[roundIndex][index].style.backgroundColor !== "green
 } 
 }
 
+// Scroll to top of page
+function scrollToTop(){
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+}
 // End GameBoard tile modifiers
 
 
