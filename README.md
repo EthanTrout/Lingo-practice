@@ -514,7 +514,7 @@ while(gameController.lingoWord.indexOf(" ") != -1){
     console.log(gameController.lingoWord)
     await getNewWord()
 }
- ```
+```
 
  - ![Evidence fix works](./assets/testing-images/GetNewWordFix.png)
 
