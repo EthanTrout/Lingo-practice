@@ -914,16 +914,18 @@ I have most of the functionality of the Challenege words in place and the basic 
 # Beta Test- User testing feeback
 - Since the entire game is scripted and there are alot of different features i thought it best to give the game to a few users to test how it plays and their experience with the game.
 
-## User1 
+## User 1 
 
-![user1 feeback](./assets/readme-images/user1-feeback.png)
+![user 1 feeback](./assets/readme-images/user1-feeback.png)
 
-## User2 
+## User 2 
 
 User is an experienced programmer themselfs and highlighted
 - that the use of Alerts for verifcation was bad practice
 - using Jquery for future projects might help with development time 
 - They mentioned that the 404 error returned was unavoidable as it is a browser default behaviour 
 
+## user 3
+![user 3 feeback](./assets/readme-images/user3-feeback.png)
 
 
