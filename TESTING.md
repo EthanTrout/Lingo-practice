@@ -925,6 +925,8 @@ User is an experienced programmer themselfs and highlighted
 - using Jquery for future projects might help with development time 
 - They mentioned that the 404 error returned was unavoidable as it is a browser default behaviour 
 
+![user 2 feedback](./assets/readme-images/user2-feedback.png)
+
 ## user 3
 ![user 3 feeback](./assets/readme-images/user3-feeback.png)
 
