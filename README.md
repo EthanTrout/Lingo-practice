@@ -526,8 +526,6 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 
  Users have reported that this change is much better.
 
-## Known bugs
-
 #### Fetch Default behaviour
 
  The checkWord function validates if the word the user enters is a real word in the dictionary.
@@ -538,6 +536,10 @@ while(gameController.lingoWord.indexOf(" ") != -1){
 
 Note: this doesn't cause a bug with the game at all as the 404 is handled but displaying the 404 is not desired.
  ![404 error](/assets/readme-images/404error.png)
+
+## Known bugs
+
+There are no known bugs
 
 # Acessibility
 
